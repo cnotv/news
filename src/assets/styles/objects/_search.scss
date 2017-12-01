@@ -1,0 +1,127 @@
+.o-search {
+  &__bar {
+    display: none;
+    flex-grow: 1;
+
+    .has-search-open & {
+      display: block;
+    }
+
+    input {
+      height: 100%;
+      border: none;
+      width: 100%;
+      text-transform: uppercase;
+      outline: none;
+
+      @include media-bp(tablet-min) {
+        padding: $menu-padding;
+      }
+
+      @include media-bp(phone) {
+        padding: $menu-padding/2;
+      }
+    }
+  }
+
+  &__status {
+    position: absolute;
+
+    @include media-bp(tablet-min) {
+      display: flex;
+      top: -$menu-padding;
+      left: -$menu-padding;
+      height: $menu-padding*2;
+      width: $menu-padding*2;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: $bg-nav;
+      border: $website-border-secondary;
+      border-radius: 50%;
+    }
+
+    @include media-bp(phone) {
+      padding: $menu-padding/2;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  &__reset {
+    cursor: pointer;
+
+    &::before {
+      content: "- ";
+    }
+  }
+
+  &__status {
+    i::before {
+      @include fa-icon;
+
+      animation: pulse 1s linear infinite;
+    }
+
+    &__search {
+      &::before {
+        content: $fa-var-search;
+      }
+    }
+
+    &__typing {
+      &::before {
+        content: $fa-var-pencil;
+      }
+    }
+  }
+
+  &__toggle {
+    i::before {
+      content: $fa-var-search;
+
+      .has-search-open & {
+        content: $fa-var-times;
+      }
+    }
+  }
+
+  &__results {
+    position: absolute;
+    flex-direction: column;
+    margin: -$menu-padding/6 $menu-padding/2;
+    width: calc(100% - #{$menu-padding});
+    z-index: zindex(dropdown);
+    border: $website-border-secondary;
+    box-shadow: $website-shadow-hover;
+    background-color: $bg-dropdown;
+
+    @include media-bp(tablet-min) {
+      white-space: nowrap;
+    }
+
+    @include media-bp(phone) {
+      top: 100%;
+    }
+
+    &__answer {
+      padding: $menu-padding/2;
+    }
+
+    a {
+      padding: $menu-padding/2;
+      border-top: $website-border-secondary;
+    }
+  }
+}
+
+.has-search-open {
+  overflow: hidden;
+
+  .c-logo,
+  main {
+    transition: filter 0.1s, opacity 0.1s;
+    opacity: 0.2;
+    filter: blur(2px);
+  }
+}

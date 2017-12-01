@@ -48,6 +48,15 @@ module.exports = {
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')]
       },
+      { test: /\.sass$/,
+        use: this.styleLoader('sass', {
+          loader: 'sass-loader',
+          options: { indentedSyntax: true }
+        })
+      },
+      { test: /\.scss$/,
+        use: this.styleLoader('scss', 'sass-loader')
+      },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
