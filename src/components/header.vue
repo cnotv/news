@@ -5,8 +5,8 @@
       <nav class="o-nav-h">
 
         <ul class="o-nav-h__left">
-          <li v-for="subreddit in subreddits">
-            <a v-on:click="changeCurrent(subreddit)">{{ subreddit }}</a>
+          <li v-for="subreddit in getSubreddits">
+            <a v-on:click="makeCurrent(subreddit)">{{ subreddit }}</a>
           </li>
         </ul>
 
@@ -29,17 +29,19 @@
 import Vuex from 'vuex'
 
 export default {
+  mounted () {
+  },
   computed: {
     ...Vuex.mapGetters([
-      'changeCurrent',
-      'getData'
-    ]),
-    ...Vuex.mapState([
-      'subreddits',
-      'currentSub'
+      'getSubreddits',
+      'getOrder',
+      'getSearch'
     ])
   },
   methods: {
+    makeCurrent (current) {
+      this.$store.dispatch('changeCurrent', current)
+    }
   }
 }
 </script>

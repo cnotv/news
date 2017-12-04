@@ -1,10 +1,15 @@
 <template>
   <section class="c-section">
     <div class="c-container-full">
-      <h1>{{ currentSub }}</h1>
+
+      <select>
+        <option v-for="order in getOrder">{{ order }}</option>
+      </select>
+
+      <h1>{{ getCurrent }}</h1>
 
       <ul>
-        <li v-for="post in posts">
+        <li v-for="post in getPosts">
           <h2>{{ post.title }}</h2>
           <p>{{ post.excerpt }}</p>
         </li>
@@ -14,16 +19,22 @@
 </template>
 
 <script>
+import Vuex from 'vuex'
+
 export default {
+  mounted () {
+  },
   computed: {
-    currentSub () {
-      return this.$store.state.currentSub
-    },
-    posts () {
-      return this.$getData
-    }
+    ...Vuex.mapGetters([
+      'getCurrent',
+      'getOrder',
+      'getPosts'
+    ])
   },
   methods: {
+    changeOrder (current) {
+      this.$store.dispatch('changeOrder', current)
+    }
   }
 }
 </script>
