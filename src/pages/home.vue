@@ -2,11 +2,8 @@
   <section class="c-section">
     <div class="c-container-full">
 
-      <select>
-        <option v-for="order in getOrder">{{ order }}</option>
-      </select>
-
-      <h1>{{ getCurrent }}</h1>
+      <h1>{{ getCurrentSub }}</h1>
+      <span>{{ getCurrentOrder }}</span>
 
       <ul>
         <li v-for="post in getPosts">
@@ -22,19 +19,12 @@
 import Vuex from 'vuex'
 
 export default {
-  mounted () {
-  },
   computed: {
     ...Vuex.mapGetters([
-      'getCurrent',
-      'getOrder',
+      'getCurrentSub',
+      'getCurrentOrder',
       'getPosts'
     ])
-  },
-  methods: {
-    changeOrder (current) {
-      this.$store.dispatch('changeOrder', current)
-    }
   }
 }
 </script>

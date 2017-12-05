@@ -6,7 +6,7 @@
 
         <ul class="o-nav-h__left">
           <li v-for="subreddit in getSubreddits">
-            <a v-on:click="makeCurrent(subreddit)">{{ subreddit }}</a>
+            <a v-on:click="changeSub(subreddit)">{{ subreddit }}</a>
           </li>
         </ul>
 
@@ -17,6 +17,7 @@
         <div class="o-nav-h__right">
           <a class="js-burger o-nav-h__burger" type="button"><i class="fa fa-navicon"></i></a>
           <!-- <a class="js-search o-search__toggle"><i class="fa"></i></a> -->
+          <news-order/>
         </div>
 
       </nav>
@@ -26,22 +27,22 @@
 </template>
 
 <script>
-import Vuex from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
+import newsOrder from '@/components/order'
 
 export default {
+  components: { newsOrder },
   mounted () {
   },
   computed: {
-    ...Vuex.mapGetters([
-      'getSubreddits',
-      'getOrder',
-      'getSearch'
+    ...mapGetters([
+      'getSubreddits'
     ])
   },
   methods: {
-    makeCurrent (current) {
-      this.$store.dispatch('changeCurrent', current)
-    }
+    ...mapActions([
+      'changeSub'
+    ])
   }
 }
 </script>

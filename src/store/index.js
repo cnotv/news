@@ -6,6 +6,7 @@ import mutations from './mutations'
 const store = () => {
   return new Vuex.Store({
     state: {
+      strict: process.env.NODE_ENV !== 'production',
       page: {
         id: null,
         excerpt: null,
@@ -31,7 +32,8 @@ const store = () => {
         slug: null
       },
       subreddits: ['technews', 'worldnews', 'robotics', 'TechDIY'],
-      current: 'technews',
+      currentSub: 'technews',
+      currentOrder: 'hot',
       order: ['hot', 'new', 'rising', 'controversial', 'top', 'gilded'],
       search: null,
       site_data: {}

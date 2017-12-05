@@ -8,8 +8,11 @@ export default {
   POST: (state, post) => {
     state.post = post
   },
-  CURRENT: (state, current) => {
-    state.current = current
+  CURRENT_SUB: (state, currentSub) => {
+    state.currentSub = currentSub
+  },
+  CURRENT_ORDER: (state, currentOrder) => {
+    state.currentOrder = currentOrder
   },
   ORDER: (state, order) => {
     state.order = order

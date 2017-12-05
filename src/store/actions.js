@@ -14,10 +14,10 @@
 //   })
 // }
 
-export const changeCurrent = ({ commit, state }, current) => {
-  commit('CURRENT', current)
+export const changeSub = ({ commit, state }, current) => {
+  commit('CURRENT_SUB', current)
 }
 
 export const changeOrder = ({ commit, state }, current) => {
-  commit('ORDER', current)
+  commit('CURRENT_ORDER', current)
 }
