@@ -1,39 +1,53 @@
 <template>
   <section class="c-section">
     <div class="c-container-full">
-      <input type="checkbox" v-model="debug">
-      <input type="checkbox" v-model="pictures">
 
       <h1>{{ getCurrentSub }}</h1>
 
-      <article v-for="post in getPosts">
-        <a 
-          :href="'http://www.reddit.com' + post.data.permalink"
-          target="_blank"
+      <div class="c-row">
+        <article 
+          class="c-col-1-4 o-card is-loading" 
+          v-for="post in getPosts"
         >
-          <img
-            v-if="pictures"
-            :src="post.data.preview.images[0].source.url"
-          />
-          <img
-            v-if="post.data.thumbnail"
-            :src="post.data.thumbnail" 
-          />
-          <b>{{ post.data.title }}</b>
-        </a>
+          <div class="o-card__wrap">
 
-        <a 
-          :href="post.data.url"
-          target="_blank"
-        ><p>{{ post.data.domain }}</p></a>
-        </a>
+            <header v-if="post.data.preview">
+              <img :src="post.data.preview.images[0].source.url" />
+              <!-- <img
+                v-if="post.data.thumbnail"
+                :src="post.data.thumbnail" 
+              /> -->
+            </header>
 
-        <div
-          v-if="post.data.selftext"
-        >{{post.data.selftext | truncate(200)}}</div>
+            <section>
+              <b>{{ post.data.title }}</b>
+            </section>
 
-        <pre v-if="debug">{{ post.data }}</pre>
-      </article>
+            <section v-if="post.data.selftext">
+              <div>{{post.data.selftext | truncate(200)}}</div>
+            </section>
+
+            <footer>
+              <a 
+                :href="'http://www.reddit.com' + post.data.permalink"
+                target="_blank"
+              >
+                <i class="fa fa-comment"></i>
+              </a>
+
+              <a 
+                :href="post.data.url"
+                target="_blank"
+              >
+                <i class="fa fa-plus"></i>
+                <!-- <p>{{ post.data.domain }}</p> -->
+              </a>
+            </footer>
+          </div>
+
+          <pre v-if="debug">{{ post.data }}</pre>
+        </article>
+      </div>
     </div>
   </section>
 </template>
@@ -42,12 +56,6 @@
 import Vuex from 'vuex'
 
 export default {
-  data () {
-    return {
-      debug: false,
-      pictures: false
-    }
-  },
   filters: {
     truncate: function (string, value) {
       if (!value) return ''
