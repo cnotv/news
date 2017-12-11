@@ -49,13 +49,11 @@ module.exports = {
         include: [resolve('src'), resolve('test')]
       },
       { test: /\.sass$/,
-        use: this.styleLoader('sass', {
-          loader: 'sass-loader',
-          options: { indentedSyntax: true }
-        })
+        loader: 'sass-loader',
+        options: { indentedSyntax: true }
       },
       { test: /\.scss$/,
-        use: this.styleLoader('scss', 'sass-loader')
+        loader: ('scss', 'sass-loader'),
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
