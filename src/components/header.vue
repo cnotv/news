@@ -32,8 +32,6 @@ import newsOrder from '@/components/order'
 
 export default {
   components: { newsOrder },
-  mounted () {
-  },
   computed: {
     ...mapGetters([
       'getSubreddits'

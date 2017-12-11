@@ -13,10 +13,6 @@
 
             <header v-if="post.data.preview">
               <img :src="post.data.preview.images[0].source.url" />
-              <!-- <img
-                v-if="post.data.thumbnail"
-                :src="post.data.thumbnail" 
-              /> -->
             </header>
 
             <section>
@@ -40,12 +36,10 @@
                 target="_blank"
               >
                 <i class="fa fa-plus"></i>
-                <!-- <p>{{ post.data.domain }}</p> -->
               </a>
             </footer>
           </div>
 
-          <pre v-if="debug">{{ post.data }}</pre>
         </article>
       </div>
     </div>
@@ -69,6 +63,9 @@ export default {
       'getCurrentSub',
       'getPosts'
     ])
+  },
+  mounted () {
+    this.$store.dispatch('commitPosts')
   }
 }
 </script>
