@@ -26,6 +26,10 @@
             </section>
 
             <footer>
+              <span >
+                <i class="fa fa-clock-o"></i>
+                {{post.data.created_utc | date}}
+              </span>
               <a 
                 :href="'http://www.reddit.com' + post.data.permalink"
                 target="_blank"
@@ -39,6 +43,10 @@
               >
                 <i class="fa fa-plus"></i>
               </a>
+              <span v-if="post.data.ups">
+                <i class="fa fa-arrow-up"></i>
+                {{post.data.ups}}
+              </span>
             </footer>
           </div>
 
@@ -77,6 +85,10 @@ export default {
         stringNew += '...'
       }
       return stringNew
+    },
+    date: (value) => {
+      let newDate = new Date(value * 1000)
+      return newDate.toLocaleDateString('en-GB')
     }
   },
 
