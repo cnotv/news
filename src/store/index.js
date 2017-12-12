@@ -31,7 +31,7 @@ const store = () => {
         name: null,
         slug: null
       },
-      subreddits: ['technews', 'news', 'WorldNews', 'germany', 'robotics', 'TechDIY'],
+      subreddits: ['technews', 'news', 'WorldNews', 'germany', 'robotics', 'TechDIY', 'Gamebundles', 'gamernews', 'gamingnews', 'gaming', 'vuejs'],
       currentSub: 'technews',
       currentOrder: 'new',
       order: ['hot', 'new', 'rising', 'controversial', 'top', 'gilded'],

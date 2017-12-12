@@ -12,11 +12,13 @@
           <div class="o-card__wrap">
 
             <header v-if="post.data.preview">
-              <img :src="post.data.preview.images[0].source.url" />
+              <div class="o-card__hero">
+                <img :src="post.data.preview.images[0].source.url" />
+              </div>
             </header>
 
             <section>
-              <b>{{ post.data.title }}</b>
+              <h6  v-bind:class="heading">{{ post.data.title | truncate(150) }}</h6>
             </section>
 
             <section v-if="post.data.selftext">
@@ -50,22 +52,53 @@
 import Vuex from 'vuex'
 
 export default {
-  filters: {
-    truncate: function (string, value) {
-      if (!value) return ''
-      value = value.toString()
-      string = string.toString()
-      return `${string.substring(0, value)}...`
+  props: {
+    heading: {
+      headingClass: (string) => {
+        string = string.toString()
+        if (string < 20) {
+          return 'h2'
+        } else if (string > 20 & string < 40) {
+          return 'h4'
+        } else {
+          return 'h6'
+        }
+      }
     }
   },
+
+  filters: {
+    truncate: (string, value) => {
+      if (!value) return ''
+      value = value.toString()
+      let stringNew = string.toString()
+      stringNew = stringNew.substring(0, value)
+      if (string.length > value) {
+        stringNew += '...'
+      }
+      return stringNew
+    }
+  },
+
   computed: {
     ...Vuex.mapGetters([
       'getCurrentSub',
       'getPosts'
     ])
   },
+
   mounted () {
     this.$store.dispatch('commitPosts')
   }
 }
 </script>
+
+<style>
+  .o-card__hero { 
+    max-height: 150px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
