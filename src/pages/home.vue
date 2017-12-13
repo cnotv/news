@@ -2,8 +2,6 @@
   <section class="c-section">
     <div class="c-container-full">
 
-      <h1>{{ getCurrentSub }}</h1>
-
       <div class="c-row">
         <article 
           class="c-col-1-4 o-card is-loading" 
