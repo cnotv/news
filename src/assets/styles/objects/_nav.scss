@@ -130,7 +130,7 @@
     }
 
     &__left {
-      .has-search-open header & {
+      .has-search-open & {
         display: none;
       }
 

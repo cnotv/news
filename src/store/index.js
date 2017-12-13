@@ -35,7 +35,7 @@ const store = () => {
       currentSub: 'technews',
       currentOrder: 'new',
       order: ['hot', 'new', 'rising', 'controversial', 'top', 'gilded'],
-      search: null,
+      search: '',
       site_data: {}
     },
     actions,
