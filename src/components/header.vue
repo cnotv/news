@@ -1,10 +1,16 @@
 <template>
 
-  <header class="c-section">
+  <header
+    class="c-section"
+    v-bind:class="{ 'has-menu-open' : menuOpen }"
+  >
     <div class="c-container-full">
       <nav class="o-nav-h">
 
-        <ul class="o-nav-h__left">
+        <ul
+          class="o-nav-h__left"
+          v-on:click="openMenu"
+        >
           <li v-for="subreddit in getSubreddits">
             <a v-on:click="changeSub(subreddit)">{{ subreddit }}</a>
           </li>
@@ -15,7 +21,10 @@
         </div>
 
         <div class="o-nav-h__right">
-          <a class="js-burger o-nav-h__burger" type="button"><i class="fa fa-navicon"></i></a>
+          <a 
+            class="js-burger o-nav-h__burger"
+            v-on:click="openMenu"
+          ><i class="fa fa-navicon"></i></a>
           <!-- <a class="js-search o-search__toggle"><i class="fa"></i></a> -->
           <news-order/>
         </div>
@@ -31,6 +40,11 @@ import { mapGetters, mapActions } from 'vuex'
 import newsOrder from '@/components/order'
 
 export default {
+  data () {
+    return {
+      menuOpen: false
+    }
+  },
   components: { newsOrder },
   computed: {
     ...mapGetters([
@@ -40,7 +54,10 @@ export default {
   methods: {
     ...mapActions([
       'changeSub'
-    ])
+    ]),
+    openMenu () {
+      this.menuOpen = !this.menuOpen
+    }
   }
 }
 </script>
