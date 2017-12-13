@@ -10,17 +10,22 @@
     height: 100%;
     max-width: 320px;
     margin: auto;
-    transition: box-shadow 0.2s;
-    box-shadow: $website-shadow;
-    background-color: $bg-card;
-    border: $website-border;
+    border: $website-border-secondary;
+    transition: box-shadow 0.2s, background-color 0.2s;
 
     &:hover {
       box-shadow: $website-shadow-hover;
+      background-color: $bg-card;
     }
 
     & > * + * {
       border-top: $website-border-secondary;
+    }
+
+    &--feat {
+      box-shadow: $website-shadow;
+      background-color: $bg-card;
+      border: $website-border;
     }
   }
 
