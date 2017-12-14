@@ -31,7 +31,6 @@ export const changeSearch = ({ commit, state }, string) => {
     commit('CURRENT_ORDER', 'search')
   } else {
     commit('CURRENT_ORDER', state.order[0])
-    commit('CURRENT_SUB', state.subreddits[0])
     commit('SEARCH', '')
   }
   commitPosts({ commit, state })

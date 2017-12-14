@@ -25,7 +25,7 @@
 
             <footer>
               <span >
-                <i class="fa fa-clock-o"></i>
+                {{post.data.subreddit}} - 
                 {{post.data.created_utc | date}}
               </span>
               <a 
