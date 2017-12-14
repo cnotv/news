@@ -17,7 +17,16 @@ export default {
   ORDER: (state, order) => {
     state.order = order
   },
+  CURRENT_LIMIT: (state, currentLimit) => {
+    state.currentLimit = currentLimit
+  },
   SEARCH: (state, search) => {
     state.search = search
+  },
+  SEARCHGLOBAL: (state) => {
+    state.searchGlobal = !state.searchGlobal
+  },
+  QUERY: (state, query) => {
+    state.query = query
   }
 }

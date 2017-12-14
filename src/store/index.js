@@ -33,9 +33,13 @@ const store = () => {
       },
       subreddits: ['technews', 'news', 'WorldNews', 'germany', 'robotics', 'TechDIY', 'Gamebundles', 'gamernews', 'gamingnews', 'gaming', 'vuejs'],
       currentSub: 'technews',
+      limits: ['10', '25', '50', '100'],
+      currentLimit: '25',
       currentOrder: 'new',
       order: ['hot', 'new', 'rising', 'controversial', 'top', 'gilded'],
+      query: 'technews/new.json',
       search: '',
+      searchGlobal: false,
       site_data: {}
     },
     actions,

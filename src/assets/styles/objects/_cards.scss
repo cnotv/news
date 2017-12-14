@@ -12,6 +12,7 @@
     margin: auto;
     border: $website-border-secondary;
     transition: box-shadow 0.2s, background-color 0.2s;
+    word-wrap: break-word;
 
     &:hover {
       box-shadow: $website-shadow-hover;
@@ -27,6 +28,14 @@
       background-color: $bg-card;
       border: $website-border;
     }
+  }
+
+  &__header { 
+    max-height: 150px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   img {

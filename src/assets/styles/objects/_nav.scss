@@ -1,5 +1,4 @@
 .o-nav {
-
   // horizontal navbar, e.g. for main navigations
   &-h {
     position: relative;
@@ -166,6 +165,11 @@
         display: none !important; // please forgive me for this...
       }
     }
+
+    button {
+      border: none;
+      background-color: transparent;
+    }
   }
 
   // vertical navbar, e.g. for side navigations
@@ -309,6 +313,19 @@
 
     > * + * {
       border-left: $website-border-secondary;
+    }
+  }
+
+  &-min {
+    font-size: 0.8rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: $menu-padding/2;
+    align-items: center;
+
+    > * + * {
+      margin-left: $menu-padding/4;
     }
   }
 }

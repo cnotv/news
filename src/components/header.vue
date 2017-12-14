@@ -16,9 +16,7 @@
           </li>
         </ul>
 
-        <div class="o-search__bar">
-          <search></search>
-        </div>
+        <search v-if="searchOpen"></search>
 
         <div class="o-nav-h__right">
           <a 
@@ -26,15 +24,23 @@
             v-on:click="openMenu"
           ><i class="fa fa-navicon"></i></a>
 
-          <news-order/>
+          <news-order v-if="!searchOpen"/>
 
-          <a
+          <button
             class="js-search o-search__toggle"
             v-on:click="openSearch"
-          ><i class="fa"></i></a>
+          ><i class="fa"></i></button>
         </div>
 
       </nav>
+
+      <div class="o-nav-min">
+        <span>Posts:</span>
+        <button
+          v-for="limit in getLimits"
+          v-on:click="changeLimit(limit)"
+        >{{ limit }}</button>
+      </div>
     </div>
   </header>
 
@@ -55,12 +61,14 @@ export default {
   components: { newsOrder, search },
   computed: {
     ...mapGetters([
-      'getSubreddits'
+      'getSubreddits',
+      'getLimits'
     ])
   },
   methods: {
     ...mapActions([
       'changeSub',
+      'changeLimit',
       'changeSearch'
     ]),
     openMenu () {

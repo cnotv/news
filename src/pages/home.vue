@@ -9,10 +9,11 @@
         >
           <div class="o-card__wrap">
 
-            <header v-if="post.data.preview">
-              <div class="o-card__hero">
-                <img :src="post.data.preview.images[0].source.url" />
-              </div>
+            <header
+              class="o-card__header"
+              v-if="post.data.preview"
+            >
+              <img :src="post.data.preview.images[0].source.url" />
             </header>
 
             <section>
@@ -104,11 +105,4 @@ export default {
 </script>
 
 <style>
-  .o-card__hero { 
-    max-height: 150px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 </style>

@@ -3,12 +3,11 @@ import axios from 'axios'
 export default {
   baseUrl: `//www.reddit.com/r/`,
 
-  fetchData (current, order, search) {
+  fetchData (query) {
     return new Promise((resolve, reject) => {
-      let urlComposer = `${current}/search.json?q=${search}+subreddit:${current}`
       axios.defaults.baseURL = this.baseUrl
 
-      return axios.get(urlComposer).then(
+      return axios.get(query).then(
         response => {
           resolve(response.data.data.children)
         })

@@ -1,11 +1,15 @@
 <template>
-  <section>
-    <input 
-      class="js-search-field"
-      placeholder="Type something.."
-      v-model="search"
-    >
-  </section>
+    <div class="o-search__bar">
+      <input 
+        class="js-search-field"
+        placeholder="Type something.."
+        v-model="search"
+      >
+      <button v-on:click="changeSearchGlobal">
+        <i class="fa fa-globe"></i>
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -15,7 +19,8 @@ export default {
   name: 'search',
   methods: {
     ...mapActions([
-      'changeSearch'
+      'changeSearch',
+      'changeSearchGlobal'
     ])
   },
   computed: {
@@ -24,7 +29,7 @@ export default {
         return this.$store.state.search
       },
       set (value) {
-        this.$store.dispatch('changeSearch', value)
+        this.$store.dispatch('changeSearch', value, this.global)
       }
     }
   }

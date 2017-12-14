@@ -1,3 +1,12 @@
+button {
+  background-color: transparent;
+  border: $website-border-secondary;
+  &:hover {
+    background-color: $bg-link-hover;
+    cursor: pointer;
+  }
+}
+
 @mixin buttonBg($color1, $color2) {
   &:hover {
     background-image: linear-gradient(225deg, $color1 0%, $color1 0.5rem, transparent 0.5rem, transparent 100%);
