@@ -5,49 +5,51 @@
       v-for="post in getPosts"
     >
 
-      <a 
-        :href="'http://www.reddit.com' + post.data.permalink"
-        target="_blank"
-      >
-        <div class="o-card__wrap">
+      <div class="o-card__wrap">
 
-          <header
-            class="o-card__header"
-            v-if="post.data.preview"
+        <header
+          class="o-card__header"
+          v-if="post.data.preview"
+        >
+          <a 
+            :href="post.data.url"
+            target="_blank"
           >
             <img v-if="post.data.preview.images[0].variants.gif" :src="post.data.preview.images[0].variants.gif.source.url" />
             <img v-else :src="post.data.preview.images[0].source.url" />
-          </header>
+          </a>
+        </header>
 
-          <section>
-            <h6  v-bind:class="heading">{{ post.data.title | truncate(150) }}</h6>
-          </section>
+        <section>
+          <h6  v-bind:class="heading">{{ post.data.title | truncate(150) }}</h6>
+        </section>
 
-          <section v-if="post.data.selftext">
-            <div>{{post.data.selftext | truncate(200)}}</div>
-          </section>
+        <section v-if="post.data.selftext">
+          <div>{{post.data.selftext | truncate(200)}}</div>
+        </section>
 
-          <footer>
-            <span
+        <footer>
+          <span>
+            <button
               v-on:click="addSub(post.data.subreddit)"
             >
-              {{post.data.subreddit}} - 
-              {{post.data.created_utc | date}}
-            </span>
-            <a 
-              :href="post.data.url"
-              target="_blank"
-            >
-              <i class="fa fa-plus"></i>
-            </a>
-            <span v-if="post.data.ups">
-              <i class="fa fa-arrow-up"></i>
-              {{post.data.ups}}
-            </span>
-          </footer>
+              {{post.data.subreddit}}
+            </button>
+            {{post.data.created_utc | date}}
+          </span>
+          <a 
+            :href="'http://www.reddit.com' + post.data.permalink"
+            target="_blank"
+          >
+            <i class="fa fa-comment"></i>
+          </a>
+          <span v-if="post.data.ups">
+            <i class="fa fa-arrow-up"></i>
+            {{post.data.ups}}
+          </span>
+        </footer>
 
-        </div>
-      </a>
+      </div>
 
     </article>
   </div>
