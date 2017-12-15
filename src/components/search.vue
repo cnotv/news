@@ -9,7 +9,8 @@
       v-on:click="changeSearchGlobal"
       v-bind:class="{ 'is-active' : getSearchGlobal}"
     >
-      <i class="fa fa-globe"></i>
+      <span v-if="getSearchGlobal">All</span>
+      <span v-if="!getSearchGlobal">{{getCurrentSub}}</span>
     </button>
   </div>
 </template>
@@ -27,7 +28,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getSearchGlobal'
+      'getSearchGlobal',
+      'getCurrentSub'
     ]),
     search: {
       get () {

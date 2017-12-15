@@ -1,10 +1,12 @@
 <template>
-  <div class="c-row">
+  <div
+    class="c-row"
+    v-if="getPosts.length > 0"
+    >
     <article 
       class="c-col-1-4 o-card is-loading" 
       v-for="post in getPosts"
     >
-
       <div class="o-card__wrap">
 
         <header
@@ -57,6 +59,8 @@
 
     <modal v-if="modalOpen" />
   </div>
+
+  <div v-else>Sorry, no post found.</div>
 </template>
 
 <script>

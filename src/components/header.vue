@@ -101,6 +101,7 @@ export default {
     },
     toggleSearch () {
       this.openMenu = false
+      this.openSettings = false
       this.openSearch = !this.openSearch
       this.$store.dispatch('changeSearch', '')
     }
