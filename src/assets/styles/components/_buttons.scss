@@ -1,12 +1,3 @@
-button {
-  background-color: transparent;
-  border: $website-border-secondary;
-  &:hover {
-    background-color: $bg-link-hover;
-    cursor: pointer;
-  }
-}
-
 @mixin buttonBg($color1, $color2) {
   &:hover {
     background-image: linear-gradient(225deg, $color1 0%, $color1 0.5rem, transparent 0.5rem, transparent 100%);
@@ -29,7 +20,6 @@ button {
 
 [class^="c-btn"] {
   border: $website-border;
-  padding: 0.8em 1.8em;
   background-color: transparent;
   cursor: pointer;
   display: inline-block;
@@ -39,6 +29,7 @@ button {
   line-height: 1.2;
   font-size: 0.8em;
   text-transform: uppercase;
+  padding: 0.8em 1.8em;
 
   &:hover,
   &:active,
@@ -76,6 +67,6 @@ button {
   }
 
   &-alt {
-    @include buttonBg($brand-primary, $brand-secondary);
+    @include buttonBg($bg-link-active, $brand-secondary);
   }
 }

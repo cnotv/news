@@ -2,33 +2,34 @@
 
   <header
     class="c-section"
-    v-bind:class="{ 'has-menu-open' : menuOpen, 'has-search-open' : searchOpen,  }"
+    v-bind:class="{ 'has-menu-open' : openMenu, 'has-search-open' : openSearch }"
   >
     <div class="c-container-full">
       <nav class="o-nav-h">
 
         <ul
-          class="o-nav-h__left"
-          v-on:click="openMenu"
+          class="o-nav-h__left fadeIn"
+          v-on:click="toggleMenu"
         >
           <li v-for="subreddit in getSubreddits">
             <a v-on:click="changeSub(subreddit)">{{ subreddit }}</a>
           </li>
         </ul>
 
-        <search v-if="searchOpen"></search>
+        <search v-if="openSearch"></search>
 
         <div class="o-nav-h__right">
           <a 
-            class="js-burger o-nav-h__burger"
-            v-on:click="openMenu"
+            class="o-nav-h__burger"
+            v-on:click="toggleMenu"
           ><i class="fa fa-navicon"></i></a>
 
-          <news-order v-if="!searchOpen"/>
+          <news-order v-if="!openSearch"/>
 
           <button
-            class="js-search o-search__toggle"
-            v-on:click="openSearch"
+            class="o-search__toggle"
+            v-on:click="toggleSearch"
+            v-bind:class="{'is-active' : openSearch}"
           ><i class="fa"></i></button>
         </div>
 
@@ -37,8 +38,10 @@
       <div class="o-nav-min">
         <span>Posts:</span>
         <button
+          class="c-btn-alt"
           v-for="limit in getLimits"
           v-on:click="changeLimit(limit)"
+          v-bind:class="{'is-active' : limit === getCurrentLimit}"
         >{{ limit }}</button>
       </div>
     </div>
@@ -54,15 +57,16 @@ import search from '@/components/search'
 export default {
   data () {
     return {
-      menuOpen: false,
-      searchOpen: false
+      openMenu: false,
+      openSearch: false
     }
   },
   components: { newsOrder, search },
   computed: {
     ...mapGetters([
       'getSubreddits',
-      'getLimits'
+      'getLimits',
+      'getCurrentLimit'
     ])
   },
   methods: {
@@ -71,11 +75,13 @@ export default {
       'changeLimit',
       'changeSearch'
     ]),
-    openMenu () {
-      this.menuOpen = !this.menuOpen
+    toggleMenu () {
+      this.openMenu = !this.openMenu
+      this.openSearch = false
     },
-    openSearch () {
-      this.searchOpen = !this.searchOpen
+    toggleSearch () {
+      this.openMenu = false
+      this.openSearch = !this.openSearch
       this.$store.dispatch('changeSearch', '')
     }
   }

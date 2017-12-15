@@ -169,6 +169,11 @@
     button {
       border: none;
       background-color: transparent;
+
+      &.is-active {
+        background-color: $bg-link-active;
+        color: $color-active;
+      }
     }
   }
 

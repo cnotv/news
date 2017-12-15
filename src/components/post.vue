@@ -32,6 +32,7 @@
         <footer>
           <span>
             <button
+              class="c-btn-alt"
               v-on:click="addSub(post.data.subreddit)"
             >
               {{post.data.subreddit}}
