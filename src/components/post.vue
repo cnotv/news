@@ -4,49 +4,50 @@
       class="c-col-1-4 o-card is-loading" 
       v-for="post in getPosts"
     >
-      <div class="o-card__wrap">
 
-        <header
-          class="o-card__header"
-          v-if="post.data.preview"
-        >
-          <img :src="post.data.preview.images[0].source.url" />
-        </header>
+      <a 
+        :href="'http://www.reddit.com' + post.data.permalink"
+        target="_blank"
+      >
+        <div class="o-card__wrap">
 
-        <section>
-          <h6  v-bind:class="heading">{{ post.data.title | truncate(150) }}</h6>
-        </section>
-
-        <section v-if="post.data.selftext">
-          <div>{{post.data.selftext | truncate(200)}}</div>
-        </section>
-
-        <footer>
-          <span
-            v-on:click="addSub(post.data.subreddit)"
+          <header
+            class="o-card__header"
+            v-if="post.data.preview"
           >
-            {{post.data.subreddit}} - 
-            {{post.data.created_utc | date}}
-          </span>
-          <a 
-            :href="'http://www.reddit.com' + post.data.permalink"
-            target="_blank"
-          >
-            <i class="fa fa-comment"></i>
-          </a>
+            <img v-if="post.data.preview.images[0].variants.gif" :src="post.data.preview.images[0].variants.gif.source.url" />
+            <img v-else :src="post.data.preview.images[0].source.url" />
+          </header>
 
-          <a 
-            :href="post.data.url"
-            target="_blank"
-          >
-            <i class="fa fa-plus"></i>
-          </a>
-          <span v-if="post.data.ups">
-            <i class="fa fa-arrow-up"></i>
-            {{post.data.ups}}
-          </span>
-        </footer>
-      </div>
+          <section>
+            <h6  v-bind:class="heading">{{ post.data.title | truncate(150) }}</h6>
+          </section>
+
+          <section v-if="post.data.selftext">
+            <div>{{post.data.selftext | truncate(200)}}</div>
+          </section>
+
+          <footer>
+            <span
+              v-on:click="addSub(post.data.subreddit)"
+            >
+              {{post.data.subreddit}} - 
+              {{post.data.created_utc | date}}
+            </span>
+            <a 
+              :href="post.data.url"
+              target="_blank"
+            >
+              <i class="fa fa-plus"></i>
+            </a>
+            <span v-if="post.data.ups">
+              <i class="fa fa-arrow-up"></i>
+              {{post.data.ups}}
+            </span>
+          </footer>
+
+        </div>
+      </a>
 
     </article>
   </div>

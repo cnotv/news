@@ -36,7 +36,6 @@ export const changeLimit = ({ commit, state }, limit) => {
 
 export const changeOrder = ({ commit, state }, order) => {
   commit('CURRENT_ORDER', order)
-  commit('SEARCH', '')
   commit('QUERY', `${state.currentSub}/${state.currentOrder}.json?limit=${state.currentLimit}`)
   commitPosts({ commit, state })
 }
