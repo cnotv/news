@@ -54,7 +54,7 @@
         <button
           class="c-btn-alt"
           v-for="limit in getLimits"
-          v-on:click="changeLimit(limit)"
+          v-on:click="changeLimit(limit), prevent"
           v-bind:class="{'is-active' : limit === getCurrentLimit}"
         >{{ limit }}</button>
       </div>

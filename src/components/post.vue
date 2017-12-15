@@ -1,12 +1,16 @@
 <template>
   <div
     class="c-row"
-    v-if="getPosts.length > 0"
+    v-if="getPosts && getPosts.length > 0"
     >
     <article 
-      class="c-col-1-4 o-card is-loading" 
+      class="c-col-1-4 o-card o-card--hidden-footer is-loading" 
       v-for="post in getPosts"
     >
+          <a 
+            :href="post.data.url"
+            target="_blank"
+          >
       <div class="o-card__wrap">
 
         <header
@@ -14,13 +18,8 @@
           v-if="post.data.preview"
           v-on:click="toggleModal(post.data.url)"
         >
-          <a 
-            :href="post.data.url"
-            target="_blank"
-          >
             <img v-if="post.data.preview.images[0].variants.gif" :src="post.data.preview.images[0].variants.gif.source.url" />
             <img v-else :src="post.data.preview.images[0].source.url" />
-          </a>
         </header>
 
         <section>
@@ -33,12 +32,13 @@
 
         <footer>
           <span>
-            <button
+            <a
+              href="#"
               class="c-btn-alt"
               v-on:click="addSub(post.data.subreddit)"
             >
               {{post.data.subreddit}}
-            </button>
+            </a>
             {{post.data.created_utc | date}}
           </span>
           <a 
@@ -54,6 +54,7 @@
         </footer>
 
       </div>
+          </a>
 
     </article>
 

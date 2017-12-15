@@ -64,6 +64,23 @@
     }
   }
 
+  &--hidden-footer {
+    footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      transform: translateY(100%);
+      transition: transform  $website-animation-time;
+    }
+
+    &:hover {
+      footer {
+        transform: none;
+        background-color: $bg-card;
+      }
+    }
+  }
+
   &--center {
     text-align: center;
     display: flex;
