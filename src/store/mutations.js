@@ -8,6 +8,9 @@ export default {
   POST: (state, post) => {
     state.post = post
   },
+  ADD_SUB: (state, newSub) => {
+    state.subreddits = newSub
+  },
   CURRENT_SUB: (state, currentSub) => {
     state.currentSub = currentSub
   },

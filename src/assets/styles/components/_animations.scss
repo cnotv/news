@@ -1,11 +1,11 @@
 .fadeIn {
-  animation: fadeIn 0.5s forwards;
+  animation: fadeIn $website-animation-time forwards;
   opacity: 0;
 
   @include animationDelay;
 }
 
-.fadeOut { animation: fadeIn 0.5s backwards; }
+.fadeOut { animation: fadeIn $website-animation-time backwards; }
 
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -14,7 +14,7 @@
 
 .fadeInUp {
   opacity: 0;
-  animation: fadeInUp 0.5s forwards;
+  animation: fadeInUp $website-animation-time forwards;
 
   @include animationDelay;
 }
@@ -30,7 +30,7 @@
     transform: none;
   }
 }
-.fadeInRight { animation: fadeInRight 0.2s forwards; }
+.fadeInRight { animation: fadeInRight $website-animation-time forwards; }
 
 @keyframes fadeInRight {
   from {
@@ -45,7 +45,7 @@
 }
 
 .slideInRight {
-  animation: slideInRight 0.2s forwards;
+  animation: slideInRight $website-animation-time forwards;
 
   @include animationDelay;
 }
@@ -56,7 +56,7 @@
 }
 
 .slideInLeft {
-  animation: slideInLeft 0.2s forwards;
+  animation: slideInLeft $website-animation-time forwards;
 
   @include animationDelay;
 }
@@ -66,7 +66,7 @@
   to { transform: none; }
 }
 
-.animation-delay { animation-delay: 0.2s; }
+.animation-delay { animation-delay: $website-animation-delay; }
 
 @keyframes rotate360 {
   from { transform: rotate(0deg); }

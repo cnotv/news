@@ -14,6 +14,14 @@ export const commitPosts = ({ commit, state }) => {
   })
 }
 
+export const addSub = ({ commit, state }, sub) => {
+  let subs = state.subreddits
+  if (!subs.includes(sub)) {
+    subs.push(sub)
+  }
+  commit('ADD_SUB', subs)
+}
+
 export const changeSub = ({ commit, state }, sub) => {
   commit('CURRENT_SUB', sub)
   commit('QUERY', `${state.currentSub}/${state.currentOrder}.json?limit=${state.currentLimit}`)
