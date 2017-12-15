@@ -1,14 +1,13 @@
 <template>
-    <div class="o-search__bar">
-      <input 
-        class="js-search-field"
-        placeholder="Type something.."
-        v-model="search"
-      >
-      <button v-on:click="changeSearchGlobal">
-        <i class="fa fa-globe"></i>
-      </button>
-    </div>
+  <div class="o-search__bar">
+    <input 
+      class="js-search-field"
+      placeholder="Type something.."
+      v-model="search"
+    >
+    <button v-on:click="changeSearchGlobal">
+      <i class="fa fa-globe"></i>
+    </button>
   </div>
 </template>
 
@@ -29,7 +28,7 @@ export default {
         return this.$store.state.search
       },
       set (value) {
-        this.$store.dispatch('changeSearch', value, this.global)
+        this.$store.dispatch('changeSearch', value)
       }
     }
   }

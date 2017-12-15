@@ -43,7 +43,7 @@ export const changeOrder = ({ commit, state }, order) => {
 export const changeSearch = ({ commit, state }, search = state.search) => {
   let searchGlobal = ''
 
-  if (state.searchGlobal) {
+  if (!state.searchGlobal) {
     searchGlobal = `+subreddit:${state.currentSub}`
   }
 
