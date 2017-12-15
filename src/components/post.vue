@@ -10,6 +10,7 @@
         <header
           class="o-card__header"
           v-if="post.data.preview"
+          v-on:click="toggleModal(post.data.url)"
         >
           <a 
             :href="post.data.url"
@@ -52,13 +53,22 @@
       </div>
 
     </article>
+
+    <modal v-if="modalOpen" />
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import modal from '@/components/modal'
 
 export default {
+  components: { modal },
+  data () {
+    return {
+      modalOpen: false
+    }
+  },
   props: {
     heading: {
       headingClass: (string) => {
@@ -100,7 +110,10 @@ export default {
   methods: {
     ...mapActions([
       'addSub'
-    ])
+    ]),
+    toggleModal (content) {
+      this.modalOpen = !this.modalOpen
+    }
   },
 
   mounted () {
