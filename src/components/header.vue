@@ -18,6 +18,7 @@
             >X {{ subreddit }}</a>
             <a
               v-if="!openSettings"
+              v-bind:class="{'is-active' : subreddit == getCurrentSub}"
               v-on:click="changeSub(subreddit)"
             >{{ subreddit }}</a>
           </li>
@@ -81,6 +82,7 @@ export default {
     ...mapGetters([
       'getSubreddits',
       'getLimits',
+      'getCurrentSub',
       'getCurrentLimit'
     ])
   },

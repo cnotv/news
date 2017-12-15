@@ -168,13 +168,15 @@
       }
     }
 
-    button {
+    button,
+    a {
       border: none;
       background-color: transparent;
 
       &.is-active {
         background-color: $bg-link-active;
         color: $color-active;
+        transition: background-color $website-animation-time, color $website-animation-time;
       }
     }
   }
