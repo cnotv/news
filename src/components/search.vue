@@ -1,6 +1,7 @@
 <template>
   <div class="o-search__bar fadeIn">
-    <input 
+    <input
+      ref="search"
       class="js-search-field"
       placeholder="Type something.."
       v-model="search"
@@ -25,6 +26,9 @@ export default {
       'changeSearch',
       'changeSearchGlobal'
     ])
+  },
+  mounted () {
+    this.$refs.search.focus()
   },
   computed: {
     ...mapGetters([
