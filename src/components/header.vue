@@ -12,7 +12,14 @@
           v-on:click="toggleMenu"
         >
           <li v-for="subreddit in getSubreddits">
-            <a v-on:click="changeSub(subreddit)">{{ subreddit }}</a>
+            <a
+              v-if="openSettings"
+              v-on:click="removeSub(subreddit)"
+            >X {{ subreddit }}</a>
+            <a
+              v-if="!openSettings"
+              v-on:click="changeSub(subreddit)"
+            >{{ subreddit }}</a>
           </li>
         </ul>
 
@@ -25,6 +32,13 @@
           ><i class="fa fa-navicon"></i></a>
 
           <news-order v-if="!openSearch"/>
+
+          <button
+            class=""
+            v-on:click="toggleSettings"
+            v-if="!openSearch"
+            v-bind:class="{'is-active' : openSettings}"
+          ><i class="fa fa-cog"></i></button>
 
           <button
             class="o-search__toggle"
@@ -58,6 +72,7 @@ export default {
   data () {
     return {
       openMenu: false,
+      openSettings: false,
       openSearch: false
     }
   },
@@ -73,11 +88,16 @@ export default {
     ...mapActions([
       'changeSub',
       'changeLimit',
-      'changeSearch'
+      'changeSearch',
+      'removeSub'
     ]),
     toggleMenu () {
       this.openMenu = !this.openMenu
       this.openSearch = false
+    },
+    toggleSettings () {
+      this.openSettings = !this.openSettings
+      this.openMenu = true
     },
     toggleSearch () {
       this.openMenu = false

@@ -9,7 +9,17 @@ export default {
     state.post = post
   },
   ADD_SUB: (state, newSub) => {
-    state.subreddits = newSub
+    let subs = state.subreddits
+    if (!subs.includes(newSub)) {
+      subs.push(newSub)
+    }
+    state.subreddits = subs
+  },
+  REMOVE_SUB: (state, removeSub) => {
+    let subs = state.subreddits
+    if (subs.includes(removeSub)) {
+      state.subreddits = subs.filter(e => e !== removeSub)
+    }
   },
   CURRENT_SUB: (state, currentSub) => {
     state.currentSub = currentSub

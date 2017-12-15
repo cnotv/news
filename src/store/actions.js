@@ -15,11 +15,11 @@ export const commitPosts = ({ commit, state }) => {
 }
 
 export const addSub = ({ commit, state }, sub) => {
-  let subs = state.subreddits
-  if (!subs.includes(sub)) {
-    subs.push(sub)
-  }
-  commit('ADD_SUB', subs)
+  commit('ADD_SUB', sub)
+}
+
+export const removeSub = ({ commit, state }, sub) => {
+  commit('REMOVE_SUB', sub)
 }
 
 export const changeSub = ({ commit, state }, sub) => {
