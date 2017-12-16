@@ -51,11 +51,30 @@
       </nav>
 
       <div class="o-nav-min">
+        <span
+          class="fadeIn"
+          v-if="openSearch"
+        >
+          <span>View post till:</span>
+          <button
+            class="c-btn-alt"
+            v-on:click="changeSearchTime('')"
+            v-bind:class="{'is-active' : '' === getSearchTimeCurrent}"
+          >None</button>
+
+          <button
+            class="c-btn-alt"
+            v-for="time in getSearchTime"
+            v-on:click="changeSearchTime(time)"
+            v-bind:class="{'is-active' : time === getSearchTimeCurrent}"
+          >{{ time }} </button>
+        </span>
+
         <span>Posts:</span>
         <button
           class="c-btn-alt"
           v-for="limit in getLimits"
-          v-on:click="changeLimit(limit), prevent"
+          v-on:click="changeLimit(limit)"
           v-bind:class="{'is-active' : limit === getCurrentLimit}"
         >{{ limit }}</button>
       </div>
@@ -83,7 +102,9 @@ export default {
       'getSubreddits',
       'getLimits',
       'getCurrentSub',
-      'getCurrentLimit'
+      'getCurrentLimit',
+      'getSearchTime',
+      'getSearchTimeCurrent'
     ])
   },
   methods: {
@@ -91,7 +112,8 @@ export default {
       'changeSub',
       'changeLimit',
       'changeSearch',
-      'removeSub'
+      'removeSub',
+      'changeSearchTime'
     ]),
     toggleMenu () {
       this.openMenu = !this.openMenu

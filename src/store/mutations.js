@@ -39,6 +39,9 @@ export default {
   SEARCHGLOBAL: (state) => {
     state.searchGlobal = !state.searchGlobal
   },
+  SEARCHTIME: (state, time) => {
+    state.searchTimeCurrent = time
+  },
   QUERY: (state, query) => {
     state.query = query
   }

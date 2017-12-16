@@ -39,6 +39,8 @@ const store = () => {
       order: ['hot', 'new', 'rising', 'controversial', 'top', 'gilded'],
       query: 'technews/new.json',
       search: '',
+      searchTime: ['year', 'month', 'day', 'hour'],
+      searchTimeCurrent: '',
       searchGlobal: false,
       site_data: {}
     },

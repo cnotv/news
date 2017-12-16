@@ -49,7 +49,7 @@ export const changeSearch = ({ commit, state }, search = state.search) => {
 
   if (search.length > 0) {
     commit('SEARCH', search)
-    commit('QUERY', `${state.currentSub}/search.json?limit=${state.currentLimit}&q=${state.search}${searchGlobal}`)
+    commit('QUERY', `${state.currentSub}/search.json?limit=${state.currentLimit}&q=${state.search}${searchGlobal}&t=${state.searchTimeCurrent}`)
   } else {
     commit('SEARCH', '')
     commit('QUERY', `${state.currentSub}/${state.currentOrder}.json`)
@@ -59,5 +59,10 @@ export const changeSearch = ({ commit, state }, search = state.search) => {
 
 export const changeSearchGlobal = ({ commit, state }) => {
   commit('SEARCHGLOBAL')
+  changeSearch({ commit, state })
+}
+
+export const changeSearchTime = ({ commit, state }, time = state.time) => {
+  commit('SEARCHTIME', time)
   changeSearch({ commit, state })
 }
