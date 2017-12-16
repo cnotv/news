@@ -12,14 +12,20 @@
             target="_blank"
           >
       <div class="o-card__wrap">
-
         <header
           class="o-card__header"
-          v-if="post.data.preview"
+          v-if="post.data.domain =='youtube.com' || post.data.domain =='youtu.be'"
+          v-on:click="toggleModal(post.data.url)"
+        >
+            <iframe  width="100%" :src="post.data.url | embed" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+        </header>
+        <header
+          class="o-card__header"
+          v-else-if="post.data.preview"
           v-on:click="toggleModal(post.data.url)"
         >
             <img v-if="post.data.preview.images[0].variants.gif" :src="post.data.preview.images[0].variants.gif.source.url" />
-            <img v-else :src="post.data.preview.images[0].source.url" />
+            <img v-else="post.data.preview" :src="post.data.preview.images[0].source.url" />
         </header>
 
         <section>
@@ -104,6 +110,9 @@ export default {
     date: (value) => {
       let newDate = new Date(value * 1000)
       return newDate.toLocaleDateString('en-GB')
+    },
+    embed: (url) => {
+      return url.replace('watch?v=', 'embed/')
     }
   },
 
