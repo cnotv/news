@@ -1,21 +1,25 @@
-.c-loader {
-  position: relative;
-
-  &::before {
+@mixin loader($size, $border, $type) {
     content: "";
-    position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     margin: auto;
     font-size: 3rem;
-    width: 0.85em;
-    height: 0.85em;
+    width: $size;
+    height: $size;
     border-radius: 50%;
-    border: 0.2em solid $brand-primary;
+    border: $border $type $brand-primary;
     border-bottom-color: transparent;
     animation: rotate360 1s linear infinite;
+}
+
+.c-loader {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    @include loader(0.85em, 0.2em, solid);
   }
 }
 
@@ -24,23 +28,16 @@
   // animation: pulse 1s linear infinite;
 
   &::before {
-    content: "";
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    font-size: 3rem;
-    width: 0.5em;
-    height: 0.5em;
-    border-radius: 50%;
-    border: 2px dotted $brand-primary;
-    border-bottom-color: transparent;
-    animation: rotate360 1s linear infinite;
+    @include loader(0.5em, 2px, dotted);
   }
 
   & * {
     opacity: 0;
   }
+}
+
+img[lazy=loading] {
+  @include loader(0.5em, 2px, dotted);
+  margin: 3em;
 }

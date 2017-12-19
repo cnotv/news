@@ -81,6 +81,7 @@
     "sw-precache-webpack-plugin": "^0.11.4",
     "uglify-es": "^3.2.2",
     "url-loader": "^0.6.2",
+    "vue-lazyload": "^1.1.4",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.3",
     "vue-template-compiler": "^2.5.2",

@@ -25,8 +25,8 @@
           v-else-if="post.data.preview"
           v-on:click="toggleModal(post.data.url)"
         >
-            <img v-if="post.data.preview.images[0].variants.gif" :src="post.data.preview.images[0].variants.gif.source.url" />
-            <img v-else="post.data.preview" :src="post.data.preview.images[0].source.url" />
+            <img v-lazy="post.data.preview.images[0].variants.gif.source.url" v-if="post.data.preview.images[0].variants.gif" :src="imgUrl" />
+            <img v-lazy="post.data.preview.images[0].source.url" v-else="post.data.preview" :src="imgUrl" />
         </header>
 
         <section>
