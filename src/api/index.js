@@ -10,7 +10,11 @@ export default {
       return axios.get(query).then(
         response => {
           resolve(response.data.data.children)
-        })
+        },
+        response => {
+          reject(response)
+        }
+      )
     })
   }
 }

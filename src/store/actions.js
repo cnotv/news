@@ -1,6 +1,7 @@
 import api from './../api'
 
 export const commitPosts = ({ commit, state }) => {
+  commit('POSTS', '')
   return new Promise((resolve, reject) => {
     api.fetchData(state.query).then(
       response => {

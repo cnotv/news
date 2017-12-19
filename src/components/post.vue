@@ -4,7 +4,7 @@
     v-if="getPosts && getPosts.length > 0"
     >
     <article 
-      class="o-card o-card--hidden-footer is-loading" 
+      class="o-card o-card--hidden-footer" 
       v-bind:class="'c-col-1-'+getCurrentLayout"
       v-for="post in getPosts"
     >
@@ -68,7 +68,11 @@
     <modal v-if="modalOpen" />
   </div>
 
-  <div v-else>Sorry, no post found.</div>
+  <div v-else-if="getPosts">Sorry, no post found.</div>
+  <div
+    v-else
+    class="is-loading"
+  ></div>
 </template>
 
 <script>
