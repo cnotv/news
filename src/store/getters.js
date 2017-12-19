@@ -12,3 +12,5 @@ export const getLimits = state => state.limits
 export const getCurrentLimit = state => state.currentLimit
 export const getCurrentSub = state => state.currentSub
 export const getCurrentOrder = state => state.currentOrder
+export const getLayout = state => state.layout
+export const getCurrentLayout = state => state.currentLayout

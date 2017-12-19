@@ -98,7 +98,7 @@ $cols: 6;
 @for $i from 1 through $cols - 1 {
   @for $j from 1 through $cols {
     @if ($i and $j == 1) {
-      .c-col {
+      .c-col, .c-col-1-1 {
         @include grid-col;
       }
     }

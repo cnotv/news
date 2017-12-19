@@ -4,7 +4,8 @@
     v-if="getPosts && getPosts.length > 0"
     >
     <article 
-      class="c-col-1-4 o-card o-card--hidden-footer is-loading" 
+      class="o-card o-card--hidden-footer is-loading" 
+      v-bind:class="'c-col-1-'+getCurrentLayout"
       v-for="post in getPosts"
     >
           <a 
@@ -118,7 +119,8 @@ export default {
 
   computed: {
     ...mapGetters([
-      'getPosts'
+      'getPosts',
+      'getCurrentLayout'
     ])
   },
   methods: {

@@ -170,6 +170,7 @@
 
     button,
     a {
+      user-select: none;
       border: none;
       background-color: transparent;
 
@@ -333,8 +334,17 @@
     margin-top: $menu-padding/2;
     align-items: center;
 
-    > * + * {
-      margin-left: $menu-padding/4;
+    @include media-bp(phone) {
+      flex-direction: column;
+    }
+
+    &__group {
+      &+& {
+        margin-left: $menu-padding/2;
+      }
+      > * + * {
+        margin-left: $menu-padding/4;
+      }
     }
   }
 }

@@ -27,6 +27,9 @@ export default {
   CURRENT_ORDER: (state, currentOrder) => {
     state.currentOrder = currentOrder
   },
+  CURRENT_LAYOUT: (state, currentLayout) => {
+    state.currentLayout = currentLayout
+  },
   ORDER: (state, order) => {
     state.order = order
   },

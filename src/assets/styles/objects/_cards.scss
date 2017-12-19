@@ -9,7 +9,6 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    max-width: 480px;
     margin: auto;
     border: $website-border-secondary;
     transition: box-shadow 0.2s, background-color 0.2s;
@@ -71,12 +70,12 @@
       width: 100%;
       transform: translateY(100%);
       transition: transform  $website-animation-time;
+      background-color: $bg-card;
     }
 
     &:hover {
       footer {
         transform: none;
-        background-color: $bg-card;
       }
     }
   }

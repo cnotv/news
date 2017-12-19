@@ -28,6 +28,10 @@ export const changeSub = ({ commit, state }, sub) => {
   commitPosts({ commit, state })
 }
 
+export const changeLayout = ({ commit, state }, layout) => {
+  commit('CURRENT_LAYOUT', layout)
+}
+
 export const changeLimit = ({ commit, state }, limit) => {
   commit('CURRENT_LIMIT', limit)
   commit('QUERY', `${state.currentSub}/${state.currentOrder}.json?limit=${state.currentLimit}`)

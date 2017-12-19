@@ -50,9 +50,9 @@
 
       </nav>
 
-      <div class="o-nav-min">
-        <span
-          class="fadeIn"
+      <nav class="o-nav-min">
+        <div
+          class="o-nav-min__group fadeIn"
           v-if="openSearch"
         >
           <span>View post till:</span>
@@ -61,23 +61,34 @@
             v-on:click="changeSearchTime('')"
             v-bind:class="{'is-active' : '' === getSearchTimeCurrent}"
           >None</button>
-
           <button
             class="c-btn-alt"
             v-for="time in getSearchTime"
             v-on:click="changeSearchTime(time)"
             v-bind:class="{'is-active' : time === getSearchTimeCurrent}"
           >{{ time }} </button>
-        </span>
+        </div>
 
-        <span>Posts:</span>
-        <button
-          class="c-btn-alt"
-          v-for="limit in getLimits"
-          v-on:click="changeLimit(limit)"
-          v-bind:class="{'is-active' : limit === getCurrentLimit}"
-        >{{ limit }}</button>
-      </div>
+        <div class="o-nav-min__group fadeIn">
+          <span>Columns:</span>
+          <button
+            class="c-btn-alt"
+            v-for="layout in getLayout"
+            v-on:click="changeLayout(layout)"
+            v-bind:class="{'is-active' : layout === getCurrentLayout}"
+          >{{ layout }} </button>
+        </div>
+
+        <div class="o-nav-min__group">
+          <span>Posts:</span>
+          <button
+            class="c-btn-alt"
+            v-for="limit in getLimits"
+            v-on:click="changeLimit(limit)"
+            v-bind:class="{'is-active' : limit === getCurrentLimit}"
+          >{{ limit }}</button>
+        </div>
+      </nav>
     </div>
   </header>
 
@@ -104,7 +115,9 @@ export default {
       'getCurrentSub',
       'getCurrentLimit',
       'getSearchTime',
-      'getSearchTimeCurrent'
+      'getSearchTimeCurrent',
+      'getLayout',
+      'getCurrentLayout'
     ])
   },
   methods: {
@@ -113,7 +126,8 @@ export default {
       'changeLimit',
       'changeSearch',
       'removeSub',
-      'changeSearchTime'
+      'changeSearchTime',
+      'changeLayout'
     ]),
     toggleMenu () {
       this.openMenu = !this.openMenu

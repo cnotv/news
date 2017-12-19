@@ -31,7 +31,7 @@ const store = () => {
         name: null,
         slug: null
       },
-      subreddits: ['technews', 'news', 'WorldNews', 'robotics', 'TechDIY', 'gamernews', 'gamingnews', 'vuejs', 'gifrecipes'],
+      subreddits: ['technews', 'news', 'WorldNews', 'robotics', 'TechDIY', 'vuejs', 'gifrecipes'],
       currentSub: 'technews',
       limits: ['10', '25', '50', '100'],
       currentLimit: '25',
@@ -42,6 +42,8 @@ const store = () => {
       searchTime: ['year', 'month', 'day', 'hour'],
       searchTimeCurrent: '',
       searchGlobal: false,
+      layout: ['1', '2', '3', '4'],
+      currentLayout: '4',
       site_data: {}
     },
     actions,
