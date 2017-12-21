@@ -3,7 +3,7 @@
     class="c-row"
     v-if="getPosts && getPosts.length > 0"
     >
-    <span v-if="modeOffline">You are offline.</span>
+    <span v-if="!modeOnline">You are offline.</span>
     <article 
       class="o-card o-card--hidden-footer" 
       v-bind:class="'c-col-1-'+getCurrentLayout"
@@ -85,7 +85,8 @@ export default {
   data () {
     return {
       modalOpen: false,
-      modeOffline: window.localStorage.getItem('vuex') === null
+      modeOnline: true,
+      noStorage: window.localStorage.getItem('vuex') === null
     }
   },
   props: {
@@ -135,14 +136,30 @@ export default {
     ]),
     toggleModal (content) {
       this.modalOpen = !this.modalOpen
+    },
+    _toggleNetworkStatus ({ type }) {
+      this.online = type === 'online'
     }
   },
 
   mounted () {
-    if (this.modeOffline) {
-      this.$store.dispatch('commitPosts')
-    } else {
-      this.$store.commit('commitPosts', JSON.parse(window.localStorage.getItem('vuex')))
+    if (!window.navigator) {
+      this.modeOnline = false
+      return
+    }
+    this.modeOnline = Boolean(window.navigator.onLine)
+    window.addEventListener('offline', this._toggleNetworkStatus)
+    window.addEventListener('online', this._toggleNetworkStatus)
+
+    if (!this.modeOnline) {
+      console.log('you are offline')
+      if (this.noStorage) {
+        this.$store.dispatch('commitPosts')
+        console.log('you have no store :( ', this.noStorage)
+      } else {
+        this.$store.commit('commitPosts', JSON.parse(window.localStorage.getItem('vuex')))
+        console.log('got backup dude')
+      }
     }
   }
 }
