@@ -137,7 +137,11 @@ export default {
   },
 
   mounted () {
-    this.$store.dispatch('commitPosts')
+    if (window.localStorage.getItem('vuex') === null) {
+      this.$store.dispatch('commitPosts')
+    } else {
+      this.$store.commit('commitPosts', JSON.parse(window.localStorage.getItem('vuex')))
+    }
   }
 }
 </script>
