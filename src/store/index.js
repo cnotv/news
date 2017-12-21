@@ -37,7 +37,7 @@ const store = () => {
       currentLimit: '25',
       currentOrder: 'new',
       order: ['hot', 'new', 'rising', 'controversial', 'top', 'gilded'],
-      query: 'technews/new.json',
+      query: 'WorldNews/new.json',
       search: '',
       searchTime: ['year', 'month', 'day', 'hour'],
       searchTimeCurrent: '',

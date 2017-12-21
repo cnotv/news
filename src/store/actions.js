@@ -1,4 +1,5 @@
 import api from './../api'
+import debounce from 'lodash.debounce'
 
 export const commitPosts = ({ commit, state }) => {
   commit('POSTS', '')
@@ -45,7 +46,7 @@ export const changeOrder = ({ commit, state }, order) => {
   commitPosts({ commit, state })
 }
 
-export const changeSearch = ({ commit, state }, search = state.search) => {
+export const changeSearch = debounce(({ commit, state }, search = state.search) => {
   let searchGlobal = ''
 
   if (!state.searchGlobal) {
@@ -60,7 +61,7 @@ export const changeSearch = ({ commit, state }, search = state.search) => {
     commit('QUERY', `${state.currentSub}/${state.currentOrder}.json`)
   }
   commitPosts({ commit, state })
-}
+}, 500)
 
 export const changeSearchGlobal = ({ commit, state }) => {
   commit('SEARCHGLOBAL')
