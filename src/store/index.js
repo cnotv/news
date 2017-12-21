@@ -2,6 +2,11 @@ import Vuex from 'vuex'
 import * as actions from './actions'
 import * as getters from './getters'
 import mutations from './mutations'
+import VuexPersistence from 'vuex-persist'
+
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage
+})
 
 const store = () => {
   return new Vuex.Store({
@@ -48,7 +53,8 @@ const store = () => {
     },
     actions,
     mutations,
-    getters
+    getters,
+    plugins: [vuexLocal.plugin]
   })
 }
 
