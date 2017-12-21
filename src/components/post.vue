@@ -3,6 +3,7 @@
     class="c-row"
     v-if="getPosts && getPosts.length > 0"
     >
+    <span v-if="modeOffline">You are offline.</span>
     <article 
       class="o-card o-card--hidden-footer" 
       v-bind:class="'c-col-1-'+getCurrentLayout"
@@ -25,8 +26,8 @@
           v-else-if="post.data.preview"
           v-on:click="toggleModal(post.data.url)"
         >
-            <img v-lazy="post.data.preview.images[0].variants.gif.source.url" v-if="post.data.preview.images[0].variants.gif" :src="imgUrl" />
-            <img v-lazy="post.data.preview.images[0].source.url" v-else="post.data.preview" :src="imgUrl" />
+            <img v-lazy="post.data.preview.images[0].variants.gif.source.url" v-if="post.data.preview.images[0].variants.gif" />
+            <img v-lazy="post.data.preview.images[0].source.url" v-else="post.data.preview" />
         </header>
 
         <section>
@@ -83,7 +84,8 @@ export default {
   components: { modal },
   data () {
     return {
-      modalOpen: false
+      modalOpen: false,
+      modeOffline: window.localStorage.getItem('vuex') === null
     }
   },
   props: {
@@ -137,7 +139,7 @@ export default {
   },
 
   mounted () {
-    if (window.localStorage.getItem('vuex') === null) {
+    if (this.modeOffline) {
       this.$store.dispatch('commitPosts')
     } else {
       this.$store.commit('commitPosts', JSON.parse(window.localStorage.getItem('vuex')))
