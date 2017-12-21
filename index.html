@@ -22,6 +22,25 @@
     <!-- Add to home screen for Windows -->
     <meta name="msapplication-TileImage" content="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/msapplication-icon-144x144.png">
     <meta name="msapplication-TileColor" content="#000000">
+
+
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Reddit News Aggregator">
+    <meta property="og:description" content="News aggregator based on Reddit API, Vue.js and PWA">
+    <meta property="og:url" content="https://cnotv.xyz/">
+    <meta property="og:site_name" content="cnotv">
+    <meta property="og:image" content="<%= htmlWebpackPlugin.files.publicPath %>/static/img/icons/android-chrome-512x512.png">
+    <meta property="og:image:secure_url" content="<%= htmlWebpackPlugin.files.publicPath %>/static/img/icons/android-chrome-512x512.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="News aggregator based on Reddit API, Vue.js and PWA">
+    <meta name="twitter:title" content="Reddit News Aggregator">
+    <meta name="twitter:site" content="@cnotvdev">
+    <meta name="twitter:image" content="<%= htmlWebpackPlugin.files.publicPath %>/static/img/icons/android-chrome-512x512.png">
+    <meta name="twitter:creator" content="@cnotvdev">
+
     <% for (var chunk of webpack.chunks) {
         for (var file of chunk.files) {
           if (file.match(/\.(js|css)$/)) { %>
