@@ -8,10 +8,12 @@
       <nav class="o-nav-h">
 
         <ul
+            v-if="getSubreddits.length > 0"
           class="o-nav-h__left fadeIn"
           v-on:click="toggleMenu"
         >
-          <li v-for="subreddit in getSubreddits">
+          <li
+            v-for="subreddit in getSubreddits">
             <a
               v-if="openSettings"
               v-on:click="removeSub(subreddit)"
@@ -23,6 +25,10 @@
             >{{ subreddit }}</a>
           </li>
         </ul>
+        <a
+          v-else-if="!getSearchOpen"
+          v-on:click="toggleSearch"
+        >Add a topic</a>
 
         <search v-if="getSearchOpen"></search>
 
