@@ -68,9 +68,8 @@ export const changeSearchGlobal = ({ commit, state }) => {
   changeSearch({ commit, state })
 }
 
-export const changeSearchOpen = ({ commit, state }) => {
-  commit('SEARCHOPEN')
-  changeSearch({ commit, state }, '')
+export const changeSearchOpen = ({ commit, state }, close) => {
+  commit('SEARCHOPEN', close)
 }
 
 export const changeSearchTime = ({ commit, state }, time = state.time) => {

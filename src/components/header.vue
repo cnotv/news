@@ -132,7 +132,7 @@ export default {
     ]),
     toggleMenu () {
       this.openMenu = !this.openMenu
-      this.$store.dispatch('changeSearchOpen', false)
+      this.$store.dispatch('changeSearchOpen', true)
     },
     toggleSettings () {
       this.openSettings = !this.openSettings
@@ -142,6 +142,7 @@ export default {
       this.openMenu = false
       this.openSettings = false
       this.$store.dispatch('changeSearchOpen')
+      this.$store.dispatch('changeSearch', '')
     }
   }
 }
