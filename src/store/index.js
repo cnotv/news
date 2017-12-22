@@ -36,7 +36,7 @@ const store = () => {
         name: null,
         slug: null
       },
-      subreddits: ['WorldNews', 'news', 'technews', 'robotics', 'TechDIY', 'vuejs', 'gifrecipes', 'streetart'],
+      subreddits: [],
       currentSub: 'WorldNews',
       limits: ['10', '25', '50', '100'],
       currentLimit: '25',
@@ -44,6 +44,7 @@ const store = () => {
       order: ['hot', 'new', 'rising', 'controversial', 'top', 'gilded'],
       query: 'WorldNews/new.json',
       search: '',
+      searchOpen: true,
       searchTime: ['year', 'month', 'day', 'hour'],
       searchTimeCurrent: '',
       searchGlobal: false,

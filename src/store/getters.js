@@ -4,6 +4,7 @@ export const getPost = state => state.post
 export const getSubreddits = state => state.subreddits
 export const getOrder = state => state.order
 export const getSearch = state => state.search
+export const getSearchOpen = state => state.searchOpen
 export const getSearchTime = state => state.searchTime
 export const getSearchTimeCurrent = state => state.searchTimeCurrent
 export const getSearchGlobal = state => state.searchGlobal

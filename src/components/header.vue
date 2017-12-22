@@ -2,7 +2,7 @@
 
   <header
     class="c-section"
-    v-bind:class="{ 'has-menu-open' : openMenu, 'has-search-open' : openSearch }"
+    v-bind:class="{ 'has-menu-open' : openMenu, 'has-search-open' : getSearchOpen }"
   >
     <div class="c-container-full">
       <nav class="o-nav-h">
@@ -24,7 +24,7 @@
           </li>
         </ul>
 
-        <search v-if="openSearch"></search>
+        <search v-if="getSearchOpen"></search>
 
         <div class="o-nav-h__right">
           <a 
@@ -32,19 +32,19 @@
             v-on:click="toggleMenu"
           ><i class="fa fa-navicon"></i></a>
 
-          <news-order v-if="!openSearch"/>
+          <news-order v-if="!getSearchOpen"/>
 
           <button
             class=""
             v-on:click="toggleSettings"
-            v-if="!openSearch"
+            v-if="!getSearchOpen"
             v-bind:class="{'is-active' : openSettings}"
           ><i class="fa fa-cog"></i></button>
 
           <button
             class="o-search__toggle"
             v-on:click="toggleSearch"
-            v-bind:class="{'is-active' : openSearch}"
+            v-bind:class="{'is-active' : getSearchOpen}"
           ><i class="fa"></i></button>
         </div>
 
@@ -53,7 +53,7 @@
       <nav class="o-nav-min">
         <div
           class="o-nav-min__group fadeIn"
-          v-if="openSearch"
+          v-if="getSearchOpen"
         >
           <span>View post till:</span>
           <button
@@ -103,8 +103,7 @@ export default {
   data () {
     return {
       openMenu: false,
-      openSettings: false,
-      openSearch: false
+      openSettings: false
     }
   },
   components: { newsOrder, search },
@@ -114,6 +113,7 @@ export default {
       'getLimits',
       'getCurrentSub',
       'getCurrentLimit',
+      'getSearchOpen',
       'getSearchTime',
       'getSearchTimeCurrent',
       'getLayout',
@@ -127,11 +127,12 @@ export default {
       'changeSearch',
       'removeSub',
       'changeSearchTime',
+      'changeSearchOpen',
       'changeLayout'
     ]),
     toggleMenu () {
       this.openMenu = !this.openMenu
-      this.openSearch = false
+      this.$store.dispatch('changeSearchOpen', false)
     },
     toggleSettings () {
       this.openSettings = !this.openSettings
@@ -140,8 +141,7 @@ export default {
     toggleSearch () {
       this.openMenu = false
       this.openSettings = false
-      this.openSearch = !this.openSearch
-      this.$store.dispatch('changeSearch', '')
+      this.$store.dispatch('changeSearchOpen')
     }
   }
 }

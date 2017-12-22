@@ -42,6 +42,9 @@ export default {
   SEARCHGLOBAL: (state) => {
     state.searchGlobal = !state.searchGlobal
   },
+  SEARCHOPEN: (state) => {
+    state.searchOpen = !state.searchOpen
+  },
   SEARCHTIME: (state, time) => {
     state.searchTimeCurrent = time
   },
