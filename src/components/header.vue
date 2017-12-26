@@ -26,9 +26,10 @@
           </li>
         </ul>
         <a
-          v-else-if="!getSearchOpen"
+          v-else-if="!getSearchOpen && !openSettings"
           v-on:click="toggleSearch"
         >Add a topic</a>
+        <span v-else></span>
 
         <search v-if="getSearchOpen"></search>
 
@@ -38,7 +39,13 @@
             v-on:click="toggleMenu"
           ><i class="fa fa-navicon"></i></a>
 
-          <news-order v-if="!getSearchOpen"/>
+          <button
+            class=""
+            v-on:click="resetSettings"
+            v-if="!getSearchOpen && openSettings"
+          >Reset</button>
+
+          <news-order v-if="!getSearchOpen && !openSettings"/>
 
           <button
             class=""
@@ -149,6 +156,10 @@ export default {
       this.openSettings = false
       this.$store.dispatch('changeSearchOpen')
       this.$store.dispatch('changeSearch', '')
+    },
+    resetSettings () {
+      localStorage.clear()
+      location.reload()
     }
   }
 }
