@@ -144,23 +144,23 @@ export default {
 
   mounted () {
     if (!window.navigator) {
-      console.log('You are not online')
+      // console.log('You are not online')
       this.modeOnline = false
       return
     }
-    console.log('You are online')
+    // console.log('You are online')
     this.modeOnline = Boolean(window.navigator.onLine)
     window.addEventListener('offline', this._toggleNetworkStatus)
     window.addEventListener('online', this._toggleNetworkStatus)
 
     if (!this.modeOnline) {
-      console.log('Loading offline mode...')
+      // console.log('Loading offline mode...')
       if (this.noStorage) {
         this.$store.dispatch('commitPosts')
-        console.log('Cant load offline: you have no store :( ', this.noStorage)
+        // console.log('Cant load offline: you have no store :( ', this.noStorage)
       } else {
         this.$store.commit('commitPosts', JSON.parse(window.localStorage.getItem('vuex')))
-        console.log('Offline mode loaded')
+        // console.log('Offline mode loaded')
       }
     }
   }
