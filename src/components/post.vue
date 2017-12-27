@@ -3,68 +3,78 @@
     class="c-row"
     v-if="getPosts && getPosts.length > 0"
     >
-    <span v-if="!modeOnline">You are offline.</span>
+    <span v-if="!statusOnline">You are offline.</span>
     <article 
       class="o-card o-card--hidden-footer" 
       v-bind:class="'c-col-1-'+getCurrentLayout"
+      v-if="!getSearchOpen || getSearchSub"
       v-for="post in getPosts"
     >
-          <a 
-            :href="post.data.url"
-            target="_blank"
+      <a 
+        :href="post.data.url"
+        target="_blank"
+      >
+        <div class="o-card__wrap">
+          <header
+            class="o-card__header"
+            v-if="post.data.domain =='youtube.com' || post.data.domain =='youtu.be'"
+            v-on:click="toggleModal(post.data.url)"
           >
-      <div class="o-card__wrap">
-        <header
-          class="o-card__header"
-          v-if="post.data.domain =='youtube.com' || post.data.domain =='youtu.be'"
-          v-on:click="toggleModal(post.data.url)"
-        >
-            <iframe  width="100%" :src="post.data.url | embed" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-        </header>
-        <header
-          class="o-card__header"
-          v-else-if="post.data.preview"
-          v-on:click="toggleModal(post.data.url)"
-        >
-            <img v-lazy="post.data.preview.images[0].variants.gif.source.url" v-if="post.data.preview.images[0].variants.gif" />
-            <img v-lazy="post.data.preview.images[0].source.url" v-else="post.data.preview" />
-        </header>
+              <iframe  width="100%" :src="post.data.url | embed" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+          </header>
+          <header
+            class="o-card__header"
+            v-else-if="post.data.preview"
+            v-on:click="toggleModal(post.data.url)"
+          >
+              <img v-lazy="post.data.preview.images[0].variants.gif.source.url" v-if="post.data.preview.images[0].variants.gif" />
+              <img v-lazy="post.data.preview.images[0].source.url" v-else="post.data.preview" />
+          </header>
 
-        <section>
-          <h6  v-bind:class="heading">{{ post.data.title | truncate(150) }}</h6>
-        </section>
+          <section>
+            <h6  v-bind:class="heading">{{ post.data.title | truncate(150) }}</h6>
+          </section>
 
-        <section v-if="post.data.selftext">
-          <div>{{post.data.selftext | truncate(200)}}</div>
-        </section>
+          <section v-if="post.data.selftext">
+            <div>{{post.data.selftext | truncate(200)}}</div>
+          </section>
 
-        <footer>
-          <span>
-            <a
-              href="#"
-              class="c-btn-alt"
-              v-on:click="addSub(post.data.subreddit)"
+          <footer>
+            <span>
+              <a
+                href="#"
+                class="c-btn-alt"
+                v-on:click="addSub(post.data.subreddit)"
+              >
+                {{post.data.subreddit}}
+              </a>
+              {{post.data.created_utc | date}}
+            </span>
+            <a 
+              :href="'http://www.reddit.com' + post.data.permalink"
+              target="_blank"
             >
-              {{post.data.subreddit}}
+              <i class="fa fa-comment"></i>
             </a>
-            {{post.data.created_utc | date}}
-          </span>
-          <a 
-            :href="'http://www.reddit.com' + post.data.permalink"
-            target="_blank"
-          >
-            <i class="fa fa-comment"></i>
-          </a>
-          <span v-if="post.data.ups">
-            <i class="fa fa-arrow-up"></i>
-            {{post.data.ups}}
-          </span>
-        </footer>
+            <span v-if="post.data.ups">
+              <i class="fa fa-arrow-up"></i>
+              {{post.data.ups}}
+            </span>
+          </footer>
 
-      </div>
-          </a>
-
+        </div>
+      </a>
     </article>
+
+    <section
+        class="c-col-1-4"
+        v-else
+      >
+        <a
+          href="#"
+          v-on:click="addSub(post.data.subreddit)"
+        >/r/{{post.data.subreddit}}</a>
+    </section>
 
     <modal v-if="modalOpen" />
   </div>
@@ -85,7 +95,7 @@ export default {
   data () {
     return {
       modalOpen: false,
-      modeOnline: true,
+      statusOnline: true,
       noStorage: window.localStorage.getItem('vuex') === null
     }
   },
@@ -127,7 +137,9 @@ export default {
   computed: {
     ...mapGetters([
       'getPosts',
-      'getCurrentLayout'
+      'getCurrentLayout',
+      'getSearchOpen',
+      'getSearchSub'
     ])
   },
   methods: {
@@ -145,15 +157,17 @@ export default {
   mounted () {
     if (!window.navigator) {
       // console.log('You are not online')
-      this.modeOnline = false
+      this.statusOnline = false
       return
     }
-    // console.log('You are online')
-    this.modeOnline = Boolean(window.navigator.onLine)
-    window.addEventListener('offline', this._toggleNetworkStatus)
-    window.addEventListener('online', this._toggleNetworkStatus)
 
-    if (!this.modeOnline) {
+    // console.log('You are online')
+    this.statusOnline = Boolean(window.navigator.onLine)
+
+    if (!this.statusOnline) {
+      window.addEventListener('offline', this._toggleNetworkStatus)
+      window.addEventListener('online', this._toggleNetworkStatus)
+
       // console.log('Loading offline mode...')
       if (this.noStorage) {
         this.$store.dispatch('commitPosts')

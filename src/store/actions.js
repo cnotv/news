@@ -1,6 +1,7 @@
 import api from './../api'
 import debounce from 'lodash.debounce'
 
+// unique api query after defining arguments (states)
 export const commitPosts = ({ commit, state }) => {
   commit('POSTS', '')
   return new Promise((resolve, reject) => {
@@ -26,6 +27,8 @@ export const removeSub = ({ commit, state }, sub) => {
 
 export const changeSub = ({ commit, state }, sub) => {
   commit('CURRENT_SUB', sub)
+
+  // update query before api request
   commit('QUERY', `${state.currentSub}/${state.currentOrder}.json?limit=${state.currentLimit}`)
   commitPosts({ commit, state })
 }
@@ -36,10 +39,18 @@ export const changeLayout = ({ commit, state }, layout) => {
 
 export const changeLimit = ({ commit, state }, limit) => {
   commit('CURRENT_LIMIT', limit)
-  commit('QUERY', `${state.currentSub}/${state.currentOrder}.json?limit=${state.currentLimit}`)
-  commitPosts({ commit, state })
+
+  // switch between search query or subreddit feed if no input
+  if (state.search === '') {
+    commit('QUERY', `${state.currentSub}/${state.currentOrder}.json?limit=${state.currentLimit}`)
+    commitPosts({ commit, state })
+  } else {
+  // update search after change
+    changeSearch({ commit, state })
+  }
 }
 
+// change subreddit order
 export const changeOrder = ({ commit, state }, order) => {
   commit('CURRENT_ORDER', order)
   commit('QUERY', `${state.currentSub}/${state.currentOrder}.json?limit=${state.currentLimit}`)
@@ -49,10 +60,12 @@ export const changeOrder = ({ commit, state }, order) => {
 export const changeSearch = debounce(({ commit, state }, search = state.search) => {
   let searchGlobal = ''
 
+  // if filter search to subreddit
   if (!state.searchGlobal) {
     searchGlobal = `+subreddit:${state.currentSub}`
   }
 
+  // if no input switch between search query or subreddit feed
   if (search.length > 0) {
     commit('SEARCH', search)
     commit('QUERY', `${state.currentSub}/search.json?limit=${state.currentLimit}&q=${state.search}${searchGlobal}&t=${state.searchTimeCurrent}`)
@@ -60,11 +73,14 @@ export const changeSearch = debounce(({ commit, state }, search = state.search) 
     commit('SEARCH', '')
     commit('QUERY', `${state.currentSub}/${state.currentOrder}.json`)
   }
+
+  // submit search request with small delay
   commitPosts({ commit, state })
 }, 500)
 
 export const changeSearchGlobal = ({ commit, state }) => {
   commit('SEARCHGLOBAL')
+  // update search after change
   changeSearch({ commit, state })
 }
 
@@ -72,7 +88,14 @@ export const changeSearchOpen = ({ commit, state }, close) => {
   commit('SEARCHOPEN', close)
 }
 
+export const changeSearchSub = ({ commit, state }) => {
+  commit('SEARCHSUB')
+  // update search after change
+  changeSearch({ commit, state })
+}
+
 export const changeSearchTime = ({ commit, state }, time = state.time) => {
   commit('SEARCHTIME', time)
+  // update search after change
   changeSearch({ commit, state })
 }

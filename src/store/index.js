@@ -45,6 +45,7 @@ const store = () => {
       query: 'WorldNews/new.json',
       search: '',
       searchOpen: true,
+      searchSub: true,
       searchTime: ['year', 'month', 'day', 'hour'],
       searchTimeCurrent: '',
       searchGlobal: false,

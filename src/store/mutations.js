@@ -39,6 +39,10 @@ export default {
   SEARCH: (state, search) => {
     state.search = search
   },
+  SEARCHSUB: (state) => {
+    state.searchGlobal = true
+    state.searchSub = !state.searchSub
+  },
   SEARCHGLOBAL: (state) => {
     state.searchGlobal = !state.searchGlobal
   },
