@@ -3,7 +3,7 @@
     <input
       ref="search"
       class="js-search-field"
-      placeholder="Type something.. or select a topic"
+      placeholder="Type something.."
       v-model="search"
     >
     <button

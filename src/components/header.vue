@@ -27,7 +27,7 @@
         </ul>
         <a
           v-else-if="!getSearchOpen && !openSettings"
-          v-on:click="toggleSearch"
+          v-on:click="toggleSearchTopic"
         >Add a topic</a>
         <span v-else></span>
 
@@ -140,6 +140,7 @@ export default {
       'changeSearch',
       'removeSub',
       'changeSearchTime',
+      'changeSearchSub',
       'changeSearchOpen',
       'changeLayout'
     ]),
@@ -160,6 +161,10 @@ export default {
     resetSettings () {
       localStorage.clear()
       location.reload()
+    },
+    toggleSearchTopic () {
+      this.toggleSearch()
+      this.$store.dispatch('changeSearchSub', true)
     }
   }
 }

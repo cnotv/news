@@ -88,8 +88,8 @@ export const changeSearchOpen = ({ commit, state }, close) => {
   commit('SEARCHOPEN', close)
 }
 
-export const changeSearchSub = ({ commit, state }) => {
-  commit('SEARCHSUB')
+export const changeSearchSub = ({ commit, state }, close) => {
+  commit('SEARCHSUB', close)
   // update search after change
   changeSearch({ commit, state })
 }
