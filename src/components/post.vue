@@ -73,7 +73,7 @@
         <a
           href="#"
           v-on:click="addSub(post.data.subreddit)"
-        >/r/{{post.data.subreddit}}</a>
+        >+ {{post.data.subreddit}}</a>
     </section>
 
     <modal v-if="modalOpen" />
