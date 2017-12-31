@@ -50,7 +50,7 @@ const store = () => {
       searchTimeCurrent: '',
       searchGlobal: false,
       layout: ['1', '2', '3', '4'],
-      currentLayout: '4',
+      currentLayout: '2',
       site_data: {}
     },
     actions,

@@ -70,10 +70,10 @@ li {
 }
 
 hr {
-  margin-top: $grid-gutter-size;
-  margin-bottom: $grid-gutter-size;
+  margin-top: $grid-gutter-size/2;
+  margin-bottom: $grid-gutter-size/2;
   border: 0;
-  border-top: $website-border;
+  border-top: $website-border-secondary;
 }
 
 small,
