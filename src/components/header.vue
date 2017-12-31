@@ -9,7 +9,7 @@
 
         <ul
             v-if="getSubreddits.length > 0"
-          class="o-nav-h__left flipInX"
+          class="o-nav-h__left fadeIn"
           v-on:click="toggleMenu"
         >
           <li
@@ -65,7 +65,7 @@
 
       <nav class="o-nav-wrap">
         <div
-          class="o-nav-alt flipInX"
+          class="o-nav-alt fadeIn"
           v-if="getSearchOpen"
         >
           <span>View post till:</span>
@@ -80,7 +80,7 @@
           >{{ time }} </button>
         </div>
 
-        <div class="o-nav-alt flipInX">
+        <div class="o-nav-alt fadeIn">
           <span>Layout:</span>
           <button
             v-for="layout in getLayout"
@@ -102,7 +102,7 @@
           </button>
         </div>
 
-        <div class="o-nav-alt flipInX">
+        <div class="o-nav-alt fadeIn">
           <span>Posts:</span>
           <button
             v-for="limit in getLimits"
@@ -164,6 +164,7 @@ export default {
     toggleSearch () {
       this.openMenu = false
       this.openSettings = false
+      this.$store.dispatch('changeSearchSub', true)
       this.$store.dispatch('changeSearchOpen')
       this.$store.dispatch('changeSearch', '')
     },
@@ -173,7 +174,7 @@ export default {
     },
     toggleSearchTopic () {
       this.toggleSearch()
-      this.$store.dispatch('changeSearchSub', true)
+      this.$store.dispatch('changeSearchSub', false)
     }
   }
 }

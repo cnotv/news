@@ -41,8 +41,8 @@ export default {
   },
   SEARCHSUB: (state, close) => {
     state.searchGlobal = true
-    if (close === true) {
-      state.searchSub = false
+    if (close === false || close === true) {
+      state.searchSub = close
     } else {
       state.searchSub = !state.searchSub
     }
