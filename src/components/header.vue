@@ -9,7 +9,7 @@
 
         <ul
             v-if="getSubreddits.length > 0"
-          class="o-nav-h__left fadeIn"
+          class="o-nav-h__left flipInX"
           v-on:click="toggleMenu"
         >
           <li
@@ -63,39 +63,48 @@
 
       </nav>
 
-      <nav class="o-nav-min">
+      <nav class="o-nav-wrap">
         <div
-          class="o-nav-min__group fadeIn"
+          class="o-nav-alt flipInX"
           v-if="getSearchOpen"
         >
           <span>View post till:</span>
           <button
-            class="c-btn-alt"
             v-on:click="changeSearchTime('')"
             v-bind:class="{'is-active' : '' === getSearchTimeCurrent}"
           >None</button>
           <button
-            class="c-btn-alt"
             v-for="time in getSearchTime"
             v-on:click="changeSearchTime(time)"
             v-bind:class="{'is-active' : time === getSearchTimeCurrent}"
           >{{ time }} </button>
         </div>
 
-        <div class="o-nav-min__group fadeIn">
-          <span>Columns:</span>
+        <div class="o-nav-alt flipInX">
+          <span>Layout:</span>
           <button
-            class="c-btn-alt"
             v-for="layout in getLayout"
             v-on:click="changeLayout(layout)"
             v-bind:class="{'is-active' : layout === getCurrentLayout}"
-          >{{ layout }} </button>
+          >
+            <span
+              v-if="layout === '1'"
+              class="fa fa-list"></span>
+            <span
+              v-if="layout === '2'"
+              class="fa fa-th"></span>
+            <span
+              v-if="layout === '3'"
+              class="fa fa-newspaper-o"></span>
+            <span
+              v-if="layout === '4'"
+              class="fa fa-picture-o"></span>
+          </button>
         </div>
 
-        <div class="o-nav-min__group">
+        <div class="o-nav-alt flipInX">
           <span>Posts:</span>
           <button
-            class="c-btn-alt"
             v-for="limit in getLimits"
             v-on:click="changeLimit(limit)"
             v-bind:class="{'is-active' : limit === getCurrentLimit}"

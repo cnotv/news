@@ -2,7 +2,7 @@
   animation: fadeIn $website-animation-time forwards;
   opacity: 0;
 
-  @include animationDelay;
+  // @include animationDelay;
 }
 
 .fadeOut { animation: fadeIn $website-animation-time backwards; }
@@ -16,7 +16,7 @@
   opacity: 0;
   animation: fadeInUp $website-animation-time forwards;
 
-  @include animationDelay;
+  // @include animationDelay;
 }
 
 @keyframes fadeInUp {
@@ -47,7 +47,7 @@
 .slideInRight {
   animation: slideInRight $website-animation-time forwards;
 
-  @include animationDelay;
+  // @include animationDelay;
 }
 
 @keyframes slideInRight {
@@ -58,7 +58,7 @@
 .slideInLeft {
   animation: slideInLeft $website-animation-time forwards;
 
-  @include animationDelay;
+  // @include animationDelay;
 }
 
 @keyframes slideInLeft {
