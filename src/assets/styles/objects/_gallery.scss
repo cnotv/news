@@ -1,0 +1,54 @@
+.o-gallery {
+  position: relative;
+  overflow: hidden;
+
+  @include media-bp(desktop) {
+    width: calc(100%/3);
+  }
+  @include media-bp(tablet) {
+    width: calc(100%/2);
+  }
+  @include media-bp(phone) {
+    width: 100%;
+  }
+
+  header,
+  footer {
+    width: 100%;
+    padding: $section-padding;
+    transition: transform  $website-animation-time;
+    background-color: $bg-card;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include media-bp(desktop) {
+      position: absolute;
+    }
+  }
+
+
+  @include media-bp(desktop) {
+    header {
+      top: 0;
+      transform: translateY(-100%);
+    }
+
+    footer {
+      bottom: 0;
+      transform: translateY(100%);
+    }
+
+    &:hover {
+      footer,
+      header {
+        transform: none;
+      }
+    }
+  }
+
+  img {
+    width: 100%;
+    padding: 0;
+  }
+}

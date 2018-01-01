@@ -71,6 +71,10 @@
       transform: translateY(100%);
       transition: transform  $website-animation-time;
       background-color: $bg-card;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     &:hover {

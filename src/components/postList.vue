@@ -1,10 +1,10 @@
 <template>
-  <article>
+  <article class="c-container-s">
     <a 
       :href="this.post.data.url"
       target="_blank"
     >
-      <b>{{this.post.data.title}}</b>
+      <div><b>{{this.post.data.title}}</b></div>
       <small>
         <a
           href="#"

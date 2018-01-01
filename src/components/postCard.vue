@@ -31,15 +31,9 @@
         </section>
 
         <footer>
-          <span>
-            <a
-              href="#"
-              class="c-btn-alt"
-              v-on:click="addSub(post.data.subreddit)"
-            >
-              {{this.post.data.subreddit}}
-            </a>
-            {{this.post.data.created_utc | date}}
+          <span v-if="this.post.data.ups">
+            <i class="fa fa-arrow-up"></i>
+            {{this.post.data.ups}}
           </span>
           <a 
             :href="'http://www.reddit.com' + this.post.data.permalink"
@@ -47,10 +41,15 @@
           >
             <i class="fa fa-comment"></i>
           </a>
-          <span v-if="this.post.data.ups">
-            <i class="fa fa-arrow-up"></i>
-            {{this.post.data.ups}}
-          </span>
+          <small>
+            {{this.post.data.created_utc | date}}
+          </small>
+          <a
+            href="#"
+            class="c-btn-alt"
+            v-on:click="addSub(post.data.subreddit)"
+          >/r/{{this.post.data.subreddit}}
+          </a>
         </footer>
 
       </div>

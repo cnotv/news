@@ -6,7 +6,6 @@
     <span v-if="!statusOnline">You are offline.</span>
 
     <List 
-      class="c-col-1-1"
       v-if="getSearchSub && getCurrentLayout === '1'"
       v-for="post in getPosts"
       v-bind:post="post"
@@ -24,7 +23,6 @@
       :key="post.data.id"
     />
     <Gallery
-      class="c-col-1-4"
       v-else-if="getSearchSub && getCurrentLayout === '4'"
       v-bind:post="post"
       :key="post.data.id"
