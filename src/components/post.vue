@@ -1,6 +1,6 @@
 <template>
   <div
-    class="c-row"
+    v-bind:class="[getCurrentLayout === '4' ? 'o-gallery' : 'c-row']"
     v-if="getPosts && getPosts.length > 0"
     >
     <span v-if="!statusOnline">You are offline.</span>

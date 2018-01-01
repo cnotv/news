@@ -1,6 +1,6 @@
 <template>
   <article
-    class="o-gallery"
+    class="o-gallery__item"
     v-if="this.post.data.preview"
   >
     <a 

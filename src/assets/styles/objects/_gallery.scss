@@ -1,15 +1,30 @@
 .o-gallery {
-  position: relative;
-  overflow: hidden;
+  display: grid;
+  grid-gap: 15px;
+  grid-auto-rows: 300px;
 
   @include media-bp(desktop) {
-    width: calc(100%/3);
+    grid-template-columns: repeat(auto-fill, minmax(32%,1fr));
   }
   @include media-bp(tablet) {
-    width: calc(100%/2);
+    grid-template-columns: repeat(auto-fill, minmax(49%,1fr));
   }
   @include media-bp(phone) {
-    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(100%,1fr));
+  }
+
+  &__item {
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+      footer,
+      header {
+        @include media-bp(desktop) {
+          transform: none;
+        }
+      }
+    }
   }
 
   header,
@@ -27,28 +42,22 @@
     }
   }
 
-
-  @include media-bp(desktop) {
-    header {
+  header {
+    @include media-bp(desktop) {
       top: 0;
       transform: translateY(-100%);
     }
+  }
 
-    footer {
+  footer {
+    @include media-bp(desktop) {
       bottom: 0;
       transform: translateY(100%);
-    }
-
-    &:hover {
-      footer,
-      header {
-        transform: none;
-      }
     }
   }
 
   img {
-    width: 100%;
+    max-width: 100%;
     padding: 0;
   }
 }
