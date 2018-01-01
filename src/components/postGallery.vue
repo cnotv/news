@@ -1,5 +1,5 @@
 <template>
-  <article
+  <figure
     v-if="this.post.data.preview"
   >
     <a 
@@ -14,7 +14,7 @@
         <img v-lazy="this.post.data.preview.images[0].source.url" v-else="this.post.data.preview" />
       </section>
     </a>
-  </article>
+  </figure>
 </template>
 
 <script>
