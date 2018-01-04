@@ -1,6 +1,13 @@
 <template>
   <div
-    v-bind:class="[getCurrentLayout === '4' ? 'o-gallery' : 'c-row']"
+    class=""
+    v-bind:class="[
+      getSearchSub && getCurrentLayout === '1' ? 'c-row' : '',
+      getSearchSub && getCurrentLayout === '2' ? 'c-row' : '',
+      getSearchSub && getCurrentLayout === '3' ? 'o-newspaper' : '',
+      getSearchSub && getCurrentLayout === '4' ? 'o-gallery' : '',
+      !getSearchSub ? 'c-row' : ''
+    ]"
     v-if="getPosts && getPosts.length > 0"
     >
     <span v-if="!statusOnline">You are offline.</span>

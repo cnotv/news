@@ -1,6 +1,6 @@
 .o-gallery {
   display: grid;
-  grid-gap: 15px;
+  grid-gap: $grid-gutter-size;
   grid-auto-rows: 300px;
 
   @include media-bp(desktop) {
@@ -30,7 +30,7 @@
   header,
   footer {
     width: 100%;
-    padding: $section-padding;
+    padding: $grid-gutter-size;
     transition: transform  $website-animation-time;
     background-color: $bg-card;
     display: flex;
