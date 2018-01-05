@@ -1,21 +1,17 @@
 .o-gallery {
-  display: grid;
-  grid-gap: $grid-gutter-size;
-  grid-auto-rows: 300px;
+  column-gap: $grid-gutter-size;
 
   @include media-bp(desktop) {
-    grid-template-columns: repeat(auto-fill, minmax(32%,1fr));
+    column-count: 3;
   }
   @include media-bp(tablet) {
-    grid-template-columns: repeat(auto-fill, minmax(49%,1fr));
-  }
-  @include media-bp(phone) {
-    grid-template-columns: repeat(auto-fill, minmax(100%,1fr));
+    column-count: 2;
   }
 
   &__item {
     position: relative;
     overflow: hidden;
+    margin-bottom: $grid-gutter-size;
 
     &:hover {
       footer,

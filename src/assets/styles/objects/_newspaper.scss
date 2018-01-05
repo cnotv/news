@@ -21,9 +21,13 @@
   section {
   }
 
+  figure {
+    position: relative;
+    float: left;
+  }
+
   img {
     max-width: 200px;
     padding: 0 $grid-gutter-size $grid-gutter-size 0;
-    float: left;
   }
 }

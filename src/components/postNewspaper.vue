@@ -16,9 +16,16 @@
           v-if="this.post.data.preview"
           v-on:click="toggleModal(this.post.data.url)"
         >
-          <img v-lazy="this.post.data.preview.images[0].variants.gif.source.url" v-if="this.post.data.preview.images[0].variants.gif" />
-          <img v-lazy="this.post.data.preview.images[0].source.url" v-else="this.post.data.preview" />
+          <img 
+            v-if="this.post.data.preview.images[0].variants.gif"
+            v-lazy="this.post.data.preview.images[0].variants.gif.source.url"
+          />
+          <img
+            v-lazy="this.post.data.preview.images[0].source.url"
+            v-else="this.post.data.preview"
+          />
         </figure>
+
         <div>{{this.post.data.selftext | truncate(400)}}</div>
       </section>
 

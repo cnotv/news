@@ -11,15 +11,22 @@
           v-if="this.post.data.domain =='youtube.com' || this.post.data.domain =='youtu.be'"
           v-on:click="toggleModal(this.post.data.url)"
         >
-          <iframe  width="100%" :src="this.post.data.url | embed" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+          <iframe width="100%" :src="this.post.data.url | embed" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
         </header>
+
         <header
           class="o-card__header"
           v-else-if="this.post.data.preview"
           v-on:click="toggleModal(this.post.data.url)"
         >
-          <img v-lazy="this.post.data.preview.images[0].variants.gif.source.url" v-if="this.post.data.preview.images[0].variants.gif" />
-          <img v-lazy="this.post.data.preview.images[0].source.url" v-else="this.post.data.preview" />
+          <img
+            v-if="this.post.data.preview.images[0].variants.gif"
+            v-lazy="this.post.data.preview.images[0].variants.gif.source.url"
+          />
+          <img
+            v-else="this.post.data.preview"
+            v-lazy="this.post.data.preview.images[0].source.url"
+          />
         </header>
 
         <section>
