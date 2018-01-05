@@ -284,14 +284,40 @@
 
   // secondary navbar, e.g. for sidebars
   &-alt {
-    position: relative;
-    display: flex;
     font-size: 0.8rem;
-    margin-bottom: $section-padding;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: $menu-padding/2;
+    align-items: center;
+    flex-wrap: wrap;
 
-    // &:nth-child(n+2) {
-    //   margin-top: $section-padding;
-    // }
+    @include media-bp(phone) {
+      justify-content: space-between;
+    }
+
+    &__group {
+      position: relative;
+      display: flex;
+      font-size: 0.8rem;
+
+      > * {
+
+        @include media-bp(tablet-min) {
+          padding: $menu-padding/2 $menu-padding;
+        }
+
+        @include media-bp(phone) {
+          padding: $menu-padding/4 $menu-padding/2;
+        }
+      }
+    }
+
+    &__label {
+      @include media-bp(phone) {
+        display: none;
+      }
+    }
 
     button {
       background-color: transparent;
@@ -300,8 +326,8 @@
       text-decoration: none;
     }
 
-    > button,
-    > a {
+    button,
+    a {
       display: block;
       flex-grow: 1;
       text-align: center;
@@ -321,31 +347,6 @@
       &:active {
         background-color: $bg-link-hover;
       }
-    }
-
-    > * {
-
-      @include media-bp(tablet-min) {
-        padding: $menu-padding/2 $menu-padding;
-      }
-
-      @include media-bp(phone) {
-        padding: $menu-padding/4 $menu-padding/2;
-      }
-    }
-  }
-
-  &-wrap {
-    font-size: 0.8rem;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    margin-top: $menu-padding/2;
-    align-items: center;
-    flex-wrap: wrap;
-
-    @include media-bp(phone) {
-      flex-direction: column;
     }
   }
 }

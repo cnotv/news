@@ -63,12 +63,12 @@
 
       </nav>
 
-      <nav class="o-nav-wrap">
+      <nav class="o-nav-alt">
         <div
-          class="o-nav-alt fadeIn"
+          class="o-nav-alt__group fadeIn"
           v-if="getSearchOpen"
         >
-          <span>View post till:</span>
+          <span class="o-nav-alt__label">View post till:</span>
           <button
             v-on:click="changeSearchTime('')"
             v-bind:class="{'is-active' : '' === getSearchTimeCurrent}"
@@ -80,8 +80,8 @@
           >{{ time }} </button>
         </div>
 
-        <div class="o-nav-alt fadeIn">
-          <span>Layout:</span>
+        <div class="o-nav-alt__group fadeIn">
+          <span class="o-nav-alt__label">Layout:</span>
           <button
             v-for="layout in getLayout"
             v-on:click="changeLayout(layout)"
@@ -102,8 +102,8 @@
           </button>
         </div>
 
-        <div class="o-nav-alt fadeIn">
-          <span>Posts:</span>
+        <div class="o-nav-alt__group fadeIn">
+          <span class="o-nav-alt__label">Posts:</span>
           <button
             v-for="limit in getLimits"
             v-on:click="changeLimit(limit)"
