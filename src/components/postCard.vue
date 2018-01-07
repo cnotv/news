@@ -1,5 +1,6 @@
 <template>
   <article 
+    class="c-col-1-4 o-card o-card--hidden-footer"
   >
     <a 
       :href="this.post.data.url"

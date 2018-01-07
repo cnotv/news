@@ -2,7 +2,7 @@
   <div
     class=""
     v-bind:class="[
-      getSearchSub && getCurrentLayout === '1' ? 'c-row' : '',
+      getSearchSub && getCurrentLayout === '1' ? '' : '',
       getSearchSub && getCurrentLayout === '2' ? 'c-row' : '',
       getSearchSub && getCurrentLayout === '3' ? 'o-newspaper' : '',
       getSearchSub && getCurrentLayout === '4' ? 'o-gallery' : '',
@@ -19,7 +19,6 @@
       :key="post.data.id"
     />
     <Card 
-      class="c-col-1-4 o-card o-card--hidden-footer"
       v-else-if="getSearchSub && getCurrentLayout === '2'"
       v-bind:post="post"
       :key="post.data.id"
@@ -35,7 +34,6 @@
       :key="post.data.id"
     />
     <Subreddit
-      class="c-col-1-4"
       v-else
       v-bind:post="post"
       :key="post.data.id"

@@ -14,7 +14,6 @@
       <section v-if="this.post.data.selftext">
         <figure
           v-if="this.post.data.preview"
-          v-on:click="toggleModal(this.post.data.url)"
         >
           <img 
             v-if="this.post.data.preview.images[0].variants.gif"

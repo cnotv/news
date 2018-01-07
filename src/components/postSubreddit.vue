@@ -1,5 +1,7 @@
 <template>
-  <section>
+  <section
+    class="c-col-1-4"
+  >
     <a
       href="#"
       v-on:click="addSub(post.data.subreddit)"
