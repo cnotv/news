@@ -2,18 +2,17 @@
   <div class="o-search__bar fadeIn">
     <input
       ref="search"
-      class="js-search-field"
       placeholder="Type something.."
       v-model="search"
     >
-    <button
-      v-on:click="changeSearchGlobal"
-      v-bind:class="{ 'is-active' : getSearchGlobal}"
-      v-if="getSearchSub"
-    >
-      <span v-if="getSearchGlobal">All</span>
-      <span v-if="!getSearchGlobal && getCurrentSub">{{getCurrentSub}}</span>
-    </button>
+    <div class="c-filter">
+      <input
+        type="checkbox"
+        id="search-global"
+        v-model="searchGlobal"
+      >
+      <label for="search-global">Global?</label>
+    </div>
 
     <button
       v-bind:class="{ 'is-active' : !getSearchSub}"
@@ -50,7 +49,20 @@ export default {
       set (value) {
         this.$store.dispatch('changeSearch', value)
       }
+    },
+    searchGlobal: {
+      get () {
+        return this.$store.state.searchGlobal
+      },
+      set (value) {
+        this.$store.dispatch('changeSearchGlobal', value)
+      }
     }
   }
 }
 </script>
+<style scoped>
+.c-filter {
+  flex-shrink: 0;
+}
+</style>
