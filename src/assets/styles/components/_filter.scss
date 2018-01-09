@@ -6,7 +6,6 @@
     cursor: pointer;
     user-select: none;
     margin-right: 0.5em;
-    background-color: color(white);
 
     &::before {
       content: "";
@@ -18,7 +17,7 @@
       border: $website-border;
       vertical-align: bottom;
       cursor: pointer;
-      background: color(white);
+      background: $bg-nav;
       transition: background-color 0.2s;
     }
     &:after {
@@ -37,7 +36,7 @@
 
   input:checked + label {
     &::before {
-      background-color: color(grey);
+      background-color: $bg-link-hover;
     }
     &::after {
       left: 1.4em;

@@ -51,7 +51,7 @@ $color-error:                         color(red);
 $color-disabled:                      color(grey-l);
 $color-active:                        color(white);
 
-$bg-nav:                              color(white);
+$bg-nav:                              transparent;
 $bg-dropdown:                         color(white);
 $bg-card:                             color(white);
 $bg-link:                             color(white);
@@ -66,7 +66,7 @@ $website-border-radius:               2px !default;
 $website-border-size:                 2px !default;
 $website-border:                      $website-border-size solid color(black);
 $website-border-secondary:            $website-border-size/2 solid color(black);
-$menu-padding:                        1.2rem !default;
+$menu-padding:                        0.75rem !default;
 $menu-mobile-offset:                  80px !default;
 
 $website-animation-time:              0.2s;

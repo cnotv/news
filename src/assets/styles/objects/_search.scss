@@ -8,15 +8,16 @@
       height: 100%;
       border: none;
       width: 100%;
-      text-transform: uppercase;
       outline: none;
+      // text-transform: uppercase;
+      background: $bg-nav;
 
       @include media-bp(tablet-min) {
-        padding: $menu-padding;
+        padding: 0 $menu-padding;
       }
 
       @include media-bp(phone) {
-        padding: $menu-padding/2;
+        padding: 0 $menu-padding/2;
       }
     }
   }

@@ -7,12 +7,10 @@
     font-size: 0.8rem;
     font-family: $headings-font-family;
     font-weight: 500;
-    border-top: $website-border;
-    border-bottom: $website-border;
-    text-transform: uppercase;
     box-shadow: $website-shadow;
     border: $website-border;
     background-color: $bg-nav;
+    // text-transform: uppercase;
 
     @include media-bp(tablet-min) {
       align-items: center;

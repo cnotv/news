@@ -45,8 +45,6 @@
             v-if="!getSearchOpen && openSettings"
           >Reset</button>
 
-          <news-order v-if="!getSearchOpen && !openSettings"/>
-
           <button
             class=""
             v-on:click="toggleSettings"
@@ -64,6 +62,13 @@
       </nav>
 
       <nav class="o-nav-alt">
+        <div
+          class="o-nav-alt__group fadeIn"
+          v-if="!getSearchOpen && !openSettings"
+        >
+          <news-order/>
+        </div>
+
         <div
           class="o-nav-alt__group fadeIn"
           v-if="getSearchOpen"
