@@ -106,6 +106,9 @@ export default {
     ])
   },
   methods: {
+    ...mapActions([
+      'commitPosts'
+    ]),
     toggleModal (content) {
       this.modalOpen = !this.modalOpen
     },
@@ -115,6 +118,10 @@ export default {
   },
 
   mounted () {
+    // display post default
+    this.$store.dispatch('commitPosts')
+
+    // online check and local storage save
     if (!window.navigator) {
       // console.log('You are not online')
       this.statusOnline = false
