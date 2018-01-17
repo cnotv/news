@@ -4,7 +4,7 @@
     v-bind:class="[
       getSearchSub && getCurrentLayout === '1' ? '' : '',
       getSearchSub && getCurrentLayout === '2' ? 'c-row' : '',
-      getSearchSub && getCurrentLayout === '3' ? 'o-newspaper' : '',
+      getSearchSub && getCurrentLayout === '3' ? 'o-paper' : '',
       getSearchSub && getCurrentLayout === '4' ? 'o-gallery' : '',
       !getSearchSub ? 'c-row' : ''
     ]"
@@ -23,7 +23,7 @@
       v-bind:post="post"
       :key="post.data.id"
     />
-    <Newspaper
+    <Paper
       v-else-if="getSearchSub && getCurrentLayout === '3'"
       v-bind:post="post"
       :key="post.data.id"
@@ -56,7 +56,7 @@ import Modal from '@/components/modal'
 import Card from '@/components/postCard'
 import Gallery from '@/components/postGallery'
 import List from '@/components/postList'
-import Newspaper from '@/components/postNewspaper'
+import Paper from '@/components/postPaper'
 import Subreddit from '@/components/postSubreddit'
 
 // Distribute to components using global mixin
@@ -88,7 +88,7 @@ Vue.mixin({
 })
 
 export default {
-  components: { Modal, Card, Gallery, List, Subreddit, Newspaper },
+  components: { Modal, Card, Gallery, List, Subreddit, Paper },
   data () {
     return {
       modalOpen: false,
