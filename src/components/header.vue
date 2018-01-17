@@ -61,7 +61,10 @@
 
       </nav>
 
-      <nav class="o-nav-alt">
+      <nav
+        v-if="getQuery !== ''"
+        class="o-nav-alt"
+      >
         <div
           class="o-nav-alt__group fadeIn"
           v-if="!getSearchOpen && !openSettings"
@@ -138,6 +141,7 @@ export default {
     ...mapGetters([
       'getSubreddits',
       'getLimits',
+      'getQuery',
       'getCurrentSub',
       'getCurrentLimit',
       'getSearchOpen',

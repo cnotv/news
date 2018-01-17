@@ -1,5 +1,11 @@
 <template>
   <div
+    v-if="getQuery === ''"
+  >
+    <Welcome />
+  </div>
+
+  <div
     class=""
     v-bind:class="[
       getSearchSub && getCurrentLayout === '1' ? '' : '',
@@ -8,7 +14,7 @@
       getSearchSub && getCurrentLayout === '4' ? 'o-gallery' : '',
       !getSearchSub ? 'c-row' : ''
     ]"
-    v-if="getPosts && getPosts.length > 0"
+    v-else-if="getPosts && getPosts.length > 0"
     >
     <span v-if="!statusOnline">You are offline.</span>
 
@@ -52,6 +58,7 @@
 <script>
 import Vue from 'vue'
 import { mapGetters, mapActions } from 'vuex'
+import Welcome from '@/components/welcome'
 import Modal from '@/components/modal'
 import Card from '@/components/postCard'
 import Gallery from '@/components/postGallery'
@@ -88,7 +95,7 @@ Vue.mixin({
 })
 
 export default {
-  components: { Modal, Card, Gallery, List, Subreddit, Paper },
+  components: { Welcome, Modal, Card, Gallery, List, Subreddit, Paper },
   data () {
     return {
       modalOpen: false,
@@ -99,6 +106,7 @@ export default {
 
   computed: {
     ...mapGetters([
+      'getQuery',
       'getPosts',
       'getCurrentLayout',
       'getSearchOpen',

@@ -3,18 +3,20 @@ import debounce from 'lodash.debounce'
 
 // unique api query after defining arguments (states)
 export const commitPosts = ({ commit, state }) => {
-  commit('POSTS', '')
-  return new Promise((resolve, reject) => {
-    api.fetchData(state.query).then(
-      response => {
-        commit('POSTS', response)
-        resolve(response)
-      },
-      response => {
-        reject(response)
-      }
-    )
-  })
+  if (state.query !== '') {
+    commit('POSTS', '')
+    return new Promise((resolve, reject) => {
+      api.fetchData(state.query).then(
+        response => {
+          commit('POSTS', response)
+          resolve(response)
+        },
+        response => {
+          reject(response)
+        }
+      )
+    })
+  }
 }
 
 export const addSub = ({ commit, state }, sub) => {
