@@ -8,10 +8,10 @@
   <div
     class=""
     v-bind:class="[
-      getSearchSub && getCurrentLayout === '1' ? '' : '',
-      getSearchSub && getCurrentLayout === '2' ? 'c-row' : '',
-      getSearchSub && getCurrentLayout === '3' ? 'o-paper' : '',
-      getSearchSub && getCurrentLayout === '4' ? 'o-gallery' : '',
+      getSearchSub && getCurrentLayout === 1 ? '' : '',
+      getSearchSub && getCurrentLayout === 2 ? 'c-row' : '',
+      getSearchSub && getCurrentLayout === 3 ? 'o-paper' : '',
+      getSearchSub && getCurrentLayout === 4 ? 'o-gallery' : '',
       !getSearchSub ? 'c-row' : ''
     ]"
     v-else-if="getPosts && getPosts.length > 0"
@@ -19,23 +19,23 @@
     <span v-if="!statusOnline">You are offline.</span>
 
     <List 
-      v-if="getSearchSub && getCurrentLayout === '1'"
+      v-if="getSearchSub && getCurrentLayout === 1"
       v-for="post in getPosts"
       v-bind:post="post"
       :key="post.data.id"
     />
     <Card 
-      v-else-if="getSearchSub && getCurrentLayout === '2'"
+      v-else-if="getSearchSub && getCurrentLayout === 2"
       v-bind:post="post"
       :key="post.data.id"
     />
     <Paper
-      v-else-if="getSearchSub && getCurrentLayout === '3'"
+      v-else-if="getSearchSub && getCurrentLayout === 3"
       v-bind:post="post"
       :key="post.data.id"
     />
     <Gallery
-      v-else-if="getSearchSub && getCurrentLayout === '4'"
+      v-else-if="getSearchSub && getCurrentLayout === 4"
       v-bind:post="post"
       :key="post.data.id"
     />

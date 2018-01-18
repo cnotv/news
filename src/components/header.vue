@@ -91,22 +91,11 @@
         <div class="o-nav-alt__group fadeIn">
           <span class="o-nav-alt__label">Layout:</span>
           <button
-            v-for="layout in getLayout"
-            v-on:click="changeLayout(layout)"
+            v-for="(layout, index) in getLayout"
+            v-on:click="changeLayout(index)"
             v-bind:class="{'is-active' : layout === getCurrentLayout}"
           >
-            <span
-              v-if="layout === '1'"
-              class="fa fa-list"></span>
-            <span
-              v-if="layout === '2'"
-              class="fa fa-th"></span>
-            <span
-              v-if="layout === '3'"
-              class="fa fa-newspaper-o"></span>
-            <span
-              v-if="layout === '4'"
-              class="fa fa-picture-o"></span>
+            <span v-bind:class="'fa fa-' + layout"></span>
           </button>
         </div>
 

@@ -12,30 +12,8 @@ const store = () => {
   return new Vuex.Store({
     state: {
       strict: process.env.NODE_ENV !== 'production',
-      page: {
-        id: null,
-        excerpt: null,
-        slug: null,
-        title: null,
-        content: null
-      },
       posts: null,
-      post: {
-        id: null,
-        date: null,
-        score: null,
-        link: null,
-        source: null,
-        featured_media: null,
-        title: null,
-        excerpt: null,
-        content: null
-      },
-      subreddit: {
-        id: null,
-        name: null,
-        slug: null
-      },
+      subreddit: {},
       subreddits: [],
       currentSub: 'WorldNews',
       limits: ['12', '24', '48', '96'],
@@ -49,9 +27,8 @@ const store = () => {
       searchTime: ['year', 'month', 'day', 'hour'],
       searchTimeCurrent: '',
       searchGlobal: false,
-      layout: ['1', '2', '3', '4'],
-      currentLayout: '2',
-      site_data: {}
+      layout: ['list', 'th', 'newspaper-o', 'picture-o'],
+      currentLayout: [2]
     },
     actions,
     mutations,

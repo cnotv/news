@@ -1,12 +1,6 @@
 export default {
-  PAGE: (state, page) => {
-    state.page = page
-  },
   POSTS: (state, posts) => {
     state.posts = posts
-  },
-  POST: (state, post) => {
-    state.post = post
   },
   ADD_SUB: (state, newSub) => {
     let subs = state.subreddits
