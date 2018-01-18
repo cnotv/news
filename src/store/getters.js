@@ -2,11 +2,6 @@ export const getPosts = state => state.posts
 export const getSubreddits = state => state.subreddits
 export const getOrder = state => state.order
 export const getSearch = state => state.search
-export const getSearchOpen = state => state.searchOpen
-export const getSearchSub = state => state.searchSub
-export const getSearchTime = state => state.searchTime
-export const getSearchTimeCurrent = state => state.searchTimeCurrent
-export const getSearchGlobal = state => state.searchGlobal
 export const getQuery = state => state.query
 export const getLimits = state => state.limits
 export const getCurrentLimit = state => state.currentLimit

@@ -31,28 +31,28 @@ export default {
     state.currentLimit = currentLimit
   },
   SEARCH: (state, search) => {
-    state.search = search
+    state.search.string = search
   },
   SEARCHSUB: (state, close) => {
-    state.searchGlobal = true
+    state.search.global = true
     if (close === false || close === true) {
-      state.searchSub = close
+      state.search.sub = close
     } else {
-      state.searchSub = !state.searchSub
+      state.search.sub = !state.search.sub
     }
   },
   SEARCHGLOBAL: (state) => {
-    state.searchGlobal = !state.searchGlobal
+    state.search.global = !state.search.global
   },
   SEARCHOPEN: (state, close) => {
     if (close) {
-      state.searchOpen = false
+      state.search.open = false
     } else {
-      state.searchOpen = !state.searchOpen
+      state.search.open = !state.search.open
     }
   },
   SEARCHTIME: (state, time) => {
-    state.searchTimeCurrent = time
+    state.search.timecurrent = time
   },
   QUERY: (state, query) => {
     state.query = query

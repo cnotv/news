@@ -59,18 +59,18 @@ export const changeOrder = ({ commit, state }, order) => {
   commitPosts({ commit, state })
 }
 
-export const changeSearch = debounce(({ commit, state }, search = state.search) => {
+export const changeSearch = debounce(({ commit, state }, search = state.search.string) => {
   let searchGlobal = ''
 
   // if filter search to subreddit
-  if (!state.searchGlobal) {
+  if (!state.search.global) {
     searchGlobal = `+subreddit:${state.currentSub}`
   }
 
   // if no input switch between search query or subreddit feed
   if (search.length > 0) {
     commit('SEARCH', search)
-    commit('QUERY', `${state.currentSub}/search.json?limit=${state.currentLimit}&q=${state.search}${searchGlobal}&t=${state.searchTimeCurrent}`)
+    commit('QUERY', `${state.currentSub}/search.json?limit=${state.currentLimit}&q=${state.search.string}${searchGlobal}&t=${state.timecurrent}`)
   } else {
     commit('SEARCH', '')
     commit('QUERY', `${state.currentSub}/${state.currentOrder}.json`)

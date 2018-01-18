@@ -15,7 +15,7 @@
     </div>
 
     <button
-      v-bind:class="{ 'is-active' : !getSearchSub}"
+      v-bind:class="{ 'is-active' : !getSearch.sub}"
       v-on:click="changeSearchSub"
     >/r/</button>
   </div>
@@ -38,13 +38,11 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getSearchGlobal',
-      'getSearchSub',
-      'getCurrentSub'
+      'getSearch'
     ]),
     search: {
       get () {
-        return this.$store.state.search
+        return this.$store.state.search.string
       },
       set (value) {
         this.$store.dispatch('changeSearch', value)
@@ -52,7 +50,7 @@ export default {
     },
     searchGlobal: {
       get () {
-        return this.$store.state.searchGlobal
+        return this.$store.state.search.global
       },
       set (value) {
         this.$store.dispatch('changeSearchGlobal', value)

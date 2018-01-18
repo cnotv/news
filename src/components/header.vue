@@ -2,7 +2,7 @@
 
   <header
     class="c-section"
-    v-bind:class="{ 'has-menu-open' : openMenu, 'has-search-open' : getSearchOpen }"
+    v-bind:class="{ 'has-menu-open' : openMenu, 'has-search-open' : getSearch.open }"
   >
     <div class="c-container-full">
       <nav class="o-nav-h">
@@ -26,12 +26,12 @@
           </li>
         </ul>
         <a
-          v-else-if="!getSearchOpen && !openSettings"
+          v-else-if="!getSearch.open && !openSettings"
           v-on:click="toggleSearchTopic"
         >Add a topic</a>
         <span v-else></span>
 
-        <search v-if="getSearchOpen"></search>
+        <search v-if="getSearch.open"></search>
 
         <div class="o-nav-h__right">
           <a 
@@ -42,20 +42,20 @@
           <button
             class=""
             v-on:click="resetSettings"
-            v-if="!getSearchOpen && openSettings"
+            v-if="!getSearch.open && openSettings"
           >Reset</button>
 
           <button
             class=""
             v-on:click="toggleSettings"
-            v-if="!getSearchOpen"
+            v-if="!getSearch.open"
             v-bind:class="{'is-active' : openSettings}"
           ><i class="fa fa-cog"></i></button>
 
           <button
             class="o-search__toggle"
             v-on:click="toggleSearch"
-            v-bind:class="{'is-active' : getSearchOpen}"
+            v-bind:class="{'is-active' : getSearch.open}"
           ><i class="fa"></i></button>
         </div>
 
@@ -67,24 +67,24 @@
       >
         <div
           class="o-nav-alt__group fadeIn"
-          v-if="!getSearchOpen && !openSettings"
+          v-if="!getSearch.open && !openSettings"
         >
           <news-order/>
         </div>
 
         <div
           class="o-nav-alt__group fadeIn"
-          v-if="getSearchOpen"
+          v-if="getSearch.open"
         >
           <span class="o-nav-alt__label">View post till:</span>
           <button
             v-on:click="changeSearchTime('')"
-            v-bind:class="{'is-active' : '' === getSearchTimeCurrent}"
+            v-bind:class="{'is-active' : '' === getSearch.timecurrent}"
           >None</button>
           <button
-            v-for="time in getSearchTime"
+            v-for="time in getSearch.time"
             v-on:click="changeSearchTime(time)"
-            v-bind:class="{'is-active' : time === getSearchTimeCurrent}"
+            v-bind:class="{'is-active' : time === getSearch.timecurrent}"
           >{{ time }} </button>
         </div>
 
@@ -93,7 +93,7 @@
           <button
             v-for="(layout, index) in getLayout"
             v-on:click="changeLayout(index)"
-            v-bind:class="{'is-active' : layout === getCurrentLayout}"
+            v-bind:class="{'is-active' : index === getCurrentLayout}"
           >
             <span v-bind:class="'fa fa-' + layout"></span>
           </button>
@@ -133,9 +133,7 @@ export default {
       'getQuery',
       'getCurrentSub',
       'getCurrentLimit',
-      'getSearchOpen',
-      'getSearchTime',
-      'getSearchTimeCurrent',
+      'getSearch',
       'getLayout',
       'getCurrentLayout'
     ])
