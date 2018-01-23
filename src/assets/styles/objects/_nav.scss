@@ -20,9 +20,11 @@
       flex-direction: column-reverse;
     }
 
-    a,
-    button {
+    &__action {
       display: block;
+      user-select: none;
+      border: none;
+      background-color: transparent;
 
       @include media-bp(tablet-min) {
         padding: $menu-padding;
@@ -40,16 +42,41 @@
           background-color: $bg-link-hover;
         }
       }
+
+      &.is-active {
+        background-color: $bg-link-active;
+        color: $color-active;
+        transition: background-color $website-animation-time, color $website-animation-time;
+      }
     }
     &__remove {
     }
 
-    i {
+    &__icon {
       font-size: 1rem;
       min-width: 1rem;
+      z-index: 1;
+      border: none;
+
+      &:hover {
+        background-color: $bg-link-hover;
+      }
+
+      &::before {
+        float: left;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        font-size: 1rem;
+        color: inherit;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: -1;
+      }
     }
 
-    ul {
+    &__menu {
       margin: 0;
       padding: 0;
 
@@ -58,73 +85,41 @@
         flex-flow: row wrap;
       }
 
-      .fa {
-        z-index: 1;
-        border: none;
+      &__item {
+        position: relative;
+        list-style: none;
 
-        &:hover {
-          background-color: $bg-link-hover;
+        @include media-bp(tablet-min) {
+          white-space: nowrap;
         }
 
-        a {
-          text-indent: -999999px;
-          height: 100%;
-          width: 4rem;
-          line-height: 1.5;
-
-          &:hover {
-            background-color: transparent;
+        &+& {
+          @include media-bp(phone) {
+            border-top: $website-border-secondary;
           }
         }
 
-        &::before {
-          float: left;
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          font-size: 1rem;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: -1;
-        }
-      }
-    }
-
-    li + li {
-      @include media-bp(phone) {
-        border-top: $website-border-secondary;
-      }
-    }
-
-    li {
-      position: relative;
-      list-style: none;
-
-      @include media-bp(tablet-min) {
-        white-space: nowrap;
-      }
-
-      ul {
-        z-index: zindex(dropdown);
-        background-color: $bg-dropdown;
-
-        @include media-bp(tablet-min) {
-          display: none;
-          position: absolute;
-          white-space: nowrap;
-          border: $website-border-secondary;
-          box-shadow: $website-shadow-hover;
-        }
-
         ul {
-          left: 100%;
-          top: -1px;
-        }
-      }
+          z-index: zindex(dropdown);
+          background-color: $bg-dropdown;
 
-      &:hover > ul {
-        display: block;
+          @include media-bp(tablet-min) {
+            display: none;
+            position: absolute;
+            white-space: nowrap;
+            border: $website-border-secondary;
+            box-shadow: $website-shadow-hover;
+          }
+
+          ul {
+            left: 100%;
+            top: -1px;
+          }
+        }
+
+        &:hover > ul {
+          display: block;
+        }
       }
     }
 
@@ -163,19 +158,6 @@
     &__burger {
       @include media-bp(tablet-min) {
         display: none !important; // please forgive me for this...
-      }
-    }
-
-    button,
-    a {
-      user-select: none;
-      border: none;
-      background-color: transparent;
-
-      &.is-active {
-        background-color: $bg-link-active;
-        color: $color-active;
-        transition: background-color $website-animation-time, color $website-animation-time;
       }
     }
   }
@@ -317,19 +299,13 @@
       }
     }
 
-    button {
-      background-color: transparent;
-    }
-    a {
-      text-decoration: none;
-    }
-
-    button,
-    a {
+    &__action {
       display: block;
       flex-grow: 1;
       text-align: center;
       border: $website-border-secondary;
+      text-decoration: none;
+      background-color: transparent;
       
       &:hover {
         text-decoration: none;

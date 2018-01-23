@@ -15,6 +15,7 @@
     </div>
 
     <button
+      class="o-nav-h__action"
       v-bind:class="{ 'is-active' : !getSearch.sub}"
       v-on:click="changeSearchSub"
     >/r/</button>
