@@ -43,7 +43,7 @@ export const changeLimit = ({ commit, state }, limit) => {
   commit('CURRENT_LIMIT', limit)
 
   // switch between search query or subreddit feed if no input
-  if (state.search === '') {
+  if (state.search.string === '') {
     commit('QUERY', `${state.currentSub}/${state.currentOrder}.json?limit=${state.currentLimit}`)
     commitPosts({ commit, state })
   } else {
