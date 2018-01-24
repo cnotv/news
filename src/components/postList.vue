@@ -14,6 +14,8 @@
         /r/{{this.post.data.subreddit}}
       </button>
         - 
+        <a :href="'//' + this.post.data.domain" target="_blank">{{this.post.data.domain}}</a>
+        - 
         {{this.post.data.created_utc | date}}
       <a 
         :href="'http://www.reddit.com' + this.post.data.permalink"
