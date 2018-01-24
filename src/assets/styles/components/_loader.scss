@@ -44,3 +44,6 @@ img[lazy=loading] {
   position: absolute;
   z-index: -1;
 }
+img[lazy=loaded] {
+  animation: fadeIn $website-animation-time*2 forwards;
+}
