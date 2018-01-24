@@ -25,7 +25,7 @@ const store = () => {
         string: '',
         open: false,
         sub: true,
-        time: ['year', 'month', 'day', 'hour'],
+        time: ['year', 'month', 'week', 'day', 'hour'],
         timecurrent: '',
         global: false
       },
