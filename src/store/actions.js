@@ -70,7 +70,7 @@ export const changeSearch = debounce(({ commit, state }, search = state.search.s
   // if no input switch between search query or subreddit feed
   if (search.length > 0) {
     commit('SEARCH', search)
-    commit('QUERY', `${state.currentSub}/search.json?limit=${state.currentLimit}&q=${state.search.string}${searchGlobal}&t=${state.timecurrent}`)
+    commit('QUERY', `${state.currentSub}/search.json?limit=${state.currentLimit}&t=${state.search.timecurrent}&q=${state.search.string}${searchGlobal}`)
   } else {
     commit('SEARCH', '')
     commit('QUERY', `${state.currentSub}/${state.currentOrder}.json`)
