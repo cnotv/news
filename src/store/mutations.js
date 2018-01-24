@@ -16,6 +16,7 @@ export default {
     }
   },
   CURRENT_SUB: (state, currentSub) => {
+    state.search.global = false
     state.currentSub = currentSub
   },
   CURRENT_ORDER: (state, currentOrder) => {
@@ -41,7 +42,7 @@ export default {
       state.search.sub = !state.search.sub
     }
   },
-  SEARCHGLOBAL: (state) => {
+  SEARCHGLOBAL: (state, close) => {
     state.search.global = !state.search.global
   },
   SEARCHOPEN: (state, close) => {

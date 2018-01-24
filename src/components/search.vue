@@ -54,7 +54,7 @@ export default {
         return this.$store.state.search.global
       },
       set (value) {
-        this.$store.dispatch('changeSearchGlobal', value)
+        this.$store.dispatch('changeSearchGlobal')
       }
     }
   }
