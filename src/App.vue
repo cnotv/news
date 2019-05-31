@@ -14,6 +14,17 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import VueLazyload from 'vue-lazyload'
 
+import * as Sentry from '@sentry/browser';
+import * as Integrations from '@sentry/integrations';
+
+Sentry.init({
+  dsn: 'https://f908d5c000ea4ffa87f6484a4c286732@sentry.io/1472388',
+  integrations: [new Integrations.Vue({Vue, attachProps: true})],
+  environment: process.env.NODE_ENV,
+  release: process.env.VERSION,
+});
+
+
 Vue.use(Vuex)
 
 Vue.use(VueLazyload, {
