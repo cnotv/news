@@ -1,6 +1,8 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/32357878-206c-467c-8385-6c1e3a6bae43/deploy-status)](https://app.netlify.com/sites/cnotv-edugames/deploys)
+
 # cnotv-news
 
->  News aggregator based on Reddit API, Vue.js and PWA 
+>  News aggregator based on Reddit API, Vue.js and PWA
 
 ## Build Setup
 
