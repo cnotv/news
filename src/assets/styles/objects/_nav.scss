@@ -20,6 +20,10 @@
       flex-direction: column-reverse;
     }
 
+    &--sticky {
+      position: sticky;
+    }
+
     &__action {
       display: block;
       user-select: none;
@@ -308,7 +312,7 @@
       border: $website-border-secondary;
       text-decoration: none;
       background-color: transparent;
-      
+
       &:hover {
         text-decoration: none;
         cursor: pointer;
@@ -318,7 +322,7 @@
       &:not(:last-child) {
         border-right: none;
       }
-      
+
       &.is-active,
       &:active {
         background-color: $bg-link-hover;

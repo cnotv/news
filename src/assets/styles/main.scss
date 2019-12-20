@@ -15,7 +15,6 @@
 @import "components/bg";
 @import "components/loader";
 @import "components/logo";
-@import "components/utilities";
 
 // Objects
 @import "objects/modal";
@@ -34,3 +33,5 @@
 @import "pages/portfolio";
 @import "pages/contact";
 @import "pages/posts";
+
+@import "utilities/generic";
