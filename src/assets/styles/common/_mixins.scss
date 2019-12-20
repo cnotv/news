@@ -33,7 +33,7 @@ $viewports: (
   @else {
     @warn 'The color '$value' does not exist';
 
-    @break;
+    // @break;
   }
 }
 
@@ -48,7 +48,7 @@ $viewports: (
   @else {
     @warn 'The z-index '$value' does not exist';
 
-    @break;
+    // @break;
   }
 }
 
