@@ -1,4 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/32357878-206c-467c-8385-6c1e3a6bae43/deploy-status)](https://app.netlify.com/sites/cnotv-edugames/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5d30be00-bed2-4c64-8f22-9f868a44d104/deploy-status)](https://app.netlify.com/sites/cnotv-news/deploys)
 
 # cnotv-news
 
