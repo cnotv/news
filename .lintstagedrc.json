@@ -1,5 +1,5 @@
 {
-  "**/*.vue": [
+  "*.vue": [
     "yarn lint --fix",
     "git add"
   ]
