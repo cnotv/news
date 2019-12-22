@@ -2,49 +2,56 @@
   <section class="c-container-s">
     <header>
       <hgroup>
-        <img
-          class="logo"
-          src="./../assets/logo.svg" alt="cnotv news"
-        >
+        <img class="logo" src="./../assets/logo.svg" alt="cnotv news" />
         <h1 class="title">cnotv news</h1>
       </hgroup>
       <h5>Welcome! Here you can easily access to multiple format of news.</h5>
     </header>
 
     <p>
-      Try to <b v-on:click="changeSearchOpen()">search some news or topic</b> you are interested about.<br>
+      Try to
+      <b v-on:click="changeSearchOpen()">search some news or topic</b> you are
+      interested about.<br />
       I would recomends these topics to give you an idea of what you can do:
     </p>
 
     <button
-    class="c-btn-alt"
+      class="c-btn-alt"
       v-for="sub in suggestions"
       href="#"
+      v-bind:key="sub"
       v-on:click="addSub(sub)"
-    >+ {{sub}}</button>
+    >
+      + {{ sub }}
+    </button>
   </section>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
 
 export default {
-  name: 'Welcome',
-  data () {
+  name: "Welcome",
+  data() {
     return {
-      suggestions: ['worldnews', 'technology', 'art', 'mechanical_gifs', 'futurology', 'redditdev']
-    }
+      suggestions: [
+        "worldnews",
+        "technology",
+        "art",
+        "mechanical_gifs",
+        "futurology",
+        "redditdev"
+      ]
+    };
   },
   methods: {
-    ...mapActions([
-      'changeSearchOpen'
-    ])
+    ...mapActions(["changeSearchOpen"])
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-$mobile:  560px;
+$mobile: 560px;
 
 hgroup {
   display: flex;

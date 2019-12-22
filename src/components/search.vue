@@ -1,64 +1,52 @@
 <template>
   <div class="o-search__bar fadeIn">
-    <input
-      ref="search"
-      placeholder="Type something.."
-      v-model="search"
-    >
+    <input ref="search" placeholder="Type something.." v-model="search" />
     <div class="c-filter">
-      <input
-        type="checkbox"
-        id="search-global"
-        v-model="searchGlobal"
-      >
+      <input type="checkbox" id="search-global" v-model="searchGlobal" />
       <label for="search-global"></label>
     </div>
 
     <button
       class="o-nav-h__action"
-      v-bind:class="{ 'is-active' : !getSearch.sub}"
+      v-bind:class="{ 'is-active': !getSearch.sub }"
       v-on:click="changeSearchSub"
-    >/r/</button>
+    >
+      /r/
+    </button>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: 'search',
+  name: "search",
   methods: {
-    ...mapActions([
-      'changeSearch',
-      'changeSearchSub',
-      'changeSearchGlobal'
-    ])
+    ...mapActions(["changeSearch", "changeSearchSub", "changeSearchGlobal"])
   },
-  mounted () {
-    this.$refs.search.focus()
+  mounted() {
+    this.$refs.search.focus();
   },
   computed: {
-    ...mapGetters([
-      'getSearch'
-    ]),
+    ...mapGetters(["getSearch"]),
     search: {
-      get () {
-        return this.$store.state.search.string
+      get() {
+        return this.$store.state.search.string;
       },
-      set (value) {
-        this.$store.dispatch('changeSearch', value)
+      set(value) {
+        this.$store.dispatch("changeSearch", value);
       }
     },
     searchGlobal: {
-      get () {
-        return this.$store.state.search.global
+      get() {
+        return this.$store.state.search.global;
       },
-      set (value) {
-        this.$store.dispatch('changeSearchGlobal')
+      set(value) {
+        this.$store.dispatch("changeSearchGlobal");
       }
     }
   }
-}
+};
 </script>
 <style scoped>
 .c-filter {

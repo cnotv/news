@@ -1,33 +1,28 @@
 <template>
   <select class="c-input__select c-order" v-model="select">
-    <option v-for="order in getOrder">{{ order }}</option>
+    <option v-for="order in getOrder" v-bind:key="order">{{ order }}</option>
   </select>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters([
-      'getCurrentOrder',
-      'getOrder'
-    ]),
+    ...mapGetters(["getCurrentOrder", "getOrder"]),
     select: {
-      get () {
-        return this.$store.state.currentOrder
+      get() {
+        return this.$store.state.currentOrder;
       },
-      set (value) {
-        this.$store.dispatch('changeOrder', value)
+      set(value) {
+        this.$store.dispatch("changeOrder", value);
       }
     }
   },
   methods: {
-    ...mapActions([
-      'changeOrder'
-    ])
+    ...mapActions(["changeOrder"])
   }
-}
+};
 </script>
 
 <style>

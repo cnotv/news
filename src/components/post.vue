@@ -1,7 +1,5 @@
 <template>
-  <div
-    v-if="getQuery === ''"
-  >
+  <div v-if="getQuery === ''">
     <Welcome />
   </div>
 
@@ -15,16 +13,13 @@
       !getSearch.sub ? 'c-row' : ''
     ]"
     v-else-if="getPosts && getPosts.length > 0"
-    >
+  >
     <span v-if="!statusOnline">You are offline.</span>
 
-    <List 
-      v-if="getSearch.sub && getCurrentLayout === 0"
-      v-for="post in getPosts"
-      v-bind:post="post"
-      :key="post.data.id"
-    />
-    <Card 
+    <template v-if="getSearch.sub && getCurrentLayout === 0">
+      <List v-for="post in getPosts" v-bind:post="post" :key="post.data.id" />
+    </template>
+    <Card
       v-else-if="getSearch.sub && getCurrentLayout === 1"
       v-bind:post="post"
       :key="post.data.id"
@@ -39,118 +34,105 @@
       v-bind:post="post"
       :key="post.data.id"
     />
-    <Subreddit
-      v-else
-      v-bind:post="post"
-      :key="post.data.id"
-    />
+    <Subreddit v-else v-bind:post="post" :key="post.data.id" />
 
-    <modal v-if="modalOpen"/>
+    <modal v-if="modalOpen" />
   </div>
 
   <div v-else-if="getPosts">Sorry, no post found.</div>
-  <div
-    v-else
-    class="is-loading"
-  ></div>
+  <div v-else class="is-loading"></div>
 </template>
 
 <script>
-import Vue from 'vue'
-import { mapGetters, mapActions } from 'vuex'
-import Welcome from '@/components/welcome'
-import Modal from '@/components/modal'
-import Card from '@/components/postCard'
-import Gallery from '@/components/postGallery'
-import List from '@/components/postList'
-import Paper from '@/components/postPaper'
-import Subreddit from '@/components/postSubreddit'
+import Vue from "vue";
+import { mapGetters, mapActions } from "vuex";
+import Welcome from "@/components/welcome";
+import Modal from "@/components/modal";
+import Card from "@/components/postCard";
+import Gallery from "@/components/postGallery";
+import List from "@/components/postList";
+import Paper from "@/components/postPaper";
+import Subreddit from "@/components/postSubreddit";
 
 // Distribute to components using global mixin
 Vue.mixin({
   methods: {
-    ...mapActions([
-      'addSub'
-    ])
+    ...mapActions(["addSub"])
   },
   filters: {
     truncate: (string, value) => {
-      if (!value) return ''
-      value = value.toString()
-      let stringNew = string.toString()
-      stringNew = stringNew.substring(0, value)
+      if (!value) return "";
+      value = value.toString();
+      let stringNew = string.toString();
+      stringNew = stringNew.substring(0, value);
       if (string.length > value) {
-        stringNew += '...'
+        stringNew += "...";
       }
-      return stringNew
+      return stringNew;
     },
-    date: (value) => {
-      let newDate = new Date(value * 1000)
-      return newDate.toLocaleDateString('en-GB')
+    date: value => {
+      let newDate = new Date(value * 1000);
+      return newDate.toLocaleDateString("en-GB");
     },
-    embed: (url) => {
-      return url.replace('watch?v=', 'embed/')
+    embed: url => {
+      return url.replace("watch?v=", "embed/");
     }
   }
-})
+});
 
 export default {
   components: { Welcome, Modal, Card, Gallery, List, Subreddit, Paper },
-  data () {
+  data() {
     return {
       modalOpen: false,
       statusOnline: true,
-      noStorage: window.localStorage.getItem('vuex') === null
-    }
+      noStorage: window.localStorage.getItem("vuex") === null
+    };
   },
 
   computed: {
-    ...mapGetters([
-      'getQuery',
-      'getPosts',
-      'getCurrentLayout',
-      'getSearch'
-    ])
+    ...mapGetters(["getQuery", "getPosts", "getCurrentLayout", "getSearch"])
   },
   methods: {
-    ...mapActions([
-      'commitPosts'
-    ]),
-    toggleModal (content) {
-      this.modalOpen = !this.modalOpen
+    ...mapActions(["commitPosts"]),
+    toggleModal(content) {
+      this.modalOpen = !this.modalOpen;
     },
-    _toggleNetworkStatus ({ type }) {
-      this.online = type === 'online'
+    _toggleNetworkStatus({ type }) {
+      this.online = type === "online";
     }
   },
 
-  mounted () {
+  mounted() {
     // display post default
-    this.$store.dispatch('commitPosts')
+    this.$store.dispatch("commitPosts");
 
     // online check and local storage save
     if (!window.navigator) {
       // console.log('You are not online')
-      this.statusOnline = false
-      return
+      this.statusOnline = false;
+      return;
     }
 
     // console.log('You are online')
-    this.statusOnline = Boolean(window.navigator.onLine)
+    this.statusOnline = Boolean(window.navigator.onLine);
 
     if (!this.statusOnline) {
-      window.addEventListener('offline', this._toggleNetworkStatus)
-      window.addEventListener('online', this._toggleNetworkStatus)
+      window.addEventListener("offline", this._toggleNetworkStatus);
+      window.addEventListener("online", this._toggleNetworkStatus);
 
       // console.log('Loading offline mode...')
       if (this.noStorage) {
-        this.$store.dispatch('commitPosts')
+        this.$store.dispatch("commitPosts");
         // console.log('Cant load offline: you have no store :( ', this.noStorage)
       } else {
-        this.$store.commit('commitPosts', JSON.parse(window.localStorage.getItem('vuex')))
+        this.$store.commit(
+          "commitPosts",
+          JSON.parse(window.localStorage.getItem("vuex"))
+        );
         // console.log('Offline mode loaded')
       }
     }
   }
-}
+};
 </script>
