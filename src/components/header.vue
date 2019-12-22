@@ -69,7 +69,7 @@
     >
       <div
         class="o-nav-sub__group fadeIn"
-        v-if="!getSearch.open && !openSettings"
+        v-if="!getSearch.open"
       >
         <news-order/>
       </div>
