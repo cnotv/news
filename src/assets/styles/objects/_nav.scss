@@ -10,12 +10,10 @@
     background-color: $bg-nav;
     border: $website-border;
 
-    @include media-bp(tablet-min) {
-      align-items: center;
-    }
-
-    @include media-bp(phone) {
-      flex-direction: column-reverse;
+    .has-menu-open & {
+      @include media-bp(phone) {
+        flex-direction: column-reverse;
+      }
     }
 
     &--detached {
@@ -149,9 +147,17 @@
 
     &__right {
       display: flex;
+      flex-grow: 1;
+      justify-content: flex-end;
 
-      @include media-bp(phone) {
-        border-bottom: $website-border-secondary;
+      .has-search-open & {
+        flex-grow: 0;
+      }
+
+      .has-menu-open & {
+        @include media-bp(phone) {
+          border-bottom: $website-border-secondary;
+        }
       }
 
       footer & {
@@ -162,7 +168,13 @@
     }
 
     &__burger {
+      margin-right: auto;
+
       @include media-bp(tablet-min) {
+        display: none !important; // please forgive me for this...
+      }
+
+      .has-search-open & {
         display: none !important; // please forgive me for this...
       }
     }

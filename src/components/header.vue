@@ -160,7 +160,7 @@ export default {
     },
     toggleSettings () {
       this.openSettings = !this.openSettings
-      this.openMenu = true
+      this.openMenu = false
     },
     toggleSearch () {
       this.openMenu = false

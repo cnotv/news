@@ -11,7 +11,7 @@
         id="search-global"
         v-model="searchGlobal"
       >
-      <label for="search-global">Global?</label>
+      <label for="search-global"></label>
     </div>
 
     <button
