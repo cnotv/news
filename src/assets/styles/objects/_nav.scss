@@ -31,11 +31,11 @@
       background-color: transparent;
 
       @include media-bp(tablet-min) {
-        padding: $menu-padding;
+        padding: space(s);
       }
 
       @include media-bp(phone) {
-        padding: space(s) $menu-padding;
+        padding: space(xs) space(s);
       }
 
       &:hover {
@@ -291,11 +291,11 @@
       > * {
 
         @include media-bp(tablet-min) {
-          padding: space(xs) space(s);
+          padding: 0 space(s);
         }
 
         @include media-bp(phone) {
-          padding: space(xs) space(s);
+          padding: 0 space(xs);
         }
       }
     }
