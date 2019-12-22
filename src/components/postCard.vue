@@ -1,8 +1,8 @@
 <template>
-  <article 
+  <article
     class="c-col-1-4 o-card o-card--hidden-footer"
   >
-    <a 
+    <a
       :href="this.post.data.url"
       target="_blank"
     >
@@ -22,11 +22,11 @@
         >
           <img
             v-if="this.post.data.preview.images[0].variants.gif"
-            v-lazy="this.post.data.preview.images[0].variants.gif.source.url"
+            v-lazy="this.post.data.preview.images[0].variants.gif.source.url.replace('amp;s', 's')"
           />
           <img
             v-else="this.post.data.preview"
-            v-lazy="this.post.data.preview.images[0].source.url"
+            v-lazy="this.post.data.preview.images[0].source.url.replace('amp;s', 's')"
           />
         </header>
 
@@ -43,7 +43,7 @@
             <i class="fa fa-arrow-up"></i>
             {{this.post.data.ups}}
           </span>
-          <a 
+          <a
             :href="'http://www.reddit.com' + this.post.data.permalink"
             target="_blank"
           >

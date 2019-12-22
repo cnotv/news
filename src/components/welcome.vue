@@ -32,7 +32,7 @@ export default {
   name: 'Welcome',
   data () {
     return {
-      suggestions: ['worldnews', 'technology', 'art', 'mechanical_gifs', 'futurology']
+      suggestions: ['worldnews', 'technology', 'art', 'mechanical_gifs', 'futurology', 'redditdev']
     }
   },
   methods: {
