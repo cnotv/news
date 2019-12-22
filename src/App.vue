@@ -14,6 +14,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import VueLazyload from 'vue-lazyload'
 
+import './filters'
+
 import * as Sentry from '@sentry/browser'
 import * as Integrations from '@sentry/integrations'
 
