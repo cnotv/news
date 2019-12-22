@@ -39,6 +39,14 @@ $colors: (
   grey-l:                             "lightgrey",
 );
 
+$spaces: (
+  xs:                                 '0.35rem',
+  s:                                  '0.75rem',
+  m:                                  '1.5rem',
+  l:                                  '3rem',
+  xl:                                 '6rem',
+);
+
 $zindex: (
   dropdown:                           '10',
 );
@@ -67,7 +75,7 @@ $website-border-radius:               2px !default;
 $website-border-size:                 2px !default;
 $website-border:                      $website-border-size solid color(black);
 $website-border-secondary:            $website-border-size/2 solid color(black);
-$menu-padding:                        0.75rem !default;
+$menu-padding:                        space(s) !default;
 $menu-mobile-offset:                  80px !default;
 
 $website-animation-time:              0.2s;

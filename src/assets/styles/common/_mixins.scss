@@ -37,6 +37,21 @@ $viewports: (
   }
 }
 
+// Creating space mixin
+@function space($value) {
+  @if map-get($spaces, $value) {
+    $space: map-get($spaces, $value);
+
+    @return #{$space};
+  }
+
+  @else {
+    @warn 'The space '$value' does not exist';
+
+    // @break;
+  }
+}
+
 // Creating zindex mixin
 @function zindex($value) {
   @if map-get($zindex, $value) {

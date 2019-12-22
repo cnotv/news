@@ -183,3 +183,17 @@ output {
   display: none !important;
 }
 
+* {
+  &::-webkit-scrollbar {
+    width: 0.5em;
+    height: 0.5em;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $brand-secondary;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $brand-primary;
+  }
+}
