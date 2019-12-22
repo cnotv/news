@@ -64,38 +64,38 @@
     </nav>
 
     <nav
-      v-if="getQuery !== ''"
-      class="o-nav-alt"
+      v-if="openSettings | getSearch.open"
+      class="o-nav-sub"
     >
       <div
-        class="o-nav-alt__group fadeIn"
+        class="o-nav-sub__group fadeIn"
         v-if="!getSearch.open && !openSettings"
       >
         <news-order/>
       </div>
 
       <div
-        class="o-nav-alt__group fadeIn"
+        class="o-nav-sub__group fadeIn"
         v-if="getSearch.open"
       >
-        <span class="o-nav-alt__label">View post till:</span>
+        <span class="o-nav-sub__label">View post till:</span>
         <button
-          class="o-nav-alt__action"
+          class="o-nav-sub__action"
           v-on:click="changeSearchTime('')"
           v-bind:class="{'is-active' : '' === getSearch.timecurrent}"
         >None</button>
         <button
-          class="o-nav-alt__action"
+          class="o-nav-sub__action"
           v-for="time in getSearch.time"
           v-on:click="changeSearchTime(time)"
           v-bind:class="{'is-active' : time === getSearch.timecurrent}"
         >{{ time }} </button>
       </div>
 
-      <div class="o-nav-alt__group fadeIn">
-        <span class="o-nav-alt__label">Layout:</span>
+      <div class="o-nav-sub__group fadeIn">
+        <span class="o-nav-sub__label">Layout:</span>
         <button
-          class="o-nav-alt__action"
+          class="o-nav-sub__action"
           v-for="(layout, index) in getLayout"
           v-on:click="changeLayout(index)"
           v-bind:class="{'is-active' : index === getCurrentLayout}"
@@ -104,10 +104,10 @@
         </button>
       </div>
 
-      <div class="o-nav-alt__group fadeIn">
-        <span class="o-nav-alt__label">Posts:</span>
+      <div class="o-nav-sub__group fadeIn">
+        <span class="o-nav-sub__label">Posts:</span>
         <button
-          class="o-nav-alt__action"
+          class="o-nav-sub__action"
           v-for="limit in getLimits"
           v-on:click="changeLimit(limit)"
           v-bind:class="{'is-active' : limit === getCurrentLimit}"

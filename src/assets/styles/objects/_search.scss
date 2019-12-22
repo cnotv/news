@@ -13,11 +13,11 @@
       background: $bg-nav;
 
       @include media-bp(tablet-min) {
-        padding: 0 $menu-padding;
+        padding: 0 space(m);
       }
 
       @include media-bp(phone) {
-        padding: 0 $menu-padding/2;
+        padding: 0 space(s);
       }
     }
   }
@@ -27,10 +27,10 @@
 
     @include media-bp(tablet-min) {
       display: flex;
-      top: -$menu-padding;
-      left: -$menu-padding;
-      height: $menu-padding*2;
-      width: $menu-padding*2;
+      top: -space(m);
+      left: -space(m);
+      height: space(l);
+      width: space(l);
       align-items: center;
       justify-content: center;
       text-align: center;
@@ -40,7 +40,7 @@
     }
 
     @include media-bp(phone) {
-      padding: $menu-padding/2;
+      padding: space(s);
       top: 0;
       right: 0;
     }
@@ -87,8 +87,8 @@
   &__results {
     position: absolute;
     flex-direction: column;
-    margin: -$menu-padding/6 $menu-padding/2;
-    width: calc(100% - #{$menu-padding});
+    margin: -space(s) space(s);
+    width: calc(100% - #{space(m)});
     z-index: zindex(dropdown);
     border: $website-border-secondary;
     box-shadow: $website-shadow-hover;
@@ -103,11 +103,11 @@
     }
 
     &__answer {
-      padding: $menu-padding/2;
+      padding: space(s);
     }
 
     a {
-      padding: $menu-padding/2;
+      padding: space(s);
       border-top: $website-border-secondary;
     }
   }

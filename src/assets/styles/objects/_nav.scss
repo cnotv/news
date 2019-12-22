@@ -7,10 +7,8 @@
     font-size: 0.8rem;
     font-family: $headings-font-family;
     font-weight: 500;
-    box-shadow: $website-shadow;
-    border: $website-border;
     background-color: $bg-nav;
-    // text-transform: uppercase;
+    border: $website-border;
 
     @include media-bp(tablet-min) {
       align-items: center;
@@ -20,8 +18,10 @@
       flex-direction: column-reverse;
     }
 
-    &--sticky {
-      position: sticky;
+    &--detached {
+      box-shadow: $website-shadow;
+      border: $website-border;
+      background-color: $bg-nav;
     }
 
     &__action {
@@ -35,7 +35,7 @@
       }
 
       @include media-bp(phone) {
-        padding: $menu-padding/2 $menu-padding;
+        padding: space(s) $menu-padding;
       }
 
       &:hover {
@@ -269,14 +269,15 @@
   }
 
   // secondary navbar, e.g. for sidebars
-  &-alt {
+  &-sub {
     font-size: 0.8rem;
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    margin-top: $menu-padding/2;
+    padding: space(xs);
     align-items: center;
     flex-wrap: wrap;
+    background-color: $bg-link-hover;
 
     @include media-bp(phone) {
       justify-content: space-between;
@@ -290,16 +291,17 @@
       > * {
 
         @include media-bp(tablet-min) {
-          padding: $menu-padding/2 $menu-padding;
+          padding: space(xs) space(s);
         }
 
         @include media-bp(phone) {
-          padding: $menu-padding/4 $menu-padding/2;
+          padding: space(xs) space(s);
         }
       }
     }
 
     &__label {
+      font-weight: bolder;
       @include media-bp(phone) {
         display: none;
       }
@@ -310,6 +312,7 @@
       flex-grow: 1;
       text-align: center;
       border: $website-border-secondary;
+      border-color: transparent;
       text-decoration: none;
       background-color: transparent;
 
@@ -326,6 +329,7 @@
       &.is-active,
       &:active {
         background-color: $bg-link-hover;
+        border: $website-border-secondary;
       }
     }
   }
