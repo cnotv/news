@@ -21,20 +21,28 @@
     </template>
     <Card
       v-else-if="getSearch.sub && getCurrentLayout === 1"
+      v-for="post in getPosts"
       v-bind:post="post"
       :key="post.data.id"
     />
     <Paper
       v-else-if="getSearch.sub && getCurrentLayout === 2"
+      v-for="post in getPosts"
       v-bind:post="post"
       :key="post.data.id"
     />
     <Gallery
       v-else-if="getSearch.sub && getCurrentLayout === 3"
+      v-for="post in getPosts"
       v-bind:post="post"
       :key="post.data.id"
     />
-    <Subreddit v-else v-bind:post="post" :key="post.data.id" />
+    <Subreddit
+      v-else
+      v-for="post in getPosts"
+      v-bind:post="post"
+      :key="post.data.id"
+    />
 
     <modal v-if="modalOpen" />
   </div>
