@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default {
-  baseUrl: `/r/`,
+  baseUrl: `//www.reddit.com/r/`,
 
   fetchData(query) {
     return new Promise((resolve, reject) => {
