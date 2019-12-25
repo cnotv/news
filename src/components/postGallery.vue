@@ -20,7 +20,7 @@
           "
         />
         <img
-          v-else="this.post.data.preview"
+          v-else-if="this.post.data.preview"
           v-lazy="
             this.post.data.preview.images[0].source.url.replace('amp;s', 's')
           "
