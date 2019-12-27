@@ -21,8 +21,10 @@
             class="o-nav-h__action"
             v-if="openSettings"
             v-on:click="removeSub(subreddit)"
-            >X {{ subreddit }}</a
           >
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+            {{ subreddit }}
+          </a>
           <a
             class="o-nav-h__action"
             v-if="!openSettings"
