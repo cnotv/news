@@ -8,7 +8,8 @@
     font-family: $headings-font-family;
     font-weight: 500;
     background-color: $bg-nav;
-    border: $website-border;
+    border-top: $website-border;
+    border-bottom: $website-border;
 
     .has-menu-open & {
       @include media-bp(phone) {
@@ -292,6 +293,7 @@
     align-items: center;
     flex-wrap: wrap;
     background-color: $bg-link-hover;
+    border-bottom: $website-border-secondary;
 
     @include media-bp(phone) {
       justify-content: space-between;
