@@ -32,12 +32,14 @@
           >
         </li>
       </ul>
+
       <a
         class="o-nav-h__action"
         v-else-if="!getSearch.open && !openSettings"
         v-on:click="toggleSearchTopic"
         >Add a topic</a
       >
+
       <span v-else></span>
 
       <search v-if="getSearch.open"></search>
@@ -46,6 +48,13 @@
         <a class="o-nav-h__action o-nav-h__burger" v-on:click="toggleMenu"
           ><i class="fa fa-navicon o-nav-h__icon"></i
         ></a>
+
+        <span
+          class="o-nav-h__item u-hidden--desktop"
+          v-if="!(getSearch.open || openSettings) && getCurrentSub"
+        >{{ getCurrentSub }}</span>
+
+        <span class="u-spacer--x"></span>
 
         <button
           class="o-nav-h__action"
