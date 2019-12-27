@@ -22,6 +22,7 @@
       background-color: $bg-nav;
     }
 
+    &__item,
     &__action {
       display: block;
       user-select: none;
@@ -35,7 +36,9 @@
       @include media-bp(phone) {
         padding: space(xs) space(s);
       }
+    }
 
+    &__action {
       &:hover {
         text-decoration: none;
         cursor: pointer;
@@ -51,6 +54,7 @@
         transition: background-color $website-animation-time, color $website-animation-time;
       }
     }
+
     &__remove {
     }
 
@@ -168,8 +172,6 @@
     }
 
     &__burger {
-      margin-right: auto;
-
       @include media-bp(tablet-min) {
         display: none !important; // please forgive me for this...
       }
