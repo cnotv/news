@@ -1,5 +1,6 @@
 <template>
   <article
+    v-if="this.post.data"
     class="o-paper__wrap"
     v-bind:class="[
       this.post.data.selftext ? 'o-paper--desc' : '',
