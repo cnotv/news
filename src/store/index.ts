@@ -18,5 +18,6 @@ export default new Vuex.Store({
   mutations,
   actions,
   getters,
-  modules: {}
+  modules: {},
+  plugins: [vuexLocal.plugin]
 });

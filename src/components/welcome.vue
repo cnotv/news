@@ -25,7 +25,10 @@
       + {{ sub }}
     </button>
 
-    <p>Follow this project on <a href="https://github.com/cnotv/news/" target="_blank"><b>Github</b></a></p>
+    <p>
+      Follow this project on
+      <a href="https://github.com/cnotv/news/" target="_blank"><b>Github</b></a>
+    </p>
   </section>
 </template>
 
