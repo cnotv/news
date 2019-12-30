@@ -40,11 +40,13 @@ export default {
   data() {
     return {
       suggestions: [
+        "news",
         "worldnews",
-        "technology",
-        "art",
-        "mechanical_gifs",
         "futurology",
+        "technology",
+        "educationalgifs",
+        "mechanical_gifs",
+        "dataisbeautiful",
         "redditdev"
       ]
     };
