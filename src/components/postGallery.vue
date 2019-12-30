@@ -33,18 +33,15 @@
         <i class="fa fa-arrow-up"></i>
         {{ this.post.data.ups }}
       </span>
-      <a
-        :href="'http://www.reddit.com' + this.post.data.permalink"
-        target="_blank"
-      >
+      <a :href="'http://www.reddit.com' + this.post.data.permalink" target="_blank">
         <i class="fa fa-comment"></i>
       </a>
-      <small>
-        {{ this.post.data.created_utc | date }}
-      </small>
-      <a href="#" class="c-btn-alt" v-on:click="addSub(post.data.subreddit)"
-        >/r/{{ this.post.data.subreddit }}
-      </a>
+      <small>{{ this.post.data.created_utc | date }}</small>
+      <a
+        href="#"
+        class="c-btn-alt"
+        v-on:click="addSub(post.data.subreddit)"
+      >/r/{{ this.post.data.subreddit }}</a>
     </footer>
   </article>
 </template>
@@ -56,11 +53,12 @@ export default {
   data() {
     return {
       style: {
-        minHeight:
-          (this.post.data.preview.images[0].source.height /
-            this.post.data.preview.images[0].source.width) *
-            30 +
-          "vw"
+        minHeight: !this.post.data.preview
+          ? 0
+          : (this.post.data.preview.images[0].source.height /
+              this.post.data.preview.images[0].source.width) *
+              30 +
+            "vw"
       }
     };
   }
