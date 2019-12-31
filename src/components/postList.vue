@@ -6,7 +6,7 @@
       </a>
     </header>
 
-    <small class="o-list__meta">      
+    <small class="o-list__meta">
       <span>{{ this.post.data.created_utc | date }}</span>
 
       <a :href="'//' + this.post.data.domain" target="_blank">{{
@@ -28,7 +28,7 @@
         target="_blank"
       >
         <i class="fa fa-comment"></i>
-        {{this.post.data.num_comments}}
+        {{ this.post.data.num_comments }}
       </a>
     </small>
     <hr />
@@ -45,10 +45,8 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters([
-      "getSearch",
-    ])
-  },
+    ...mapGetters(["getSearch"])
+  }
 };
 </script>
 <style scoped>

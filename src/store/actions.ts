@@ -19,11 +19,11 @@ export const commitPosts = ({ commit, state }) => {
   }
 };
 
-export const addSub = ({ commit, state }, sub) => {
+export const addSub = ({ commit }, sub) => {
   commit("ADD_SUB", sub);
 };
 
-export const removeSub = ({ commit, state }, sub) => {
+export const removeSub = ({ commit }, sub) => {
   commit("REMOVE_SUB", sub);
 };
 
@@ -38,7 +38,7 @@ export const changeSub = ({ commit, state }, sub) => {
   commitPosts({ commit, state });
 };
 
-export const changeLayout = ({ commit, state }, layout) => {
+export const changeLayout = ({ commit }, layout) => {
   commit("CURRENT_LAYOUT", layout);
 };
 
@@ -101,7 +101,7 @@ export const changeSearchGlobal = ({ commit, state }) => {
   changeSearch({ commit, state });
 };
 
-export const changeSearchOpen = ({ commit, state }, close) => {
+export const changeSearchOpen = ({ commit }, close) => {
   commit("SEARCHOPEN", close);
 };
 
@@ -115,4 +115,8 @@ export const changeSearchTime = ({ commit, state }, time = state.time) => {
   commit("SEARCHTIME", time);
   // update search after change
   changeSearch({ commit, state });
+};
+
+export const resetState = ({ commit }) => {
+  commit("RESET_STATE");
 };

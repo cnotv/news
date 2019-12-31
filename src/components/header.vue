@@ -54,7 +54,8 @@
         <span
           class="o-nav-h__item u-hidden--desktop"
           v-if="!(getSearch.open || openSettings) && getCurrentSub"
-        >{{ getCurrentSub }}</span>
+          >{{ getCurrentSub }}</span
+        >
 
         <span class="u-spacer--x"></span>
 
@@ -192,6 +193,7 @@ export default {
     resetSettings() {
       localStorage.clear();
       location.reload();
+      // this.$store.dispatch("resetState");
     },
     toggleSearchTopic() {
       this.toggleSearch();

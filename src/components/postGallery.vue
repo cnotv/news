@@ -33,15 +33,16 @@
         <i class="fa fa-arrow-up"></i>
         {{ this.post.data.ups }}
       </span>
-      <a :href="'http://www.reddit.com' + this.post.data.permalink" target="_blank">
+      <a
+        :href="'http://www.reddit.com' + this.post.data.permalink"
+        target="_blank"
+      >
         <i class="fa fa-comment"></i>
       </a>
       <small>{{ this.post.data.created_utc | date }}</small>
-      <a
-        href="#"
-        class="c-btn-alt"
-        v-on:click="addSub(post.data.subreddit)"
-      >/r/{{ this.post.data.subreddit }}</a>
+      <a href="#" class="c-btn-alt" v-on:click="addSub(post.data.subreddit)"
+        >/r/{{ this.post.data.subreddit }}</a
+      >
     </footer>
   </article>
 </template>

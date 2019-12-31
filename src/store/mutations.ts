@@ -42,7 +42,7 @@ export default {
       state.search.sub = !state.search.sub;
     }
   },
-  SEARCHGLOBAL: (state, close) => {
+  SEARCHGLOBAL: state => {
     state.search.global = !state.search.global;
   },
   SEARCHOPEN: (state, close) => {
@@ -57,5 +57,8 @@ export default {
   },
   QUERY: (state, query) => {
     state.query = query;
+  },
+  RESET_STATE: state => {
+    // state = state;
   }
 };

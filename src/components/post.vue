@@ -37,7 +37,12 @@
       v-bind:post="post"
       :key="post.data.id"
     />
-    <Subreddit v-else v-for="post in getPosts" v-bind:post="post" :key="post.data.id" />
+    <Subreddit
+      v-else
+      v-for="post in getPosts"
+      v-bind:post="post"
+      :key="post.data.id"
+    />
 
     <modal v-if="modalOpen" />
   </div>
