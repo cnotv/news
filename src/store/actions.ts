@@ -4,6 +4,7 @@ import debounce from "lodash.debounce";
 // unique api query after defining arguments (states)
 export const commitPosts = ({ commit, state }) => {
   if (state.query !== "") {
+    commit("LOADING", true);
     commit("POSTS", "");
     return new Promise((resolve, reject) => {
       api.fetchData(state.query).then(
@@ -12,7 +13,13 @@ export const commitPosts = ({ commit, state }) => {
           resolve(response);
         },
         response => {
+          commit("POSTS", {});
           reject(response);
+        }
+      )
+      .finally(
+        () => {
+          commit("LOADING", false);
         }
       );
     });

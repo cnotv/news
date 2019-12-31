@@ -9,3 +9,4 @@ export const getCurrentSub = state => state.currentSub;
 export const getCurrentOrder = state => state.currentOrder;
 export const getLayout = state => state.layout;
 export const getCurrentLayout = state => state.currentLayout;
+export const getLoading = state => state.loading;

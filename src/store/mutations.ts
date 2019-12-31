@@ -2,6 +2,9 @@ export default {
   POSTS: (state, posts) => {
     state.posts = posts;
   },
+  LOADING: (state, loading) => {
+    state.loading = loading;
+  },
   ADD_SUB: (state, newSub) => {
     let subs = state.subreddits;
     if (!subs.includes(newSub)) {
