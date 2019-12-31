@@ -47,8 +47,12 @@
       <search v-if="getSearch.open"></search>
 
       <div class="o-nav-h__right">
-        <a class="o-nav-h__action o-nav-h__burger" v-on:click="toggleMenu"
-          ><i class="fa fa-navicon o-nav-h__icon"></i
+        <a
+          class="o-nav-h__action o-nav-h__burger"
+          v-on:click="toggleMenu"
+          v-if="getSubreddits.length > 0"
+        >
+          <i class="fa fa-navicon o-nav-h__icon"></i
         ></a>
 
         <span
