@@ -3,7 +3,7 @@ export default {
   posts: null,
   subreddit: {},
   subreddits: [],
-  currentSub: "worldnews",
+  currentSub: "",
   limits: ["12", "24", "48", "96"],
   currentLimit: "24",
   currentOrder: "new",
