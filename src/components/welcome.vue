@@ -47,6 +47,12 @@ export default {
         "educationalgifs",
         "mechanical_gifs",
         "dataisbeautiful",
+        "selfhosted",
+        "cgnews",
+        "pcgaming",
+        "addons4kodi",
+        "webdev",
+        "programmerhumor",
         "redditdev"
       ]
     };
