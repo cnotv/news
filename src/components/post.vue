@@ -4,7 +4,7 @@
   </div>
 
   <div
-    class=""
+    class
     v-bind:class="[
       getSearch.sub && getCurrentLayout === 0 ? '' : '',
       getSearch.sub && getCurrentLayout === 1 ? 'c-row' : '',
@@ -37,12 +37,7 @@
       v-bind:post="post"
       :key="post.data.id"
     />
-    <Subreddit
-      v-else
-      v-for="post in getPosts"
-      v-bind:post="post"
-      :key="post.data.id"
-    />
+    <Subreddit v-else v-for="post in getPosts" v-bind:post="post" :key="post.data.id" />
 
     <modal v-if="modalOpen" />
   </div>
@@ -103,12 +98,27 @@ export default {
   },
   methods: {
     ...mapActions(["commitPosts"]),
+
     toggleModal(content) {
       this.modalOpen = !this.modalOpen;
     },
+
     _toggleNetworkStatus({ type }) {
       this.online = type === "online";
+    },
+
+    reload() {
+      if (window.scrollY === 0) {
+        this.$store.dispatch("commitPosts");
+      }
     }
+  },
+
+  created: function() {
+    window.addEventListener("touchend", this.reload);
+  },
+  destroyed: function() {
+    window.removeEventListener("touchend", this.reload);
   },
 
   mounted() {
