@@ -3,27 +3,50 @@ import debounce from "lodash.debounce";
 
 // unique api query after defining arguments (states)
 export const commitPosts = ({ commit, state }) => {
-  if (state.query !== "") {
-    commit("LOADING", true);
-    commit("POSTS", "");
-    return new Promise((resolve, reject) => {
-      api.fetchData(state.query).then(
-        response => {
-          commit("POSTS", response);
-          resolve(response);
-        },
-        response => {
-          commit("POSTS", {});
-          reject(response);
-        }
-      )
-      .finally(
-        () => {
-          commit("LOADING", false);
-        }
-      );
-    });
+  if (state.query === "") {
+    return;
   }
+
+  commit("LOADING_STATUS", true);
+  commit("POSTS", "");
+
+  api
+    .fetchData(state.query)
+    .then(
+      response => {
+        const { posts, after } = response;
+        commit("POSTS", posts);
+        commit("SET_AFTER", after);
+      },
+      () => commit("POSTS", {})
+    )
+    .finally(() => {
+      commit("LOADING_STATUS", false);
+    });
+};
+
+export const loadMore = ({ commit, state }) => {
+  if (!state.after) {
+    return;
+  }
+
+  const query = `${state.currentSub}/${state.currentOrder}.json?limit=${state.currentLimit}&after=${state.after}`;
+  commit("LOADING_STATUS", true);
+  commit("QUERY", query);
+
+  api
+    .fetchData(state.query)
+    .then(
+      response => {
+        const { posts, after } = response;
+        commit("LOAD_MORE", posts);
+        commit("SET_AFTER", after);
+      },
+      () => commit("POSTS", {})
+    )
+    .finally(() => {
+      commit("LOADING_STATUS", false);
+    });
 };
 
 export const addSub = ({ commit }, sub) => {

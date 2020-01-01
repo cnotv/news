@@ -2,8 +2,14 @@ export default {
   POSTS: (state, posts) => {
     state.posts = posts;
   },
-  LOADING: (state, loading) => {
+  LOADING_STATUS: (state, loading) => {
     state.loading = loading;
+  },
+  LOAD_MORE: (state, posts) => {
+    state.posts = [...state.posts, ...posts];
+  },
+  SET_AFTER: (state, id) => {
+    state.after = id;
   },
   ADD_SUB: (state, newSub) => {
     let subs = state.subreddits;
