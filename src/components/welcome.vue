@@ -42,6 +42,7 @@ export default {
       suggestions: [
         "news",
         "worldnews",
+        "hackernews",
         "futurology",
         "technology",
         "educationalgifs",
