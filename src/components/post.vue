@@ -4,6 +4,7 @@
   </div>
 
   <div
+    ref="posts"
     class
     v-bind:class="[
       getSearch.sub && getCurrentLayout === 0 ? '' : '',
@@ -99,7 +100,13 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["getQuery", "getPosts", "getCurrentLayout", "getSearch"])
+    ...mapGetters([
+      "getQuery",
+      "getPosts",
+      "getCurrentLayout",
+      "getSearch",
+      "getLoading"
+    ])
   },
   methods: {
     ...mapActions(["commitPosts"]),
@@ -116,14 +123,31 @@ export default {
       if (window.scrollY === 0) {
         this.$store.dispatch("commitPosts");
       }
+    },
+
+    loadMore() {
+      const el = this.$refs.posts;
+
+      if (!el) {
+        return;
+      }
+
+      const threshold = 850;
+      const offset = window.scrollY - el.offsetHeight + threshold;
+      const trigger = offset > 0;
+      if (trigger && !this.$store.state.loading) {
+        this.$store.dispatch("loadMore");
+      }
     }
   },
 
   created: function() {
     window.addEventListener("touchend", this.reload);
+    window.addEventListener("scroll", this.loadMore);
   },
   destroyed: function() {
     window.removeEventListener("touchend", this.reload);
+    window.addEventListener("scroll", this.loadMore);
   },
 
   mounted() {
