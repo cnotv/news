@@ -8,4 +8,15 @@ module.exports = {
       },
     },
   },
+  pwa: {
+    name: 'cnotv-news',
+    themeColor: '#333333',
+    msTileColor: '#333333',
+    appleMobileWebAppCapable: 'yes',
+    appleMobileWebAppStatusBarStyle: 'black',
+    manifestOptions: {
+      display: 'portrait',
+      background_color: '#333333'
+    },
+  }
 }
