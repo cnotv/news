@@ -1,5 +1,5 @@
 import Vue from "vue";
-import Vuex from "vuex";
+import Vuex, { Plugin } from "vuex";
 
 import * as actions from "./actions";
 import * as getters from "./getters";
@@ -14,10 +14,10 @@ const vuexLocal = new VuexPersistence({
 });
 
 export default new Vuex.Store({
-  state: state.default,
+  state: state.default as State,
   mutations,
   actions,
   getters,
   modules: {},
-  plugins: [vuexLocal.plugin]
+  plugins: [vuexLocal.plugin] as Plugin<State>[]
 });

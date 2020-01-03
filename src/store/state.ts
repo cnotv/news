@@ -1,9 +1,8 @@
 export default {
   strict: process.env.NODE_ENV !== "production",
-  posts: null,
+  posts: [],
   after: "",
   loading: false,
-  subreddit: {},
   subreddits: [],
   currentSub: "",
   limits: ["12", "24", "48", "96"],
