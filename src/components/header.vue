@@ -25,13 +25,13 @@
             <i class="fa fa-times-circle" aria-hidden="true"></i>
             {{ subreddit }}
           </a>
+          
           <a
             class="o-nav-h__action"
             v-if="!openSettings"
             v-bind:class="{ 'is-active': subreddit == getCurrentSub }"
-            v-on:click="changeSub(subreddit)"
-            >{{ subreddit }}</a
-          >
+            v-on:click="navigate(subreddit)"
+            >{{ subreddit }}</a>
         </li>
       </ul>
 
@@ -63,13 +63,17 @@
 
         <span class="u-spacer--x"></span>
 
+        <router-link
+          class="o-nav-h__action"
+          v-if="!getSearch.open && openSettings"
+          :to="{ name: 'welcome'}"
+        >Suggest</router-link>
+
         <button
           class="o-nav-h__action"
           v-on:click="resetSettings"
           v-if="!getSearch.open && openSettings"
-        >
-          Reset
-        </button>
+        >Reset</button>
 
         <button
           class="o-nav-h__action"
@@ -202,6 +206,12 @@ export default {
     toggleSearchTopic() {
       this.toggleSearch();
       this.$store.dispatch("changeSearchSub", false);
+    },
+    navigate(menu) {
+      this.changeSub(menu)
+      if (this.$route.name !== "home") {
+        this.$router.push({ name: "home" });
+      }
     }
   }
 };
