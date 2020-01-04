@@ -56,7 +56,7 @@ import Gallery from "@/components/postGallery";
 import List from "@/components/postList";
 import Paper from "@/components/postPaper";
 import Subreddit from "@/components/postSubreddit";
-import { getSubreddits } from '../store/getters';
+import { getSubreddits } from "@/store/getters";
 
 // Distribute to components using global mixin
 Vue.mixin({
@@ -98,7 +98,7 @@ export default {
   computed: {
     ...mapGetters([
       "getCurrentLayout",
-      "getLoading",
+      "isLoading",
       "getPosts",
       "getQuery",
       "getSearch",

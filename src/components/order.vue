@@ -1,6 +1,6 @@
 <template>
   <select class="c-input__select c-order" v-model="select">
-    <option v-for="order in getOrder" v-bind:key="order">{{ order }}</option>
+    <option v-for="sort in getSorting" v-bind:key="sort">{{ sort }}</option>
   </select>
 </template>
 
@@ -9,10 +9,10 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters(["getCurrentOrder", "getOrder"]),
+    ...mapGetters(["getCurrentSort", "getSorting"]),
     select: {
       get() {
-        return this.$store.state.currentOrder;
+        return this.$store.state.currentSort;
       },
       set(value) {
         this.$store.dispatch("changeOrder", value);

@@ -123,7 +123,7 @@
         <span class="o-nav-sub__label">Layout:</span>
         <button
           class="o-nav-sub__action"
-          v-for="(layout, index) in getLayout"
+          v-for="(layout, index) in getLayouts"
           v-bind:key="index"
           v-on:click="changeLayout(index)"
           v-bind:class="{ 'is-active': index === getCurrentLayout }"
@@ -169,7 +169,7 @@ export default {
       "getCurrentSub",
       "getCurrentLimit",
       "getSearch",
-      "getLayout",
+      "getLayouts",
       "getCurrentLayout"
     ])
   },

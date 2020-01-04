@@ -1,12 +1,12 @@
 export default {
-  POSTS: (state: State, posts: any[]) => {
+  LOAD_POSTS: (state: State, posts: any[]) => {
     state.posts = posts;
-  },
-  LOADING_STATUS: (state: State, loading: boolean) => {
-    state.loading = loading;
   },
   LOAD_MORE: (state: State, posts: any[]) => {
     state.posts = [...state.posts, ...posts];
+  },
+  SET_LOADING: (state: State, loading: boolean) => {
+    state.loading = loading;
   },
   SET_AFTER: (state: State, id) => {
     state.after = id;
@@ -28,22 +28,19 @@ export default {
     state.search.global = false;
     state.currentSub = currentSub;
   },
-  CURRENT_ORDER: (state: State, currentOrder: string) => {
-    state.currentOrder = currentOrder;
+  CURRENT_ORDER: (state: State, currentSort: string) => {
+    state.currentSort = currentSort;
   },
   CURRENT_LAYOUT: (state: State, currentLayout: number) => {
     state.currentLayout = currentLayout;
   },
-  ORDER: (state: State, order: string[]) => {
-    state.order = order;
-  },
   CURRENT_LIMIT: (state: State, currentLimit: string) => {
     state.currentLimit = currentLimit;
   },
-  SEARCH: (state: State, search: string) => {
+  SET_SEARCH: (state: State, search: string) => {
     state.search.string = search;
   },
-  SEARCHSUB: (state: State, close: boolean) => {
+  SEARCH_SUB: (state: State, close: boolean) => {
     state.search.global = true;
     if (close === false || close === true) {
       state.search.sub = close;
@@ -51,20 +48,20 @@ export default {
       state.search.sub = !state.search.sub;
     }
   },
-  SEARCHGLOBAL: (state: State) => {
+  SEARCH_GLOBAL: (state: State) => {
     state.search.global = !state.search.global;
   },
-  SEARCHOPEN: (state: State, close: boolean) => {
+  SEARCH_OPEN: (state: State, close: boolean) => {
     if (close) {
       state.search.open = false;
     } else {
       state.search.open = !state.search.open;
     }
   },
-  SEARCHTIME: (state: State, time: string) => {
+  SEARCH_TIME: (state: State, time: string) => {
     state.search.timecurrent = time;
   },
-  QUERY: (state: State, query: string) => {
+  SET_QUERY: (state: State, query: string) => {
     state.query = query;
   },
   RESET_STATE: (state: State) => {

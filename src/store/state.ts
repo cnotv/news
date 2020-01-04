@@ -7,8 +7,8 @@ export default {
   currentSub: "",
   limits: ["12", "24", "48", "96"],
   currentLimit: "24",
-  currentOrder: "hot",
-  order: ["hot", "new", "rising", "controversial", "top", "gilded"],
+  currentSort: "hot",
+  sorting: ["hot", "new", "rising", "controversial", "top", "gilded"],
   query: "",
   search: {
     string: "",
@@ -18,6 +18,6 @@ export default {
     timecurrent: "",
     global: false
   },
-  layout: ["list", "th", "newspaper-o", "picture-o"],
+  layouts: ["list", "th", "newspaper-o", "picture-o"],
   currentLayout: 0
 };

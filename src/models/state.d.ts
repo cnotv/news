@@ -7,11 +7,11 @@ interface State {
   currentSub: string;
   limits: string[];
   currentLimit: string;
-  currentOrder: string;
-  order: string[];
+  currentSort: string;
+  sorting: string[];
   query: string;
   search: StateSearch;
-  layout: string[];
+  layouts: string[];
   currentLayout: number;
 }
 

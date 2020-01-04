@@ -7,21 +7,21 @@ export const commitPosts = ({ commit, state }) => {
     return;
   }
 
-  commit("LOADING_STATUS", true);
-  commit("POSTS", "");
+  commit("SET_LOADING", true);
+  commit("LOAD_POSTS", "");
 
   api
     .fetchData(state.query)
     .then(
       response => {
         const { posts, after } = response;
-        commit("POSTS", posts);
+        commit("LOAD_POSTS", posts);
         commit("SET_AFTER", after);
       },
-      () => commit("POSTS", {})
+      () => commit("LOAD_POSTS", {})
     )
     .finally(() => {
-      commit("LOADING_STATUS", false);
+      commit("SET_LOADING", false);
     });
 };
 
@@ -30,9 +30,9 @@ export const loadMore = ({ commit, state }) => {
     return;
   }
 
-  const query = `${state.currentSub}/${state.currentOrder}.json?limit=${state.currentLimit}&after=${state.after}`;
-  commit("LOADING_STATUS", true);
-  commit("QUERY", query);
+  const query = `${state.currentSub}/${state.currentSort}.json?limit=${state.currentLimit}&after=${state.after}`;
+  commit("SET_LOADING", true);
+  commit("SET_QUERY", query);
 
   api
     .fetchData(state.query)
@@ -42,10 +42,10 @@ export const loadMore = ({ commit, state }) => {
         commit("LOAD_MORE", posts);
         commit("SET_AFTER", after);
       },
-      () => commit("POSTS", {})
+      () => commit("LOAD_POSTS", {})
     )
     .finally(() => {
-      commit("LOADING_STATUS", false);
+      commit("SET_LOADING", false);
     });
 };
 
@@ -62,8 +62,8 @@ export const changeSub = ({ commit, state }, sub) => {
 
   // update query before api request
   commit(
-    "QUERY",
-    `${state.currentSub}/${state.currentOrder}.json?limit=${state.currentLimit}`
+    "SET_QUERY",
+    `${state.currentSub}/${state.currentSort}.json?limit=${state.currentLimit}`
   );
   commitPosts({ commit, state });
 };
@@ -78,8 +78,8 @@ export const changeLimit = ({ commit, state }, limit) => {
   // switch between search query or subreddit feed if no input
   if (state.search.string === "") {
     commit(
-      "QUERY",
-      `${state.currentSub}/${state.currentOrder}.json?limit=${state.currentLimit}`
+      "SET_QUERY",
+      `${state.currentSub}/${state.currentSort}.json?limit=${state.currentLimit}`
     );
     commitPosts({ commit, state });
   } else {
@@ -92,8 +92,8 @@ export const changeLimit = ({ commit, state }, limit) => {
 export const changeOrder = ({ commit, state }, order) => {
   commit("CURRENT_ORDER", order);
   commit(
-    "QUERY",
-    `${state.currentSub}/${state.currentOrder}.json?limit=${state.currentLimit}`
+    "SET_QUERY",
+    `${state.currentSub}/${state.currentSort}.json?limit=${state.currentLimit}`
   );
   commitPosts({ commit, state });
 };
@@ -109,14 +109,14 @@ export const changeSearch = debounce(
 
     // if no input switch between search query or subreddit feed
     if (search.length > 0) {
-      commit("SEARCH", search);
+      commit("SET_SEARCH", search);
       commit(
-        "QUERY",
+        "SET_QUERY",
         `${state.currentSub}/search.json?limit=${state.currentLimit}&t=${state.search.timecurrent}&q=${state.search.string}${searchGlobal}`
       );
     } else {
-      commit("SEARCH", "");
-      commit("QUERY", `${state.currentSub}/${state.currentOrder}.json`);
+      commit("SET_SEARCH", "");
+      commit("SET_QUERY", `${state.currentSub}/${state.currentSort}.json`);
     }
 
     // submit search request with small delay
@@ -126,23 +126,23 @@ export const changeSearch = debounce(
 );
 
 export const changeSearchGlobal = ({ commit, state }) => {
-  commit("SEARCHGLOBAL");
+  commit("SEARCH_GLOBAL");
   // update search after change
   changeSearch({ commit, state });
 };
 
 export const changeSearchOpen = ({ commit }, close) => {
-  commit("SEARCHOPEN", close);
+  commit("SEARCH_OPEN", close);
 };
 
 export const changeSearchSub = ({ commit, state }, close) => {
-  commit("SEARCHSUB", close);
+  commit("SEARCH_SUB", close);
   // update search after change
   changeSearch({ commit, state });
 };
 
 export const changeSearchTime = ({ commit, state }, time = state.time) => {
-  commit("SEARCHTIME", time);
+  commit("SEARCH_TIME", time);
   // update search after change
   changeSearch({ commit, state });
 };
