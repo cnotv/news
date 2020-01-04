@@ -7,7 +7,7 @@ export default {
   currentSub: "",
   limits: ["12", "24", "48", "96"],
   currentLimit: "24",
-  currentOrder: "new",
+  currentOrder: "hot",
   order: ["hot", "new", "rising", "controversial", "top", "gilded"],
   query: "",
   search: {
