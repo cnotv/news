@@ -18,7 +18,6 @@ interface State {
 interface StateSearch {
   string: string;
   open: boolean;
-  sub: boolean;
   time: string[];
   currentTime: string;
   global: boolean;

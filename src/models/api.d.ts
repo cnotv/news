@@ -1,4 +1,4 @@
 interface RedditResponse {
-  posts: {};
+  posts: RedditPost,
   after: string;
 }
