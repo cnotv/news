@@ -9,11 +9,9 @@ News aggregator based on Reddit API, Vue.js and PWA
 
 - [ ] Posts options per subredddit
 - [ ] Slide to next menu with transition
-- [ ] Add pull to refresh transitions
 - [ ] Menu transition
-- [ ] Store posts in local storage
 - [ ] Service worker to inform of new posts with refresh button
-- [ ] Create plugins out of scrolling behavior
+- [ ] Create plugins out of swipe behavior
 - [ ] Add Travis or Circle.ci configuration for CI pipes
 - [ ] Add models and types for all the missing cases
 - [ ] Add TSLint configuration for ESLint
@@ -24,6 +22,7 @@ News aggregator based on Reddit API, Vue.js and PWA
 - [ ] Add factories
 - [ ] Add e2e tests
 
+- [x] Store posts in local storage
 - [x] Add pull to refresh
 - [x] Mobile header with current menu
 - [x] Add comments number
@@ -33,6 +32,7 @@ News aggregator based on Reddit API, Vue.js and PWA
 - [x] Integrate Sentry
 - [x] Integrate Hotjar
 - [x] Add PWA files from the vue.config
+- [x] Add pull to refresh transitions
 
 
 ## Project setup

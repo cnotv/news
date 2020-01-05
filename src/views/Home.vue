@@ -89,6 +89,7 @@ export default {
   components: { Modal, Card, Gallery, List, Subreddit, Paper },
   data() {
     return {
+      refresh: false,
       modalOpen: false,
       statusOnline: true,
       noStorage: window.localStorage.getItem("vuex") === null
@@ -116,8 +117,43 @@ export default {
       this.online = type === "online";
     },
 
-    reload() {
-      if (window.scrollY === 0) {
+    /**
+     * Handle touch events for mobile:
+     * - Top offset for refreshing
+     * - Side swipes for changing subreddit
+     */
+    _handleTouchStart($start) {
+      const threshold = 150;
+      const X1 = $start.touches[0].screenX;
+      const Y1 = $start.touches[0].screenY;
+      const move = ($move) => {
+        const X2 = $move.touches[0].screenX;
+        const Y2 = $move.touches[0].screenY;
+        const el = document.querySelector('body')
+
+        const offsetY = Y2 - Y1;
+        if (window.scrollY <= 0) {
+          if (offsetY < threshold) {
+            el.style.transform = `translateY(${offsetY}px)`;
+          }
+          if (offsetY > threshold/1.5) {
+            this.refresh = true;
+          } else {
+            this.refresh = false;
+          }
+        } else {
+          el.style.transform = `translateY(0)`;
+          this.refresh = false;
+        }
+      }
+
+      window.addEventListener("touchmove", move);
+    },
+
+    _handleTouchEnd() {
+      const el = document.querySelector('body')
+      el.style.transform = `translateY(0)`;
+      if (this.refresh) {
         this.$store.dispatch("commitPosts");
       }
     },
@@ -130,6 +166,7 @@ export default {
       }
 
       const threshold = 850;
+      // TODO: Replace with "el" after setting CSS grid layout
       const offset = window.scrollY - el.offsetHeight + threshold;
       const trigger = offset > 0;
       if (trigger && !this.$store.state.loading) {
@@ -139,11 +176,15 @@ export default {
   },
 
   created: function() {
-    window.addEventListener("touchend", this.reload);
+    window.addEventListener("touchend", this._handleTouchEnd);
+    window.addEventListener("touchstart", this._handleTouchStart);
+    // TODO: Replace with "el" after setting CSS grid layout
     window.addEventListener("scroll", this.loadMore);
   },
   destroyed: function() {
-    window.removeEventListener("touchend", this.reload);
+    window.removeEventListener("touchend", this._handleTouchEnd);
+    window.removeEventListener("touchstart", this._handleTouchStart);
+    // TODO: Replace with "el" after setting CSS grid layout
     window.addEventListener("scroll", this.loadMore);
   },
 
