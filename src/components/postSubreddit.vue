@@ -6,13 +6,11 @@
   </section>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+
+export default Vue.extend({
   name: "Subreddit",
   props: ["post"],
-  data() {
-    return {};
-  }
-};
+});
 </script>
-<style scoped></style>

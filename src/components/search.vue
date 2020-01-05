@@ -16,38 +16,40 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue";
 import { mapGetters, mapActions } from "vuex";
 
-export default {
+export default Vue.extend({
   name: "search",
   methods: {
     ...mapActions(["changeSearch", "changeSearchSub", "changeSearchGlobal"])
   },
   mounted() {
-    this.$refs.search.focus();
+    (this.$refs.search as HTMLElement).focus();
   },
   computed: {
     ...mapGetters(["getSearch"]),
     search: {
-      get() {
+      get(): string {
         return this.$store.state.search.string;
       },
-      set(value) {
+      set(value: string): void {
         this.$store.dispatch("changeSearch", value);
       }
     },
     searchGlobal: {
-      get() {
+      get(): string {
         return this.$store.state.search.global;
       },
-      set(value) {
+      set(value: string): void {
         this.$store.dispatch("changeSearchGlobal");
       }
     }
   }
-};
+});
 </script>
+
 <style scoped>
 .c-filter {
   flex-shrink: 0;

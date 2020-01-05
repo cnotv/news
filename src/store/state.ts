@@ -15,7 +15,7 @@ export default {
     open: false,
     sub: true,
     time: ["year", "month", "week", "day", "hour"],
-    timecurrent: "",
+    currentTime: "",
     global: false
   },
   layouts: ["list", "th", "newspaper-o", "picture-o"],

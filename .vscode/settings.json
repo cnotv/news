@@ -1,5 +1,8 @@
 {
   "cSpell.words": [
+    "reddit",
+    "subreddit",
     "subreddits"
-  ]
+  ],
+  "tslint.typeCheck": true, 
 }

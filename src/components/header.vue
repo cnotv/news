@@ -104,7 +104,7 @@
         <button
           class="o-nav-sub__action"
           v-on:click="changeSearchTime('')"
-          v-bind:class="{ 'is-active': '' === getSearch.timecurrent }"
+          v-bind:class="{ 'is-active': '' === getSearch.currentTime }"
         >
           None
         </button>
@@ -113,7 +113,7 @@
           v-for="time in getSearch.time"
           v-bind:key="time"
           v-on:click="changeSearchTime(time)"
-          v-bind:class="{ 'is-active': time === getSearch.timecurrent }"
+          v-bind:class="{ 'is-active': time === getSearch.currentTime }"
         >
           {{ time }}
         </button>
@@ -148,12 +148,13 @@
   </header>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue";
 import { mapGetters, mapActions } from "vuex";
 import newsOrder from "@/components/order";
 import search from "@/components/search";
 
-export default {
+export default Vue.extend({
   data() {
     return {
       openMenu: false,
@@ -207,12 +208,12 @@ export default {
       this.toggleSearch();
       this.$store.dispatch("changeSearchSub", false);
     },
-    navigate(menu) {
-      this.changeSub(menu)
+    navigate(menu: string) {
+      this.changeSub(menu);
       if (this.$route.name !== "home") {
         this.$router.push({ name: "home" });
       }
     }
   }
-};
+});
 </script>

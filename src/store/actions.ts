@@ -1,4 +1,4 @@
-import api from "./../api";
+import api from "@/helpers/api";
 import debounce from "lodash.debounce";
 
 // unique api query after defining arguments (states)
@@ -49,15 +49,15 @@ export const loadMore = ({ commit, state }) => {
     });
 };
 
-export const addSub = ({ commit }, sub) => {
+export const addSub = ({ commit }, sub: string) => {
   commit("ADD_SUB", sub);
 };
 
-export const removeSub = ({ commit }, sub) => {
+export const removeSub = ({ commit }, sub: string) => {
   commit("REMOVE_SUB", sub);
 };
 
-export const changeSub = ({ commit, state }, sub) => {
+export const changeSub = ({ commit, state }, sub: string) => {
   commit("CURRENT_SUB", sub);
 
   // update query before api request
@@ -68,11 +68,11 @@ export const changeSub = ({ commit, state }, sub) => {
   commitPosts({ commit, state });
 };
 
-export const changeLayout = ({ commit }, layout) => {
+export const changeLayout = ({ commit }, layout: number) => {
   commit("CURRENT_LAYOUT", layout);
 };
 
-export const changeLimit = ({ commit, state }, limit) => {
+export const changeLimit = ({ commit, state }, limit: string) => {
   commit("CURRENT_LIMIT", limit);
 
   // switch between search query or subreddit feed if no input
@@ -89,7 +89,7 @@ export const changeLimit = ({ commit, state }, limit) => {
 };
 
 // change subreddit order
-export const changeOrder = ({ commit, state }, order) => {
+export const changeOrder = ({ commit, state }, order: string) => {
   commit("CURRENT_ORDER", order);
   commit(
     "SET_QUERY",
@@ -99,7 +99,7 @@ export const changeOrder = ({ commit, state }, order) => {
 };
 
 export const changeSearch = debounce(
-  ({ commit, state }, search = state.search.string) => {
+  ({ commit, state }, search: string = state.search.string) => {
     let searchGlobal = "";
 
     // if filter search to subreddit
@@ -112,7 +112,7 @@ export const changeSearch = debounce(
       commit("SET_SEARCH", search);
       commit(
         "SET_QUERY",
-        `${state.currentSub}/search.json?limit=${state.currentLimit}&t=${state.search.timecurrent}&q=${state.search.string}${searchGlobal}`
+        `${state.currentSub}/search.json?limit=${state.currentLimit}&t=${state.search.currentTime}&q=${state.search.string}${searchGlobal}`
       );
     } else {
       commit("SET_SEARCH", "");
@@ -131,11 +131,11 @@ export const changeSearchGlobal = ({ commit, state }) => {
   changeSearch({ commit, state });
 };
 
-export const changeSearchOpen = ({ commit }, close) => {
+export const changeSearchOpen = ({ commit }, close: boolean) => {
   commit("SEARCH_OPEN", close);
 };
 
-export const changeSearchSub = ({ commit, state }, close) => {
+export const changeSearchSub = ({ commit, state }, close: boolean) => {
   commit("SEARCH_SUB", close);
   // update search after change
   changeSearch({ commit, state });

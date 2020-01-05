@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   baseUrl: `//www.reddit.com/r/`,
 
-  fetchData(query): Promise<RedditResponse> {
+  async fetchData(query: string): Promise<RedditResponse> {
     axios.defaults.baseURL = this.baseUrl;
 
     // FIXME: Convert query into HTTP Parameters options

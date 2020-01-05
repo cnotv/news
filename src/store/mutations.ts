@@ -8,7 +8,7 @@ export default {
   SET_LOADING: (state: State, loading: boolean) => {
     state.loading = loading;
   },
-  SET_AFTER: (state: State, id) => {
+  SET_AFTER: (state: State, id: string) => {
     state.after = id;
   },
   ADD_SUB: (state: State, newSub: string) => {
@@ -59,7 +59,7 @@ export default {
     }
   },
   SEARCH_TIME: (state: State, time: string) => {
-    state.search.timecurrent = time;
+    state.search.currentTime = time;
   },
   SET_QUERY: (state: State, query: string) => {
     state.query = query;

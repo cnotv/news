@@ -14,7 +14,6 @@ News aggregator based on Reddit API, Vue.js and PWA
 - [ ] Create plugins out of swipe behavior
 - [ ] Add Travis or Circle.ci configuration for CI pipes
 - [ ] Add models and types for all the missing cases
-- [ ] Add TSLint configuration for ESLint
 - [ ] Complete unit testing
 - [ ] Add push notifications for new posts
 - [ ] Add dark mode using CSS variables and or theme class
@@ -33,6 +32,7 @@ News aggregator based on Reddit API, Vue.js and PWA
 - [x] Integrate Hotjar
 - [x] Add PWA files from the vue.config
 - [x] Add pull to refresh transitions
+- [x] Convert code to typescript compliant
 
 
 ## Project setup

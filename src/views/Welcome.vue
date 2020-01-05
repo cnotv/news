@@ -3,10 +3,10 @@
     <div class="c-container-full">
       <section class="c-container-s">
         <header>
-          <hgroup>
-            <img class="logo" src="./../assets/logo.svg" alt="cnotv news" />
-            <h1 class="title">cnotv news</h1>
-          </hgroup>
+          <div class="welcome__header">
+            <img class="c-logo" src="./../assets/logo.svg" alt="cnotv news" />
+            <h1 class="c-h1">cnotv news</h1>
+          </div>
           <h5>Welcome! Here you can easily access to multiple format of news.</h5>
         </header>
 
@@ -29,7 +29,11 @@
 
         <p>
           Follow this project on
-          <a href="https://github.com/cnotv/news/" target="_blank"><b>Github</b></a>
+          <a
+            rel="noopener noreferrer"
+            href="https://github.com/cnotv/news/"
+            target="_blank"
+          ><b>Github</b></a>
         </p>
       </section>
     </div>
@@ -37,9 +41,10 @@
 </template>
 
 <script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
 import { mapActions } from "vuex";
 
-export default {
+@Component({
   name: "Welcome",
   data() {
     return {
@@ -65,25 +70,32 @@ export default {
   methods: {
     ...mapActions(["changeSearchOpen"])
   }
-};
+})
+export default class Welcome extends Vue {}
 </script>
 
 <style lang="scss" scoped>
 $mobile: 560px;
 
-hgroup {
-  display: flex;
-  @media (max-width: $mobile) {
-    height: 100px;
-    margin-bottom: 1.5rem;
+.welcome {
+  &__header {
+    display: flex;
+    @media (max-width: $mobile) {
+      height: 100px;
+      margin-bottom: 1.5rem;
+    }
   }
 }
-.logo {
+
+// TODO: Create component class
+.c-logo {
   @media (max-width: $mobile) {
     width: 100px;
   }
 }
-.title {
+
+// TODO: Create component class
+.c-h1 {
   font-size: 6rem;
   line-height: 1;
   font-weight: 700;
@@ -92,7 +104,8 @@ hgroup {
     font-size: 3rem;
   }
 }
-button {
+
+.c-btn-alt {
   margin: 0 1rem 1rem 0;
 }
 </style>

@@ -4,17 +4,18 @@
   </select>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue";
 import { mapGetters, mapActions } from "vuex";
 
-export default {
+export default Vue.extend({
   computed: {
     ...mapGetters(["getCurrentSort", "getSorting"]),
     select: {
-      get() {
+      get(): string {
         return this.$store.state.currentSort;
       },
-      set(value) {
+      set(value: string): void {
         this.$store.dispatch("changeOrder", value);
       }
     }
@@ -22,7 +23,7 @@ export default {
   methods: {
     ...mapActions(["changeOrder"])
   }
-};
+});
 </script>
 
 <style>

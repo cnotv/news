@@ -20,6 +20,6 @@ interface StateSearch {
   open: boolean;
   sub: boolean;
   time: string[];
-  timecurrent: string;
+  currentTime: string;
   global: boolean;
 }

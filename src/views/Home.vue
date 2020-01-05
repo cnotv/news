@@ -47,7 +47,7 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
 import Vue from "vue";
 import { mapGetters, mapActions } from "vuex";
 import Modal from "@/components/modal";
@@ -58,34 +58,8 @@ import Paper from "@/components/postPaper";
 import Subreddit from "@/components/postSubreddit";
 import { getSubreddits } from "@/store/getters";
 
-// Distribute to components using global mixin
-Vue.mixin({
-  methods: {
-    ...mapActions(["addSub"])
-  },
-  filters: {
-    truncate: (string, value) => {
-      if (!value) return "";
-      value = value.toString();
-      let stringNew = string.toString();
-      stringNew = stringNew.substring(0, value);
-      if (string.length > value) {
-        stringNew += "...";
-      }
-      return stringNew;
-    },
-    date: value => {
-      let newDate = new Date(value * 1000);
-      return newDate.toLocaleDateString("en-GB");
-    },
-    embed: url => {
-      return url.replace("watch?v=", "embed/");
-    }
-  }
-});
-
-export default {
-  name: "Home",
+export default Vue.extend({
+  name: "home",
   components: { Modal, Card, Gallery, List, Subreddit, Paper },
   data() {
     return {
@@ -109,12 +83,45 @@ export default {
   methods: {
     ...mapActions(["commitPosts"]),
 
-    toggleModal(content) {
+    toggleModal(): void {
       this.modalOpen = !this.modalOpen;
     },
 
-    _toggleNetworkStatus({ type }) {
-      this.online = type === "online";
+    _toggleNetworkStatus({ type }): void {
+      this.statusOnline = type === "online";
+    },
+
+    /**
+     * Check if a refresh is required
+     */
+    _refreshCheck(y1: number, y2: number, el: HTMLElement): void {
+      const threshold = 150;
+      const offsetY = y2 - y1;
+      if (window.scrollY <= 0) {
+        if (offsetY < threshold) {
+          el.style.transform = `translateY(${offsetY}px)`;
+        }
+        if (offsetY > threshold / 1.5) {
+          this.refresh = true;
+        } else {
+          this.refresh = false;
+        }
+      } else {
+        el.style.transform = `translateY(0)`;
+        this.refresh = false;
+      }
+    },
+
+    /**
+     * Refresh if active.
+     * Delete style alteration always.
+     */
+    _refreshTrigger(): void {
+      const el = document.querySelector('body')
+      el!.style.transform = `translateY(0)`;
+      if (this.refresh) {
+        this.$store.dispatch("commitPosts");
+      }
     },
 
     /**
@@ -122,44 +129,60 @@ export default {
      * - Top offset for refreshing
      * - Side swipes for changing subreddit
      */
-    _handleTouchStart($start) {
-      const threshold = 150;
+    _handleTouchStart($start: TouchEvent): void {
       const X1 = $start.touches[0].screenX;
       const Y1 = $start.touches[0].screenY;
-      const move = ($move) => {
+
+      const move = ($move: TouchEvent): void => {
         const X2 = $move.touches[0].screenX;
         const Y2 = $move.touches[0].screenY;
         const el = document.querySelector('body')
-
-        const offsetY = Y2 - Y1;
-        if (window.scrollY <= 0) {
-          if (offsetY < threshold) {
-            el.style.transform = `translateY(${offsetY}px)`;
-          }
-          if (offsetY > threshold/1.5) {
-            this.refresh = true;
-          } else {
-            this.refresh = false;
-          }
-        } else {
-          el.style.transform = `translateY(0)`;
-          this.refresh = false;
-        }
-      }
+        this._refreshCheck(Y1, Y2, el!);
+      };
 
       window.addEventListener("touchmove", move);
     },
 
-    _handleTouchEnd() {
-      const el = document.querySelector('body')
-      el.style.transform = `translateY(0)`;
-      if (this.refresh) {
-        this.$store.dispatch("commitPosts");
+    _handleTouchEnd(): void {
+      this._refreshTrigger();
+    },
+
+    /**
+     * Online check and local storage save
+     */
+    _handleOffline(): void {
+      const noStorage = window.localStorage.getItem("vuex") === null;
+
+      // not online
+      if (!window.navigator) {
+        this.statusOnline = false;
+        return;
+      }
+
+      // online
+      this.statusOnline = Boolean(window.navigator.onLine);
+
+      if (!this.statusOnline) {
+        window.addEventListener("offline", this._toggleNetworkStatus);
+        window.addEventListener("online", this._toggleNetworkStatus);
+
+        if (noStorage) {
+          this.$store.dispatch("commitPosts");
+        } else {
+          // offline mode
+          this.$store.commit(
+            "commitPosts",
+            JSON.parse(window.localStorage.getItem("vuex") || '')
+          );
+        }
       }
     },
 
-    loadMore() {
-      const el = this.$refs.posts;
+    /**
+     * Infinite scroll
+     */
+    _loadMore(): void {
+      const el = this.$refs.posts as HTMLElement;
 
       if (!el) {
         return;
@@ -175,53 +198,27 @@ export default {
     }
   },
 
-  created: function() {
+  created: function(): void {
     window.addEventListener("touchend", this._handleTouchEnd);
     window.addEventListener("touchstart", this._handleTouchStart);
     // TODO: Replace with "el" after setting CSS grid layout
-    window.addEventListener("scroll", this.loadMore);
+    window.addEventListener("scroll", this._loadMore);
   },
-  destroyed: function() {
+  destroyed: function(): void {
     window.removeEventListener("touchend", this._handleTouchEnd);
     window.removeEventListener("touchstart", this._handleTouchStart);
     // TODO: Replace with "el" after setting CSS grid layout
-    window.addEventListener("scroll", this.loadMore);
+    window.addEventListener("scroll", this._loadMore);
   },
 
-  mounted() {
+  mounted(): void {
     if (!this.getQuery || !this.getSubreddits) {
       this.$router.push({ name: "welcome" });
     }
 
     // display post default
     this.$store.dispatch("commitPosts");
-
-    // online check and local storage save
-    if (!window.navigator) {
-      // console.log('You are not online')
-      this.statusOnline = false;
-      return;
-    }
-
-    // console.log('You are online')
-    this.statusOnline = Boolean(window.navigator.onLine);
-
-    if (!this.statusOnline) {
-      window.addEventListener("offline", this._toggleNetworkStatus);
-      window.addEventListener("online", this._toggleNetworkStatus);
-
-      // console.log('Loading offline mode...')
-      if (this.noStorage) {
-        this.$store.dispatch("commitPosts");
-        // console.log('Cant load offline: you have no store :( ', this.noStorage)
-      } else {
-        this.$store.commit(
-          "commitPosts",
-          JSON.parse(window.localStorage.getItem("vuex"))
-        );
-        // console.log('Offline mode loaded')
-      }
-    }
+    this._handleOffline();
   }
-};
+});
 </script>

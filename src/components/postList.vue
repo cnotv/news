@@ -35,20 +35,19 @@
   </article>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue";
 import { mapGetters } from "vuex";
 
-export default {
+export default Vue.extend({
   name: "List",
   props: ["post"],
-  data() {
-    return {};
-  },
   computed: {
     ...mapGetters(["getSearch"])
   }
-};
+});
 </script>
+
 <style scoped>
 header {
   font-weight: bold;
