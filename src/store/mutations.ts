@@ -1,8 +1,8 @@
 export default {
-  LOAD_POSTS: (state: State, posts: any[]) => {
+  LOAD_POSTS: (state: State, posts: RedditPost[] | Subreddit[]) => {
     state.posts = posts;
   },
-  LOAD_MORE: (state: State, posts: any[]) => {
+  LOAD_MORE: (state: State, posts: RedditPost[]) => {
     state.posts = [...state.posts, ...posts];
   },
   SET_LOADING: (state: State, loading: boolean) => {
@@ -39,14 +39,6 @@ export default {
   },
   SET_SEARCH: (state: State, search: string) => {
     state.search.string = search;
-  },
-  SEARCH_SUB: (state: State, close: boolean) => {
-    state.search.global = true;
-    if (close === false || close === true) {
-      state.search.sub = close;
-    } else {
-      state.search.sub = !state.search.sub;
-    }
   },
   SEARCH_GLOBAL: (state: State) => {
     state.search.global = !state.search.global;

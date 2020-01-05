@@ -5,38 +5,47 @@
         ref="posts"
         class
         v-bind:class="[
-          getSearch.sub && getCurrentLayout === 0 ? '' : '',
-          getSearch.sub && getCurrentLayout === 1 ? 'c-row' : '',
-          getSearch.sub && getCurrentLayout === 2 ? 'o-paper' : '',
-          getSearch.sub && getCurrentLayout === 3 ? 'o-gallery' : '',
+          getCurrentLayout === 0 ? '' : '',
+          getCurrentLayout === 1 ? 'c-row' : '',
+          getCurrentLayout === 2 ? 'o-paper' : '',
+          getCurrentLayout === 3 ? 'o-gallery' : '',
           !getSearch.sub ? 'c-row' : ''
         ]"
-        v-if="getPosts && getPosts.length > 0"
+        v-if="getPosts.length > 0"
       >
         <span v-if="!statusOnline">You are offline.</span>
 
-        <template v-if="getSearch.sub && getCurrentLayout === 0">
-          <List v-for="post in getPosts" v-bind:post="post" :key="post.data.id" />
+        <template v-if="getCurrentLayout === 0">
+          <List
+            v-for="post in getPosts"
+            v-bind:post="post"
+            :key="post.data.id"
+          />
         </template>
         <Card
-          v-else-if="getSearch.sub && getCurrentLayout === 1"
+          v-else-if="getCurrentLayout === 1"
           v-for="post in getPosts"
           v-bind:post="post"
           :key="post.data.id"
         />
         <Paper
-          v-else-if="getSearch.sub && getCurrentLayout === 2"
+          v-else-if="getCurrentLayout === 2"
           v-for="post in getPosts"
           v-bind:post="post"
           :key="post.data.id"
         />
         <Gallery
-          v-else-if="getSearch.sub && getCurrentLayout === 3"
+          v-else-if="getCurrentLayout === 3"
           v-for="post in getPosts"
           v-bind:post="post"
           :key="post.data.id"
         />
-        <Subreddit v-else v-for="post in getPosts" v-bind:post="post" :key="post.data.id" />
+        <Subreddit
+          v-else
+          v-for="post in getPosts"
+          v-bind:post="post"
+          :key="post.data.id"
+        />
 
         <modal v-if="modalOpen" />
       </div>
@@ -117,7 +126,7 @@ export default Vue.extend({
      * Delete style alteration always.
      */
     _refreshTrigger(): void {
-      const el = document.querySelector('body')
+      const el = document.querySelector("body");
       el!.style.transform = `translateY(0)`;
       if (this.refresh) {
         this.$store.dispatch("commitPosts");
@@ -136,7 +145,7 @@ export default Vue.extend({
       const move = ($move: TouchEvent): void => {
         const X2 = $move.touches[0].screenX;
         const Y2 = $move.touches[0].screenY;
-        const el = document.querySelector('body')
+        const el = document.querySelector("body");
         this._refreshCheck(Y1, Y2, el!);
       };
 
@@ -172,7 +181,7 @@ export default Vue.extend({
           // offline mode
           this.$store.commit(
             "commitPosts",
-            JSON.parse(window.localStorage.getItem("vuex") || '')
+            JSON.parse(window.localStorage.getItem("vuex") || "")
           );
         }
       }

@@ -1,4 +1,4 @@
-interface RedditResponse {
-  posts: RedditPost,
+interface Posts {
+  posts: RedditPost[] | Subreddit[];
   after: string;
 }

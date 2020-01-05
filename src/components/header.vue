@@ -25,13 +25,14 @@
             <i class="fa fa-times-circle" aria-hidden="true"></i>
             {{ subreddit }}
           </a>
-          
+
           <a
             class="o-nav-h__action"
             v-if="!openSettings"
             v-bind:class="{ 'is-active': subreddit == getCurrentSub }"
             v-on:click="navigate(subreddit)"
-            >{{ subreddit }}</a>
+            >{{ subreddit }}</a
+          >
         </li>
       </ul>
 
@@ -54,7 +55,8 @@
         >
           <i class="fa fa-navicon o-nav-h__icon"></i
         ></a>
-
+        
+        <!-- Current Sub -->
         <span
           class="o-nav-h__item u-hidden--desktop"
           v-if="!(getSearch.open || openSettings) && getCurrentSub"
@@ -66,15 +68,19 @@
         <router-link
           class="o-nav-h__action"
           v-if="!getSearch.open && openSettings"
-          :to="{ name: 'welcome'}"
-        >Suggest</router-link>
+          :to="{ name: 'welcome' }"
+          >Suggest</router-link
+        >
 
         <button
           class="o-nav-h__action"
           v-on:click="resetSettings"
           v-if="!getSearch.open && openSettings"
-        >Reset</button>
+        >
+          Reset
+        </button>
 
+        <!-- Settings -->
         <button
           class="o-nav-h__action"
           v-on:click="toggleSettings"
@@ -84,7 +90,20 @@
           <i class="fa fa-cog o-nav-h__icon"></i>
         </button>
 
+        <!-- Reddit -->
         <button
+          class="o-nav-h__action"
+          v-bind:class="{ 'is-active': $route.name === 'subreddits' }"
+          v-on:click="searchSub"
+          v-if="!(getSearch.open && $route.name !== 'subreddits')"
+        >
+          <i v-if="$route.name !== 'subreddits'" class="fa fa-reddit o-nav-h__icon"></i>
+          <i v-if="$route.name === 'subreddits'" class="fa fa-times o-nav-h__icon"></i>
+        </button>
+
+        <!-- Search -->
+        <button
+          v-if="$route.name !== 'subreddits'"
           class="o-nav-h__action o-search__toggle"
           v-on:click="toggleSearch"
           v-bind:class="{ 'is-active': getSearch.open }"
@@ -212,6 +231,15 @@ export default Vue.extend({
       this.changeSub(menu);
       if (this.$route.name !== "home") {
         this.$router.push({ name: "home" });
+      }
+    },
+    searchSub() {
+      if (this.$route.name === "home") {
+        this.$router.push({ name: "subreddits" });
+        this.toggleSearch();
+      } else {
+        this.$router.push({ name: "home" });
+        this.toggleSearch();
       }
     }
   }

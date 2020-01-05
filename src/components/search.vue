@@ -1,18 +1,10 @@
 <template>
   <div class="o-search__bar fadeIn">
     <input ref="search" placeholder="Type something.." v-model="search" />
-    <div class="c-filter">
+    <div class="c-filter" v-if="$route.name !== 'subreddits'">
       <input type="checkbox" id="search-global" v-model="searchGlobal" />
       <label for="search-global"></label>
     </div>
-
-    <button
-      class="o-nav-h__action"
-      v-bind:class="{ 'is-active': !getSearch.sub }"
-      v-on:click="changeSearchSub"
-    >
-      /r/
-    </button>
   </div>
 </template>
 
@@ -23,7 +15,7 @@ import { mapGetters, mapActions } from "vuex";
 export default Vue.extend({
   name: "search",
   methods: {
-    ...mapActions(["changeSearch", "changeSearchSub", "changeSearchGlobal"])
+    ...mapActions(["changeSearch", "changeSearchGlobal"])
   },
   mounted() {
     (this.$refs.search as HTMLElement).focus();
@@ -35,7 +27,11 @@ export default Vue.extend({
         return this.$store.state.search.string;
       },
       set(value: string): void {
-        this.$store.dispatch("changeSearch", value);
+        if (this.$route.name === "home") {
+          this.$store.dispatch("changeSearch", value);
+        } else {
+          this.$store.dispatch("commitSubreddits", value);
+        }
       }
     },
     searchGlobal: {

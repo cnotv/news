@@ -1,5 +1,3 @@
-type SubredditsIndex = { [key: string]: Subreddit };
-
 interface Subreddits {
   account: null;
   authorFlair: AuthorFlair;
@@ -21,6 +19,8 @@ interface Subreddits {
   tokens: Tokens;
   viewTreatment: string;
 }
+
+type SubredditsIndex = { [key: string]: Subreddit };
 
 interface AuthorFlair {}
 

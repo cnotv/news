@@ -33,6 +33,7 @@ News aggregator based on Reddit API, Vue.js and PWA
 - [x] Add PWA files from the vue.config
 - [x] Add pull to refresh transitions
 - [x] Convert code to typescript compliant
+- [x] Reimplement subreddit search
 
 
 ## Project setup

@@ -13,7 +13,6 @@ export default {
   search: {
     string: "",
     open: false,
-    sub: true,
     time: ["year", "month", "week", "day", "hour"],
     currentTime: "",
     global: false

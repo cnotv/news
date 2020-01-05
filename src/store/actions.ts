@@ -18,7 +18,25 @@ export const commitPosts = ({ commit, state }) => {
         commit("LOAD_POSTS", posts);
         commit("SET_AFTER", after);
       },
-      () => commit("LOAD_POSTS", {})
+      () => commit("LOAD_POSTS", [])
+    )
+    .finally(() => {
+      commit("SET_LOADING", false);
+    });
+};
+
+export const commitSubreddits = ({ commit }, query: string) => {
+  commit("SET_LOADING", true);
+  commit("LOAD_POSTS", "");
+
+  api
+    .fetchSubs(query)
+    .then(
+      response => {
+        const subreddits = Object.values(response);
+        commit("LOAD_POSTS", subreddits);
+      },
+      () => commit("LOAD_POSTS", [])
     )
     .finally(() => {
       commit("SET_LOADING", false);
@@ -30,7 +48,7 @@ export const loadMore = ({ commit, state }) => {
     return;
   }
 
-  const query = `${state.currentSub}/${state.currentSort}.json?limit=${state.currentLimit}&after=${state.after}`;
+  const query = `${state.currentSub}/${state.currentSort}.json?allow_over18=1&limit=${state.currentLimit}&after=${state.after}`;
   commit("SET_LOADING", true);
   commit("SET_QUERY", query);
 
@@ -63,7 +81,7 @@ export const changeSub = ({ commit, state }, sub: string) => {
   // update query before api request
   commit(
     "SET_QUERY",
-    `${state.currentSub}/${state.currentSort}.json?limit=${state.currentLimit}`
+    `${state.currentSub}/${state.currentSort}.json?allow_over18=1&limit=${state.currentLimit}`
   );
   commitPosts({ commit, state });
 };
@@ -79,7 +97,7 @@ export const changeLimit = ({ commit, state }, limit: string) => {
   if (state.search.string === "") {
     commit(
       "SET_QUERY",
-      `${state.currentSub}/${state.currentSort}.json?limit=${state.currentLimit}`
+      `${state.currentSub}/${state.currentSort}.json?allow_over18=1&limit=${state.currentLimit}`
     );
     commitPosts({ commit, state });
   } else {
@@ -93,7 +111,7 @@ export const changeOrder = ({ commit, state }, order: string) => {
   commit("CURRENT_ORDER", order);
   commit(
     "SET_QUERY",
-    `${state.currentSub}/${state.currentSort}.json?limit=${state.currentLimit}`
+    `${state.currentSub}/${state.currentSort}.json?allow_over18=1&limit=${state.currentLimit}`
   );
   commitPosts({ commit, state });
 };
@@ -112,7 +130,7 @@ export const changeSearch = debounce(
       commit("SET_SEARCH", search);
       commit(
         "SET_QUERY",
-        `${state.currentSub}/search.json?limit=${state.currentLimit}&t=${state.search.currentTime}&q=${state.search.string}${searchGlobal}`
+        `${state.currentSub}/search.json?allow_over18=1&limit=${state.currentLimit}&t=${state.search.currentTime}&q=${state.search.string}${searchGlobal}`
       );
     } else {
       commit("SET_SEARCH", "");
@@ -133,12 +151,6 @@ export const changeSearchGlobal = ({ commit, state }) => {
 
 export const changeSearchOpen = ({ commit }, close: boolean) => {
   commit("SEARCH_OPEN", close);
-};
-
-export const changeSearchSub = ({ commit, state }, close: boolean) => {
-  commit("SEARCH_SUB", close);
-  // update search after change
-  changeSearch({ commit, state });
 };
 
 export const changeSearchTime = ({ commit, state }, time = state.time) => {

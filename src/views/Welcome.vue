@@ -7,13 +7,15 @@
             <img class="c-logo" src="./../assets/logo.svg" alt="cnotv news" />
             <h1 class="c-h1">cnotv news</h1>
           </div>
-          <h5>Welcome! Here you can easily access to multiple format of news.</h5>
+          <h5>
+            Welcome! Here you can easily access to multiple format of news.
+          </h5>
         </header>
 
         <p>
           Try to
-          <b v-on:click="changeSearchOpen()">search some news or topic</b> you are
-          interested about.<br />
+          <b v-on:click="changeSearchOpen()">search some news or topic</b> you
+          are interested about.<br />
           I would recomends these topics to give you an idea of what you can do:
         </p>
 
@@ -33,7 +35,8 @@
             rel="noopener noreferrer"
             href="https://github.com/cnotv/news/"
             target="_blank"
-          ><b>Github</b></a>
+            ><b>Github</b></a
+          >
         </p>
       </section>
     </div>
@@ -41,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue } from "vue-property-decorator";
 import { mapActions } from "vuex";
 
 @Component({
