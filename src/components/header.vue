@@ -113,7 +113,7 @@
       </div>
     </nav>
 
-    <nav v-if="openSettings | getSearch.open" class="o-nav-sub">
+    <nav v-if="(openSettings | getSearch.open) && $route.name !== 'subreddits'" class="o-nav-sub">
       <div class="o-nav-sub__group fadeIn" v-if="!getSearch.open">
         <news-order />
       </div>
