@@ -14,12 +14,13 @@ interface Subreddits {
   queries: AuthorFlair;
   searchDiscoveryUnitOrder: any[];
   searchDiscoveryUnits: AuthorFlair;
-  subredditAboutInfo: { [key: string]: SubredditAboutInfo };
+  subredditAboutInfo: SubredditsInfoIndex;
   subreddits: SubredditsIndex;
   tokens: Tokens;
   viewTreatment: string;
 }
 
+type SubredditsInfoIndex = { [key: string]: SubredditAboutInfo };
 type SubredditsIndex = { [key: string]: Subreddit };
 
 interface AuthorFlair {}
@@ -35,7 +36,7 @@ interface ListingOrderType {
 
 interface SubredditAboutInfo {
   accountsActive: null;
-  advertiserCategory: AdvertiserCategory;
+  advertiserCategory: string[];
   allOriginalContent: boolean;
   allowedPostTypes: AllowedPostTypes;
   contentCategory?: string;
@@ -56,12 +57,6 @@ interface SubredditAboutInfo {
   userIsContributor: null;
   userIsSubscriber: null;
   usingNewModmail: null;
-}
-
-interface AdvertiserCategory {
-  Empty: string;
-  Games: string;
-  Lifestyles: string;
 }
 
 interface AllowedPostTypes {

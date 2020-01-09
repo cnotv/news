@@ -1,5 +1,5 @@
 export default {
-  LOAD_POSTS: (state: State, posts: RedditPost[] | Subreddit[]) => {
+  LOAD_POSTS: (state: State, posts: RedditPost[] | PostSub[]) => {
     state.posts = posts;
   },
   LOAD_MORE: (state: State, posts: RedditPost[]) => {

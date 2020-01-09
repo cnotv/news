@@ -33,8 +33,7 @@ export const commitSubreddits = ({ commit }, query: string) => {
     .fetchSubs(query)
     .then(
       response => {
-        const subreddits = Object.values(response);
-        commit("LOAD_POSTS", subreddits);
+        commit("LOAD_POSTS", response);
       },
       () => commit("LOAD_POSTS", [])
     )

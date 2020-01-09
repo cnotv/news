@@ -1,12 +1,11 @@
 <template>
-  <section class="c-col">
+  <section class="c-col" v-on:click="addSub(post.name)">
     <h1 class="c-h1">{{ post.title }}</h1>
-    <h2>{{ post.publicDescription }}</h2>
+    <h5>{{ post.description }}</h5>
 
-    <span>{{ post.subscribers }}</span>
-    <button class="c-btn-alt" v-on:click="addSub(post.name)">
-      /r/ {{ post.name }}
-    </button>
+    <i class="fa fa-plus-circle"></i>
+    <span> {{ post.subscribers }}</span>
+    <span v-if="post.categories"> - {{ post.categories }}</span>
   </section>
 </template>
 
