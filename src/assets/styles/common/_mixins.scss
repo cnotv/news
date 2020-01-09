@@ -130,3 +130,10 @@ $viewports: (
     }
   }
 }
+
+@mixin iconSize($size) {
+  padding: $size;
+  line-height: $size;
+  width: $size;
+  height: $size;
+}
