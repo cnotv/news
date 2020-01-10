@@ -9,7 +9,6 @@
           getCurrentLayout === 1 ? 'c-row' : '',
           getCurrentLayout === 2 ? 'o-paper' : '',
           getCurrentLayout === 3 ? 'o-gallery' : '',
-          !getSearch.sub ? 'c-row' : ''
         ]"
         v-if="getPosts.length > 0"
       >
