@@ -14,7 +14,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { mapGetters, mapActions } from "vuex";
-import Subreddit from "@/components/postSubreddit";
+import Subreddit from "@/components/Subreddit";
 import { getPosts } from "@/store/getters";
 
 export default Vue.extend({

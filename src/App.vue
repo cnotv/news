@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import newsHeader from "@/components/header";
+import newsHeader from "@/components/NewsHeader";
 import store from "@/store";
 import Vue from "vue";
 import Vuex from "vuex";
