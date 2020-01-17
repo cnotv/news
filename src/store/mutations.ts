@@ -28,14 +28,14 @@ export default {
     state.search.global = false;
     state.currentSub = currentSub;
   },
-  CURRENT_ORDER: (state: State, currentSort: string) => {
-    state.currentSort = currentSort;
+  CURRENT_ORDER: (state: State, sort: string) => {
+    state.settings.sort = sort;
   },
-  CURRENT_LAYOUT: (state: State, currentLayout: number) => {
-    state.currentLayout = currentLayout;
+  CURRENT_LAYOUT: (state: State, layout: number) => {
+    state.settings.layout = layout;
   },
-  CURRENT_LIMIT: (state: State, currentLimit: string) => {
-    state.currentLimit = currentLimit;
+  CURRENT_LIMIT: (state: State, limit: string) => {
+    state.settings.limit = limit;
   },
   SET_SEARCH: (state: State, search: string) => {
     state.search.string = search;

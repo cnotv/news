@@ -47,7 +47,7 @@ export const loadMore = ({ commit, state }) => {
     return;
   }
 
-  const query = `${state.currentSub}/${state.currentSort}.json?allow_over18=1&limit=${state.currentLimit}&after=${state.after}`;
+  const query = `${state.currentSub}/${state.settings.sort}.json?allow_over18=1&limit=${state.settings.limit}&after=${state.after}`;
   commit("SET_LOADING", true);
   commit("SET_QUERY", query);
 
@@ -80,7 +80,7 @@ export const changeSub = ({ commit, state }, sub: string) => {
   // update query before api request
   commit(
     "SET_QUERY",
-    `${state.currentSub}/${state.currentSort}.json?allow_over18=1&limit=${state.currentLimit}`
+    `${state.currentSub}/${state.settings.sort}.json?allow_over18=1&limit=${state.settings.limit}`
   );
   commitPosts({ commit, state });
 };
@@ -96,7 +96,7 @@ export const changeLimit = ({ commit, state }, limit: string) => {
   if (state.search.string === "") {
     commit(
       "SET_QUERY",
-      `${state.currentSub}/${state.currentSort}.json?allow_over18=1&limit=${state.currentLimit}`
+      `${state.currentSub}/${state.settings.sort}.json?allow_over18=1&limit=${state.settings.limit}`
     );
     commitPosts({ commit, state });
   } else {
@@ -110,7 +110,7 @@ export const changeOrder = ({ commit, state }, order: string) => {
   commit("CURRENT_ORDER", order);
   commit(
     "SET_QUERY",
-    `${state.currentSub}/${state.currentSort}.json?allow_over18=1&limit=${state.currentLimit}`
+    `${state.currentSub}/${state.settings.sort}.json?allow_over18=1&limit=${state.settings.limit}`
   );
   commitPosts({ commit, state });
 };
@@ -129,11 +129,11 @@ export const changeSearch = debounce(
       commit("SET_SEARCH", search);
       commit(
         "SET_QUERY",
-        `${state.currentSub}/search.json?allow_over18=1&limit=${state.currentLimit}&t=${state.search.currentTime}&q=${state.search.string}${searchGlobal}`
+        `${state.currentSub}/search.json?allow_over18=1&limit=${state.settings.limit}&t=${state.search.currentTime}&q=${state.search.string}${searchGlobal}`
       );
     } else {
       commit("SET_SEARCH", "");
-      commit("SET_QUERY", `${state.currentSub}/${state.currentSort}.json`);
+      commit("SET_QUERY", `${state.currentSub}/${state.settings.sort}.json`);
     }
 
     // submit search request with small delay

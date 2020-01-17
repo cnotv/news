@@ -10,7 +10,7 @@ import { mapGetters, mapActions } from "vuex";
 
 export default Vue.extend({
   computed: {
-    ...mapGetters(["getCurrentSort", "getSorting"]),
+    ...mapGetters(["getSort", "getSorting"]),
     select: {
       get(): string {
         return this.$store.state.currentSort;

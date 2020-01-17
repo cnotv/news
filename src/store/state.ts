@@ -1,22 +1,24 @@
 export default {
-  strict: process.env.NODE_ENV !== "production",
-  posts: [],
   after: "",
-  loading: false,
-  subreddits: [],
   currentSub: "",
+  layouts: ["list", "th", "newspaper-o", "picture-o"],
   limits: ["12", "24", "48", "96"],
-  currentLimit: "24",
-  currentSort: "hot",
-  sorting: ["hot", "new", "rising", "controversial", "top", "gilded"],
+  loading: false,
+  posts: [],
   query: "",
   search: {
-    string: "",
-    open: false,
-    time: ["year", "month", "week", "day", "hour"],
     currentTime: "",
-    global: false
+    global: false,
+    open: false,
+    string: "",
+    time: ["year", "month", "week", "day", "hour"]
   },
-  layouts: ["list", "th", "newspaper-o", "picture-o"],
-  currentLayout: 0
+  settings: {
+    layout: 0,
+    limit: "24",
+    sort: "hot"
+  },
+  sorting: ["hot", "new", "rising", "controversial", "top", "gilded"],
+  strict: process.env.NODE_ENV !== "production",
+  subreddits: []
 };

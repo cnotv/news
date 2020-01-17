@@ -145,7 +145,7 @@
           v-for="(layout, index) in getLayouts"
           v-bind:key="index"
           v-on:click="changeLayout(index)"
-          v-bind:class="{ 'is-active': index === getCurrentLayout }"
+          v-bind:class="{ 'is-active': index === getLayout }"
         >
           <span v-bind:class="'fa fa-' + layout"></span>
         </button>
@@ -158,7 +158,7 @@
           v-for="limit in getLimits"
           v-bind:key="limit"
           v-on:click="changeLimit(limit)"
-          v-bind:class="{ 'is-active': limit === getCurrentLimit }"
+          v-bind:class="{ 'is-active': limit === getLimit }"
         >
           {{ limit }}
         </button>
@@ -187,10 +187,10 @@ export default Vue.extend({
       "getLimits",
       "getQuery",
       "getCurrentSub",
-      "getCurrentLimit",
+      "getLimit",
       "getSearch",
       "getLayouts",
-      "getCurrentLayout"
+      "getLayout"
     ])
   },
   methods: {

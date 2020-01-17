@@ -5,16 +5,16 @@
         ref="posts"
         class
         v-bind:class="[
-          getCurrentLayout === 0 ? '' : '',
-          getCurrentLayout === 1 ? 'c-row' : '',
-          getCurrentLayout === 2 ? 'o-paper' : '',
-          getCurrentLayout === 3 ? 'o-gallery' : '',
+          getLayout === 0 ? '' : '',
+          getLayout === 1 ? 'c-row' : '',
+          getLayout === 2 ? 'o-paper' : '',
+          getLayout === 3 ? 'o-gallery' : '',
         ]"
         v-if="getPosts.length > 0"
       >
         <span v-if="!statusOnline">You are offline.</span>
 
-        <template v-if="getCurrentLayout === 0">
+        <template v-if="getLayout === 0">
           <List
             v-for="post in getPosts"
             v-bind:post="post"
@@ -22,19 +22,19 @@
           />
         </template>
         <Card
-          v-else-if="getCurrentLayout === 1"
+          v-else-if="getLayout === 1"
           v-for="post in getPosts"
           v-bind:post="post"
           :key="post.data.id"
         />
         <Paper
-          v-else-if="getCurrentLayout === 2"
+          v-else-if="getLayout === 2"
           v-for="post in getPosts"
           v-bind:post="post"
           :key="post.data.id"
         />
         <Gallery
-          v-else-if="getCurrentLayout === 3"
+          v-else-if="getLayout === 3"
           v-for="post in getPosts"
           v-bind:post="post"
           :key="post.data.id"
@@ -80,7 +80,7 @@ export default Vue.extend({
 
   computed: {
     ...mapGetters([
-      "getCurrentLayout",
+      "getLayout",
       "isLoading",
       "getPosts",
       "getQuery",
