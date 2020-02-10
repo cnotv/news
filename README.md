@@ -7,6 +7,8 @@ News aggregator based on Reddit API, Vue.js and PWA
 
 ## Todo
 
+- [ ] Inline SVG
+- [ ] Add share button with [Share API](https://web.dev/web-share/)
 - [ ] Posts options per subredddit
 - [ ] Slide to next menu with transition
 - [ ] Menu transition
