@@ -58,12 +58,12 @@
 <script lang="ts">
 import Vue from "vue";
 import { mapGetters, mapActions } from "vuex";
-import Modal from "@/components/modal";
-import Card from "@/components/Card";
-import Gallery from "@/components/Gallery";
-import List from "@/components/List";
-import Paper from "@/components/Paper";
-import Subreddit from "@/components/Subreddit";
+import Modal from "@/components/Modal.vue";
+import Card from "@/components/Card.vue";
+import Gallery from "@/components/Gallery.vue";
+import List from "@/components/List.vue";
+import Paper from "@/components/Paper.vue";
+import Subreddit from "@/components/Subreddit.vue";
 import { getSubreddits } from "@/store/getters";
 
 export default Vue.extend({

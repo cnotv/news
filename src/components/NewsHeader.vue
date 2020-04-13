@@ -179,8 +179,8 @@
 <script lang="ts">
 import Vue from "vue";
 import { mapGetters, mapActions } from "vuex";
-import newsOrder from "@/components/order";
-import search from "@/components/search";
+import newsOrder from "@/components/order.vue";
+import search from "@/components/search.vue";
 
 export default Vue.extend({
   data() {
