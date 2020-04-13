@@ -55,7 +55,7 @@
         >
           <i class="fa fa-navicon o-nav-h__icon"></i
         ></a>
-        
+
         <!-- Current Sub -->
         <span
           class="o-nav-h__item u-hidden--desktop"
@@ -97,8 +97,14 @@
           v-on:click="searchSub"
           v-if="!(getSearch.open && $route.name !== 'subreddits')"
         >
-          <i v-if="$route.name !== 'subreddits'" class="fa fa-reddit o-nav-h__icon"></i>
-          <i v-if="$route.name === 'subreddits'" class="fa fa-times o-nav-h__icon"></i>
+          <i
+            v-if="$route.name !== 'subreddits'"
+            class="fa fa-reddit o-nav-h__icon"
+          ></i>
+          <i
+            v-if="$route.name === 'subreddits'"
+            class="fa fa-times o-nav-h__icon"
+          ></i>
         </button>
 
         <!-- Search -->
@@ -113,7 +119,10 @@
       </div>
     </nav>
 
-    <nav v-if="(openSettings | getSearch.open) && $route.name !== 'subreddits'" class="o-nav-sub">
+    <nav
+      v-if="openSettings | getSearch.open && $route.name !== 'subreddits'"
+      class="o-nav-sub"
+    >
       <div class="o-nav-sub__group fadeIn" v-if="!getSearch.open">
         <news-order />
       </div>

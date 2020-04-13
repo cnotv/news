@@ -8,7 +8,7 @@
           getLayout === 0 ? '' : '',
           getLayout === 1 ? 'c-row' : '',
           getLayout === 2 ? 'o-paper' : '',
-          getLayout === 3 ? 'o-gallery' : '',
+          getLayout === 3 ? 'o-gallery' : ''
         ]"
         v-if="getPosts.length > 0"
       >
