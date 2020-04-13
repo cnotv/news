@@ -134,7 +134,7 @@
           v-on:click="changeSearchTime('')"
           v-bind:class="{ 'is-active': '' === getSearch.currentTime }"
         >
-          None
+          X
         </button>
         <button
           class="o-nav-sub__action"
@@ -143,7 +143,7 @@
           v-on:click="changeSearchTime(time)"
           v-bind:class="{ 'is-active': time === getSearch.currentTime }"
         >
-          {{ time }}
+          {{ time[0].toUpperCase() }}
         </button>
       </div>
 
