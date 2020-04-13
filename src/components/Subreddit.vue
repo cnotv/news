@@ -1,11 +1,13 @@
 <template>
   <section class="c-col" v-on:click="addSub(post.name)">
-    <h1 class="c-h1">{{ post.title }}</h1>
+    <h1 class="c-h1">/r/{{ post.name }} - {{ post.title }}</h1>
     <h5>{{ post.description }}</h5>
 
     <i class="fa fa-plus-circle"></i>
     <span> {{ post.subscribers }}</span>
     <span v-if="post.categories"> - {{ post.categories }}</span>
+    <br>
+    <hr>
   </section>
 </template>
 
