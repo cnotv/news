@@ -95,6 +95,33 @@ export default Vue.extend({
       this.modalOpen = !this.modalOpen;
     },
 
+    // TODO: Add listener to container rather than window
+    _refreshListener() {
+      const el = this.$refs.posts as HTMLElement;
+      if (el) {
+        el.addEventListener("touchend", this._handleTouchEnd);
+        el.addEventListener("touchstart", this._handleTouchStart);
+        // TODO: Replace with "el" after setting CSS grid layout
+        el.addEventListener("scroll", this._loadMore);
+      }
+    },
+
+    _removeListeners() {
+      const el = this.$refs.posts as HTMLElement;
+      if (el) {
+        el.removeEventListener("touchend", this._handleTouchEnd);
+        el.removeEventListener("touchstart", this._handleTouchStart);
+        // TODO: Replace with "el" after setting CSS grid layout
+        el.addEventListener("scroll", this._loadMore);
+      }
+    },
+
+    _checkWelcome() {
+      if (!this.getQuery || !this.getSubreddits) {
+        this.$router.push({ name: "welcome" });
+      }
+    },
+
     _toggleNetworkStatus({ type }): void {
       this.statusOnline = type === "online";
     },
@@ -206,23 +233,14 @@ export default Vue.extend({
     }
   },
 
-  created: function(): void {
-    window.addEventListener("touchend", this._handleTouchEnd);
-    window.addEventListener("touchstart", this._handleTouchStart);
-    // TODO: Replace with "el" after setting CSS grid layout
-    window.addEventListener("scroll", this._loadMore);
-  },
-  destroyed: function(): void {
-    window.removeEventListener("touchend", this._handleTouchEnd);
-    window.removeEventListener("touchstart", this._handleTouchStart);
-    // TODO: Replace with "el" after setting CSS grid layout
-    window.addEventListener("scroll", this._loadMore);
+  created(): void {},
+  destroyed(): void {
+    this._removeListeners();
   },
 
   mounted(): void {
-    if (!this.getQuery || !this.getSubreddits) {
-      this.$router.push({ name: "welcome" });
-    }
+    this._refreshListener();
+    this._checkWelcome();
 
     // display post default
     this.$store.dispatch("commitPosts");
