@@ -1,6 +1,6 @@
 <template>
   <section class="c-section">
-    <div class="c-container-full">
+    <div class="c-container-full" ref="container">
       <div
         ref="posts"
         class
@@ -97,7 +97,7 @@ export default Vue.extend({
     },
 
     _refreshListener() {
-      const el = this.$refs.posts as HTMLElement;
+      const el = this.$refs.container as HTMLElement;
       if (el) {
         el.addEventListener("touchend", this._handleTouchEnd);
         el.addEventListener("touchstart", this._handleTouchStart);
@@ -109,7 +109,7 @@ export default Vue.extend({
     },
 
     _removeListeners() {
-      const el = this.$refs.posts as HTMLElement;
+      const el = this.$refs.container as HTMLElement;
       if (el) {
         el.removeEventListener("touchend", this._handleTouchEnd);
         el.removeEventListener("touchstart", this._handleTouchStart);
