@@ -34,7 +34,7 @@ export default {
   },
 
   async fetchSubs(q: string, after?: string): Promise<PostSub[]> {
-    const url = `https://gateway.reddit.com/desktopapi/v1/search`;
+    const url = `//gateway.reddit.com/desktopapi/v1/search`;
     const params = {
       allow_over18: "1",
       sort: "relevance",

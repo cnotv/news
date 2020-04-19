@@ -1,6 +1,11 @@
 module.exports = {
   devServer: {
     proxy: {
+      '^/desktopapi': {
+        target: 'https://gateway.reddit.com/desktopapi',
+        ws: true,
+        changeOrigin: true
+      },
       '^/r': {
         target: 'https://www.reddit.com',
         ws: true,
