@@ -74,6 +74,7 @@ export default Vue.extend({
       refresh: false,
       modalOpen: false,
       statusOnline: true,
+      loadThreshold: 0,
       noStorage: window.localStorage.getItem("vuex") === null
     };
   },
@@ -95,15 +96,16 @@ export default Vue.extend({
       this.modalOpen = !this.modalOpen;
     },
 
-    // TODO: Add listener to container rather than window
     _refreshListener() {
       const el = this.$refs.posts as HTMLElement;
       if (el) {
         el.addEventListener("touchend", this._handleTouchEnd);
         el.addEventListener("touchstart", this._handleTouchStart);
-        // TODO: Replace with "el" after setting CSS grid layout
-        el.addEventListener("scroll", this._loadMore);
       }
+    },
+
+    _loadMoreListener() {
+      window.addEventListener("scroll", this._loadMore);
     },
 
     _removeListeners() {
@@ -111,8 +113,7 @@ export default Vue.extend({
       if (el) {
         el.removeEventListener("touchend", this._handleTouchEnd);
         el.removeEventListener("touchstart", this._handleTouchStart);
-        // TODO: Replace with "el" after setting CSS grid layout
-        el.addEventListener("scroll", this._loadMore);
+        el.removeEventListener("scroll", this._loadMore);
       }
     },
 
@@ -223,9 +224,12 @@ export default Vue.extend({
         return;
       }
 
-      const threshold = 850;
+      if (!this.loadThreshold) {
+        this.loadThreshold = el.offsetHeight;
+      }
+
       // TODO: Replace with "el" after setting CSS grid layout
-      const offset = window.scrollY - el.offsetHeight + threshold;
+      const offset = window.scrollY - el.offsetHeight + this.loadThreshold;
       const trigger = offset > 0;
       if (trigger && !this.$store.state.loading) {
         this.$store.dispatch("loadMore");
@@ -240,6 +244,7 @@ export default Vue.extend({
 
   mounted(): void {
     this._refreshListener();
+    this._loadMoreListener();
     this._checkWelcome();
 
     // display post default
