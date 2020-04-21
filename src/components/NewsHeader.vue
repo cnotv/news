@@ -226,7 +226,9 @@ export default Vue.extend({
       this.openMenu = false;
       this.openSettings = false;
       this.$store.dispatch("changeSearchOpen");
-      this.$store.dispatch("changeSearch", "");
+      if (!this.getSearch.open) {
+        this.$store.dispatch("changeSearch", "");
+      }
     },
     resetSettings() {
       localStorage.clear();
