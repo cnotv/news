@@ -1,14 +1,11 @@
 interface State {
   after?: string;
   currentSub: string;
-  layouts: string[];
-  limits: string[];
   loading: boolean;
   posts: Object[];
   query: string;
   search: StateSearch;
   settings: StateSettings;
-  sorting: string[];
   strict: boolean;
   subreddits: string[];
 }
@@ -16,7 +13,6 @@ interface State {
 interface StateSearch {
   string: string;
   open: boolean;
-  time: string[];
   currentTime: string;
   global: boolean;
 }

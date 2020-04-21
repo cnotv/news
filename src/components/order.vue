@@ -1,16 +1,17 @@
 <template>
   <select class="c-input__select c-order" v-model="select">
-    <option v-for="sort in getSorting" v-bind:key="sort">{{ sort }}</option>
+    <option v-for="sort in SORTING" v-bind:key="sort">{{ sort }}</option>
   </select>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import { mapGetters, mapActions } from "vuex";
+import { SORTING } from "@/data/settings";
 
 export default Vue.extend({
   computed: {
-    ...mapGetters(["getSort", "getSorting"]),
+    ...mapGetters(["getSort"]),
     select: {
       get(): string {
         return this.$store.state.currentSort;

@@ -138,7 +138,7 @@
         </button>
         <button
           class="o-nav-sub__action"
-          v-for="time in getSearch.time"
+          v-for="time in times"
           v-bind:key="time"
           v-on:click="changeSearchTime(time)"
           v-bind:class="{ 'is-active': time === getSearch.currentTime }"
@@ -151,7 +151,7 @@
         <span class="o-nav-sub__label">Layout:</span>
         <button
           class="o-nav-sub__action"
-          v-for="(layout, index) in getLayouts"
+          v-for="(layout, index) in layouts"
           v-bind:key="index"
           v-on:click="changeLayout(index)"
           v-bind:class="{ 'is-active': index === getLayout }"
@@ -164,7 +164,7 @@
         <span class="o-nav-sub__label">Posts:</span>
         <button
           class="o-nav-sub__action"
-          v-for="limit in getLimits"
+          v-for="limit in limits"
           v-bind:key="limit"
           v-on:click="changeLimit(limit)"
           v-bind:class="{ 'is-active': limit === getLimit }"
@@ -181,37 +181,38 @@ import Vue from "vue";
 import { mapGetters, mapActions } from "vuex";
 import newsOrder from "@/components/order.vue";
 import search from "@/components/search.vue";
+import { LIMITS, LAYOUTS, TIMES } from "@/data/settings";
 
 export default Vue.extend({
   data() {
     return {
       openMenu: false,
-      openSettings: false
+      openSettings: false,
+      limits: LIMITS,
+      layouts: LAYOUTS,
+      times: TIMES
     };
   },
   components: { newsOrder, search },
   computed: {
     ...mapGetters([
-      "getSubreddits",
-      "getLimits",
-      "getQuery",
       "getCurrentSub",
+      "getLayout",
       "getLimit",
+      "getQuery",
       "getSearch",
-      "getLayouts",
-      "getLayout"
+      "getSubreddits"
     ])
   },
   methods: {
     ...mapActions([
-      "changeSub",
+      "changeLayout",
       "changeLimit",
       "changeSearch",
-      "removeSub",
-      "changeSearchTime",
-      "changeSearchSub",
       "changeSearchOpen",
-      "changeLayout"
+      "changeSearchTime",
+      "changeSub",
+      "removeSub"
     ]),
     toggleMenu() {
       this.openMenu = !this.openMenu;
@@ -230,11 +231,10 @@ export default Vue.extend({
     resetSettings() {
       localStorage.clear();
       location.reload();
-      // this.$store.dispatch("resetState");
+      this.$store.dispatch("resetState");
     },
     toggleSearchTopic() {
-      this.toggleSearch();
-      this.$store.dispatch("changeSearchSub", false);
+      this.searchSub();
     },
     navigate(menu: string) {
       this.changeSub(menu);

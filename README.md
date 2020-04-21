@@ -20,6 +20,7 @@ News aggregator based on Reddit API, Vue.js and PWA
 - [ ] Add push notifications for new posts
 - [ ] Add dark mode using CSS variables and or theme class
 - [ ] Rewrite layout with CSS grids
+- [ ] Use parameters over query string
 - [ ] Add factories
 - [ ] Add e2e tests
 

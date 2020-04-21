@@ -6,8 +6,8 @@
     <i class="fa fa-plus-circle"></i>
     <span> {{ post.subscribers }}</span>
     <span v-if="post.categories"> - {{ post.categories }}</span>
-    <br>
-    <hr>
+    <br />
+    <hr />
   </section>
 </template>
 
