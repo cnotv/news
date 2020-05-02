@@ -1,21 +1,16 @@
 import axios from "axios";
 import { AxiosRequestConfig } from "axios";
 
-function _subToPost(data: Subreddits): PostSub[] {
-  const list: PostSub[] = [];
-  const subs = Object.keys(data.subreddits);
-
-  subs.forEach(sub => {
-    list.push({
-      title: data.subreddits[sub].title,
-      description: data.subredditAboutInfo[sub].publicDescription,
-      name: data.subreddits[sub].name,
-      subscribers: data.subreddits[sub].subscribers,
-      categories: data.subredditAboutInfo[sub].advertiserCategory
-    });
+function _subToPost(data: RedditResponseData): PostSub[] {
+  return data.children.map(sub => {
+    return {
+      title: sub.data.title,
+      description: sub.data.public_description,
+      name: sub.data.display_name,
+      subscribers: sub.data.subscribers,
+      categories: sub.data.advertiser_category
+    };
   });
-
-  return list;
 }
 
 export default {
@@ -34,7 +29,7 @@ export default {
   },
 
   async fetchSubs(q: string, after?: string): Promise<PostSub[]> {
-    const url = `//gateway.reddit.com/desktopapi/v1/search`;
+    const url = `//www.reddit.com/subreddits/search.json`;
     const params = {
       allow_over18: "1",
       sort: "relevance",
@@ -45,7 +40,7 @@ export default {
     const config: AxiosRequestConfig = { params };
 
     return axios
-      .get<Subreddits>(url, config)
-      .then(response => _subToPost(response.data));
+      .get(url, config)
+      .then(response => _subToPost(response.data.data));
   }
 };

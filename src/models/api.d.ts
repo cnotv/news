@@ -8,5 +8,5 @@ interface PostSub {
   description: string;
   name: string;
   subscribers: number;
-  categories: string[];
+  categories: string;
 }

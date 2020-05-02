@@ -18,6 +18,7 @@ interface Child {
 }
 
 interface RedditPost {
+  advertiser_category: string; // Subreddit only?
   all_awardings: any[];
   allow_live_comments: boolean;
   approved_at_utc: null;
@@ -45,6 +46,7 @@ interface RedditPost {
   contest_mode: boolean;
   created_utc: number;
   created: number;
+  display_name: string; // Subreddit only?
   discussion_type: null;
   distinguished: null;
   domain: string;
@@ -89,6 +91,7 @@ interface RedditPost {
   pinned: boolean;
   post_hint?: string;
   preview?: Preview;
+  public_description: string; // Subreddit only?
   pwls: number;
   quarantine: boolean;
   removal_reason: null;
@@ -110,6 +113,7 @@ interface RedditPost {
   subreddit_subscribers: number;
   subreddit_type: string;
   subreddit: string;
+  subscribers: number; // Subreddit only?
   suggested_sort: null;
   thumbnail_height: number | null;
   thumbnail_width: number | null;

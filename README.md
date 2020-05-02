@@ -7,12 +7,13 @@ News aggregator based on Reddit API, Vue.js and PWA
 
 ## Todo
 
+- [ ] Service worker to inform of new posts with refresh button
+- [ ] Add Open ID SSO and OAuth with Firebase
+- [ ] Posts options per subredddit
 - [ ] Inline SVG
 - [ ] Add share button with [Share API](https://web.dev/web-share/)
-- [ ] Posts options per subredddit
 - [ ] Slide to next menu with transition
 - [ ] Menu transition
-- [ ] Service worker to inform of new posts with refresh button
 - [ ] Create plugins out of swipe behavior
 - [ ] Add Travis or Circle.ci configuration for CI pipes
 - [ ] Add models and types for all the missing cases
