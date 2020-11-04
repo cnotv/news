@@ -18,11 +18,15 @@ import { mapGetters, mapActions } from "vuex";
 import "./filters";
 
 import * as Sentry from "@sentry/browser";
-import * as Integrations from "@sentry/integrations";
+import { Vue as VueIntegration } from "@sentry/integrations";
+import { Integrations } from "@sentry/tracing";
 
 Sentry.init({
   dsn: "https://f908d5c000ea4ffa87f6484a4c286732@sentry.io/1472388",
-  integrations: [new Integrations.Vue({ Vue, attachProps: true })],
+  integrations: [
+    new Integrations.BrowserTracing(),
+    new VueIntegration({ Vue, attachProps: true, tracing: true })
+  ],
   environment: process.env.NODE_ENV,
   release: process.env.VERSION
 });
