@@ -20,7 +20,7 @@ export default Vue.extend({
     ...mapGetters(["getSort"]),
     select: {
       get(): string {
-        return this.$store.state.currentSort;
+        return this.$store.state.settings.sort;
       },
       set(value: string): void {
         this.$store.dispatch("changeOrder", value);
