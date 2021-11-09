@@ -1,0 +1,11 @@
+.o-list {
+  &__meta {
+    display: flex;
+
+    & > * + *:not(:empty):not(:last-child):before {
+      margin-left: 1em;
+      margin-right: 1em;
+      content: "-";
+    }
+  }
+}

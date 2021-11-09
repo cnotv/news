@@ -1,0 +1,125 @@
+.o-search {
+  &__bar {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+
+    input {
+      height: 100%;
+      border: none;
+      width: 100%;
+      outline: none;
+      // text-transform: uppercase;
+      background: $bg-nav;
+
+      @include media-bp(tablet-min) {
+        padding: 0 space(m);
+      }
+
+      @include media-bp(phone) {
+        padding: 0 space(s);
+      }
+    }
+  }
+
+  &__status {
+    position: absolute;
+
+    @include media-bp(tablet-min) {
+      display: flex;
+      top: -space(m);
+      left: -space(m);
+      height: space(l);
+      width: space(l);
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: $bg-nav;
+      border: $website-border-secondary;
+      border-radius: 50%;
+    }
+
+    @include media-bp(phone) {
+      padding: space(s);
+      top: 0;
+      right: 0;
+    }
+  }
+
+  &__reset {
+    cursor: pointer;
+
+    &::before {
+      content: "- ";
+    }
+  }
+
+  &__status {
+    i::before {
+      @include fa-icon;
+
+      animation: pulse 1s linear infinite;
+    }
+
+    &__search {
+      &::before {
+        content: $fa-var-search;
+      }
+    }
+
+    &__typing {
+      &::before {
+        content: $fa-var-pencil;
+      }
+    }
+  }
+
+  &__toggle {
+    i::before {
+      content: $fa-var-search;
+
+      .has-search-open & {
+        content: $fa-var-times;
+      }
+    }
+  }
+
+  &__results {
+    position: absolute;
+    flex-direction: column;
+    margin: -space(s) space(s);
+    width: calc(100% - #{space(m)});
+    z-index: zindex(dropdown);
+    border: $website-border-secondary;
+    box-shadow: $website-shadow-hover;
+    background-color: $bg-dropdown;
+
+    @include media-bp(tablet-min) {
+      white-space: nowrap;
+    }
+
+    @include media-bp(phone) {
+      top: 100%;
+    }
+
+    &__answer {
+      padding: space(s);
+    }
+
+    a {
+      padding: space(s);
+      border-top: $website-border-secondary;
+    }
+  }
+}
+
+.has-search-open {
+  overflow: hidden;
+
+  .c-logo,
+  main {
+    transition: filter 0.1s, opacity 0.1s;
+    opacity: 0.2;
+    filter: blur(2px);
+  }
+}

@@ -1,0 +1,36 @@
+.u-hidden {
+  display: none;
+  
+  &--mobile {
+    @include media-bp(mobile) {
+      display: none;
+    }
+  }
+
+  &--desktop {
+    @include media-bp(tablet-min) {
+      display: none;
+    }
+  }
+}
+
+.u-sticky {
+  position: sticky;
+  top: 0;
+}
+
+
+
+.u-spacer {
+  margin: auto;
+
+  &--x {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &--y {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}

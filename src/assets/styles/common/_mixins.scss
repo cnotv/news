@@ -1,0 +1,139 @@
+// Defining viewports
+$viewports: (
+  phone:        "only screen and (max-width: 575px)",
+  mobile:       "only screen and (max-width: 991px)",
+  tablet:       "only screen and (min-width: 575px) and (max-width: 992px)",
+  tablet-min:   "only screen and (min-width: 575px)",
+  desktop:      "only screen and (min-width: 992px)",
+);
+
+// Creating viewports mixin
+@mixin media-bp($prefix) {
+  @if map-get($viewports, $prefix) {
+    $media-query: map-get($viewports, $prefix);
+
+    @media #{$media-query} {
+      @content;
+    }
+  }
+
+  @else {
+    @warn 'please define a real device';
+  }
+}
+
+// Creating color mixin
+@function color($value) {
+  @if map-get($colors, $value) {
+    $color: map-get($colors, $value);
+
+    @return #{$color};
+  }
+
+  @else {
+    @warn 'The color '$value' does not exist';
+
+    // @break;
+  }
+}
+
+// Creating space mixin
+@function space($value) {
+  @if map-get($spaces, $value) {
+    $space: map-get($spaces, $value);
+
+    @return #{$space};
+  }
+
+  @else {
+    @warn 'The space '$value' does not exist';
+
+    // @break;
+  }
+}
+
+// Creating zindex mixin
+@function zindex($value) {
+  @if map-get($zindex, $value) {
+    $zindex: map-get($zindex, $value);
+
+    @return #{$zindex};
+  }
+
+  @else {
+    @warn 'The z-index '$value' does not exist';
+
+    // @break;
+  }
+}
+
+// Creating grid layout mixin, option with and without padding
+@mixin grid-row($padding: true) {
+  display: flex;
+  flex-flow: row wrap;
+
+  @if ($padding == true) {
+    @include media-bp(desktop) {
+      margin-left: -$grid-gutter-size;
+      margin-right: -$grid-gutter-size;
+    }
+
+    @include media-bp(mobile) {
+      margin-left: -$grid-gutter-size/2;
+      margin-right: -$grid-gutter-size/2;
+    }
+  }
+}
+
+// Creating grid layout mixin, optional mobile, option with and without padding
+@mixin grid-col($size: 1, $sizeMobile: 1, $padding: true) {
+  @if ($padding == true) {
+    @include media-bp(desktop) {
+      padding-left: $grid-gutter-size;
+      padding-right: $grid-gutter-size;
+    }
+
+    @include media-bp(mobile) {
+      padding-left: $grid-gutter-size/2;
+      padding-right: $grid-gutter-size/2;
+    }
+  }
+
+  @if ($size != 1) {
+    @include media-bp(desktop) {
+      width: calc(100% * #{$size});
+    }
+  }
+
+  @else {
+    width: 100%;
+  }
+
+  @if ($sizeMobile != 1) {
+    @include media-bp(mobile) {
+      width: calc(100% * #{$sizeMobile});
+    }
+  }
+
+  @else {
+    @include media-bp(mobile) {
+      width: 100%;
+    }
+  }
+}
+
+// Armonic animations adding delay
+@mixin animationDelay {
+  @for $i from 1 through 20 {
+    &:nth-of-type(n+#{$i}) {
+      animation-delay: #{$i/10}s;
+    }
+  }
+}
+
+@mixin iconSize($size) {
+  padding: $size;
+  line-height: $size;
+  width: $size;
+  height: $size;
+}

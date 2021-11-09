@@ -1,0 +1,49 @@
+@mixin loader($size, $border, $type) {
+    content: "";
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font-size: 3rem;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    border: $border $type $brand-primary;
+    border-bottom-color: transparent;
+    animation: rotate360 1s linear infinite;
+    padding: 0;
+}
+
+.c-loader {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    @include loader(0.85em, 0.2em, solid);
+  }
+}
+
+.is-loading {
+  position: relative;
+  // animation: pulse 1s linear infinite;
+
+  &::before {
+    position: absolute;
+    @include loader(0.5em, 2px, dotted);
+  }
+
+  & * {
+    opacity: 0;
+  }
+}
+
+img[lazy=loading] {
+  @include loader(0.5em, 2px, dotted);
+  margin: auto;
+  position: absolute;
+  z-index: -1;
+}
+img[lazy=loaded] {
+  animation: fadeIn $website-animation-time*2 forwards;
+}

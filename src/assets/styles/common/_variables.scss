@@ -1,0 +1,88 @@
+// Grid settings
+$enable-flex:                         true;
+$main-sm-columns:                     12;
+$sidebar-sm-columns:                  4;
+
+// Layout
+$container-width:                     1200px;
+$container-s-width:                   $container-width*4/6;
+$grid-gutter-size:                    15px;
+$section-padding:                     2rem;
+
+// Typography
+$font-family-base:                    'Roboto', -apple-system, system-ui, "Helvetica Neue", Arial, sans-serif;
+$headings-font-family:                'Rubik',  -apple-system, system-ui, "Helvetica Neue", Arial, sans-serif;
+
+$font-size-base:                      1rem !default;
+$font-weight-base:                    normal !default;
+$letter-spacing-base:                 0.5px !default;
+$line-height-base:                    1.8 !default;
+
+$headings-margin-bottom:              1rem;
+$headings-font-weight:                700;
+$headings-line-height:                1.5 !default;
+$headings-line-space:                 1px !default;
+$font-size-h1:                        2.5rem !default;
+$font-size-h2:                        2rem !default;
+$font-size-h3:                        1.75rem !default;
+$font-size-h4:                        1.5rem !default;
+$font-size-h5:                        1.25rem !default;
+$font-size-h6:                        1rem !default;
+
+// Colors
+$colors: (
+  white:                              "#fff",
+  black:                              "#333",
+  red:                                "red",
+  grey:                               "#dadada",
+  lightgrey:                          "#f1f1f1",
+  grey-l:                             "lightgrey",
+);
+
+$spaces: (
+  xs:                                 '0.35rem',
+  s:                                  '0.75rem',
+  m:                                  '1.5rem',
+  l:                                  '3rem',
+  xl:                                 '6rem',
+);
+
+$zindex: (
+  dropdown:                           '10',
+);
+
+$brand-primary:                       color(black);
+$brand-secondary:                     color(grey);
+$body-bg:                             color(lightgrey);
+$body-color:                          $brand-primary;
+$color-error:                         color(red);
+$color-disabled:                      color(grey-l);
+$color-active:                        color(white);
+
+$bg-nav:                              transparent;
+$bg-header:                           color(lightgrey);
+$bg-dropdown:                         color(white);
+$bg-card:                             color(white);
+$bg-link:                             color(white);
+$bg-link-hover:                       color(grey);
+$bg-link-active:                      color(black);
+$modal-shadow-color:                  rgba(0, 0, 0, 0.7);
+
+$website-shadow:                      4px 4px 0 0 color(black);
+$website-shadow-hover:                8px 8px 0 0 color(black);
+
+$website-border-radius:               2px !default;
+$website-border-size:                 2px !default;
+$website-border:                      $website-border-size solid color(black);
+$website-border-secondary:            $website-border-size/2 solid color(black);
+$menu-padding:                        space(s) !default;
+$menu-mobile-offset:                  80px !default;
+
+$website-animation-time:              0.2s;
+$website-animation-delay:             0.2s;
+
+$zindex-modal:                        1050;
+
+// Font Awesome | see: http://fontawesome.io/get-started/
+// $fa-font-path:          '~font-awesome/fonts';
+$fa-font-path:        "//netdna.bootstrapcdn.com/font-awesome/4.7.0/fonts" !default; // for referencing Bootstrap CDN font files directly

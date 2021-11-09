@@ -1,0 +1,50 @@
+{
+  "name": "news-vite",
+  "license": "MIT",
+  "version": "0.2.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "serve": "vite preview",
+    "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "vue-cli-service test:e2e",
+    "lint": "vue-cli-service lint",
+    "build:netlify": "vue-cli-service build && npx codecov"
+  },
+  "dependencies": {
+    "@sentry/tracing": "^6.14.1",
+    "@sentry/vue": "^6.14.1",
+    "axios": "^0.24.0",
+    "lodash": "^4.17.21",
+    "register-service-worker": "^1.7.2",
+    "vue": "^3.2.16",
+    "vue-lazyload": "^1.3.3",
+    "vue-router": "^4.0.0",
+    "vuex": "^4.0.0",
+    "vuex-persist": "^3.1.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
+    "@vitejs/plugin-vue": "^1.9.3",
+    "@vue/cli-plugin-e2e-cypress": "^4.5.15",
+    "@vue/cli-plugin-eslint": "^4.5.15",
+    "@vue/cli-plugin-pwa": "^4.5.15",
+    "@vue/cli-plugin-router": "^4.5.15",
+    "@vue/cli-plugin-typescript": "^4.5.15",
+    "@vue/cli-plugin-unit-jest": "^4.5.15",
+    "@vue/cli-plugin-vuex": "^4.5.15",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "@vue/eslint-config-typescript": "^9.0.1",
+    "@vue/test-utils": "^1.2.2",
+    "eslint": "^8.2.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.6",
+    "prettier": "^2.4.1",
+    "typescript": "^4.4.3",
+    "vite": "^2.6.4",
+    "vue-tsc": "^0.3.0"
+  }
+}

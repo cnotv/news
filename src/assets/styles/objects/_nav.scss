@@ -1,0 +1,352 @@
+.o-nav {
+  // horizontal navbar, e.g. for main navigations
+  &-h {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-family: $headings-font-family;
+    font-weight: 500;
+    background-color: $bg-nav;
+    border-top: $website-border;
+    border-bottom: $website-border;
+
+    .has-menu-open & {
+      @include media-bp(phone) {
+        flex-direction: column-reverse;
+      }
+    }
+
+    &--detached {
+      box-shadow: $website-shadow;
+      border: $website-border;
+      background-color: $bg-nav;
+    }
+
+    &__item,
+    &__action {
+      display: block;
+      user-select: none;
+      border: none;
+      background-color: transparent;
+
+      @include media-bp(tablet-min) {
+        padding: space(s);
+      }
+
+      @include media-bp(phone) {
+        padding: space(xs) space(s);
+      }
+    }
+
+    &__action {
+      &:hover {
+        text-decoration: none;
+        cursor: pointer;
+
+        @include media-bp(tablet-min) {
+          background-color: $bg-link-hover;
+        }
+      }
+
+      &.is-active {
+        background-color: $bg-link-active;
+        color: $color-active;
+        transition: background-color $website-animation-time, color $website-animation-time;
+      }
+    }
+
+    &__remove {
+    }
+
+    &__icon {
+      font-size: 1rem;
+      min-width: 1rem;
+
+      .fa {
+        z-index: 1;
+        border: none;
+
+        &:hover {
+          background-color: $bg-link-hover;
+        }
+
+        &::before {
+          float: left;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          font-size: 1rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: -1;
+        }
+      }
+    }
+
+    &__menu {
+      margin: 0;
+      padding: 0;
+
+      @include media-bp(tablet-min) {
+        display: flex;
+        flex-flow: row wrap;
+      }
+
+      &__item {
+        position: relative;
+        list-style: none;
+
+        @include media-bp(tablet-min) {
+          white-space: nowrap;
+        }
+
+        &+& {
+          @include media-bp(phone) {
+            border-top: $website-border-secondary;
+          }
+        }
+
+        ul {
+          z-index: zindex(dropdown);
+          background-color: $bg-dropdown;
+
+          @include media-bp(tablet-min) {
+            display: none;
+            position: absolute;
+            white-space: nowrap;
+            border: $website-border-secondary;
+            box-shadow: $website-shadow-hover;
+          }
+
+          ul {
+            left: 100%;
+            top: -1px;
+          }
+        }
+
+        &:hover > ul {
+          display: block;
+        }
+      }
+    }
+
+    &__left {
+      .has-search-open & {
+        display: none;
+      }
+
+      .has-menu-open & {
+        @include media-bp(phone) {
+          display: block;
+        }
+      }
+
+      header & {
+        @include media-bp(phone) {
+          display: none;
+        }
+      }
+    }
+
+    &__right {
+      display: flex;
+      flex-grow: 1;
+      justify-content: flex-end;
+
+      .has-search-open & {
+        flex-grow: 0;
+      }
+
+      .has-menu-open & {
+        @include media-bp(phone) {
+          border-bottom: $website-border-secondary;
+        }
+      }
+
+      footer & {
+        @include media-bp(phone) {
+          display: block;
+        }
+      }
+    }
+
+    &__burger {
+      @include media-bp(tablet-min) {
+        display: none !important; // please forgive me for this...
+      }
+
+      .has-search-open & {
+        display: none !important; // please forgive me for this...
+      }
+    }
+  }
+
+  // vertical navbar, e.g. for side navigations
+  &-v {
+    padding: 0 4vw;
+
+    @include media-bp(mobile) {
+      position: fixed;
+      left: -100vw;
+      top: 0;
+      background-color: white;
+      height: 100vh;
+      width: 100vw;
+      z-index: zindex(dropdown);
+      transition: left 0.2s, z-index 0.2s 0s;
+      padding-top: 2rem;
+
+      &:active,
+      &:focus {
+        left: 0;
+        z-index: 999;
+      }
+    }
+
+    &__toggle,
+    &__close {
+      @include media-bp(mobile) {
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 2rem;
+        margin: $grid-gutter-size;
+        padding: 0.2rem;
+        border-radius: 50%;
+        background-color: white;
+        cursor: pointer;
+      }
+    }
+
+    &__close {
+      display: none;
+      border: none;
+      width: 2rem;
+
+      *:focus & {
+        @include media-bp(mobile) {
+          display: block;
+        }
+      }
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      a {
+        position: relative;
+        z-index: 0;
+
+        &::after {
+          content: "";
+          position: absolute;
+          height: 1.5em;
+          width: 0;
+          left: -0.5em;
+          transition: all 0.2s;
+          z-index: -1;
+        }
+
+        &:hover,
+        &:focus {
+          &::after {
+            background-color: $bg-link-hover;
+            width: calc(100% + 1em);
+            right: 0;
+          }
+        }
+      }
+    }
+
+    li {
+      font-weight: bolder;
+      margin-bottom: 1px;
+
+      ul {
+        margin: 0.5rem 0.5rem 1rem;
+      }
+
+      li {
+        font-weight: lighter;
+
+        ul {
+          display: none;
+        }
+      }
+    }
+
+    a:focus + ul {
+      display: block;
+    }
+  }
+
+  // secondary navbar, e.g. for sidebars
+  &-sub {
+    font-size: 0.8rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: space(xs);
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: $bg-link-hover;
+    border-bottom: $website-border-secondary;
+
+    @include media-bp(phone) {
+      justify-content: space-between;
+    }
+
+    &__group {
+      position: relative;
+      display: flex;
+      font-size: 0.8rem;
+
+      > * {
+
+        @include media-bp(tablet-min) {
+          padding: 0 space(s);
+        }
+
+        @include media-bp(phone) {
+          padding: 0 space(xs);
+        }
+      }
+    }
+
+    &__label {
+      font-weight: bolder;
+      @include media-bp(phone) {
+        display: none;
+      }
+    }
+
+    &__action {
+      display: block;
+      flex-grow: 1;
+      text-align: center;
+      border: $website-border-secondary;
+      border-color: transparent;
+      text-decoration: none;
+      background-color: transparent;
+
+      &:hover {
+        text-decoration: none;
+        cursor: pointer;
+        background-color: $bg-link-hover;
+      }
+
+      &:not(:last-child) {
+        border-right: none;
+      }
+
+      &.is-active,
+      &:active {
+        background-color: $bg-link-hover;
+        border: $website-border-secondary;
+      }
+    }
+  }
+}

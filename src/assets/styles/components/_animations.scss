@@ -1,0 +1,81 @@
+.fadeIn {
+  animation: fadeIn $website-animation-time forwards;
+  opacity: 0;
+
+  // @include animationDelay;
+}
+
+.fadeOut { animation: fadeIn $website-animation-time backwards; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fadeInUp {
+  opacity: 0;
+  animation: fadeInUp $website-animation-time forwards;
+
+  // @include animationDelay;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.fadeInRight { animation: fadeInRight $website-animation-time forwards; }
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.slideInRight {
+  animation: slideInRight $website-animation-time forwards;
+
+  // @include animationDelay;
+}
+
+@keyframes slideInRight {
+  from { transform: translate3d(50%, 0, 0); }
+  to { transform: none; }
+}
+
+.slideInLeft {
+  animation: slideInLeft $website-animation-time forwards;
+
+  // @include animationDelay;
+}
+
+@keyframes slideInLeft {
+  from { transform: translate3d(-50%, 0, 0); }
+  to { transform: none; }
+}
+
+.animation-delay { animation-delay: $website-animation-delay; }
+
+@keyframes rotate360 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
