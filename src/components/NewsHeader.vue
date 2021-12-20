@@ -215,42 +215,42 @@ export default defineComponent({
       "removeSub"
     ]),
     toggleMenu() {
-      this.openMenu = !this.openMenu;
-      this.$store.dispatch("changeSearchOpen", true);
+      openMenu = !openMenu;
+      $store.dispatch("changeSearchOpen", true);
     },
     toggleSettings() {
-      this.openSettings = !this.openSettings;
-      this.openMenu = false;
+      openSettings = !openSettings;
+      openMenu = false;
     },
     toggleSearch() {
-      this.openMenu = false;
-      this.openSettings = false;
-      this.$store.dispatch("changeSearchOpen");
-      if (!this.getSearch.open) {
-        this.$store.dispatch("changeSearch", "");
+      openMenu = false;
+      openSettings = false;
+      $store.dispatch("changeSearchOpen");
+      if (!getSearch.open) {
+        $store.dispatch("changeSearch", "");
       }
     },
     resetSettings() {
       localStorage.clear();
       location.reload();
-      this.$store.dispatch("resetState");
+      $store.dispatch("resetState");
     },
     toggleSearchTopic() {
-      this.searchSub();
+      searchSub();
     },
     navigate(menu: string) {
-      this.changeSub(menu);
-      if (this.$route.name !== "home") {
-        this.$router.push({ name: "home" });
+      changeSub(menu);
+      if ($route.name !== "home") {
+        $router.push({ name: "home" });
       }
     },
     searchSub() {
-      if (this.$route.name === "home") {
-        this.$router.push({ name: "subreddits" });
-        this.toggleSearch();
+      if ($route.name === "home") {
+        $router.push({ name: "subreddits" });
+        toggleSearch();
       } else {
-        this.$router.push({ name: "home" });
-        this.toggleSearch();
+        $router.push({ name: "home" });
+        toggleSearch();
       }
     }
   }

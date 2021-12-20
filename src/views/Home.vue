@@ -93,38 +93,38 @@ export default defineComponent({
     ...mapActions(["commitPosts"]),
 
     toggleModal(): void {
-      this.modalOpen = !this.modalOpen;
+      modalOpen = !modalOpen;
     },
 
     _refreshListener() {
-      const el = this.$refs.container as HTMLElement;
+      const el = $refs.container as HTMLElement;
       if (el) {
-        el.addEventListener("touchend", this._handleTouchEnd);
-        el.addEventListener("touchstart", this._handleTouchStart);
+        el.addEventListener("touchend", _handleTouchEnd);
+        el.addEventListener("touchstart", _handleTouchStart);
       }
     },
 
     _loadMoreListener() {
-      window.addEventListener("scroll", this._loadMore);
+      window.addEventListener("scroll", _loadMore);
     },
 
     _removeListeners() {
-      const el = this.$refs.container as HTMLElement;
+      const el = $refs.container as HTMLElement;
       if (el) {
-        el.removeEventListener("touchend", this._handleTouchEnd);
-        el.removeEventListener("touchstart", this._handleTouchStart);
-        el.removeEventListener("scroll", this._loadMore);
+        el.removeEventListener("touchend", _handleTouchEnd);
+        el.removeEventListener("touchstart", _handleTouchStart);
+        el.removeEventListener("scroll", _loadMore);
       }
     },
 
     _checkWelcome() {
-      if (!this.getQuery || !this.getSubreddits) {
-        this.$router.push({ name: "welcome" });
+      if (!getQuery || !getSubreddits) {
+        $router.push({ name: "welcome" });
       }
     },
 
     _toggleNetworkStatus({ type }): void {
-      this.statusOnline = type === "online";
+      statusOnline = type === "online";
     },
 
     /**
@@ -138,13 +138,13 @@ export default defineComponent({
           el.style.transform = `translateY(${offsetY}px)`;
         }
         if (offsetY > threshold / 1.5) {
-          this.refresh = true;
+          refresh = true;
         } else {
-          this.refresh = false;
+          refresh = false;
         }
       } else {
         el.style.transform = `translateY(0)`;
-        this.refresh = false;
+        refresh = false;
       }
     },
 
@@ -155,8 +155,8 @@ export default defineComponent({
     _refreshTrigger(): void {
       const el = document.querySelector("body");
       el!.style.transform = `translateY(0)`;
-      if (this.refresh) {
-        this.$store.dispatch("commitPosts");
+      if (refresh) {
+        $store.dispatch("commitPosts");
       }
     },
 
@@ -173,14 +173,14 @@ export default defineComponent({
         const X2 = $move.touches[0].screenX;
         const Y2 = $move.touches[0].screenY;
         const el = document.querySelector("body");
-        this._refreshCheck(Y1, Y2, el!);
+        _refreshCheck(Y1, Y2, el!);
       };
 
       window.addEventListener("touchmove", move);
     },
 
     _handleTouchEnd(): void {
-      this._refreshTrigger();
+      _refreshTrigger();
     },
 
     /**
@@ -191,22 +191,22 @@ export default defineComponent({
 
       // not online
       if (!window.navigator) {
-        this.statusOnline = false;
+        statusOnline = false;
         return;
       }
 
       // online
-      this.statusOnline = Boolean(window.navigator.onLine);
+      statusOnline = Boolean(window.navigator.onLine);
 
-      if (!this.statusOnline) {
-        window.addEventListener("offline", this._toggleNetworkStatus);
-        window.addEventListener("online", this._toggleNetworkStatus);
+      if (!statusOnline) {
+        window.addEventListener("offline", _toggleNetworkStatus);
+        window.addEventListener("online", _toggleNetworkStatus);
 
         if (noStorage) {
-          this.$store.dispatch("commitPosts");
+          $store.dispatch("commitPosts");
         } else {
           // offline mode
-          this.$store.commit(
+          $store.commit(
             "commitPosts",
             JSON.parse(window.localStorage.getItem("vuex") || "")
           );
@@ -218,38 +218,38 @@ export default defineComponent({
      * Infinite scroll
      */
     _loadMore(): void {
-      const el = this.$refs.posts as HTMLElement;
+      const el = $refs.posts as HTMLElement;
 
       if (!el) {
         return;
       }
 
-      if (!this.loadThreshold) {
-        this.loadThreshold = el.offsetHeight;
+      if (!loadThreshold) {
+        loadThreshold = el.offsetHeight;
       }
 
       // TODO: Replace with "el" after setting CSS grid layout
-      const offset = window.scrollY - el.offsetHeight + this.loadThreshold;
+      const offset = window.scrollY - el.offsetHeight + loadThreshold;
       const trigger = offset > 0;
-      if (trigger && !this.$store.state.loading) {
-        this.$store.dispatch("loadMore");
+      if (trigger && !$store.state.loading) {
+        $store.dispatch("loadMore");
       }
     }
   },
 
   created(): void {},
   destroyed(): void {
-    this._removeListeners();
+    _removeListeners();
   },
 
   mounted(): void {
-    this._refreshListener();
-    this._loadMoreListener();
-    this._checkWelcome();
+    _refreshListener();
+    _loadMoreListener();
+    _checkWelcome();
 
     // display post default
-    this.$store.dispatch("commitPosts");
-    this._handleOffline();
+    $store.dispatch("commitPosts");
+    _handleOffline();
   }
 });
 </script>

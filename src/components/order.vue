@@ -20,10 +20,10 @@ export default defineComponent({
     ...mapGetters(["getSort"]),
     select: {
       get(): string {
-        return this.$store.state.settings.sort;
+        return $store.state.settings.sort;
       },
       set(value: string): void {
-        this.$store.dispatch("changeOrder", value);
+        $store.dispatch("changeOrder", value);
       }
     }
   },

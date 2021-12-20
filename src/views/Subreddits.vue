@@ -37,7 +37,7 @@ export default defineComponent({
   },
 
   mounted(): void {
-    this.$store.dispatch("commitSubreddits");
+    $store.dispatch("commitSubreddits");
   }
 });
 </script>

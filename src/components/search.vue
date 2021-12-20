@@ -18,28 +18,28 @@ export default defineComponent({
     ...mapActions(["changeSearch", "changeSearchGlobal"])
   },
   mounted() {
-    (this.$refs.search as HTMLElement).focus();
+    ($refs.search as HTMLElement).focus();
   },
   computed: {
     ...mapGetters(["getSearch"]),
     search: {
       get(): string {
-        return this.$store.state.search.string;
+        return $store.state.search.string;
       },
       set(value: string): void {
-        if (this.$route.name === "home") {
-          this.$store.dispatch("changeSearch", value);
+        if ($route.name === "home") {
+          $store.dispatch("changeSearch", value);
         } else {
-          this.$store.dispatch("commitSubreddits", value);
+          $store.dispatch("commitSubreddits", value);
         }
       }
     },
     searchGlobal: {
       get(): string {
-        return this.$store.state.search.global;
+        return $store.state.search.global;
       },
       set(value: string): void {
-        this.$store.dispatch("changeSearchGlobal");
+        $store.dispatch("changeSearchGlobal");
       }
     }
   }
