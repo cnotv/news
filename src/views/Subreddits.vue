@@ -15,6 +15,7 @@
 import {defineComponent } from "vue";
 import { mapGetters, mapActions } from "vuex";
 import Subreddit from "@/components/Subreddit.vue";
+import { store } from "@/store";
 
 export default defineComponent({
   name: "home",
@@ -36,7 +37,7 @@ export default defineComponent({
   },
 
   mounted(): void {
-    $store.dispatch("commitSubreddits");
+    store.dispatch("commitSubreddits");
   }
 });
 </script>
