@@ -1,10 +1,9 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import Welcome from "@/views/Welcome.vue";
 import Subreddits from "@/views/Subreddits.vue";
+import {createRouter, createWebHistory}  from 'vue-router'
 
-export const routes = [
+const routes = [
   {
     path: "/",
     name: "home",
@@ -21,12 +20,12 @@ export const routes = [
     component: Subreddits
   },
   {
-    path: "*",
+    path: "/:pathMatch(.*)*",
     redirect: "/"
   }
 ];
 
-export const router = VueRouter.createRouter({
-  history: VueRouter.createWebHistory(),
+export const router = createRouter({
+  history:createWebHistory(),
   routes
-});
+})
