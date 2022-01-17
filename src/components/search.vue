@@ -11,6 +11,7 @@
 <script lang="ts">
 import {defineComponent} from "vue";
 import { mapGetters, mapActions } from "vuex";
+import { store } from "@/store";
 
 export default defineComponent({
   name: "search",
@@ -18,28 +19,28 @@ export default defineComponent({
     ...mapActions(["changeSearch", "changeSearchGlobal"])
   },
   mounted() {
-    ($refs.search as HTMLElement).focus();
+    (this.$refs.search as HTMLElement).focus();
   },
   computed: {
     ...mapGetters(["getSearch"]),
     search: {
       get(): string {
-        return $store.state.search.string;
+        return store.state.search.string;
       },
       set(value: string): void {
-        if ($route.name === "home") {
-          $store.dispatch("changeSearch", value);
+        if (this.$route.name === "home") {
+          store.dispatch("changeSearch", value);
         } else {
-          $store.dispatch("commitSubreddits", value);
+          store.dispatch("commitSubreddits", value);
         }
       }
     },
     searchGlobal: {
-      get(): string {
-        return $store.state.search.global;
+      get(): boolean {
+        return store.state.search.global;
       },
       set(value: string): void {
-        $store.dispatch("changeSearchGlobal");
+        store.dispatch("changeSearchGlobal");
       }
     }
   }

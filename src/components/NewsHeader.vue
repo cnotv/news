@@ -93,23 +93,23 @@
         <!-- Reddit -->
         <button
           class="o-nav-h__action"
-          v-bind:class="{ 'is-active': $route.name === 'subreddits' }"
+          v-bind:class="{ 'is-active': isSubreddits() }"
           v-on:click="searchSub"
-          v-if="!(getSearch.open && $route.name !== 'subreddits')"
+          v-if="!(getSearch.open && !isSubreddits())"
         >
           <i
-            v-if="$route.name !== 'subreddits'"
+            v-if="!isSubreddits()"
             class="fa fa-reddit o-nav-h__icon"
           ></i>
           <i
-            v-if="$route.name === 'subreddits'"
+            v-if="isSubreddits()"
             class="fa fa-times o-nav-h__icon"
           ></i>
         </button>
 
         <!-- Search -->
         <button
-          v-if="$route.name !== 'subreddits'"
+          v-if="!isSubreddits()"
           class="o-nav-h__action o-search__toggle"
           v-on:click="toggleSearch"
           v-bind:class="{ 'is-active': getSearch.open }"
@@ -120,7 +120,7 @@
     </nav>
 
     <nav
-      v-if="openSettings | getSearch.open && $route.name !== 'subreddits'"
+      v-if="openSettings || getSearch.open && !isSubreddits()'"
       class="o-nav-sub"
     >
       <div class="o-nav-sub__group fadeIn" v-if="!getSearch.open">
@@ -181,6 +181,7 @@ import { defineComponent } from "vue";
 import { mapGetters, mapActions } from "vuex";
 import newsOrder from "@/components/order.vue";
 import search from "@/components/search.vue";
+import { store } from "@/store";
 import { LIMITS, LAYOUTS, TIMES } from "@/data/settings";
 
 export default defineComponent({
@@ -215,43 +216,46 @@ export default defineComponent({
       "removeSub"
     ]),
     toggleMenu() {
-      openMenu = !openMenu;
-      $store.dispatch("changeSearchOpen", true);
+      this.openMenu = !this.openMenu;
+      store.dispatch("changeSearchOpen", true);
     },
     toggleSettings() {
-      openSettings = !openSettings;
-      openMenu = false;
+      this.openSettings = !this.openSettings;
+      this.openMenu = false;
     },
     toggleSearch() {
-      openMenu = false;
-      openSettings = false;
-      $store.dispatch("changeSearchOpen");
-      if (!getSearch.open) {
-        $store.dispatch("changeSearch", "");
+      this.openMenu = false;
+      this.openSettings = false;
+      store.dispatch("changeSearchOpen");
+      if (!this.getSearch.open) {
+        store.dispatch("changeSearch", "");
       }
     },
     resetSettings() {
       localStorage.clear();
       location.reload();
-      $store.dispatch("resetState");
+      store.dispatch("resetState");
     },
     toggleSearchTopic() {
-      searchSub();
+      this.searchSub();
     },
     navigate(menu: string) {
-      changeSub(menu);
-      if ($route.name !== "home") {
-        $router.push({ name: "home" });
+      this.changeSub(menu);
+      if (this.$route.name !== "home") {
+        this.$router.push({ name: "home" });
       }
     },
     searchSub() {
-      if ($route.name === "home") {
-        $router.push({ name: "subreddits" });
-        toggleSearch();
+      if (this.$route.name === "home") {
+        this.$router.push({ name: "subreddits" });
+        this.toggleSearch();
       } else {
-        $router.push({ name: "home" });
-        toggleSearch();
+        this.$router.push({ name: "home" });
+        this.toggleSearch();
       }
+    },
+    isSubreddits() {
+      return this.$route.name === 'subreddits'
     }
   }
 });

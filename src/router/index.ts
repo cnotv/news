@@ -4,7 +4,7 @@ import Home from "@/views/Home.vue";
 import Welcome from "@/views/Welcome.vue";
 import Subreddits from "@/views/Subreddits.vue";
 
-const routes = [
+export const routes = [
   {
     path: "/",
     name: "home",

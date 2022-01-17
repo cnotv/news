@@ -9,7 +9,7 @@
   >
     <header>
       <a :href="post.data.url" target="_blank">
-        <h3>{{ post.data.title | truncate(100) }}</h3>
+        <h3>{{ truncate(post.data.title, 100) }}</h3>
       </a>
     </header>
 
@@ -33,7 +33,7 @@
       </template>
 
       <div v-if="post.data.selftext">
-        {{ post.data.selftext | truncate(400) }}
+        {{ truncate(post.data.selftext, 400) }}
       </div>
     </section>
 
@@ -45,9 +45,11 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
+import { mixins } from "@/mixins";
 
 export default defineComponent({
   name: "Paper",
-  props: ["post"]
+  props: ["post"],
+  mixins: [mixins]
 });
 </script>

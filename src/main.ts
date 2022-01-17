@@ -3,6 +3,7 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import { router } from "./router";
 import { store } from "./store";
+import { mixins } from "./mixins";
 
 import * as Sentry from "@sentry/vue";
 import { Integrations } from "@sentry/tracing";
@@ -21,7 +22,7 @@ Sentry.init({
 
 const app = createApp({
   ...App,
-  mixins: [App.mixin],
+  mixins: [App.mixin, mixins],
 });
 
 app.use(store);

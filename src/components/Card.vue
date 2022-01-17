@@ -8,11 +8,10 @@
             post.data.domain == 'youtube.com' ||
               post.data.domain == 'youtu.be'
           "
-          v-on:click="toggleModal(post.data.url)"
         >
           <iframe
             width="100%"
-            :src="post.data.url | embed"
+            :src="`${embed(post.data.url)}`"
             frameborder="0"
             gesture="media"
             allow="encrypted-media"
@@ -23,7 +22,6 @@
         <header
           class="o-card__header"
           v-else-if="post.data.preview"
-          v-on:click="toggleModal(post.data.url)"
         >
           <img
             v-if="post.data.preview.images[0].variants.gif"
@@ -43,11 +41,11 @@
         </header>
 
         <section>
-          <h6>{{ post.data.title | truncate(150) }}</h6>
+          <h6>{{ truncate(post.data.title, 150) }}</h6>
         </section>
 
         <section v-if="post.data.selftext">
-          <div>{{ post.data.selftext | truncate(200) }}</div>
+          <div>{{ truncate(post.data.selftext, 200) }}</div>
         </section>
 
         <footer>
@@ -62,7 +60,7 @@
             <i class="fa fa-comment"></i>
           </a>
           <small>
-            {{ post.data.created_utc | date }}
+            {{ date(post.data.created_utc) }}
           </small>
           <a href="#" class="c-btn-alt" v-on:click="addSub(post.data.subreddit)"
             >/r/{{ post.data.subreddit }}
@@ -75,9 +73,11 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { mixins } from "@/mixins";
 
 export default defineComponent({
   name: "Card",
-  props: ["post"]
+  props: ["post"],
+  mixins: [mixins]
 });
 </script>

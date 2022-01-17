@@ -1,13 +1,12 @@
 <template>
   <article class="o-gallery__item" v-if="post.data.preview">
     <header>
-      <h6>{{ post.data.title | truncate(150) }}</h6>
+      <h6>{{ truncate(post.data.title, 150) }}</h6>
     </header>
 
     <section
       v-if="post.data.preview"
       v-bind:style="style"
-      v-on:click="toggleModal(post.data.url)"
     >
       <a :href="post.data.url" target="_blank">
         <img
@@ -39,7 +38,7 @@
       >
         <i class="fa fa-comment"></i>
       </a>
-      <small>{{ post.data.created_utc | date }}</small>
+      <small>{{ date(post.data.created_utc) }}</small>
       <a href="#" class="c-btn-alt" v-on:click="addSub(post.data.subreddit)"
         >/r/{{ post.data.subreddit }}</a
       >
@@ -49,17 +48,19 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { mixins } from "@/mixins";
 
 export default defineComponent({
   name: "Gallery",
   props: ["post"],
+  mixins: [mixins],
   data() {
     return {
       style: {
-        minHeight: !post.data.preview
+        minHeight: !this.post.data.preview
           ? 0
-          : (post.data.preview.images[0].source.height /
-              post.data.preview.images[0].source.width) *
+          : (this.post.data.preview.images[0].source.height /
+              this.post.data.preview.images[0].source.width) *
               30 +
             "vw"
       }

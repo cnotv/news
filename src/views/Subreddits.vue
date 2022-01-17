@@ -15,7 +15,6 @@
 import {defineComponent } from "vue";
 import { mapGetters, mapActions } from "vuex";
 import Subreddit from "@/components/Subreddit.vue";
-import { getPosts } from "@/store/getters";
 
 export default defineComponent({
   name: "home",

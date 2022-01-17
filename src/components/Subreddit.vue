@@ -13,10 +13,12 @@
 
 <script lang="ts">
 import {defineComponent} from "vue";
+import { mixins } from "@/mixins";
 
 export default defineComponent({
   name: "Subreddit",
-  props: ["post"]
+  props: ["post"],
+  mixins: [mixins]
 });
 </script>
 

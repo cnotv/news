@@ -27,24 +27,27 @@
           v-bind:post="post"
           :key="post.data.id"
         />
-        <Paper
-          v-else-if="getLayout === 2"
-          v-for="post in getPosts"
-          v-bind:post="post"
-          :key="post.data.id"
-        />
-        <Gallery
-          v-else-if="getLayout === 3"
-          v-for="post in getPosts"
-          v-bind:post="post"
-          :key="post.data.id"
-        />
-        <Subreddit
-          v-else
-          v-for="post in getPosts"
-          v-bind:post="post"
-          :key="post.data.id"
-        />
+        <template v-else-if="getLayout === 2">
+          <Paper
+            v-for="post in getPosts"
+            v-bind:post="post"
+            :key="post.data.id"
+          />
+        </template>
+        <template v-else-if="getLayout === 3">
+          <Gallery
+            v-for="post in getPosts"
+            v-bind:post="post"
+            :key="post.data.id"
+          />
+        </template>
+        <template v-else>
+          <Subreddit
+            v-for="post in getPosts"
+            v-bind:post="post"
+            :key="post.data.id"
+          />
+        </template>
 
         <modal v-if="modalOpen" />
       </div>
@@ -65,6 +68,7 @@ import List from "@/components/List.vue";
 import Paper from "@/components/Paper.vue";
 import Subreddit from "@/components/Subreddit.vue";
 import { getSubreddits } from "@/store/getters";
+import { store } from "@/store";
 
 export default defineComponent({
   name: "home",
@@ -93,38 +97,38 @@ export default defineComponent({
     ...mapActions(["commitPosts"]),
 
     toggleModal(): void {
-      modalOpen = !modalOpen;
+      this.modalOpen = !this.modalOpen;
     },
 
     _refreshListener() {
-      const el = $refs.container as HTMLElement;
+      const el = this.$refs.container as HTMLElement;
       if (el) {
-        el.addEventListener("touchend", _handleTouchEnd);
-        el.addEventListener("touchstart", _handleTouchStart);
+        el.addEventListener("touchend", this._handleTouchEnd);
+        el.addEventListener("touchstart", this._handleTouchStart);
       }
     },
 
     _loadMoreListener() {
-      window.addEventListener("scroll", _loadMore);
+      window.addEventListener("scroll", this._loadMore);
     },
 
     _removeListeners() {
-      const el = $refs.container as HTMLElement;
+      const el = this.$refs.container as HTMLElement;
       if (el) {
-        el.removeEventListener("touchend", _handleTouchEnd);
-        el.removeEventListener("touchstart", _handleTouchStart);
-        el.removeEventListener("scroll", _loadMore);
+        el.removeEventListener("touchend", this._handleTouchEnd);
+        el.removeEventListener("touchstart", this._handleTouchStart);
+        el.removeEventListener("scroll", this._loadMore);
       }
     },
 
     _checkWelcome() {
-      if (!getQuery || !getSubreddits) {
-        $router.push({ name: "welcome" });
+      if (!this.getQuery || !getSubreddits) {
+        this.$router.push({ name: "welcome" });
       }
     },
 
-    _toggleNetworkStatus({ type }): void {
-      statusOnline = type === "online";
+    _toggleNetworkStatus({ type }:Event ): void {
+      this.statusOnline = type === "online";
     },
 
     /**
@@ -138,13 +142,13 @@ export default defineComponent({
           el.style.transform = `translateY(${offsetY}px)`;
         }
         if (offsetY > threshold / 1.5) {
-          refresh = true;
+          this.refresh = true;
         } else {
-          refresh = false;
+          this.refresh = false;
         }
       } else {
         el.style.transform = `translateY(0)`;
-        refresh = false;
+        this.refresh = false;
       }
     },
 
@@ -155,8 +159,8 @@ export default defineComponent({
     _refreshTrigger(): void {
       const el = document.querySelector("body");
       el!.style.transform = `translateY(0)`;
-      if (refresh) {
-        $store.dispatch("commitPosts");
+      if (this.refresh) {
+        store.dispatch("commitPosts");
       }
     },
 
@@ -173,14 +177,14 @@ export default defineComponent({
         const X2 = $move.touches[0].screenX;
         const Y2 = $move.touches[0].screenY;
         const el = document.querySelector("body");
-        _refreshCheck(Y1, Y2, el!);
+        this._refreshCheck(Y1, Y2, el!);
       };
 
       window.addEventListener("touchmove", move);
     },
 
     _handleTouchEnd(): void {
-      _refreshTrigger();
+      this._refreshTrigger();
     },
 
     /**
@@ -191,22 +195,22 @@ export default defineComponent({
 
       // not online
       if (!window.navigator) {
-        statusOnline = false;
+        this.statusOnline = false;
         return;
       }
 
       // online
-      statusOnline = Boolean(window.navigator.onLine);
+      this.statusOnline = Boolean(window.navigator.onLine);
 
-      if (!statusOnline) {
-        window.addEventListener("offline", _toggleNetworkStatus);
-        window.addEventListener("online", _toggleNetworkStatus);
+      if (!this.statusOnline) {
+        window.addEventListener("offline", this._toggleNetworkStatus);
+        window.addEventListener("online", this._toggleNetworkStatus);
 
         if (noStorage) {
-          $store.dispatch("commitPosts");
+          store.dispatch("commitPosts");
         } else {
           // offline mode
-          $store.commit(
+          store.commit(
             "commitPosts",
             JSON.parse(window.localStorage.getItem("vuex") || "")
           );
@@ -218,38 +222,38 @@ export default defineComponent({
      * Infinite scroll
      */
     _loadMore(): void {
-      const el = $refs.posts as HTMLElement;
+      const el = this.$refs.posts as HTMLElement;
 
       if (!el) {
         return;
       }
 
-      if (!loadThreshold) {
-        loadThreshold = el.offsetHeight;
+      if (!this.loadThreshold) {
+        this.loadThreshold = el.offsetHeight;
       }
 
       // TODO: Replace with "el" after setting CSS grid layout
-      const offset = window.scrollY - el.offsetHeight + loadThreshold;
+      const offset = window.scrollY - el.offsetHeight + this.loadThreshold;
       const trigger = offset > 0;
-      if (trigger && !$store.state.loading) {
-        $store.dispatch("loadMore");
+      if (trigger && !store.state.loading) {
+        store.dispatch("loadMore");
       }
     }
   },
 
   created(): void {},
   destroyed(): void {
-    _removeListeners();
+    this._removeListeners();
   },
 
   mounted(): void {
-    _refreshListener();
-    _loadMoreListener();
-    _checkWelcome();
+    this._refreshListener();
+    this._loadMoreListener();
+    this._checkWelcome();
 
     // display post default
-    $store.dispatch("commitPosts");
-    _handleOffline();
+    store.dispatch("commitPosts");
+    this._handleOffline();
   }
 });
 </script>

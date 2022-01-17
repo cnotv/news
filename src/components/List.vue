@@ -7,7 +7,7 @@
     </header>
 
     <small class="o-list__meta">
-      <span>{{ post.data.created_utc | date }}</span>
+      <span>{{ date(post.data.created_utc) }}</span>
 
       <a :href="'//' + post.data.domain" target="_blank">{{
         post.data.domain
@@ -38,10 +38,12 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
+import { mixins } from "@/mixins";
 
 export default defineComponent({
   name: "List",
   props: ["post"],
+  mixins: [mixins],
   computed: {
     ...mapGetters(["getSearch"])
   }

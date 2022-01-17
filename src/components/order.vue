@@ -7,6 +7,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapGetters, mapActions } from "vuex";
+import { store } from "@/store";
 import { SORTING } from "@/data/settings";
 
 export default defineComponent({
@@ -20,10 +21,10 @@ export default defineComponent({
     ...mapGetters(["getSort"]),
     select: {
       get(): string {
-        return $store.state.settings.sort;
+        return store.state.settings.sort;
       },
       set(value: string): void {
-        $store.dispatch("changeOrder", value);
+        store.dispatch("changeOrder", value);
       }
     }
   },
