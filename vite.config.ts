@@ -9,5 +9,8 @@ export default defineConfig({
       '@': resolve(__dirname, 'src')
     }
   },
-  plugins: [vue()]
+  plugins: [vue()],
+  define: {
+    'process.env': process.env
+  }
 })
