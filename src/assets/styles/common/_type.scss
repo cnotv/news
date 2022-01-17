@@ -70,8 +70,8 @@ li {
 }
 
 hr {
-  margin-top: $grid-gutter-size/2;
-  margin-bottom: $grid-gutter-size/2;
+  margin-top: calc($grid-gutter-size / 2);
+  margin-bottom: calc($grid-gutter-size / 2);
   border: 0;
   border-top: $website-border-secondary;
 }
@@ -82,7 +82,7 @@ small,
 }
 
 blockquote {
-  margin: $grid-gutter-size*2 0;
+  margin: $grid-gutter-size * 2 0;
   padding: 0.5rem 1rem;
   font-size: 1.2em;
   border-left: $website-border;

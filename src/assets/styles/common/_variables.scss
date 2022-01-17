@@ -5,7 +5,7 @@ $sidebar-sm-columns:                  4;
 
 // Layout
 $container-width:                     1200px;
-$container-s-width:                   $container-width*4/6;
+$container-s-width:                   calc($container-width * 4 / 6);
 $grid-gutter-size:                    15px;
 $section-padding:                     2rem;
 
@@ -74,7 +74,7 @@ $website-shadow-hover:                8px 8px 0 0 color(black);
 $website-border-radius:               2px !default;
 $website-border-size:                 2px !default;
 $website-border:                      $website-border-size solid color(black);
-$website-border-secondary:            $website-border-size/2 solid color(black);
+$website-border-secondary:            calc($website-border-size / 2) solid color(black);
 $menu-padding:                        space(s) !default;
 $menu-mobile-offset:                  80px !default;
 

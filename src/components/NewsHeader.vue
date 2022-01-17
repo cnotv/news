@@ -120,7 +120,7 @@
     </nav>
 
     <nav
-      v-if="openSettings || getSearch.open && !isSubreddits()'"
+      v-if="openSettings || getSearch.open && !isSubreddits()"
       class="o-nav-sub"
     >
       <div class="o-nav-sub__group fadeIn" v-if="!getSearch.open">
