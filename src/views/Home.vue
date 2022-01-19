@@ -1,52 +1,36 @@
 <template>
   <section class="c-section">
-    <div class="c-container-full" ref="container">
+    <div ref="container" class="c-container-full">
       <div
+        v-if="getPosts.length > 0"
         ref="posts"
         class
-        v-bind:class="[
+        :class="[
           getLayout === 0 ? '' : '',
           getLayout === 1 ? 'c-row' : '',
           getLayout === 2 ? 'o-paper' : '',
-          getLayout === 3 ? 'o-gallery' : ''
+          getLayout === 3 ? 'o-gallery' : '',
         ]"
-        v-if="getPosts.length > 0"
       >
         <span v-if="!statusOnline">You are offline.</span>
 
         <template v-if="getLayout === 0">
-          <List
-            v-for="post in getPosts"
-            v-bind:post="post"
-            :key="post.data.id"
-          />
+          <List v-for="post in getPosts" :key="post.data.id" :post="post" />
         </template>
         <Card
-          v-else-if="getLayout === 1"
           v-for="post in getPosts"
-          v-bind:post="post"
+          v-else-if="getLayout === 1"
           :key="post.data.id"
+          :post="post"
         />
         <template v-else-if="getLayout === 2">
-          <Paper
-            v-for="post in getPosts"
-            v-bind:post="post"
-            :key="post.data.id"
-          />
+          <Paper v-for="post in getPosts" :key="post.data.id" :post="post" />
         </template>
         <template v-else-if="getLayout === 3">
-          <Gallery
-            v-for="post in getPosts"
-            v-bind:post="post"
-            :key="post.data.id"
-          />
+          <Gallery v-for="post in getPosts" :key="post.data.id" :post="post" />
         </template>
         <template v-else>
-          <Subreddit
-            v-for="post in getPosts"
-            v-bind:post="post"
-            :key="post.data.id"
-          />
+          <Subreddit v-for="post in getPosts" :key="post.data.id" :post="post" />
         </template>
 
         <modal v-if="modalOpen" />
@@ -59,201 +43,198 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
-import { mapGetters, mapActions } from "vuex";
-import Modal from "@/components/Modal.vue";
-import Card from "@/components/Card.vue";
-import Gallery from "@/components/Gallery.vue";
-import List from "@/components/List.vue";
-import Paper from "@/components/Paper.vue";
-import Subreddit from "@/components/Subreddit.vue";
-import { getSubreddits } from "@/store/getters";
-import { store } from "@/store";
+  import { defineComponent } from 'vue'
+  import { mapGetters, mapActions } from 'vuex'
+  import Modal from '@/components/Modal.vue'
+  import Card from '@/components/Card.vue'
+  import Gallery from '@/components/Gallery.vue'
+  import List from '@/components/List.vue'
+  import Paper from '@/components/Paper.vue'
+  import Subreddit from '@/components/Subreddit.vue'
+  import { getSubreddits } from '@/store/getters'
+  import { store } from '@/store'
 
-export default defineComponent({
-  name: "home",
-  components: { Modal, Card, Gallery, List, Subreddit, Paper },
-  data() {
-    return {
-      refresh: false,
-      modalOpen: false,
-      statusOnline: true,
-      loadThreshold: 0,
-      noStorage: window.localStorage.getItem("vuex") === null
-    };
-  },
-
-  computed: {
-    ...mapGetters([
-      "getLayout",
-      "isLoading",
-      "getPosts",
-      "getQuery",
-      "getSearch",
-      "getSubreddits"
-    ])
-  },
-  methods: {
-    ...mapActions(["commitPosts"]),
-
-    toggleModal(): void {
-      this.modalOpen = !this.modalOpen;
-    },
-
-    _refreshListener() {
-      const el = this.$refs.container as HTMLElement;
-      if (el) {
-        el.addEventListener("touchend", this._handleTouchEnd);
-        el.addEventListener("touchstart", this._handleTouchStart);
+  export default defineComponent({
+    name: 'Home',
+    components: { Modal, Card, Gallery, List, Subreddit, Paper },
+    data() {
+      return {
+        refresh: false,
+        modalOpen: false,
+        statusOnline: true,
+        loadThreshold: 0,
+        noStorage: window.localStorage.getItem('vuex') === null,
       }
     },
 
-    _loadMoreListener() {
-      window.addEventListener("scroll", this._loadMore);
+    computed: {
+      ...mapGetters([
+        'getLayout',
+        'isLoading',
+        'getPosts',
+        'getQuery',
+        'getSearch',
+        'getSubreddits',
+      ]),
     },
+    methods: {
+      ...mapActions(['commitPosts']),
 
-    _removeListeners() {
-      const el = this.$refs.container as HTMLElement;
-      if (el) {
-        el.removeEventListener("touchend", this._handleTouchEnd);
-        el.removeEventListener("touchstart", this._handleTouchStart);
-        el.removeEventListener("scroll", this._loadMore);
-      }
-    },
+      toggleModal(): void {
+        this.modalOpen = !this.modalOpen
+      },
 
-    _checkWelcome() {
-      if (!this.getQuery || !getSubreddits) {
-        this.$router.push({ name: "welcome" });
-      }
-    },
-
-    _toggleNetworkStatus({ type }:Event ): void {
-      this.statusOnline = type === "online";
-    },
-
-    /**
-     * Check if a refresh is required
-     */
-    _refreshCheck(y1: number, y2: number, el: HTMLElement): void {
-      const threshold = 150;
-      const offsetY = y2 - y1;
-      if (window.scrollY <= 0) {
-        if (offsetY < threshold) {
-          el.style.transform = `translateY(${offsetY}px)`;
+      _refreshListener() {
+        const el = this.$refs.container as HTMLElement
+        if (el) {
+          el.addEventListener('touchend', this._handleTouchEnd)
+          el.addEventListener('touchstart', this._handleTouchStart)
         }
-        if (offsetY > threshold / 1.5) {
-          this.refresh = true;
+      },
+
+      _loadMoreListener() {
+        window.addEventListener('scroll', this._loadMore)
+      },
+
+      _removeListeners() {
+        const el = this.$refs.container as HTMLElement
+        if (el) {
+          el.removeEventListener('touchend', this._handleTouchEnd)
+          el.removeEventListener('touchstart', this._handleTouchStart)
+          el.removeEventListener('scroll', this._loadMore)
+        }
+      },
+
+      _checkWelcome() {
+        if (!this.getQuery || !getSubreddits) {
+          this.$router.push({ name: 'welcome' })
+        }
+      },
+
+      _toggleNetworkStatus({ type }: Event): void {
+        this.statusOnline = type === 'online'
+      },
+
+      /**
+       * Check if a refresh is required
+       */
+      _refreshCheck(y1: number, y2: number, el: HTMLElement): void {
+        const threshold = 150
+        const offsetY = y2 - y1
+        if (window.scrollY <= 0) {
+          if (offsetY < threshold) {
+            el.style.transform = `translateY(${offsetY}px)`
+          }
+          if (offsetY > threshold / 1.5) {
+            this.refresh = true
+          } else {
+            this.refresh = false
+          }
         } else {
-          this.refresh = false;
+          el.style.transform = `translateY(0)`
+          this.refresh = false
         }
-      } else {
-        el.style.transform = `translateY(0)`;
-        this.refresh = false;
-      }
-    },
+      },
 
-    /**
-     * Refresh if active.
-     * Delete style alteration always.
-     */
-    _refreshTrigger(): void {
-      const el = document.querySelector("body");
-      el!.style.transform = `translateY(0)`;
-      if (this.refresh) {
-        store.dispatch("commitPosts");
-      }
-    },
-
-    /**
-     * Handle touch events for mobile:
-     * - Top offset for refreshing
-     * - Side swipes for changing subreddit
-     */
-    _handleTouchStart($start: TouchEvent): void {
-      const X1 = $start.touches[0].screenX;
-      const Y1 = $start.touches[0].screenY;
-
-      const move = ($move: TouchEvent): void => {
-        const X2 = $move.touches[0].screenX;
-        const Y2 = $move.touches[0].screenY;
-        const el = document.querySelector("body");
-        this._refreshCheck(Y1, Y2, el!);
-      };
-
-      window.addEventListener("touchmove", move);
-    },
-
-    _handleTouchEnd(): void {
-      this._refreshTrigger();
-    },
-
-    /**
-     * Online check and local storage save
-     */
-    _handleOffline(): void {
-      const noStorage = window.localStorage.getItem("vuex") === null;
-
-      // not online
-      if (!window.navigator) {
-        this.statusOnline = false;
-        return;
-      }
-
-      // online
-      this.statusOnline = Boolean(window.navigator.onLine);
-
-      if (!this.statusOnline) {
-        window.addEventListener("offline", this._toggleNetworkStatus);
-        window.addEventListener("online", this._toggleNetworkStatus);
-
-        if (noStorage) {
-          store.dispatch("commitPosts");
-        } else {
-          // offline mode
-          store.commit(
-            "commitPosts",
-            JSON.parse(window.localStorage.getItem("vuex") || "")
-          );
+      /**
+       * Refresh if active.
+       * Delete style alteration always.
+       */
+      _refreshTrigger(): void {
+        const el = document.querySelector('body')
+        el!.style.transform = `translateY(0)`
+        if (this.refresh) {
+          store.dispatch('commitPosts')
         }
-      }
+      },
+
+      /**
+       * Handle touch events for mobile:
+       * - Top offset for refreshing
+       * - Side swipes for changing subreddit
+       */
+      _handleTouchStart($start: TouchEvent): void {
+        const X1 = $start.touches[0].screenX
+        const Y1 = $start.touches[0].screenY
+
+        const move = ($move: TouchEvent): void => {
+          const X2 = $move.touches[0].screenX
+          const Y2 = $move.touches[0].screenY
+          const el = document.querySelector('body')
+          this._refreshCheck(Y1, Y2, el!)
+        }
+
+        window.addEventListener('touchmove', move)
+      },
+
+      _handleTouchEnd(): void {
+        this._refreshTrigger()
+      },
+
+      /**
+       * Online check and local storage save
+       */
+      _handleOffline(): void {
+        const noStorage = window.localStorage.getItem('vuex') === null
+
+        // not online
+        if (!window.navigator) {
+          this.statusOnline = false
+          return
+        }
+
+        // online
+        this.statusOnline = Boolean(window.navigator.onLine)
+
+        if (!this.statusOnline) {
+          window.addEventListener('offline', this._toggleNetworkStatus)
+          window.addEventListener('online', this._toggleNetworkStatus)
+
+          if (noStorage) {
+            store.dispatch('commitPosts')
+          } else {
+            // offline mode
+            store.commit('commitPosts', JSON.parse(window.localStorage.getItem('vuex') || ''))
+          }
+        }
+      },
+
+      /**
+       * Infinite scroll
+       */
+      _loadMore(): void {
+        const el = this.$refs.posts as HTMLElement
+
+        if (!el) {
+          return
+        }
+
+        if (!this.loadThreshold) {
+          this.loadThreshold = el.offsetHeight
+        }
+
+        // TODO: Replace with "el" after setting CSS grid layout
+        const offset = window.scrollY - el.offsetHeight + this.loadThreshold
+        const trigger = offset > 0
+        if (trigger && !store.state.loading) {
+          store.dispatch('loadMore')
+        }
+      },
     },
 
-    /**
-     * Infinite scroll
-     */
-    _loadMore(): void {
-      const el = this.$refs.posts as HTMLElement;
+    created(): void {},
+    unmounted(): void {
+      this._removeListeners()
+    },
 
-      if (!el) {
-        return;
-      }
+    mounted(): void {
+      this._refreshListener()
+      this._loadMoreListener()
+      this._checkWelcome()
 
-      if (!this.loadThreshold) {
-        this.loadThreshold = el.offsetHeight;
-      }
-
-      // TODO: Replace with "el" after setting CSS grid layout
-      const offset = window.scrollY - el.offsetHeight + this.loadThreshold;
-      const trigger = offset > 0;
-      if (trigger && !store.state.loading) {
-        store.dispatch("loadMore");
-      }
-    }
-  },
-
-  created(): void {},
-  destroyed(): void {
-    this._removeListeners();
-  },
-
-  mounted(): void {
-    this._refreshListener();
-    this._loadMoreListener();
-    this._checkWelcome();
-
-    // display post default
-    store.dispatch("commitPosts");
-    this._handleOffline();
-  }
-});
+      // display post default
+      store.dispatch('commitPosts')
+      this._handleOffline()
+    },
+  })
 </script>

@@ -2,10 +2,7 @@
   <article
     v-if="post.data"
     class="o-paper__wrap"
-    v-bind:class="[
-      post.data.selftext ? 'o-paper--desc' : '',
-      post.data.preview ? 'o-paper--pic' : ''
-    ]"
+    :class="[post.data.selftext ? 'o-paper--desc' : '', post.data.preview ? 'o-paper--pic' : '']"
   >
     <header>
       <a :href="post.data.url" target="_blank">
@@ -17,18 +14,11 @@
       <template v-if="post.data.preview">
         <img
           v-if="post.data.preview.images[0].variants.gif"
-          v-lazy="
-            post.data.preview.images[0].variants.gif.source.url.replace(
-              'amp;s',
-              's'
-            )
-          "
+          v-lazy="post.data.preview.images[0].variants.gif.source.url.replace('amp;s', 's')"
         />
         <img
           v-else-if="post.data.preview"
-          v-lazy="
-            post.data.preview.images[0].source.url.replace('amp;s', 's')
-          "
+          v-lazy="post.data.preview.images[0].source.url.replace('amp;s', 's')"
         />
       </template>
 
@@ -44,12 +34,12 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
-import { mixins } from "@/mixins";
+  import { defineComponent } from 'vue'
+  import { mixins } from '@/mixins'
 
-export default defineComponent({
-  name: "Paper",
-  props: ["post"],
-  mixins: [mixins]
-});
+  export default defineComponent({
+    name: 'Paper',
+    mixins: [mixins],
+    props: ['post'],
+  })
 </script>

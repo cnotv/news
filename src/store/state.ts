@@ -1,20 +1,20 @@
 export const state: State = {
-  after: "",
-  currentSub: "",
+  after: '',
+  currentSub: '',
   loading: false,
   posts: [],
-  query: "",
+  query: '',
   search: {
-    currentTime: "",
+    currentTime: '',
     global: false,
     open: false,
-    string: "",
+    string: '',
   },
   settings: {
     layout: 0,
-    limit: "24",
-    sort: "hot",
+    limit: '24',
+    sort: 'hot',
   },
-  strict: process.env.NODE_ENV !== "production",
+  strict: process.env.NODE_ENV !== 'production',
   subreddits: [],
-};
+}

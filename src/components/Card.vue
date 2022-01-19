@@ -3,11 +3,8 @@
     <a :href="post.data.url" target="_blank">
       <div class="o-card__wrap">
         <header
+          v-if="post.data.domain == 'youtube.com' || post.data.domain == 'youtu.be'"
           class="o-card__header"
-          v-if="
-            post.data.domain == 'youtube.com' ||
-              post.data.domain == 'youtu.be'
-          "
         >
           <iframe
             width="100%"
@@ -19,24 +16,14 @@
           ></iframe>
         </header>
 
-        <header
-          class="o-card__header"
-          v-else-if="post.data.preview"
-        >
+        <header v-else-if="post.data.preview" class="o-card__header">
           <img
             v-if="post.data.preview.images[0].variants.gif"
-            v-lazy="
-              post.data.preview.images[0].variants.gif.source.url.replace(
-                'amp;s',
-                's'
-              )
-            "
+            v-lazy="post.data.preview.images[0].variants.gif.source.url.replace('amp;s', 's')"
           />
           <img
             v-else-if="post.data.preview"
-            v-lazy="
-              post.data.preview.images[0].source.url.replace('amp;s', 's')
-            "
+            v-lazy="post.data.preview.images[0].source.url.replace('amp;s', 's')"
           />
         </header>
 
@@ -53,16 +40,13 @@
             <i class="fa fa-arrow-up"></i>
             {{ post.data.ups }}
           </span>
-          <a
-            :href="'http://www.reddit.com' + post.data.permalink"
-            target="_blank"
-          >
+          <a :href="'http://www.reddit.com' + post.data.permalink" target="_blank">
             <i class="fa fa-comment"></i>
           </a>
           <small>
             {{ date(post.data.created_utc) }}
           </small>
-          <a href="#" class="c-btn-alt" v-on:click="addSub(post.data.subreddit)"
+          <a href="#" class="c-btn-alt" @click="addSub(post.data.subreddit)"
             >/r/{{ post.data.subreddit }}
           </a>
         </footer>
@@ -72,12 +56,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { mixins } from "@/mixins";
+  import { defineComponent } from 'vue'
+  import { mixins } from '@/mixins'
 
-export default defineComponent({
-  name: "Card",
-  props: ["post"],
-  mixins: [mixins]
-});
+  export default defineComponent({
+    name: 'Card',
+    mixins: [mixins],
+    props: ['post'],
+  })
 </script>
