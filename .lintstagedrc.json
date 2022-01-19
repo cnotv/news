@@ -1,6 +1,7 @@
 {
   "*.{ts, vue}": [
-    "yarn lint --fix",
-    "git add"
-  ]
+    "yarn lint:fix"
+  ],
+  "*.{css,scss,vue}": "lint:style --fix",
+  "*": "prettier -w -u"
 }
