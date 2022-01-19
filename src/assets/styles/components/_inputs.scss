@@ -1,6 +1,6 @@
 [class^="c-input"] {
   background-color: transparent;
-  padding: $menu-padding/4 $menu-padding/4 $menu-padding/8;
+  padding: calc($menu-padding/4) calc($menu-padding/4) calc($menu-padding/8);
   border: none;
   border-bottom: $website-border;
   width: 100%;
@@ -118,7 +118,7 @@
   }
 
   [class^="c-input"] ~ & {
-    margin-top: $section-padding/2;
+    margin-top: calc($section-padding/2);
   }
 
   & + & {
@@ -126,18 +126,18 @@
   }
 
   & ~ [class^="c-input"] {
-    margin-top: $section-padding/2;
+    margin-top: calc($section-padding/2);
   }
 
   &__inlined {
     width: 100%;
 
     [class^="c-input"] ~ & {
-      margin-top: $section-padding/2;
+      margin-top: calc($section-padding/2);
     }
 
     & ~ [class^="c-input"] {
-      margin-top: $section-padding/2;
+      margin-top: calc($section-padding/2);
     }
 
     .c-radio {
@@ -145,7 +145,7 @@
     }
 
     .c-radio + .c-radio {
-      margin-left: $section-padding/2;
+      margin-left: calc($section-padding/2);
     }
   }
 

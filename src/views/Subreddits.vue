@@ -12,12 +12,12 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import {defineComponent } from "vue";
 import { mapGetters, mapActions } from "vuex";
 import Subreddit from "@/components/Subreddit.vue";
-import { getPosts } from "@/store/getters";
+import { store } from "@/store";
 
-export default Vue.extend({
+export default defineComponent({
   name: "home",
   components: { Subreddit },
   data() {
@@ -37,7 +37,7 @@ export default Vue.extend({
   },
 
   mounted(): void {
-    this.$store.dispatch("commitSubreddits");
+    store.dispatch("commitSubreddits");
   }
 });
 </script>

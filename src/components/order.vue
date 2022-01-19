@@ -5,11 +5,12 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from "vue";
 import { mapGetters, mapActions } from "vuex";
+import { store } from "@/store";
 import { SORTING } from "@/data/settings";
 
-export default Vue.extend({
+export default defineComponent({
   data() {
     return {
       sorting: SORTING
@@ -20,10 +21,10 @@ export default Vue.extend({
     ...mapGetters(["getSort"]),
     select: {
       get(): string {
-        return this.$store.state.settings.sort;
+        return store.state.settings.sort;
       },
       set(value: string): void {
-        this.$store.dispatch("changeOrder", value);
+        store.dispatch("changeOrder", value);
       }
     }
   },

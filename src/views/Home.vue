@@ -27,24 +27,27 @@
           v-bind:post="post"
           :key="post.data.id"
         />
-        <Paper
-          v-else-if="getLayout === 2"
-          v-for="post in getPosts"
-          v-bind:post="post"
-          :key="post.data.id"
-        />
-        <Gallery
-          v-else-if="getLayout === 3"
-          v-for="post in getPosts"
-          v-bind:post="post"
-          :key="post.data.id"
-        />
-        <Subreddit
-          v-else
-          v-for="post in getPosts"
-          v-bind:post="post"
-          :key="post.data.id"
-        />
+        <template v-else-if="getLayout === 2">
+          <Paper
+            v-for="post in getPosts"
+            v-bind:post="post"
+            :key="post.data.id"
+          />
+        </template>
+        <template v-else-if="getLayout === 3">
+          <Gallery
+            v-for="post in getPosts"
+            v-bind:post="post"
+            :key="post.data.id"
+          />
+        </template>
+        <template v-else>
+          <Subreddit
+            v-for="post in getPosts"
+            v-bind:post="post"
+            :key="post.data.id"
+          />
+        </template>
 
         <modal v-if="modalOpen" />
       </div>
@@ -56,7 +59,7 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import {defineComponent} from "vue";
 import { mapGetters, mapActions } from "vuex";
 import Modal from "@/components/Modal.vue";
 import Card from "@/components/Card.vue";
@@ -65,8 +68,9 @@ import List from "@/components/List.vue";
 import Paper from "@/components/Paper.vue";
 import Subreddit from "@/components/Subreddit.vue";
 import { getSubreddits } from "@/store/getters";
+import { store } from "@/store";
 
-export default Vue.extend({
+export default defineComponent({
   name: "home",
   components: { Modal, Card, Gallery, List, Subreddit, Paper },
   data() {
@@ -118,12 +122,12 @@ export default Vue.extend({
     },
 
     _checkWelcome() {
-      if (!this.getQuery || !this.getSubreddits) {
+      if (!this.getQuery || !getSubreddits) {
         this.$router.push({ name: "welcome" });
       }
     },
 
-    _toggleNetworkStatus({ type }): void {
+    _toggleNetworkStatus({ type }:Event ): void {
       this.statusOnline = type === "online";
     },
 
@@ -156,7 +160,7 @@ export default Vue.extend({
       const el = document.querySelector("body");
       el!.style.transform = `translateY(0)`;
       if (this.refresh) {
-        this.$store.dispatch("commitPosts");
+        store.dispatch("commitPosts");
       }
     },
 
@@ -203,10 +207,10 @@ export default Vue.extend({
         window.addEventListener("online", this._toggleNetworkStatus);
 
         if (noStorage) {
-          this.$store.dispatch("commitPosts");
+          store.dispatch("commitPosts");
         } else {
           // offline mode
-          this.$store.commit(
+          store.commit(
             "commitPosts",
             JSON.parse(window.localStorage.getItem("vuex") || "")
           );
@@ -231,8 +235,8 @@ export default Vue.extend({
       // TODO: Replace with "el" after setting CSS grid layout
       const offset = window.scrollY - el.offsetHeight + this.loadThreshold;
       const trigger = offset > 0;
-      if (trigger && !this.$store.state.loading) {
-        this.$store.dispatch("loadMore");
+      if (trigger && !store.state.loading) {
+        store.dispatch("loadMore");
       }
     }
   },
@@ -248,7 +252,7 @@ export default Vue.extend({
     this._checkWelcome();
 
     // display post default
-    this.$store.dispatch("commitPosts");
+    store.dispatch("commitPosts");
     this._handleOffline();
   }
 });

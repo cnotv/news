@@ -1,58 +1,59 @@
 <template>
-  <article class="o-gallery__item" v-if="this.post.data.preview">
+  <article class="o-gallery__item" v-if="post.data.preview">
     <header>
-      <h6>{{ this.post.data.title | truncate(150) }}</h6>
+      <h6>{{ truncate(post.data.title, 150) }}</h6>
     </header>
 
     <section
-      v-if="this.post.data.preview"
+      v-if="post.data.preview"
       v-bind:style="style"
-      v-on:click="toggleModal(this.post.data.url)"
     >
-      <a :href="this.post.data.url" target="_blank">
+      <a :href="post.data.url" target="_blank">
         <img
-          v-if="this.post.data.preview.images[0].variants.gif"
+          v-if="post.data.preview.images[0].variants.gif"
           v-lazy="
-            this.post.data.preview.images[0].variants.gif.source.url.replace(
+            post.data.preview.images[0].variants.gif.source.url.replace(
               'amp;s',
               's'
             )
           "
         />
         <img
-          v-else-if="this.post.data.preview"
+          v-else-if="post.data.preview"
           v-lazy="
-            this.post.data.preview.images[0].source.url.replace('amp;s', 's')
+            post.data.preview.images[0].source.url.replace('amp;s', 's')
           "
         />
       </a>
     </section>
 
     <footer>
-      <span v-if="this.post.data.ups">
+      <span v-if="post.data.ups">
         <i class="fa fa-arrow-up"></i>
-        {{ this.post.data.ups }}
+        {{ post.data.ups }}
       </span>
       <a
-        :href="'http://www.reddit.com' + this.post.data.permalink"
+        :href="'http://www.reddit.com' + post.data.permalink"
         target="_blank"
       >
         <i class="fa fa-comment"></i>
       </a>
-      <small>{{ this.post.data.created_utc | date }}</small>
+      <small>{{ date(post.data.created_utc) }}</small>
       <a href="#" class="c-btn-alt" v-on:click="addSub(post.data.subreddit)"
-        >/r/{{ this.post.data.subreddit }}</a
+        >/r/{{ post.data.subreddit }}</a
       >
     </footer>
   </article>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from "vue";
+import { mixins } from "@/mixins";
 
-export default Vue.extend({
+export default defineComponent({
   name: "Gallery",
   props: ["post"],
+  mixins: [mixins],
   data() {
     return {
       style: {
