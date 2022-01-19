@@ -5,7 +5,20 @@
   force = true
   headers = {X-From = "Netlify"}
 
-#
+[[redirects]]
+  from = "/subreddits"
+  to = "https://www.reddit.com"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
+
+# The following redirect is intended for use with most SPAs that handle
+# routing internally.
+[[redirects]]
+    from = "/*"
+    to = "/index.html"
+    status = 200
+
 # Skip all post processing in deploy previews,
 # ignoring any other settings
 [context.deploy-preview.processing]
