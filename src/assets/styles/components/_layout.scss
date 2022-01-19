@@ -36,14 +36,14 @@
 }
 
 .c-main {
-  @include grid-col(3/4, $padding: false);
+  @include grid-col(calc(3/4), $padding: false);
 
   overflow-y: scroll;
   height: 100vh;
 }
 
 .c-sidebar {
-  @include grid-col(1/4, $padding: false);
+  @include grid-col(calc(1/4), $padding: false);
 
   background-color: $bg-link;
   overflow-y: scroll;

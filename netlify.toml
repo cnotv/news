@@ -4,3 +4,14 @@
   status = 200
   force = true
   headers = {X-From = "Netlify"}
+
+#
+# Skip all post processing in deploy previews,
+# ignoring any other settings
+[context.deploy-preview.processing]
+  skip_processing = true
+
+[context.branch-name.processing]
+  skip_processing = false
+[context.branch-name.processing.images]
+  compress = false

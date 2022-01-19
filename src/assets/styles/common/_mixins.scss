@@ -79,8 +79,8 @@ $viewports: (
     }
 
     @include media-bp(mobile) {
-      margin-left: -$grid-gutter-size/2;
-      margin-right: -$grid-gutter-size/2;
+      margin-left: -(calc($grid-gutter-size/2));
+      margin-right: -(calc($grid-gutter-size/2));
     }
   }
 }
@@ -94,8 +94,8 @@ $viewports: (
     }
 
     @include media-bp(mobile) {
-      padding-left: $grid-gutter-size/2;
-      padding-right: $grid-gutter-size/2;
+      padding-left: calc($grid-gutter-size/2);
+      padding-right: calc($grid-gutter-size/2);
     }
   }
 

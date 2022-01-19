@@ -21,7 +21,7 @@ export default {
   REMOVE_SUB: (state: State, removeSub: string) => {
     let subs = state.subreddits;
     if (subs.includes(removeSub)) {
-      state.subreddits = subs.filter(e => e !== removeSub);
+      state.subreddits = subs.filter((e) => e !== removeSub);
     }
   },
   CURRENT_SUB: (state: State, currentSub: string) => {
@@ -58,5 +58,5 @@ export default {
   },
   RESET_STATE: (state: State) => {
     // state = state;
-  }
+  },
 };

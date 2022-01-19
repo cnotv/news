@@ -44,11 +44,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import {defineComponent } from "vue";
 import { mapActions } from "vuex";
+import { mixins } from "@/mixins";
 
-@Component({
+export default defineComponent({
   name: "Welcome",
+  mixins: [mixins],
   data() {
     return {
       suggestions: [
@@ -73,8 +75,7 @@ import { mapActions } from "vuex";
   methods: {
     ...mapActions(["changeSearchOpen"])
   }
-})
-export default class Welcome extends Vue {}
+});
 </script>
 
 <style lang="scss" scoped>

@@ -1,53 +1,55 @@
 <template>
   <article
-    v-if="this.post.data"
+    v-if="post.data"
     class="o-paper__wrap"
     v-bind:class="[
-      this.post.data.selftext ? 'o-paper--desc' : '',
-      this.post.data.preview ? 'o-paper--pic' : ''
+      post.data.selftext ? 'o-paper--desc' : '',
+      post.data.preview ? 'o-paper--pic' : ''
     ]"
   >
     <header>
-      <a :href="this.post.data.url" target="_blank">
-        <h3>{{ this.post.data.title | truncate(100) }}</h3>
+      <a :href="post.data.url" target="_blank">
+        <h3>{{ truncate(post.data.title, 100) }}</h3>
       </a>
     </header>
 
     <section>
-      <template v-if="this.post.data.preview">
+      <template v-if="post.data.preview">
         <img
-          v-if="this.post.data.preview.images[0].variants.gif"
+          v-if="post.data.preview.images[0].variants.gif"
           v-lazy="
-            this.post.data.preview.images[0].variants.gif.source.url.replace(
+            post.data.preview.images[0].variants.gif.source.url.replace(
               'amp;s',
               's'
             )
           "
         />
         <img
-          v-else-if="this.post.data.preview"
+          v-else-if="post.data.preview"
           v-lazy="
-            this.post.data.preview.images[0].source.url.replace('amp;s', 's')
+            post.data.preview.images[0].source.url.replace('amp;s', 's')
           "
         />
       </template>
 
-      <div v-if="this.post.data.selftext">
-        {{ this.post.data.selftext | truncate(400) }}
+      <div v-if="post.data.selftext">
+        {{ truncate(post.data.selftext, 400) }}
       </div>
     </section>
 
     <footer>
-      {{ this.post.data.domain }}
+      {{ post.data.domain }}
     </footer>
   </article>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import {defineComponent} from "vue";
+import { mixins } from "@/mixins";
 
-export default Vue.extend({
+export default defineComponent({
   name: "Paper",
-  props: ["post"]
+  props: ["post"],
+  mixins: [mixins]
 });
 </script>

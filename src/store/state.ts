@@ -1,4 +1,4 @@
-export default {
+export const state: State = {
   after: "",
   currentSub: "",
   loading: false,
@@ -8,13 +8,13 @@ export default {
     currentTime: "",
     global: false,
     open: false,
-    string: ""
+    string: "",
   },
   settings: {
     layout: 0,
     limit: "24",
-    sort: "hot"
+    sort: "hot",
   },
   strict: process.env.NODE_ENV !== "production",
-  subreddits: []
+  subreddits: [],
 };
