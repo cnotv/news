@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+Access-Control-Allow-Origin: 'https://reddit.com'
+Access-Control-Allow-Origin: 'https://sentry.io'
