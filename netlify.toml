@@ -19,6 +19,12 @@
     to = "/index.html"
     status = 200
 
+[[headers]]
+  # Define which paths this specific [[headers]] block will cover.
+  for = "https://sentry.io/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
+
 # Skip all post processing in deploy previews,
 # ignoring any other settings
 [context.deploy-preview.processing]
