@@ -1,5 +1,6 @@
 import api from '@/helpers/api'
-import { ActionContext, ActionTree, Commit } from 'vuex'
+import { State } from '@/types/state'
+import { ActionTree, Commit } from 'vuex'
 
 interface ActionPayload {
   commit: Commit

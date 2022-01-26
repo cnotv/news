@@ -22,7 +22,7 @@ export const mixins = {
     /**
      * Format date
      */
-    date: (value: string): string => {
+    date: (value: string | number): string => {
       const newDate = new Date(+value * 1000)
       return newDate.toLocaleDateString('en-GB')
     },

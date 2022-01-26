@@ -15,12 +15,6 @@
 
   export default defineComponent({
     name: 'Search',
-    methods: {
-      ...mapActions(['changeSearch', 'changeSearchGlobal']),
-    },
-    mounted() {
-      ;(this.$refs.search as HTMLElement).focus()
-    },
     computed: {
       ...mapGetters(['getSearch']),
       search: {
@@ -39,10 +33,16 @@
         get(): boolean {
           return store.state.search.global
         },
-        set(value: string): void {
+        set(): void {
           store.dispatch('changeSearchGlobal')
         },
       },
+    },
+    mounted() {
+      ;(this.$refs.search as HTMLElement).focus()
+    },
+    methods: {
+      ...mapActions(['changeSearch', 'changeSearchGlobal']),
     },
   })
 </script>

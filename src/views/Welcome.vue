@@ -13,7 +13,7 @@
         <p>
           Try to
           <b @click="changeSearchOpen()">search some news or topic</b> you are interested about.<br />
-          I would recomends these topics to give you an idea of what you can do:
+          I would recommends these topics to give you an idea of what you can do:
         </p>
 
         <button

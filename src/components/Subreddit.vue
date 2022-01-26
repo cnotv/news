@@ -1,24 +1,30 @@
 <template>
-  <section class="c-col" @click="addSub(post.name)">
-    <h1 class="c-h1">/r/{{ post.name }} - {{ post.title }}</h1>
-    <h5>{{ post.description }}</h5>
+  <section class="c-col" @click="addSub(data.name)">
+    <h1 class="c-h1">/r/{{ data.name }} - {{ data.title }}</h1>
+    <h5>{{ data.description }}</h5>
 
     <i class="fa fa-plus-circle"></i>
-    <span> {{ post.subscribers }}</span>
-    <span v-if="post.categories"> - {{ post.categories }}</span>
+    <span> {{ data.subscribers }}</span>
+    <span v-if="data.categories"> - {{ data.categories }}</span>
     <br />
     <hr />
   </section>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent, PropType } from 'vue'
   import { mixins } from '@/mixins'
+  import { SubredditsIndex } from '@/types/reddit-subreddits'
 
   export default defineComponent({
     name: 'Subreddit',
     mixins: [mixins],
-    props: ['post'],
+    props: {
+      data: {
+        type: Object as PropType<SubredditsIndex>,
+        default: () => null,
+      },
+    },
   })
 </script>
 

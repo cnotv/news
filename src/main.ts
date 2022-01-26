@@ -6,7 +6,7 @@ import { store } from './store'
 import { mixins } from './mixins'
 
 import * as Sentry from '@sentry/vue'
-import { Integrations } from '@sentry/tracing'
+import { Integrations as Tracing } from '@sentry/tracing'
 
 const app = createApp({
   ...App,
@@ -22,11 +22,12 @@ Sentry.init({
   app,
   dsn: 'https://f908d5c000ea4ffa87f6484a4c286732@sentry.io/1472388',
   integrations: [
-    new Integrations.BrowserTracing({
+    new Tracing.BrowserTracing({
       routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+      tracingOrigins: ['cnotv-news.netlify.app', /^\//],
     }),
   ],
-
+  tracesSampleRate: 0.2,
   environment: process.env.NODE_ENV,
   release: process.env.VERSION,
 })

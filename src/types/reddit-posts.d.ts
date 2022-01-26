@@ -1,25 +1,25 @@
-interface RedditResponse {
+export interface RedditResponse {
   kind: string
   data: RedditResponseData
 }
 
-interface RedditResponseData {
+export interface RedditResponseData {
   after: null
   before: null
-  children: Child[]
+  children: RedditResponseChild[]
   dist: number
   facets: Facets
   modhash: string
 }
 
-interface Child {
+export interface RedditResponseChild {
   kind: string
   data: RedditPost
 }
 
-interface RedditPost {
+export interface RedditPost {
   advertiser_category: string // Subreddit only?
-  all_awardings: any[]
+  all_awardings: unknown[]
   allow_live_comments: boolean
   approved_at_utc: null
   approved_by: null
@@ -35,7 +35,7 @@ interface RedditPost {
   author_patreon_flair: boolean
   author_premium: boolean
   author: string
-  awarders: any[]
+  awarders: unknown[]
   banned_at_utc: null
   banned_by: null
   can_gild: boolean
@@ -79,7 +79,7 @@ interface RedditPost {
   mod_note: null
   mod_reason_by: null
   mod_reason_title: null
-  mod_reports: any[]
+  mod_reports: unknown[]
   name: string
   no_follow: boolean
   num_comments: number
@@ -106,7 +106,7 @@ interface RedditPost {
   selftext: string
   send_replies: boolean
   spoiler: boolean
-  steward_reports: any[]
+  steward_reports: unknown[]
   stickied: boolean
   subreddit_id: string
   subreddit_name_prefixed: string
@@ -122,39 +122,43 @@ interface RedditPost {
   total_awards_received: number
   ups: number
   url: string
-  user_reports: any[]
+  user_reports: unknown[]
   view_count: null
   visited: boolean
   whitelist_status: string
   wls: number
 }
 
-interface AuthorFlairRichtext {
+export interface AuthorFlairRichtext {
   a: string
   e: string
   u: string
 }
 
-interface Facets {}
+type Facets = {
+  gif: {
+    source: Source
+  }
+}
 
-interface LinkFlairRichtext {
+export interface LinkFlairRichtext {
   e: string
   t: string
 }
 
-interface Preview {
+export interface Preview {
   images: Image[]
   enabled: boolean
 }
 
-interface Image {
+export interface Image {
   source: Source
   resolutions: Source[]
   variants: Facets
   id: string
 }
 
-interface Source {
+export interface Source {
   url: string
   width: number
   height: number

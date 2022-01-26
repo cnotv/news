@@ -1,14 +1,14 @@
 <template>
   <article class="c-col-1-4 o-card o-card--hidden-footer">
-    <a :href="post.data.url" target="_blank">
+    <a :href="data.url" target="_blank">
       <div class="o-card__wrap">
         <header
-          v-if="post.data.domain == 'youtube.com' || post.data.domain == 'youtu.be'"
+          v-if="data.domain == 'youtube.com' || data.domain == 'youtu.be'"
           class="o-card__header"
         >
           <iframe
             width="100%"
-            :src="`${embed(post.data.url)}`"
+            :src="`${embed(data.url)}`"
             frameborder="0"
             gesture="media"
             allow="encrypted-media"
@@ -16,39 +16,37 @@
           ></iframe>
         </header>
 
-        <header v-else-if="post.data.preview" class="o-card__header">
+        <header v-else-if="data.preview" class="o-card__header">
           <img
-            v-if="post.data.preview.images[0].variants.gif"
-            v-lazy="post.data.preview.images[0].variants.gif.source.url.replace('amp;s', 's')"
+            v-if="data.preview.images[0].variants.gif"
+            v-lazy="data.preview.images[0].variants.gif.source.url.replace('amp;s', 's')"
           />
           <img
-            v-else-if="post.data.preview"
-            v-lazy="post.data.preview.images[0].source.url.replace('amp;s', 's')"
+            v-else-if="data.preview"
+            v-lazy="data.preview.images[0].source.url.replace('amp;s', 's')"
           />
         </header>
 
         <section>
-          <h6>{{ truncate(post.data.title, 150) }}</h6>
+          <h6>{{ truncate(data.title, 150) }}</h6>
         </section>
 
-        <section v-if="post.data.selftext">
-          <div>{{ truncate(post.data.selftext, 200) }}</div>
+        <section v-if="data.selftext">
+          <div>{{ truncate(data.selftext, 200) }}</div>
         </section>
 
         <footer>
-          <span v-if="post.data.ups">
+          <span v-if="data.ups">
             <i class="fa fa-arrow-up"></i>
-            {{ post.data.ups }}
+            {{ data.ups }}
           </span>
-          <a :href="'http://www.reddit.com' + post.data.permalink" target="_blank">
+          <a :href="'http://www.reddit.com' + data.permalink" target="_blank">
             <i class="fa fa-comment"></i>
           </a>
           <small>
-            {{ date(post.data.created_utc) }}
+            {{ date(data.created_utc) }}
           </small>
-          <a href="#" class="c-btn-alt" @click="addSub(post.data.subreddit)"
-            >/r/{{ post.data.subreddit }}
-          </a>
+          <a href="#" class="c-btn-alt" @click="addSub(data.subreddit)">/r/{{ data.subreddit }} </a>
         </footer>
       </div>
     </a>
@@ -56,12 +54,18 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent, PropType } from 'vue'
   import { mixins } from '@/mixins'
+  import { RedditPost } from '@/types/reddit-posts'
 
   export default defineComponent({
     name: 'Card',
     mixins: [mixins],
-    props: ['post'],
+    props: {
+      data: {
+        type: Object as PropType<RedditPost>,
+        default: () => null,
+      },
+    },
   })
 </script>

@@ -1,45 +1,51 @@
 <template>
   <article
-    v-if="post.data"
+    v-if="data"
     class="o-paper__wrap"
-    :class="[post.data.selftext ? 'o-paper--desc' : '', post.data.preview ? 'o-paper--pic' : '']"
+    :class="[data.selftext ? 'o-paper--desc' : '', data.preview ? 'o-paper--pic' : '']"
   >
     <header>
-      <a :href="post.data.url" target="_blank">
-        <h3>{{ truncate(post.data.title, 100) }}</h3>
+      <a :href="data.url" target="_blank">
+        <h3>{{ truncate(data.title, 100) }}</h3>
       </a>
     </header>
 
     <section>
-      <template v-if="post.data.preview">
+      <template v-if="data.preview">
         <img
-          v-if="post.data.preview.images[0].variants.gif"
-          v-lazy="post.data.preview.images[0].variants.gif.source.url.replace('amp;s', 's')"
+          v-if="data.preview.images[0].variants.gif"
+          v-lazy="data.preview.images[0].variants.gif.source.url.replace('amp;s', 's')"
         />
         <img
-          v-else-if="post.data.preview"
-          v-lazy="post.data.preview.images[0].source.url.replace('amp;s', 's')"
+          v-else-if="data.preview"
+          v-lazy="data.preview.images[0].source.url.replace('amp;s', 's')"
         />
       </template>
 
-      <div v-if="post.data.selftext">
-        {{ truncate(post.data.selftext, 400) }}
+      <div v-if="data.selftext">
+        {{ truncate(data.selftext, 400) }}
       </div>
     </section>
 
     <footer>
-      {{ post.data.domain }}
+      {{ data.domain }}
     </footer>
   </article>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent, PropType } from 'vue'
   import { mixins } from '@/mixins'
+  import { RedditPost } from '@/types/reddit-posts'
 
   export default defineComponent({
     name: 'Paper',
     mixins: [mixins],
-    props: ['post'],
+    props: {
+      data: {
+        type: Object as PropType<RedditPost>,
+        default: () => null,
+      },
+    },
   })
 </script>

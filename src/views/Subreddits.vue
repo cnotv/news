@@ -28,16 +28,14 @@
         noStorage: window.localStorage.getItem('vuex') === null,
       }
     },
-
     computed: {
       ...mapGetters(['isLoading', 'getSearch', 'getPosts']),
     },
-    methods: {
-      ...mapActions(['commitSubreddits']),
-    },
-
     mounted(): void {
       store.dispatch('commitSubreddits')
+    },
+    methods: {
+      ...mapActions(['commitSubreddits']),
     },
   })
 </script>

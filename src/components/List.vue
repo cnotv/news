@@ -1,24 +1,24 @@
 <template>
   <article>
     <header>
-      <a :href="post.data.url" target="_blank">{{ post.data.title }} </a>
+      <a :href="data.url" target="_blank">{{ data.title }} </a>
     </header>
 
     <small class="o-list__meta">
-      <span>{{ date(post.data.created_utc) }}</span>
+      <span>{{ date(data.created_utc) }}</span>
 
-      <a :href="'//' + post.data.domain" target="_blank">{{ post.data.domain }}</a>
+      <a :href="'//' + data.domain" target="_blank">{{ data.domain }}</a>
 
-      <button v-if="getSearch.open" @click="addSub(post.data.subreddit)">
+      <button v-if="getSearch.open" @click="addSub(data.subreddit)">
         <i class="fa fa-plus"></i>
-        /r/{{ post.data.subreddit }}
+        /r/{{ data.subreddit }}
       </button>
 
       <span class="u-spacer--x"></span>
 
-      <a :href="'http://www.reddit.com' + post.data.permalink" target="_blank">
+      <a :href="'http://www.reddit.com' + data.permalink" target="_blank">
         <i class="fa fa-comment"></i>
-        {{ post.data.num_comments }}
+        {{ data.num_comments }}
       </a>
     </small>
     <hr />
@@ -26,14 +26,20 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
   import { mapGetters } from 'vuex'
+  import { defineComponent, PropType } from 'vue'
   import { mixins } from '@/mixins'
+  import { RedditPost } from '@/types/reddit-posts'
 
   export default defineComponent({
     name: 'List',
     mixins: [mixins],
-    props: ['post'],
+    props: {
+      data: {
+        type: Object as PropType<RedditPost>,
+        default: () => null,
+      },
+    },
     computed: {
       ...mapGetters(['getSearch']),
     },

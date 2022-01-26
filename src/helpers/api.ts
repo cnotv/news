@@ -1,8 +1,10 @@
+import { Posts, PostSub } from '@/types/api'
+import { RedditResponseChild, RedditResponseData } from '@/types/reddit-posts'
 import axios from 'axios'
 import { AxiosRequestConfig } from 'axios'
 
 function _subToPost(data: RedditResponseData): PostSub[] {
-  return data.children.map((sub) => {
+  return data.children.map((sub: RedditResponseChild) => {
     return {
       title: sub.data.title,
       description: sub.data.public_description,

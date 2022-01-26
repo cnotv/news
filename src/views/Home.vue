@@ -15,22 +15,22 @@
         <span v-if="!statusOnline">You are offline.</span>
 
         <template v-if="getLayout === 0">
-          <List v-for="post in getPosts" :key="post.data.id" :post="post" />
+          <List v-for="post in getPosts" :key="post.data.id" :data="post.data" />
         </template>
         <Card
           v-for="post in getPosts"
           v-else-if="getLayout === 1"
           :key="post.data.id"
-          :post="post"
+          :data="post.data"
         />
         <template v-else-if="getLayout === 2">
-          <Paper v-for="post in getPosts" :key="post.data.id" :post="post" />
+          <Paper v-for="post in getPosts" :key="post.data.id" :data="post.data" />
         </template>
         <template v-else-if="getLayout === 3">
-          <Gallery v-for="post in getPosts" :key="post.data.id" :post="post" />
+          <Gallery v-for="post in getPosts" :key="post.data.id" :data="post.data" />
         </template>
         <template v-else>
-          <Subreddit v-for="post in getPosts" :key="post.data.id" :post="post" />
+          <Subreddit v-for="post in getPosts" :key="post.data.id" :data="post.data" />
         </template>
 
         <modal v-if="modalOpen" />
@@ -66,7 +66,6 @@
         noStorage: window.localStorage.getItem('vuex') === null,
       }
     },
-
     computed: {
       ...mapGetters([
         'getLayout',
@@ -76,6 +75,18 @@
         'getSearch',
         'getSubreddits',
       ]),
+    },
+    unmounted(): void {
+      this._removeListeners()
+    },
+    mounted(): void {
+      this._refreshListener()
+      this._loadMoreListener()
+      this._checkWelcome()
+
+      // display post default
+      store.dispatch('commitPosts')
+      this._handleOffline()
     },
     methods: {
       ...mapActions(['commitPosts']),
@@ -142,7 +153,9 @@
        */
       _refreshTrigger(): void {
         const el = document.querySelector('body')
-        el!.style.transform = `translateY(0)`
+        if (el) {
+          el.style.transform = `translateY(0)`
+        }
         if (this.refresh) {
           store.dispatch('commitPosts')
         }
@@ -154,14 +167,14 @@
        * - Side swipes for changing subreddit
        */
       _handleTouchStart($start: TouchEvent): void {
-        const X1 = $start.touches[0].screenX
         const Y1 = $start.touches[0].screenY
 
         const move = ($move: TouchEvent): void => {
-          const X2 = $move.touches[0].screenX
           const Y2 = $move.touches[0].screenY
           const el = document.querySelector('body')
-          this._refreshCheck(Y1, Y2, el!)
+          if (el) {
+            this._refreshCheck(Y1, Y2, el)
+          }
         }
 
         window.addEventListener('touchmove', move)
@@ -220,21 +233,6 @@
           store.dispatch('loadMore')
         }
       },
-    },
-
-    created(): void {},
-    unmounted(): void {
-      this._removeListeners()
-    },
-
-    mounted(): void {
-      this._refreshListener()
-      this._loadMoreListener()
-      this._checkWelcome()
-
-      // display post default
-      store.dispatch('commitPosts')
-      this._handleOffline()
     },
   })
 </script>

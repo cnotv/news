@@ -1,8 +1,11 @@
-interface State {
+import { PostSub } from './api'
+import { RedditPost } from './reddit-posts'
+
+export interface State {
   after?: string
   currentSub: string
   loading: boolean
-  posts: Object[]
+  posts: (RedditPost | PostSub)[]
   query: string
   search: StateSearch
   settings: StateSettings
@@ -10,14 +13,14 @@ interface State {
   subreddits: string[]
 }
 
-interface StateSearch {
+export interface StateSearch {
   string: string
   open: boolean
   currentTime: string
   global: boolean
 }
 
-interface StateSettings {
+export interface StateSettings {
   layout: number
   limit: string
   sort: string

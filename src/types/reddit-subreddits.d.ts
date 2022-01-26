@@ -1,4 +1,4 @@
-interface Subreddits {
+export interface Subreddits {
   account: null
   authorFlair: AuthorFlair
   comments: AuthorFlair
@@ -6,13 +6,13 @@ interface Subreddits {
   features: null
   listingOrder: ListingOrder[]
   postFlair: AuthorFlair
-  postOrder: any[]
+  postOrder: unknown[]
   posts: AuthorFlair
   preferences: null
   profileAboutInfo: AuthorFlair
   profiles: AuthorFlair
   queries: AuthorFlair
-  searchDiscoveryUnitOrder: any[]
+  searchDiscoveryUnitOrder: unknown[]
   searchDiscoveryUnits: AuthorFlair
   subredditAboutInfo: SubredditsInfoIndex
   subreddits: SubredditsIndex
@@ -20,21 +20,21 @@ interface Subreddits {
   viewTreatment: string
 }
 
-type SubredditsInfoIndex = { [key: string]: SubredditAboutInfo }
-type SubredditsIndex = { [key: string]: Subreddit }
+export type SubredditsInfoIndex = { [key: string]: SubredditAboutInfo }
+export type SubredditsIndex = { [key: string]: Subreddit }
 
-interface AuthorFlair {}
+export type AuthorFlair = unknown
 
-interface ListingOrder {
+export interface ListingOrder {
   type: string
   id: string
 }
 
-interface ListingOrderType {
+export interface ListingOrderType {
   Subreddit: string
 }
 
-interface SubredditAboutInfo {
+export interface SubredditAboutInfo {
   accountsActive: null
   advertiserCategory: string[]
   allOriginalContent: boolean
@@ -59,7 +59,7 @@ interface SubredditAboutInfo {
   usingNewModmail: null
 }
 
-interface AllowedPostTypes {
+export interface AllowedPostTypes {
   images: boolean
   text: boolean
   videos: boolean
@@ -67,7 +67,7 @@ interface AllowedPostTypes {
   spoilers: boolean
 }
 
-interface Subreddit {
+export interface Subreddit {
   allowChatPostCreation: boolean
   communityIcon: string
   displayText: string
@@ -87,13 +87,13 @@ interface Subreddit {
   wls: number | null
 }
 
-interface Icon {
+export interface Icon {
   url: string
   width: number | null
   height: number | null
 }
 
-interface Tokens {
+export interface Tokens {
   listings: string
   posts: null
 }

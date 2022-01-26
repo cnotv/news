@@ -1,53 +1,57 @@
 <template>
-  <article v-if="post.data.preview" class="o-gallery__item">
+  <article v-if="data.preview" class="o-gallery__item">
     <header>
-      <h6>{{ truncate(post.data.title, 150) }}</h6>
+      <h6>{{ truncate(data.title, 150) }}</h6>
     </header>
 
-    <section v-if="post.data.preview" :style="style">
-      <a :href="post.data.url" target="_blank">
+    <section v-if="data.preview" :style="style">
+      <a :href="data.url" target="_blank">
         <img
-          v-if="post.data.preview.images[0].variants.gif"
-          v-lazy="post.data.preview.images[0].variants.gif.source.url.replace('amp;s', 's')"
+          v-if="data.preview.images[0].variants.gif"
+          v-lazy="data.preview.images[0].variants.gif.source.url.replace('amp;s', 's')"
         />
         <img
-          v-else-if="post.data.preview"
-          v-lazy="post.data.preview.images[0].source.url.replace('amp;s', 's')"
+          v-else-if="data.preview"
+          v-lazy="data.preview.images[0].source.url.replace('amp;s', 's')"
         />
       </a>
     </section>
 
     <footer>
-      <span v-if="post.data.ups">
+      <span v-if="data.ups">
         <i class="fa fa-arrow-up"></i>
-        {{ post.data.ups }}
+        {{ data.ups }}
       </span>
-      <a :href="'http://www.reddit.com' + post.data.permalink" target="_blank">
+      <a :href="'http://www.reddit.com' + data.permalink" target="_blank">
         <i class="fa fa-comment"></i>
       </a>
-      <small>{{ date(post.data.created_utc) }}</small>
-      <a href="#" class="c-btn-alt" @click="addSub(post.data.subreddit)"
-        >/r/{{ post.data.subreddit }}</a
-      >
+      <small>{{ date(data.created_utc) }}</small>
+      <a href="#" class="c-btn-alt" @click="addSub(data.subreddit)">/r/{{ data.subreddit }}</a>
     </footer>
   </article>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent, PropType } from 'vue'
   import { mixins } from '@/mixins'
+  import { RedditPost } from '@/types/reddit-posts'
 
   export default defineComponent({
     name: 'Gallery',
     mixins: [mixins],
-    props: ['post'],
+    props: {
+      data: {
+        type: Object as PropType<RedditPost>,
+        default: () => null,
+      },
+    },
     data() {
       return {
         style: {
-          minHeight: !this.post.data.preview
+          minHeight: !this.data.preview
             ? 0
-            : (this.post.data.preview.images[0].source.height /
-                this.post.data.preview.images[0].source.width) *
+            : (this.data.preview.images[0].source.height /
+                this.data.preview.images[0].source.width) *
                 30 +
               'vw',
         },

@@ -1,8 +1,12 @@
+import { PostSub } from '@/types/api'
+import { RedditPost } from '@/types/reddit-posts'
+import { State } from '@/types/state'
+
 export default {
-  LOAD_POSTS: (state: State, posts: RedditPost[] | PostSub[]) => {
+  LOAD_POSTS: (state: State, posts: (RedditPost | PostSub)[]) => {
     state.posts = posts
   },
-  LOAD_MORE: (state: State, posts: RedditPost[]) => {
+  LOAD_MORE: (state: State, posts: (RedditPost | PostSub)[]) => {
     state.posts = [...state.posts, ...posts]
   },
   SET_LOADING: (state: State, loading: boolean) => {
@@ -56,7 +60,7 @@ export default {
   SET_QUERY: (state: State, query: string) => {
     state.query = query
   },
-  RESET_STATE: (state: State) => {
-    // state = state;
+  RESET_STATE: () => {
+    void 0
   },
 }
