@@ -1,0 +1,21 @@
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --brand-primary:                       #ddd;
+    --brand-secondary:                     #ddd;
+    --body-bg:                             #333;
+    --body-color:                          #ddd;
+    --color-error:                         red;
+    --color-disabled:                      lightgrey;
+    --color-active:                        #333;
+
+    --bg-nav:                              transparent;
+    --bg-header:                           #333;
+    --bg-dropdown:                         #333;
+    --bg-card:                             #333;
+    --bg-link:                             #333;
+    --bg-link-hover:                       grey;
+    --bg-link-active:                      #ddd;
+    --modal-shadow-color:                  rgba(255, 255, 255, 0.7);
+  }
+}

@@ -51,30 +51,49 @@ $zindex: (
   dropdown:                           '10',
 );
 
-$brand-primary:                       color(black);
-$brand-secondary:                     color(grey);
-$body-bg:                             color(lightgrey);
-$body-color:                          $brand-primary;
-$color-error:                         color(red);
-$color-disabled:                      color(grey-l);
-$color-active:                        color(white);
+:root {
+  --brand-primary:                       #333;
+  --brand-secondary:                     #dadada;
+  --body-bg:                             #f1f1f1;
+  --body-color:                          #333;
+  --color-error:                         red;
+  --color-disabled:                      lightgrey;
+  --color-active:                        #fff;
 
-$bg-nav:                              transparent;
-$bg-header:                           color(lightgrey);
-$bg-dropdown:                         color(white);
-$bg-card:                             color(white);
-$bg-link:                             color(white);
-$bg-link-hover:                       color(grey);
-$bg-link-active:                      color(black);
-$modal-shadow-color:                  rgba(0, 0, 0, 0.7);
+  --bg-nav:                              transparent;
+  --bg-header:                           #f1f1f1;
+  --bg-dropdown:                         #fff;
+  --bg-card:                             #fff;
+  --bg-link:                             #fff;
+  --bg-link-hover:                       #dadada;
+  --bg-link-active:                      #333;
+  --modal-shadow-color:                  rgba(0, 0, 0, 0.7);
+}
 
-$website-shadow:                      4px 4px 0 0 color(black);
-$website-shadow-hover:                8px 8px 0 0 color(black);
+$brand-primary:                       var(--brand-primary);
+$brand-secondary:                     var(--brand-secondary);
+$body-bg:                             var(--body-bg);
+$body-color:                          var(--body-color);
+$color-error:                         var(--color-error);
+$color-disabled:                      var(--color-disabled);
+$color-active:                        var(--color-active);
+
+$bg-nav:                              var(--bg-na);
+$bg-header:                           var(--bg-header);
+$bg-dropdown:                         var(--bg-dropdown);
+$bg-card:                             var(--bg-card);
+$bg-link:                             var(--bg-link);
+$bg-link-hover:                       var(--bg-link-hover);
+$bg-link-active:                      var(--bg-link-active);
+$modal-shadow-color:                  var(--modal-shadow-color);
+
+$website-shadow:                      4px 4px 0 0 var(--brand-primary);
+$website-shadow-hover:                8px 8px 0 0 var(--brand-primary);
 
 $website-border-radius:               2px !default;
 $website-border-size:                 2px !default;
-$website-border:                      $website-border-size solid color(black);
-$website-border-secondary:            calc($website-border-size / 2) solid color(black);
+$website-border:                      $website-border-size solid var(--brand-primary);
+$website-border-secondary:            calc($website-border-size / 2) solid var(--brand-primary);
 $menu-padding:                        space(s) !default;
 $menu-mobile-offset:                  80px !default;
 
