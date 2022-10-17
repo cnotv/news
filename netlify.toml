@@ -34,3 +34,7 @@
   skip_processing = false
 [context.branch-name.processing.images]
   compress = false
+[[redirects]]
+from="/call-proxy/*"
+to="/.netlify/functions/call-proxy/:splat"
+status=301
