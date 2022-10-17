@@ -12,6 +12,7 @@
           getLayout === 3 ? 'o-gallery' : '',
         ]"
       >
+        <modal v-if="modal.open"></modal>
         <span v-if="!statusOnline">You are offline.</span>
 
         <template v-if="getLayout === 0">
@@ -32,8 +33,6 @@
         <template v-else>
           <Subreddit v-for="post in getPosts" :key="post.data.id" :data="post.data" />
         </template>
-
-        <modal v-if="modalOpen" />
       </div>
 
       <div v-else-if="getPosts">Sorry, no post found.</div>
@@ -44,7 +43,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { mapGetters, mapActions } from 'vuex'
+  import { mapGetters, mapActions, mapState } from 'vuex'
   import Modal from '@/components/Modal.vue'
   import Card from '@/components/Card.vue'
   import Gallery from '@/components/Gallery.vue'
@@ -60,7 +59,6 @@
     data() {
       return {
         refresh: false,
-        modalOpen: false,
         statusOnline: true,
         loadThreshold: 0,
         noStorage: window.localStorage.getItem('vuex') === null,
@@ -75,6 +73,7 @@
         'getSearch',
         'getSubreddits',
       ]),
+      ...mapState(['modal']),
     },
     unmounted(): void {
       this._removeListeners()
@@ -87,13 +86,10 @@
       // display post default
       store.dispatch('commitPosts')
       this._handleOffline()
+      store.dispatch('togglePost')
     },
     methods: {
       ...mapActions(['commitPosts']),
-
-      toggleModal(): void {
-        this.modalOpen = !this.modalOpen
-      },
 
       _refreshListener() {
         const el = this.$refs.container as HTMLElement

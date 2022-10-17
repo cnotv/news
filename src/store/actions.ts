@@ -123,6 +123,10 @@ export const actions: ActionTree<State, State> = {
     changeSearch({ commit, state })
   },
 
+  togglePost({ commit }, meta) {
+    commit('TOGGLE_POST', meta)
+  },
+
   resetState({ commit }) {
     commit('RESET_STATE')
   },

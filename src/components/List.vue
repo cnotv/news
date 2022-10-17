@@ -16,6 +16,19 @@
 
       <span class="u-spacer--x"></span>
 
+      <div
+        @click="
+          togglePost({
+            link: data.url,
+            comments: `http://www.reddit.com${data.permalink}`,
+          })
+        "
+      >
+        <i class="fa fa-solid fa-link"></i>
+      </div>
+
+      <span class="u-spacer--x"></span>
+
       <a :href="'http://www.reddit.com' + data.permalink" target="_blank">
         <i class="fa fa-comment"></i>
         {{ data.num_comments }}
@@ -26,7 +39,7 @@
 </template>
 
 <script lang="ts">
-  import { mapGetters } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
   import { defineComponent, PropType } from 'vue'
   import { mixins } from '@/mixins'
   import { RedditPost } from '@/types/reddit-posts'
@@ -42,6 +55,9 @@
     },
     computed: {
       ...mapGetters(['getSearch']),
+    },
+    methods: {
+      ...mapActions(['togglePost']),
     },
   })
 </script>

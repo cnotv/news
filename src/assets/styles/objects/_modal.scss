@@ -10,12 +10,21 @@
   overflow-x: hidden;
   overflow-y: scroll;
   outline: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
 
   &__wrap {
-    @include media-bp(desktop) {
-      width: calc(100% - #{$grid-gutter-size*4});
-      margin-left: $grid-gutter-size*4;
-    }
+    // @include media-bp(desktop) {
+    //   width: calc(100% - #{$grid-gutter-size*4});
+    //   margin-left: $grid-gutter-size*4;
+    // }
+  }
+
+  &__close {
+    position: fixed;
+    top: $grid-gutter-size;
+    right: $grid-gutter-size;
   }
 
   &.is-open {
@@ -26,9 +35,21 @@
 
   &__content {
     border-radius: 0;
-    padding: 8vh 4vw;
+    // padding: 8vh 4vw;
+    display: flex;
     background-color: $body-bg;
     min-height: 100vh;
+
+    @include media-bp(desktop) {
+      flex-direction: row;
+    }
+    @include media-bp(mobile) {
+      flex-direction: column;
+    }
+
+    & > iframe {
+      flex-grow: 1;
+    }
   }
 }
 

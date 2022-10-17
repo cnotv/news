@@ -6,6 +6,11 @@ export const state: State = {
   loading: false,
   posts: [],
   query: '',
+  modal: {
+    open: false,
+    link: '',
+    comments: '',
+  },
   search: {
     currentTime: '',
     global: false,

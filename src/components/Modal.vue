@@ -8,9 +8,24 @@
   >
     <div class="o-modal__wrap fadeInRight" role="document">
       <div class="o-modal__content">
-        <p>test</p>
-        <a href="#" class="c-btn-cta">Close modal</a>
+        <iframe :src="modal.link" frameborder="0" sandbox=""></iframe>
+        <iframe :src="modal.comments" frameborder="0" sandbox=""></iframe>
       </div>
+      <button class="o-modal__close c-btn-cta" @click="togglePost()">X</button>
     </div>
   </aside>
 </template>
+
+<script lang="ts">
+  import { defineComponent } from 'vue'
+  import { mapActions, mapState } from 'vuex'
+  export default defineComponent({
+    name: 'Modal',
+    computed: {
+      ...mapState(['modal']),
+    },
+    methods: {
+      ...mapActions(['togglePost']),
+    },
+  })
+</script>

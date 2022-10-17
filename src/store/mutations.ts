@@ -60,6 +60,20 @@ export default {
   SET_QUERY: (state: State, query: string) => {
     state.query = query
   },
+  TOGGLE_POST: (state: State, meta?: { link: string; comments: string }) => {
+    state.modal = {
+      open: !!meta,
+      link: meta?.link || '',
+      comments: meta?.comments || '',
+    }
+
+    const className = 'is-modal-open'
+    if (meta) {
+      document.body.classList.add(className)
+    } else {
+      document.body.classList.remove(className)
+    }
+  },
   RESET_STATE: () => {
     void 0
   },
