@@ -19,8 +19,8 @@
       <div
         @click="
           togglePost({
-            link: data.url,
-            comments: `http://www.reddit.com${data.permalink}`,
+            link: `https://cors-anywhere.herokuapp.com/${data.url}`,
+            comments: `https://cors-anywhere.herokuapp.com/http://www.reddit.com${data.permalink}`,
           })
         "
       >
