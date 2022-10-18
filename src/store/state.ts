@@ -7,7 +7,6 @@ export const state: State = {
   posts: [],
   query: '',
   modal: {
-    open: false,
     link: '',
     comments: '',
   },

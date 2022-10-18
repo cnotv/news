@@ -1,6 +1,6 @@
 import { PostSub } from '@/types/api'
 import { RedditPost } from '@/types/reddit-posts'
-import { State } from '@/types/state'
+import { Modal, State } from '@/types/state'
 
 export default {
   LOAD_POSTS: (state: State, posts: (RedditPost | PostSub)[]) => {
@@ -60,12 +60,8 @@ export default {
   SET_QUERY: (state: State, query: string) => {
     state.query = query
   },
-  TOGGLE_POST: (state: State, meta?: { link: string; comments: string }) => {
-    state.modal = {
-      open: !!meta,
-      link: meta?.link || '',
-      comments: meta?.comments || '',
-    }
+  TOGGLE_POST: (state: State, meta?: Modal) => {
+    state.modal = meta
 
     const className = 'is-modal-open'
     if (meta) {

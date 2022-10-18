@@ -5,7 +5,7 @@ export interface State {
   after?: string
   currentSub: string
   loading: boolean
-  modal: Modal
+  modal: Modal | undefined
   posts: (RedditPost | PostSub)[]
   query: string
   search: StateSearch
@@ -15,7 +15,6 @@ export interface State {
 }
 
 export interface Modal {
-  open: boolean
   link: string
   comments: string
 }

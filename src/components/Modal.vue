@@ -7,7 +7,7 @@
     aria-hidden="true"
   >
     <div class="o-modal__wrap fadeInRight" role="document">
-      <div class="o-modal__content">
+      <div v-if="modal" class="o-modal__content">
         <iframe :src="modal.link" frameborder="0" sandbox=""></iframe>
         <iframe :src="modal.comments" frameborder="0" sandbox=""></iframe>
       </div>

@@ -12,7 +12,7 @@
           getLayout === 3 ? 'o-gallery' : '',
         ]"
       >
-        <modal v-if="modal.open"></modal>
+        <modal v-if="modal"></modal>
         <span v-if="!statusOnline">You are offline.</span>
 
         <template v-if="getLayout === 0">
