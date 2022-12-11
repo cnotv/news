@@ -32,7 +32,7 @@ $font-size-h6:                        1rem !default;
 // Colors
 $colors: (
   white:                              "#fff",
-  black:                              "#333",
+  black:                              "#222",
   red:                                "red",
   grey:                               "#dadada",
   lightgrey:                          "#f1f1f1",
@@ -52,10 +52,10 @@ $zindex: (
 );
 
 :root {
-  --brand-primary:                       #333;
+  --brand-primary:                       #222;
   --brand-secondary:                     #dadada;
   --body-bg:                             #f1f1f1;
-  --body-color:                          #333;
+  --body-color:                          #222;
   --color-error:                         red;
   --color-disabled:                      lightgrey;
   --color-active:                        #fff;
@@ -66,7 +66,7 @@ $zindex: (
   --bg-card:                             #fff;
   --bg-link:                             #fff;
   --bg-link-hover:                       #dadada;
-  --bg-link-active:                      #333;
+  --bg-link-active:                      #222;
   --modal-shadow-color:                  rgba(0, 0, 0, 0.7);
 }
 
