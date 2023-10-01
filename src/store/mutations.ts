@@ -19,7 +19,7 @@ export default {
     const isNew = !state.subreddits.find((e) => e.name === name)
     if (isNew) {
       const subreddit: Subreddit = {
-        id: state.subreddits.length,
+        id: `${state.subreddits.length}`,
         name,
       }
       state.subreddits = [...state.subreddits, subreddit]
