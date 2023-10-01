@@ -7,26 +7,31 @@
     }"
   >
     <nav class="o-nav-h">
-      <ul
-        v-if="getSubreddits.length > 0"
+      <draggable
+        v-if="subreddits.length > 0"
+        v-model="subreddits"
         class="o-nav-h__left o-nav-h__menu fadeIn"
-        @click="toggleMenu"
+        group="subreddits"
+        item-key="id"
+        @start="drag = true"
+        @end="drag = false"
       >
-        <li v-for="subreddit in getSubreddits" :key="subreddit" class="o-nav-h__menu__item">
-          <a v-if="openSettings" class="o-nav-h__action" @click="removeSub(subreddit.id)">
-            <i class="fa fa-times-circle" aria-hidden="true"></i>
-            {{ subreddit.name }}
-          </a>
-
-          <a
-            v-if="!openSettings"
-            class="o-nav-h__action"
-            :class="{ 'is-active': subreddit.name == getCurrentSub }"
-            @click="navigate(subreddit.name)"
-            >{{ subreddit.name }}</a
-          >
-        </li>
-      </ul>
+        <template #item="{ element }">
+          <div class="o-nav-h__menu__item">
+            <a v-if="openSettings" class="o-nav-h__action" @click="removeSub(element.id)">
+              <i class="fa fa-times-circle" aria-hidden="true"></i>
+              {{ element.name }}
+            </a>
+            <a
+              v-if="!openSettings"
+              class="o-nav-h__action"
+              :class="{ 'is-active': element.name == getCurrentSub }"
+              @click="navigate(element.name)"
+              >{{ element.name }}</a
+            >
+          </div>
+        </template>
+      </draggable>
 
       <a
         v-else-if="!getSearch.open && !openSettings"
@@ -167,9 +172,10 @@
   import { store } from '@/store'
   import { LIMITS, LAYOUTS, TIMES } from '@/data/settings'
   import { Subreddit } from '@/types/state'
+  import draggable from 'vuedraggable'
 
   export default defineComponent({
-    components: { newsOrder, search },
+    components: { draggable, newsOrder, search },
     data() {
       return {
         openMenu: false,
@@ -194,7 +200,7 @@
           return store.state.subreddits
         },
         set(subreddits: Subreddit[]) {
-          store.commit('updateSubs', subreddits)
+          store.dispatch('updateSubs', subreddits)
         },
       },
     },
