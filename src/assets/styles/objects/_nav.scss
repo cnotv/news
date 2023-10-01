@@ -28,6 +28,7 @@
       display: block;
       user-select: none;
       border: none;
+      color: $body-color;
       background-color: transparent;
 
       @include media-bp(tablet-min) {
@@ -62,6 +63,11 @@
     &__icon {
       font-size: 1rem;
       min-width: 1rem;
+
+      .is-active &,
+      &:active {
+        color: $color-active;
+      }
 
       .fa {
         z-index: 1;
@@ -330,6 +336,7 @@
       border: $website-border-secondary;
       border-color: transparent;
       text-decoration: none;
+      color: $body-color;
       background-color: transparent;
 
       &:hover {
@@ -344,6 +351,7 @@
 
       &.is-active,
       &:active {
+        color: $body-color;
         background-color: $bg-link-hover;
         border: $website-border-secondary;
       }

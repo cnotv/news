@@ -47,8 +47,15 @@
   })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   .c-filter {
     flex-shrink: 0;
+  }
+
+  .o-search__bar {
+    input {
+      font-size: 1.2rem;
+      color: var(--color-text);
+    }
   }
 </style>
