@@ -1,5 +1,5 @@
 import api from '@/helpers/api'
-import { State } from '@/types/state'
+import { State, Subreddit } from '@/types/state'
 import { ActionTree, Commit } from 'vuex'
 
 interface ActionPayload {
@@ -58,8 +58,8 @@ export const actions: ActionTree<State, State> = {
     commit('ADD_SUB', sub)
   },
 
-  removeSub({ commit }, sub: string) {
-    commit('REMOVE_SUB', sub)
+  removeSub({ commit }, id: string) {
+    commit('REMOVE_SUB', id)
   },
 
   changeSub({ commit, state }, sub: string) {
@@ -71,6 +71,10 @@ export const actions: ActionTree<State, State> = {
       `${state.currentSub}/${state.settings.sort}.json?allow_over18=1&limit=${state.settings.limit}`
     )
     commitPosts({ commit, state })
+  },
+
+  updateSubs({ commit }, subreddits: Subreddit[]) {
+    commit('UPDATE_SUBS', subreddits)
   },
 
   changeLayout({ commit }, layout: number) {

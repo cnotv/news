@@ -11,7 +11,7 @@ export interface State {
   search: StateSearch
   settings: StateSettings
   strict: boolean
-  subreddits: string[]
+  subreddits: Subreddit[]
 }
 
 export interface Modal {
@@ -30,4 +30,9 @@ export interface StateSettings {
   layout: number
   limit: string
   sort: string
+}
+
+export interface Subreddit {
+  id: string
+  name: string
 }

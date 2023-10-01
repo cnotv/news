@@ -1,6 +1,6 @@
 import { PostSub } from '@/types/api'
 import { RedditPost } from '@/types/reddit-posts'
-import { Modal, State } from '@/types/state'
+import { Modal, State, Subreddit } from '@/types/state'
 
 export default {
   LOAD_POSTS: (state: State, posts: (RedditPost | PostSub)[]) => {
@@ -15,18 +15,22 @@ export default {
   SET_AFTER: (state: State, id: string) => {
     state.after = id
   },
-  ADD_SUB: (state: State, newSub: string) => {
-    const subs = state.subreddits
-    if (!subs.includes(newSub)) {
-      subs.push(newSub)
+  ADD_SUB: (state: State, name: string) => {
+    const isNew = !state.subreddits.find((e) => e.name === name)
+    if (isNew) {
+      const subreddit: Subreddit = {
+        id: state.subreddits.length,
+        name,
+      }
+      state.subreddits = [...state.subreddits, subreddit]
     }
-    state.subreddits = subs
+    state.subreddits
   },
-  REMOVE_SUB: (state: State, removeSub: string) => {
-    const subs = state.subreddits
-    if (subs.includes(removeSub)) {
-      state.subreddits = subs.filter((e) => e !== removeSub)
-    }
+  REMOVE_SUB: (state: State, id: string) => {
+    state.subreddits = state.subreddits.filter((subreddit) => subreddit.id !== id)
+  },
+  UPDATE_SUBS: (state: State, subreddits: Subreddit[]) => {
+    state.subreddits = subreddits
   },
   CURRENT_SUB: (state: State, currentSub: string) => {
     state.search.global = false

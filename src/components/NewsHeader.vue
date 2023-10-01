@@ -13,17 +13,17 @@
         @click="toggleMenu"
       >
         <li v-for="subreddit in getSubreddits" :key="subreddit" class="o-nav-h__menu__item">
-          <a v-if="openSettings" class="o-nav-h__action" @click="removeSub(subreddit)">
+          <a v-if="openSettings" class="o-nav-h__action" @click="removeSub(subreddit.id)">
             <i class="fa fa-times-circle" aria-hidden="true"></i>
-            {{ subreddit }}
+            {{ subreddit.name }}
           </a>
 
           <a
             v-if="!openSettings"
             class="o-nav-h__action"
-            :class="{ 'is-active': subreddit == getCurrentSub }"
-            @click="navigate(subreddit)"
-            >{{ subreddit }}</a
+            :class="{ 'is-active': subreddit.name == getCurrentSub }"
+            @click="navigate(subreddit.name)"
+            >{{ subreddit.name }}</a
           >
         </li>
       </ul>
@@ -166,6 +166,7 @@
   import search from '@/components/search.vue'
   import { store } from '@/store'
   import { LIMITS, LAYOUTS, TIMES } from '@/data/settings'
+  import { Subreddit } from '@/types/state'
 
   export default defineComponent({
     components: { newsOrder, search },
@@ -176,6 +177,7 @@
         limits: LIMITS,
         layouts: LAYOUTS,
         times: TIMES,
+        drag: false,
       }
     },
     computed: {
@@ -187,6 +189,14 @@
         'getSearch',
         'getSubreddits',
       ]),
+      subreddits: {
+        get() {
+          return store.state.subreddits
+        },
+        set(subreddits: Subreddit[]) {
+          store.commit('updateSubs', subreddits)
+        },
+      },
     },
     methods: {
       ...mapActions([

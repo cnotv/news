@@ -21,7 +21,7 @@ export interface Subreddits {
 }
 
 export type SubredditsInfoIndex = { [key: string]: SubredditAboutInfo }
-export type SubredditsIndex = { [key: string]: Subreddit }
+export type SubredditsIndex = { [key: string]: SubredditData }
 
 export type AuthorFlair = unknown
 
@@ -67,7 +67,7 @@ export interface AllowedPostTypes {
   spoilers: boolean
 }
 
-export interface Subreddit {
+export interface SubredditData {
   allowChatPostCreation: boolean
   communityIcon: string
   displayText: string
