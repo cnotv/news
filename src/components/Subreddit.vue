@@ -22,7 +22,7 @@
     props: {
       data: {
         type: Object as PropType<SubredditsIndex>,
-        default: () => null,
+        default: () => ({}),
       },
     },
   })

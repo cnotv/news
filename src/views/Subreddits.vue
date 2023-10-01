@@ -2,7 +2,7 @@
   <section class="c-section">
     <div class="c-container-full">
       <div v-if="getPosts.length > 0" ref="posts" class="c-row">
-        <Subreddit v-for="post in getPosts" :key="post.id" :post="post" />
+        <Subreddit v-for="post in getPosts" :key="post.name" :data="post" />
       </div>
 
       <div v-else-if="getPosts">Sorry, no subreddit found.</div>
