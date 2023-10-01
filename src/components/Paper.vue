@@ -12,14 +12,7 @@
 
     <section>
       <template v-if="data.preview">
-        <img
-          v-if="data.preview.images[0].variants.gif"
-          v-lazy="data.preview.images[0].variants.gif.source.url.replace('amp;s', 's')"
-        />
-        <img
-          v-else-if="data.preview"
-          v-lazy="data.preview.images[0].source.url.replace('amp;s', 's')"
-        />
+        <ImagePreview :data="data" />
       </template>
 
       <div v-if="data.selftext">
@@ -37,9 +30,11 @@
   import { defineComponent, PropType } from 'vue'
   import { mixins } from '@/mixins'
   import { RedditPost } from '@/types/reddit-posts'
+  import ImagePreview from '@/components/ImagePreview.vue'
 
   export default defineComponent({
     name: 'Paper',
+    components: { ImagePreview },
     mixins: [mixins],
     props: {
       data: {

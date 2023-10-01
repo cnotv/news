@@ -4,7 +4,7 @@
       <div class="o-card__wrap">
         <header
           v-if="data.domain == 'youtube.com' || data.domain == 'youtu.be'"
-          class="o-card__header"
+          class="o-card__header o-card__header--youtube"
         >
           <iframe
             width="100%"
@@ -16,15 +16,8 @@
           ></iframe>
         </header>
 
-        <header v-else-if="data.preview" class="o-card__header">
-          <img
-            v-if="data.preview.images[0].variants.gif"
-            v-lazy="data.preview.images[0].variants.gif.source.url.replace('amp;s', 's')"
-          />
-          <img
-            v-else-if="data.preview"
-            v-lazy="data.preview.images[0].source.url.replace('amp;s', 's')"
-          />
+        <header v-else-if="data.preview" class="o-card__header o-card__header--preview">
+          <ImagePreview :data="data" />
         </header>
 
         <section>
@@ -56,10 +49,12 @@
 <script lang="ts">
   import { defineComponent, PropType } from 'vue'
   import { mixins } from '@/mixins'
+  import ImagePreview from '@/components/ImagePreview.vue'
   import { RedditPost } from '@/types/reddit-posts'
 
   export default defineComponent({
     name: 'Card',
+    components: { ImagePreview },
     mixins: [mixins],
     props: {
       data: {
