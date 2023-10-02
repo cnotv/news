@@ -63,12 +63,13 @@ export const actions: ActionTree<State, State> = {
   },
 
   changeSub({ commit, state }, sub: string) {
+    const setting = state.settings[state.currentSub || 'default']
     commit('CURRENT_SUB', sub)
 
     // update query before api request
     commit(
       'SET_QUERY',
-      `${state.currentSub}/${state.settings.sort}.json?allow_over18=1&limit=${state.settings.limit}`
+      `${state.currentSub}/${setting.sort}.json?allow_over18=1&limit=${setting.limit}`
     )
     commitPosts({ commit, state })
   },
@@ -86,9 +87,10 @@ export const actions: ActionTree<State, State> = {
 
     // switch between search query or subreddit feed if no input
     if (state.search.string === '') {
+      const setting = state.settings[state.currentSub || 'default']
       commit(
         'SET_QUERY',
-        `${state.currentSub}/${state.settings.sort}.json?allow_over18=1&limit=${state.settings.limit}`
+        `${state.currentSub}/${setting.sort}.json?allow_over18=1&limit=${setting.limit}`
       )
       commitPosts({ commit, state })
     } else {
@@ -99,10 +101,11 @@ export const actions: ActionTree<State, State> = {
 
   // change subreddit order
   changeOrder({ commit, state }, order: string) {
+    const setting = state.settings[state.currentSub || 'default']
     commit('CURRENT_ORDER', order)
     commit(
       'SET_QUERY',
-      `${state.currentSub}/${state.settings.sort}.json?allow_over18=1&limit=${state.settings.limit}`
+      `${state.currentSub}/${setting.sort}.json?allow_over18=1&limit=${setting.limit}`
     )
     commitPosts({ commit, state })
   },
@@ -162,6 +165,7 @@ const commitPosts = ({ state, commit }: ActionPayload) => {
 const changeSearch = ({ state, commit }: ActionPayload) => {
   const search: string = state.search.string
   let searchGlobal = ''
+  const setting = state.settings[state.currentSub || 'default']
 
   // if filter search to subreddit
   if (!state.search.global) {
@@ -173,11 +177,11 @@ const changeSearch = ({ state, commit }: ActionPayload) => {
     commit('SET_SEARCH', search)
     commit(
       'SET_QUERY',
-      `${state.currentSub}/search.json?allow_over18=1&limit=${state.settings.limit}&t=${state.search.currentTime}&q=${state.search.string}${searchGlobal}`
+      `${state.currentSub}/search.json?allow_over18=1&limit=${setting.limit}&t=${state.search.currentTime}&q=${state.search.string}${searchGlobal}`
     )
   } else {
     commit('SET_SEARCH', '')
-    commit('SET_QUERY', `${state.currentSub}/${state.settings.sort}.json`)
+    commit('SET_QUERY', `${state.currentSub}/${setting.sort}.json`)
   }
 
   // submit search request with small delay

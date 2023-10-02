@@ -35,15 +35,19 @@ export default {
   CURRENT_SUB: (state: State, currentSub: string) => {
     state.search.global = false
     state.currentSub = currentSub
+
+    if (!state.settings[state.currentSub]) {
+      state.settings[state.currentSub] = state.settings['default']
+    }
   },
   CURRENT_ORDER: (state: State, sort: string) => {
-    state.settings.sort = sort
+    state.settings[state.currentSub || 'default'].sort = sort
   },
   CURRENT_LAYOUT: (state: State, layout: number) => {
-    state.settings.layout = layout
+    state.settings[state.currentSub || 'default'].layout = layout
   },
   CURRENT_LIMIT: (state: State, limit: string) => {
-    state.settings.limit = limit
+    state.settings[state.currentSub || 'default'].limit = limit
   },
   SET_SEARCH: (state: State, search: string) => {
     state.search.string = search

@@ -17,9 +17,11 @@ export const state: State = {
     string: '',
   },
   settings: {
-    layout: 0,
-    limit: '24',
-    sort: 'hot',
+    default: {
+      layout: 0,
+      limit: '24',
+      sort: 'hot',
+    },
   },
   strict: process.env.NODE_ENV !== 'production',
   subreddits: [],

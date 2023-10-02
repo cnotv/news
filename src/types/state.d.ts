@@ -9,7 +9,7 @@ export interface State {
   posts: (RedditPost | PostSub)[]
   query: string
   search: StateSearch
-  settings: StateSettings
+  settings: Record<string, StateSettings>
   strict: boolean
   subreddits: Subreddit[]
 }

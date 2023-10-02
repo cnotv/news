@@ -21,7 +21,7 @@
       ...mapGetters(['getSort']),
       select: {
         get(): string {
-          return store.state.settings.sort
+          return store.state.settings[store.state.currentSub || 'default'].sort
         },
         set(value: string): void {
           store.dispatch('changeOrder', value)
