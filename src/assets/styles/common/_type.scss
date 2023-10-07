@@ -72,8 +72,8 @@ li {
 hr {
   margin-top: calc($grid-gutter-size / 2);
   margin-bottom: calc($grid-gutter-size / 2);
-  margin-left: calc($grid-gutter-size * -2);
-  margin-right: calc($grid-gutter-size * -2);
+  margin-left: calc($grid-gutter-size * -1);
+  margin-right: calc($grid-gutter-size * -1);
   border: 0;
   border-top: $website-border-secondary;
 }
