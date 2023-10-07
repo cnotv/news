@@ -5,18 +5,13 @@
     </header>
 
     <small class="o-list__meta">
-      <span>{{ date(data.created_utc) }}</span>
+      <span v-if="getSearch.open">{{ date(data.created_utc) }}</span>
 
       <a :href="'//' + data.domain" target="_blank">{{ data.domain }}</a>
 
-      <button v-if="getSearch.open" @click="addSub(data.subreddit)">
-        <i class="fa fa-plus"></i>
-        /r/{{ data.subreddit }}
-      </button>
-
       <span class="u-spacer--x"></span>
 
-      <div
+      <!-- <div
         @click="
           togglePost({
             source: data.url,
@@ -26,7 +21,7 @@
         "
       >
         <i class="fa fa-solid fa-link"></i>
-      </div>
+      </div> -->
 
       <span class="u-spacer--x"></span>
 
@@ -35,12 +30,19 @@
         {{ data.num_comments }}
       </a>
     </small>
+
+    <small class="o-list__meta">
+      <div v-if="search.global && getSearch.open" @click="addSub(data.subreddit)">
+        <i class="fa fa-plus"></i>
+        /r/{{ data.subreddit }}
+      </div>
+    </small>
     <hr />
   </article>
 </template>
 
 <script lang="ts">
-  import { mapActions, mapGetters } from 'vuex'
+  import { mapActions, mapGetters, mapState } from 'vuex'
   import { defineComponent, PropType } from 'vue'
   import { mixins } from '@/mixins'
   import { RedditPost } from '@/types/reddit-posts'
@@ -56,6 +58,7 @@
     },
     computed: {
       ...mapGetters(['getSearch']),
+      ...mapState(['search']),
     },
     methods: {
       ...mapActions(['togglePost']),

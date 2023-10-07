@@ -39,7 +39,7 @@
     outline: none;
   }
 
-  i:not(#{&-icon}) {
+  &:not(.c-btn-icon) i {
     margin-left: 1.5em;
   }
 

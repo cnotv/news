@@ -27,8 +27,8 @@
 }
 
 .c-section {
-  padding-bottom: $section-padding;
-  padding-top: $section-padding;
+  padding-bottom: $section-padding / 2;
+  padding-top: $section-padding / 2;
 
   // &+& {
   //   padding-top: $section-padding;
