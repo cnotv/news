@@ -1,6 +1,6 @@
 <template>
   <div class="o-search__bar fadeIn">
-    <input ref="search" v-model="search" placeholder="Type something.." />
+    <input ref="input" v-model="search" placeholder="Type something.." />
     <div v-if="$route.name !== 'subreddits'" class="c-filter">
       <input id="search-global" v-model="searchGlobal" type="checkbox" />
       <label for="search-global"></label>
@@ -8,42 +8,40 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
-  import { mapGetters, mapActions } from 'vuex'
+<script setup lang="ts">
+  import { computed, onMounted, ref } from 'vue'
   import { store } from '@/store'
+  import { debounce } from 'lodash'
+  import { useRoute } from 'vue-router'
 
-  export default defineComponent({
-    name: 'Search',
-    computed: {
-      ...mapGetters(['getSearch']),
-      search: {
-        get(): string {
-          return store.state.search.string
-        },
-        set(value: string): void {
-          if (this.$route.name === 'home') {
-            store.dispatch('changeSearch', value)
-          } else {
-            store.dispatch('commitSubreddits', value)
-          }
-        },
-      },
-      searchGlobal: {
-        get(): boolean {
-          return store.state.search.global
-        },
-        set(): void {
-          store.dispatch('changeSearchGlobal')
-        },
-      },
+  const input = ref()
+  const route = useRoute()
+  const search = computed({
+    get(): string {
+      return store.state.search.string
     },
-    mounted() {
-      ;(this.$refs.search as HTMLElement).focus()
+    set: debounce((value: string) => {
+      // TODO: Investigate why this starts on first load
+      if (typeof value === 'string') {
+        if (route.name === 'home') {
+          store.dispatch('changeSearch', value)
+        } else {
+          store.dispatch('commitSubreddits', value)
+        }
+      }
+    }, 500),
+  })
+  const searchGlobal = computed({
+    get(): boolean {
+      return store.state.search.global
     },
-    methods: {
-      ...mapActions(['changeSearch', 'changeSearchGlobal']),
+    set(): void {
+      store.dispatch('changeSearchGlobal')
     },
+  })
+
+  onMounted(() => {
+    input.value.focus()
   })
 </script>
 
