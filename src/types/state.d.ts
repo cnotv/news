@@ -15,6 +15,7 @@ export interface State {
 }
 
 export interface Modal {
+  source: string
   link: string
   comments: string
 }

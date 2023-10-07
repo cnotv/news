@@ -86,6 +86,7 @@
       // display post default
       store.dispatch('commitPosts')
       this._handleOffline()
+      // Reset modal
       store.dispatch('togglePost')
     },
     methods: {
