@@ -95,7 +95,7 @@ export const actions: ActionTree<State, State> = {
       commitPosts({ commit, state })
     } else {
       // update search after change
-      changeSearch({ commit, state })
+      getPostsEffect({ commit, state })
     }
   },
 
@@ -110,14 +110,15 @@ export const actions: ActionTree<State, State> = {
     commitPosts({ commit, state })
   },
 
-  changeSearch({ commit, state }) {
-    changeSearch({ commit, state })
+  changeSearch({ commit, state }, search: string) {
+    commit('SET_SEARCH', search)
+    getPostsEffect({ commit, state })
   },
 
   changeSearchGlobal({ commit, state }) {
     commit('SEARCH_GLOBAL')
     // update search after change
-    changeSearch({ commit, state })
+    getPostsEffect({ commit, state })
   },
 
   changeSearchOpen({ commit }, close: boolean) {
@@ -127,7 +128,7 @@ export const actions: ActionTree<State, State> = {
   changeSearchTime({ commit, state }, time = state.search.currentTime) {
     commit('SEARCH_TIME', time)
     // update search after change
-    changeSearch({ commit, state })
+    getPostsEffect({ commit, state })
   },
 
   togglePost({ commit }, meta) {
@@ -162,7 +163,7 @@ const commitPosts = ({ state, commit }: ActionPayload) => {
     })
 }
 
-const changeSearch = ({ state, commit }: ActionPayload) => {
+const getPostsEffect = ({ state, commit }: ActionPayload) => {
   const search: string = state.search.string
   let searchGlobal = ''
   const setting = state.settings[state.currentSub || 'default']
