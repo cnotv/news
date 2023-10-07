@@ -35,7 +35,7 @@ export const actions: ActionTree<State, State> = {
       return
     }
 
-    const query = `${state.currentSub}/${state.settings.sort}.json?allow_over18=1&limit=${state.settings.limit}&after=${state.after}`
+    const query = `${state.currentSub}/${state.settings.sort}.json?limit=${state.settings.limit}&after=${state.after}`
     commit('SET_LOADING', true)
     commit('SET_QUERY', query)
 
@@ -67,10 +67,7 @@ export const actions: ActionTree<State, State> = {
     commit('CURRENT_SUB', sub)
 
     // update query before api request
-    commit(
-      'SET_QUERY',
-      `${state.currentSub}/${setting.sort}.json?allow_over18=1&limit=${setting.limit}`
-    )
+    commit('SET_QUERY', `${state.currentSub}/${setting.sort}.json?limit=${setting.limit}`)
     commitPosts({ commit, state })
   },
 
@@ -88,10 +85,7 @@ export const actions: ActionTree<State, State> = {
     // switch between search query or subreddit feed if no input
     if (state.search.string === '') {
       const setting = state.settings[state.currentSub || 'default']
-      commit(
-        'SET_QUERY',
-        `${state.currentSub}/${setting.sort}.json?allow_over18=1&limit=${setting.limit}`
-      )
+      commit('SET_QUERY', `${state.currentSub}/${setting.sort}.json?limit=${setting.limit}`)
       commitPosts({ commit, state })
     } else {
       // update search after change
@@ -103,10 +97,7 @@ export const actions: ActionTree<State, State> = {
   changeOrder({ commit, state }, order: string) {
     const setting = state.settings[state.currentSub || 'default']
     commit('CURRENT_ORDER', order)
-    commit(
-      'SET_QUERY',
-      `${state.currentSub}/${setting.sort}.json?allow_over18=1&limit=${setting.limit}`
-    )
+    commit('SET_QUERY', `${state.currentSub}/${setting.sort}.json?limit=${setting.limit}`)
     commitPosts({ commit, state })
   },
 
@@ -178,7 +169,7 @@ const getPostsEffect = ({ state, commit }: ActionPayload) => {
     commit('SET_SEARCH', search)
     commit(
       'SET_QUERY',
-      `${state.currentSub}/search.json?allow_over18=1&limit=${setting.limit}&t=${state.search.currentTime}&q=${state.search.string}${searchGlobal}`
+      `${state.currentSub}/search.json?limit=${setting.limit}&t=${state.search.currentTime}&q=${state.search.string}${searchGlobal}`
     )
   } else {
     commit('SET_SEARCH', '')

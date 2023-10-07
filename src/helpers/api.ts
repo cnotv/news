@@ -43,7 +43,8 @@ export default {
   async fetchSubs(q: string, after?: string): Promise<PostSub[]> {
     const url = `//www.reddit.com/subreddits/search.json`
     const params = {
-      allow_over18: '1',
+      include_over_18: 'true',
+      label_nsfw: 'true',
       sort: 'relevance',
       type: 'sr',
       q,
