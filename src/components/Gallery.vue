@@ -4,7 +4,7 @@
       <h6>{{ truncate(data.title, 150) }}</h6>
     </header>
 
-    <section v-if="data.preview" :style="style">
+    <section>
       <a :href="data.url" target="_blank">
         <ImagePreview :data="data" />
       </a>
@@ -39,18 +39,6 @@
         type: Object as PropType<RedditPost>,
         default: () => null,
       },
-    },
-    data() {
-      return {
-        style: {
-          minHeight: !this.data.preview
-            ? 0
-            : (this.data.preview.images[0].source.height /
-                this.data.preview.images[0].source.width) *
-                30 +
-              'vw',
-        },
-      }
     },
   })
 </script>

@@ -1,9 +1,23 @@
 <template>
+  <video
+    v-if="data.secure_media?.reddit_video"
+    :poster="data.preview?.images[0].source.url"
+    preload="auto"
+    autoplay="autoplay"
+    muted="muted"
+    loop="loop"
+    webkit-playsinline=""
+    style="width: 100%; max-width: 100%; height: auto; max-height: 100vh"
+  >
+    <source :src="data.secure_media.reddit_video.fallback_url" type="video/mp4" />
+  </video>
+
   <img
-    v-if="data.preview?.images[0].variants.gif"
+    v-else-if="data.preview?.images[0].variants.gif"
     v-lazy="data.preview.images[0].variants.gif.source.url.replace('amp;s', 's')"
     class="o-card__header__image--gif"
   />
+
   <img
     v-else-if="data.preview"
     :src="
