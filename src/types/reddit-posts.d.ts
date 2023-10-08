@@ -94,6 +94,7 @@ export interface RedditPost {
   public_description: string // Subreddit only?
   pwls: number
   quarantine: boolean
+  reddit_video_preview: RedditVideo
   removal_reason: null
   removed_by_category: null
   removed_by: null

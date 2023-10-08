@@ -3,9 +3,9 @@
     v-if="data.secure_media?.reddit_video"
     :poster="data.preview?.images[0].source.url"
     preload="auto"
-    autoplay="autoplay"
-    muted="muted"
-    loop="loop"
+    autoplay="true"
+    muted="true"
+    loop="true"
     webkit-playsinline=""
     style="width: 100%; max-width: 100%; height: auto; max-height: 100vh"
   >
