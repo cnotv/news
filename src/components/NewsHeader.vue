@@ -110,11 +110,13 @@
       </div>
     </nav>
 
+    <!-- Sub-navigation bar -->
     <nav v-if="openSettings || (getSearch.open && !isSubreddits())" class="o-nav-sub">
       <div v-if="!getSearch.open" class="o-nav-sub__group fadeIn">
         <news-order />
       </div>
 
+      <!-- Time settings -->
       <div v-if="getSearch.open" class="o-nav-sub__group fadeIn">
         <span class="o-nav-sub__label">View post till:</span>
         <button
@@ -135,6 +137,7 @@
         </button>
       </div>
 
+      <!-- Layout -->
       <div class="o-nav-sub__group fadeIn">
         <span class="o-nav-sub__label">Layout:</span>
         <button
@@ -148,6 +151,7 @@
         </button>
       </div>
 
+      <!-- Pagination -->
       <div class="o-nav-sub__group fadeIn">
         <span class="o-nav-sub__label">Posts:</span>
         <button
@@ -240,6 +244,7 @@
       },
       navigate(menu: string) {
         this.changeSub(menu)
+        this.openMenu = false
         if (this.$route.name !== 'home') {
           this.$router.push({ name: 'home' })
         }
