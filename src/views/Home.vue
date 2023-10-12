@@ -75,6 +75,17 @@
       ]),
       ...mapState(['modal']),
     },
+    watch: {
+      getPosts: {
+        handler() {
+          this._layout()
+
+          setTimeout(() => {
+            this._layout()
+          }, 1000)
+        },
+      },
+    },
     unmounted(): void {
       this._removeListeners()
     },
@@ -91,6 +102,23 @@
     },
     methods: {
       ...mapActions(['commitPosts']),
+
+      _layout() {
+        const postEl = this.$refs.posts as HTMLElement
+        if (postEl && getComputedStyle(postEl).gridTemplateRows !== 'masonry') {
+          const items = [...postEl.childNodes].filter((c) => c.nodeType === 1)
+          const ncol = getComputedStyle(postEl).gridTemplateColumns.split(' ').length
+
+          items.slice(ncol).forEach((item, i) => {
+            item.style.removeProperty('margin-top')
+            const prev = items[i].getBoundingClientRect().bottom /* bottom edge of item above */
+            const current = item.getBoundingClientRect().top /* top edge of current item */
+            const gap = 10
+            const margin = `${prev - current + gap}px`
+            item.style.marginTop = margin
+          })
+        }
+      },
 
       _refreshListener() {
         const el = this.$refs.container as HTMLElement
