@@ -19,7 +19,13 @@
         <i class="fa fa-comment"></i>
       </a>
       <small>{{ date(data.created_utc) }}</small>
-      <a href="#" class="c-btn-alt" @click="addSub(data.subreddit)">/r/{{ data.subreddit }}</a>
+      <a
+        v-if="search.global && getSearch.open"
+        href="#"
+        class="c-btn-alt"
+        @click="addSub(data.subreddit)"
+        >/r/{{ data.subreddit }}</a
+      >
     </footer>
   </article>
 </template>
@@ -29,6 +35,7 @@
   import { mixins } from '@/mixins'
   import { RedditPost } from '@/types/reddit-posts'
   import ImagePreview from '@/components/ImagePreview.vue'
+  import { mapGetters, mapState } from 'vuex'
 
   export default defineComponent({
     name: 'Gallery',
@@ -39,6 +46,10 @@
         type: Object as PropType<RedditPost>,
         default: () => null,
       },
+    },
+    computed: {
+      ...mapGetters(['getSearch']),
+      ...mapState(['search']),
     },
   })
 </script>

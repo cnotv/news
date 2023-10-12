@@ -63,6 +63,8 @@
           'webdev',
           'programmerhumor',
           'redditdev',
+          'thedotisblack',
+          'generative',
         ],
       }
     },
