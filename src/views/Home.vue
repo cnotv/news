@@ -52,6 +52,7 @@
   import Subreddit from '@/components/Subreddit.vue'
   import { getSubreddits } from '@/store/getters'
   import { store } from '@/store'
+  import { Subreddit as ISubreddit } from '@/types/state'
 
   export default defineComponent({
     name: 'Home',
@@ -71,6 +72,7 @@
         'getPosts',
         'getQuery',
         'getSearch',
+        'getCurrentSub',
         'getSubreddits',
       ]),
       ...mapState(['modal']),
@@ -101,7 +103,7 @@
       store.dispatch('togglePost')
     },
     methods: {
-      ...mapActions(['commitPosts']),
+      ...mapActions(['commitPosts', 'changeSub']),
 
       _layout() {
         const postEl = this.$refs.posts as HTMLElement
@@ -128,7 +130,7 @@
       _refreshListener() {
         const el = this.$refs.container as HTMLElement
         if (el) {
-          el.addEventListener('touchend', this._handleTouchEnd)
+          el.addEventListener('touchend', this._refreshTrigger)
           el.addEventListener('touchstart', this._handleTouchStart)
         }
       },
@@ -140,7 +142,7 @@
       _removeListeners() {
         const el = this.$refs.container as HTMLElement
         if (el) {
-          el.removeEventListener('touchend', this._handleTouchEnd)
+          el.removeEventListener('touchend', this._refreshTrigger)
           el.removeEventListener('touchstart', this._handleTouchStart)
           el.removeEventListener('scroll', this._loadMore)
         }
@@ -178,6 +180,43 @@
       },
 
       /**
+       * Check if a refresh is required
+       */
+      _changeSubCheck(x1: number, x2: number, el: HTMLElement): void {
+        const threshold = 150
+        const friction = 3
+        const index = (this.getSubreddits as ISubreddit[])
+          .map(({ name }) => name)
+          .indexOf(this.getCurrentSub)
+        const prev = this.getSubreddits[index - 1]
+        const next = this.getSubreddits[index + 1]
+
+        if (prev) {
+          const left = x1 - x2
+          if (left > 0 && left < threshold) {
+            el.style.transform = `translateX(${-left / friction}px)`
+          }
+
+          if (left > threshold) {
+            this.changeSub(prev.name)
+            el.style.transform = `translateX(0)`
+          }
+        }
+
+        if (next) {
+          const right = x2 - x1
+          if (right > 0 && right < threshold) {
+            el.style.transform = `translateX(${right / friction}px)`
+          }
+
+          if (right > threshold) {
+            this.changeSub(next.name)
+            el.style.transform = `translateX(0)`
+          }
+        }
+      },
+
+      /**
        * Refresh if active.
        * Delete style alteration always.
        */
@@ -197,21 +236,23 @@
        * - Side swipes for changing subreddit
        */
       _handleTouchStart($start: TouchEvent): void {
-        const Y1 = $start.touches[0].screenY
+        const X1 = $start.touches[0].screenX
 
         const move = ($move: TouchEvent): void => {
-          const Y2 = $move.touches[0].screenY
+          const X2 = $move.touches[0].screenX
           const el = document.querySelector('body')
           if (el) {
-            this._refreshCheck(Y1, Y2, el)
+            this._changeSubCheck(X1, X2, el)
+            el.addEventListener('touchend', end)
           }
         }
 
-        window.addEventListener('touchmove', move)
-      },
+        const end = (): void => {
+          window.removeEventListener('touchmove', move)
+          window.removeEventListener('touchend', end)
+        }
 
-      _handleTouchEnd(): void {
-        this._refreshTrigger()
+        window.addEventListener('touchmove', move)
       },
 
       /**
