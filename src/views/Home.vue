@@ -106,7 +106,8 @@
       _layout() {
         const postEl = this.$refs.posts as HTMLElement
         if (postEl && getComputedStyle(postEl).gridTemplateRows !== 'masonry') {
-          const items = [...postEl.childNodes].filter((c) => c.nodeType === 1)
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const items = [...(postEl.childNodes as any)].filter((c) => c.nodeType === 1)
           const ncol = getComputedStyle(postEl).gridTemplateColumns.split(' ').length
 
           items.slice(ncol).forEach((item, i) => {
