@@ -193,7 +193,7 @@
 
         if (prev) {
           const left = x1 - x2
-          if (left > 0 && left < threshold) {
+          if (left > threshold / 2 && left < threshold) {
             el.style.transform = `translateX(${-left / friction}px)`
           }
 
@@ -205,7 +205,7 @@
 
         if (next) {
           const right = x2 - x1
-          if (right > 0 && right < threshold) {
+          if (right > threshold / 2 && right < threshold) {
             el.style.transform = `translateX(${right / friction}px)`
           }
 
