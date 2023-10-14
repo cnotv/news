@@ -150,6 +150,7 @@ export interface LinkFlairRichtext {
 export interface Preview {
   images: Image[]
   enabled: boolean
+  reddit_video_preview?: RedditVideo
 }
 
 export interface Image {

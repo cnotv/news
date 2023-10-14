@@ -12,6 +12,19 @@
     <source :src="data.secure_media.reddit_video.fallback_url" type="video/mp4" />
   </video>
 
+  <video
+    v-else-if="data.preview?.reddit_video_preview?.fallback_url"
+    :poster="data.preview?.images[0].source.url"
+    preload="auto"
+    autoplay="true"
+    muted="true"
+    loop="true"
+    webkit-playsinline=""
+    style="width: 100%; max-width: 100%; height: auto; max-height: 100vh"
+  >
+    <source :src="data.preview?.reddit_video_preview?.fallback_url" type="video/mp4" />
+  </video>
+
   <img
     v-else-if="data.preview?.images[0].variants.gif"
     v-lazy="data.preview.images[0].variants.gif.source.url.replace('amp;s', 's')"
