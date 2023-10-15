@@ -63,8 +63,10 @@
           'webdev',
           'programmerhumor',
           'redditdev',
-          'thedotisblack',
-          'generative',
+          'functionalprint',
+          'proceduralgeneration',
+          'pixelart',
+          'comics',
         ],
       }
     },
