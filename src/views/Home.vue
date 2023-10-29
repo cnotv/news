@@ -183,13 +183,13 @@
        * Check if a refresh is required
        */
       _changeSubCheck(x1: number, x2: number, el: HTMLElement): void {
-        const threshold = 150
+        const threshold = 300
         const friction = 3
         const index = (this.getSubreddits as ISubreddit[])
           .map(({ name }) => name)
           .indexOf(this.getCurrentSub)
-        const prev = this.getSubreddits[index - 1]
-        const next = this.getSubreddits[index + 1]
+        const prev = this.getSubreddits[index + 1]
+        const next = this.getSubreddits[index - 1]
 
         if (prev) {
           const left = x1 - x2
