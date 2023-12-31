@@ -34,7 +34,7 @@
   "vue/require-default-prop": "off",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll": "explicit"
   },
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
