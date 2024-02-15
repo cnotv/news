@@ -51,6 +51,8 @@
           'news',
           'worldnews',
           'hackernews',
+          'WTF',
+          'interestingasfuck',
           'futurology',
           'technology',
           'educationalgifs',
