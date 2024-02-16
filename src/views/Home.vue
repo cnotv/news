@@ -21,18 +21,22 @@
         <Card
           v-for="post in getPosts"
           v-else-if="getLayout === 1"
-          :key="post.data.id"
+          :key="'card' + post.data.id"
           :data="post.data"
         />
-        <template v-else-if="getLayout === 2">
-          <Paper v-for="post in getPosts" :key="post.data.id" :data="post.data" />
-        </template>
-        <template v-else-if="getLayout === 3">
-          <Gallery v-for="post in getPosts" :key="post.data.id" :data="post.data" />
-        </template>
-        <template v-else>
-          <Subreddit v-for="post in getPosts" :key="post.data.id" :data="post.data" />
-        </template>
+        <Paper
+          v-for="post in getPosts"
+          v-else-if="getLayout === 2"
+          :key="'paper' + post.data.id"
+          :data="post.data"
+        />
+        <Gallery
+          v-for="post in getPosts"
+          v-else-if="getLayout === 3"
+          :key="'gallery' + post.data.id"
+          :data="post.data"
+        />
+        <Subreddit v-for="post in getPosts" v-else :key="'sub' + post.data.id" :data="post.data" />
       </div>
 
       <div v-else-if="getPosts">Sorry, no post found.</div>
