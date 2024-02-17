@@ -1,20 +1,9 @@
 .o-gallery {
-  display: grid;
-  grid-template-rows: masonry;
-  grid-gap: $grid-gutter-size;
-  align-content: stretch;
-
-  @include media-bp(desktop) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  @include media-bp(tablet) {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  height: 100%;
 
   &__item {
     position: relative;
     overflow: hidden;
-    margin-bottom: $grid-gutter-size;
     align-content: stretch;
 
     &:hover {
@@ -25,44 +14,45 @@
         }
       }
     }
-  }
 
-  header,
-  footer {
-    width: 100%;
-    padding: $grid-gutter-size;
-    transition: transform  $website-animation-time;
-    background-color: $bg-card;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    header,
+    footer {
+      width: 100%;
+      padding: $grid-gutter-size;
+      transition: transform  $website-animation-time;
+      background-color: $bg-card;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-    @include media-bp(desktop) {
-      position: absolute;
+      @include media-bp(desktop) {
+        position: absolute;
+      }
     }
-  }
 
-  header {
-    @include media-bp(desktop) {
-      top: 0;
-      transform: translateY(-100%);
+    header {
+      @include media-bp(desktop) {
+        top: 0;
+        transform: translateY(-100%);
+      }
     }
-  }
 
-  footer {
-    @include media-bp(desktop) {
-      bottom: 0;
-      transform: translateY(100%);
+    footer {
+      @include media-bp(desktop) {
+        bottom: 0;
+        transform: translateY(100%);
+      }
     }
-  }
 
-  img {
-    min-width: 100%;
-    max-width: 100%;
-    padding: 0;
-  }
+    img, video {
+      min-width: 100%;
+      max-width: 100%;
+      padding: 0;
+      height: auto
+    }
 
-  a {
-    display: inline-block;
+    a {
+      display: block;
+    }
   }
 }

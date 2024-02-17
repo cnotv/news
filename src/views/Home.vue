@@ -30,12 +30,9 @@
           :key="'paper' + post.data.id"
           :data="post.data"
         />
-        <Gallery
-          v-for="post in getPosts"
-          v-else-if="getLayout === 3"
-          :key="'gallery' + post.data.id"
-          :data="post.data"
-        />
+        <Masonry v-else-if="getLayout === 3"
+          ><Gallery v-for="post in getPosts" :key="'gallery' + post.data.id" :data="post.data" />
+        </Masonry>
         <Subreddit v-for="post in getPosts" v-else :key="'sub' + post.data.id" :data="post.data" />
       </div>
 
@@ -54,13 +51,14 @@
   import List from '@/components/List.vue'
   import Paper from '@/components/Paper.vue'
   import Subreddit from '@/components/Subreddit.vue'
+  import Masonry from '@/components/Masonry.vue'
   import { getSubreddits } from '@/store/getters'
   import { store } from '@/store'
   import { Subreddit as ISubreddit } from '@/types/state'
 
   export default defineComponent({
     name: 'Home',
-    components: { Modal, Card, Gallery, List, Subreddit, Paper },
+    components: { Modal, Card, Gallery, List, Subreddit, Paper, Masonry },
     data() {
       return {
         refresh: false,
@@ -81,17 +79,6 @@
       ]),
       ...mapState(['modal']),
     },
-    watch: {
-      getPosts: {
-        handler() {
-          this._layout()
-
-          setTimeout(() => {
-            this._layout()
-          }, 1000)
-        },
-      },
-    },
     unmounted(): void {
       this._removeListeners()
     },
@@ -108,29 +95,6 @@
     },
     methods: {
       ...mapActions(['commitPosts', 'changeSub']),
-
-      _layout() {
-        const postEl = this.$refs.posts as HTMLElement
-        if (
-          this.getLayout === 3 &&
-          postEl &&
-          getComputedStyle(postEl).gridTemplateRows !== 'masonry'
-        ) {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const items = [...(postEl.childNodes as any)].filter((c) => c.nodeType === 1)
-          const ncol = getComputedStyle(postEl).gridTemplateColumns.split(' ').length
-
-          items.slice(ncol).forEach((item, i) => {
-            item.style.removeProperty('margin-top')
-            const prev = items[i].getBoundingClientRect().bottom /* bottom edge of item above */
-            const current = item.getBoundingClientRect().top /* top edge of current item */
-            const gap = 10
-            const margin = `${prev - current + gap}px`
-            item.style.marginTop = margin
-          })
-        }
-      },
-
       _refreshListener() {
         const el = this.$refs.container as HTMLElement
         if (el) {
@@ -304,7 +268,7 @@
         // TODO: Replace with "el" after setting CSS grid layout
         const offset = window.scrollY - el.offsetHeight + this.loadThreshold
         const trigger = offset > 0
-        if (trigger && !store.state.loading) {
+        if (trigger && !this.isLoading) {
           store.dispatch('loadMore')
         }
       },

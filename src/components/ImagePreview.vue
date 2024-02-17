@@ -1,35 +1,29 @@
 <template>
   <video
     v-if="data.secure_media?.reddit_video"
+    ref="videoElement"
     :poster="data.preview?.images[0].source.url"
     preload="auto"
-    autoplay="true"
     loop="true"
     webkit-playsinline=""
     controls
-    style="width: 100%; max-width: 100%; height: auto; max-height: 100vh"
   >
     <source :src="data.secure_media.reddit_video.fallback_url" type="video/mp4" />
   </video>
 
   <video
     v-else-if="data.preview?.reddit_video_preview?.fallback_url"
+    ref="videoElement"
     :poster="data.preview?.images[0].source.url"
     preload="auto"
-    autoplay="true"
     loop="true"
     webkit-playsinline=""
     controls
-    style="width: 100%; max-width: 100%; height: auto; max-height: 100vh"
   >
     <source :src="data.preview?.reddit_video_preview?.fallback_url" type="video/mp4" />
   </video>
 
-  <img
-    v-else-if="data.preview?.images[0].variants.gif"
-    v-lazy="data.preview.images[0].variants.gif.source.url.replace('amp;s', 's')"
-    class="o-card__header__image--gif"
-  />
+  <img v-else-if="data.preview?.images[0].variants.gif" class="o-card__header__image--gif" />
 
   <img
     v-else-if="data.preview"
@@ -42,7 +36,7 @@
   />
 </template>
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue'
+  import { defineComponent, PropType, onMounted, ref } from 'vue'
   import { RedditPost } from '@/types/reddit-posts'
 
   export default defineComponent({
@@ -52,6 +46,34 @@
         type: Object as PropType<RedditPost>,
         default: () => ({}),
       },
+    },
+    setup() {
+      const videoElement = ref(null as HTMLVideoElement | null)
+
+      onMounted(() => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (videoElement.value) {
+                if (entry.isIntersecting) {
+                  videoElement.value.play()
+                } else {
+                  videoElement.value.pause()
+                }
+              }
+            })
+          },
+          {
+            threshold: 0.5, // Adjust this value as needed
+          }
+        )
+
+        if (videoElement.value) {
+          observer.observe(videoElement.value as Element)
+        }
+      })
+
+      return { videoElement }
     },
   })
 </script>

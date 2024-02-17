@@ -1,13 +1,13 @@
 <template>
-  <!-- <article v-if="data.preview" class="o-gallery__item">
+  <article v-if="data.preview" class="o-gallery__item">
     <header>
       <h6>{{ truncate(data.title, 150) }}</h6>
     </header>
 
     <section>
-      <a :href="data.url" target="_blank"> -->
-  <ImagePreview v-if="data.preview" :data="data" />
-  <!-- </a>
+      <a :href="data.url" target="_blank">
+        <ImagePreview v-if="data.preview" :data="data" />
+      </a>
     </section>
 
     <footer>
@@ -27,7 +27,7 @@
         >/r/{{ data.subreddit }}</a
       >
     </footer>
-  </article> -->
+  </article>
 </template>
 
 <script lang="ts">
