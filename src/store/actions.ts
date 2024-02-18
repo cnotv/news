@@ -35,7 +35,8 @@ export const actions: ActionTree<State, State> = {
       return
     }
 
-    const query = `${state.currentSub}/${state.settings.sort}.json?limit=${state.settings.limit}&after=${state.after}`
+    const settings = state.settings[state.currentSub || 'default']
+    const query = `${state.currentSub}/${settings.sort}.json?limit=${settings.limit}&after=${state.after}`
     commit('SET_LOADING', true)
     commit('SET_QUERY', query)
 
