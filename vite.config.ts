@@ -13,10 +13,10 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: {
-        enabled: true,
+        enabled: true
       },
       workbox: {
-        sourcemap: true,
+        sourcemap: true
       },
       manifest: {
         name: 'cnotv news',
@@ -27,22 +27,22 @@ export default defineConfig({
           {
             src: 'logo.svg',
             sizes: '192x192',
-            type: 'image/svg',
+            type: 'image/svg'
           },
           {
             src: 'logo.svg',
             sizes: '512x512',
-            type: 'image/svg',
-          },
-        ],
-      },
-    }),
+            type: 'image/svg'
+          }
+        ]
+      }
+    })
   ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  },
+  }
   // define: {
   //   'process.env': process.env,
   // },
