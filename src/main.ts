@@ -1,9 +1,11 @@
 import { createApp } from 'vue'
-import App from './App.vue'
+
 import './registerServiceWorker'
 import { router } from './router'
 import { store } from './store'
 import { mixins } from './mixins'
+
+import App from './App.vue'
 
 // import * as Sentry from '@sentry/vue'
 // import { Integrations as Tracing } from '@sentry/tracing'

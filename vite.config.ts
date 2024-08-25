@@ -1,19 +1,15 @@
+import { fileURLToPath, URL } from 'node:url'
+
 import { defineConfig } from 'vite'
-import { VitePWA } from 'vite-plugin-pwa'
-import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
-import eslintPlugin from 'vite-plugin-eslint'
+import vueDevTools from 'vite-plugin-vue-devtools'
+import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
-    },
-  },
   plugins: [
     vue(),
-    eslintPlugin(),
+    vueDevTools(),
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: {
@@ -42,10 +38,15 @@ export default defineConfig({
       },
     }),
   ],
-  define: {
-    'process.env': process.env,
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
   },
-  build: {
-    base: './',
-  },
+  // define: {
+  //   'process.env': process.env,
+  // },
+  // build: {
+  //   base: './',
+  // },
 })

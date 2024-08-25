@@ -39,36 +39,48 @@ News aggregator based on Reddit API, Vue.js and PWA
 - [x] Convert code to typescript compliant
 - [x] Improve subreddit search
 
+## Project Setup
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
+```sh
+npm install
 ```
 
-### Compiles and minifies for production
-```
-yarn build
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
 ```
 
-### Run your unit tests
-```
-yarn test:unit
+### Type-Check, Compile and Minify for Production
+
+```sh
+npm run build
 ```
 
-### Run your end-to-end tests
-```
-yarn test:e2e
+### Run Unit Tests with [Vitest](https://vitest.dev/)
+
+```sh
+npm run test:unit
 ```
 
-### Lints and fixes files
-```
-yarn lint
+### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+
+```sh
+npm run test:e2e:dev
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+This runs the end-to-end tests against the Vite development server.
+It is much faster than the production build.
+
+But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
+
+```sh
+npm run build
+npm run test:e2e
+```
+
+### Lint with [ESLint](https://eslint.org/)
+
+```sh
+npm run lint
+```

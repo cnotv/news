@@ -29,17 +29,9 @@
     "webdev",
     "worldnews"
   ],
-  "tslint.typeCheck": true,
-  "vetur.validation.template": false,
-  "vue/require-default-prop": "off",
-  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit"
   },
-  "[vue]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

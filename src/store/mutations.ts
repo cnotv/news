@@ -1,7 +1,3 @@
-import { PostSub } from '@/types/api'
-import { RedditPost } from '@/types/reddit-posts'
-import { Modal, State, Subreddit } from '@/types/state'
-
 export default {
   LOAD_POSTS: (state: State, posts: (RedditPost | PostSub)[]) => {
     state.posts = posts

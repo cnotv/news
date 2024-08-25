@@ -8,16 +8,15 @@
 </template>
 
 <script lang="ts">
-  import newsHeader from '@/components/NewsHeader.vue'
-  import { store } from '@/store'
-  import { defineComponent } from 'vue'
-  import './filters'
+import newsHeader from '@/components/NewsHeader.vue'
+import { store } from '@/store'
+import { defineComponent } from 'vue'
 
-  export default defineComponent({
-    name: 'App',
-    components: { newsHeader },
-    store,
-  })
+export default defineComponent({
+  name: 'App',
+  components: { newsHeader },
+  store,
+})
 </script>
 
 <style lang="scss" src="./assets/styles/main.scss"></style>

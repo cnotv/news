@@ -1,6 +1,4 @@
 import api from '@/helpers/api'
-import { State, Subreddit } from '@/types/state'
-import { ActionTree, Commit } from 'vuex'
 
 interface ActionPayload {
   commit: Commit
@@ -23,7 +21,7 @@ export const actions: ActionTree<State, State> = {
         (response) => {
           commit('LOAD_POSTS', response)
         },
-        () => commit('LOAD_POSTS', [])
+        () => commit('LOAD_POSTS', []),
       )
       .finally(() => {
         commit('SET_LOADING', false)
@@ -48,7 +46,7 @@ export const actions: ActionTree<State, State> = {
           commit('LOAD_MORE', posts)
           commit('SET_AFTER', after)
         },
-        () => commit('LOAD_POSTS', {})
+        () => commit('LOAD_POSTS', {}),
       )
       .finally(() => {
         commit('SET_LOADING', false)
@@ -148,7 +146,7 @@ const commitPosts = ({ state, commit }: ActionPayload) => {
         commit('LOAD_POSTS', posts)
         commit('SET_AFTER', after)
       },
-      () => commit('LOAD_POSTS', [])
+      () => commit('LOAD_POSTS', []),
     )
     .finally(() => {
       commit('SET_LOADING', false)
@@ -170,7 +168,7 @@ const getPostsEffect = ({ state, commit }: ActionPayload) => {
     commit('SET_SEARCH', search)
     commit(
       'SET_QUERY',
-      `${state.currentSub}/search.json?limit=${setting.limit}&t=${state.search.currentTime}&q=${state.search.string}${searchGlobal}`
+      `${state.currentSub}/search.json?limit=${setting.limit}&t=${state.search.currentTime}&q=${state.search.string}${searchGlobal}`,
     )
   } else {
     commit('SET_SEARCH', '')

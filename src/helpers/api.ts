@@ -1,5 +1,3 @@
-import { Posts, PostSub } from '@/types/api'
-import { RedditResponseChild, RedditResponseData } from '@/types/reddit-posts'
 import axios from 'axios'
 import axiosRetry from 'axios-retry'
 import { AxiosRequestConfig } from 'axios'
