@@ -42,38 +42,37 @@
 </template>
 
 <script lang="ts">
-  import { mapActions, mapGetters, mapState } from 'vuex'
-  import { defineComponent, PropType } from 'vue'
-  import { mixins } from '@/mixins'
-  import { RedditPost } from '@/types/reddit-posts'
+import { mapActions, mapGetters, mapState } from 'vuex'
+import { defineComponent, PropType } from 'vue'
+import { mixins } from '@/mixins'
 
-  export default defineComponent({
-    name: 'List',
-    mixins: [mixins],
-    props: {
-      data: {
-        type: Object as PropType<RedditPost>,
-        default: () => null,
-      },
-    },
-    computed: {
-      ...mapGetters(['getSearch']),
-      ...mapState(['search']),
-    },
-    methods: {
-      ...mapActions(['togglePost']),
-    },
-  })
+export default defineComponent({
+  name: 'List',
+  mixins: [mixins],
+  props: {
+    data: {
+      type: Object as PropType<RedditPost>,
+      default: () => null
+    }
+  },
+  computed: {
+    ...mapGetters(['getSearch']),
+    ...mapState(['search'])
+  },
+  methods: {
+    ...mapActions(['togglePost'])
+  }
+})
 </script>
 
 <style scoped>
-  header {
-    font-weight: bold;
-    font-size: 3vh;
-  }
-  button {
-    background-color: transparent;
-    border: 0;
-    cursor: pointer;
-  }
+header {
+  font-weight: bold;
+  font-size: 3vh;
+}
+button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
 </style>

@@ -47,20 +47,19 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue'
-  import { mixins } from '@/mixins'
-  import ImagePreview from '@/components/ImagePreview.vue'
-  import { RedditPost } from '@/types/reddit-posts'
+import { defineComponent, PropType } from 'vue'
+import { mixins } from '@/mixins'
+import ImagePreview from '@/components/ImagePreview.vue'
 
-  export default defineComponent({
-    name: 'Card',
-    components: { ImagePreview },
-    mixins: [mixins],
-    props: {
-      data: {
-        type: Object as PropType<RedditPost>,
-        default: () => null,
-      },
-    },
-  })
+export default defineComponent({
+  name: 'Card',
+  components: { ImagePreview },
+  mixins: [mixins],
+  props: {
+    data: {
+      type: Object as PropType<RedditPost>,
+      default: () => null
+    }
+  }
+})
 </script>

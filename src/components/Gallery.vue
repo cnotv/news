@@ -31,25 +31,24 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue'
-  import { mixins } from '@/mixins'
-  import { RedditPost } from '@/types/reddit-posts'
-  import ImagePreview from '@/components/ImagePreview.vue'
-  import { mapGetters, mapState } from 'vuex'
+import { defineComponent, PropType } from 'vue'
+import { mixins } from '@/mixins'
+import ImagePreview from '@/components/ImagePreview.vue'
+import { mapGetters, mapState } from 'vuex'
 
-  export default defineComponent({
-    name: 'Gallery',
-    components: { ImagePreview },
-    mixins: [mixins],
-    props: {
-      data: {
-        type: Object as PropType<RedditPost>,
-        default: () => null,
-      },
-    },
-    computed: {
-      ...mapGetters(['getSearch']),
-      ...mapState(['search']),
-    },
-  })
+export default defineComponent({
+  name: 'Gallery',
+  components: { ImagePreview },
+  mixins: [mixins],
+  props: {
+    data: {
+      type: Object as PropType<RedditPost>,
+      default: () => null
+    }
+  },
+  computed: {
+    ...mapGetters(['getSearch']),
+    ...mapState(['search'])
+  }
+})
 </script>

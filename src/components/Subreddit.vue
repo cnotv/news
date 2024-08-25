@@ -16,32 +16,31 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue'
-  import { mixins } from '@/mixins'
-  import { SubredditsIndex } from '@/types/reddit-subreddits'
+import { defineComponent, PropType } from 'vue'
+import { mixins } from '@/mixins'
 
-  export default defineComponent({
-    name: 'Subreddit',
-    mixins: [mixins],
-    props: {
-      data: {
-        type: Object as PropType<SubredditsIndex>,
-        default: () => ({}),
-      },
-    },
-  })
+export default defineComponent({
+  name: 'Subreddit',
+  mixins: [mixins],
+  props: {
+    data: {
+      type: Object as PropType<SubredditsIndex>,
+      default: () => ({})
+    }
+  }
+})
 </script>
 
 <style scoped>
-  .c-h1 {
-    font-weight: bold;
-    font-size: 3vh;
-  }
+.c-h1 {
+  font-weight: bold;
+  font-size: 3vh;
+}
 
-  .o-sub {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
-  }
+.o-sub {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
 </style>

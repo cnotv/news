@@ -1,10 +1,10 @@
 // Defining viewports
 $viewports: (
-  phone:        "only screen and (max-width: 575px)",
-  mobile:       "only screen and (max-width: 991px)",
-  tablet:       "only screen and (min-width: 575px) and (max-width: 992px)",
-  tablet-min:   "only screen and (min-width: 575px)",
-  desktop:      "only screen and (min-width: 992px)",
+  phone: 'only screen and (max-width: 575px)',
+  mobile: 'only screen and (max-width: 991px)',
+  tablet: 'only screen and (min-width: 575px) and (max-width: 992px)',
+  tablet-min: 'only screen and (min-width: 575px)',
+  desktop: 'only screen and (min-width: 992px)'
 );
 
 // Creating viewports mixin
@@ -15,9 +15,7 @@ $viewports: (
     @media #{$media-query} {
       @content;
     }
-  }
-
-  @else {
+  } @else {
     @warn 'please define a real device';
   }
 }
@@ -28,9 +26,7 @@ $viewports: (
     $color: map-get($colors, $value);
 
     @return #{$color};
-  }
-
-  @else {
+  } @else {
     @warn 'The color '$value' does not exist';
 
     // @break;
@@ -43,9 +39,7 @@ $viewports: (
     $space: map-get($spaces, $value);
 
     @return #{$space};
-  }
-
-  @else {
+  } @else {
     @warn 'The space '$value' does not exist';
 
     // @break;
@@ -58,9 +52,7 @@ $viewports: (
     $zindex: map-get($zindex, $value);
 
     @return #{$zindex};
-  }
-
-  @else {
+  } @else {
     @warn 'The z-index '$value' does not exist';
 
     // @break;
@@ -87,6 +79,14 @@ $viewports: (
 
 // Creating grid layout mixin, optional mobile, option with and without padding
 @mixin grid-col($size: 1, $sizeMobile: 1, $padding: true) {
+  @if ($size == 1) {
+    width: 100%;
+  } @else {
+    @include media-bp(desktop) {
+      width: calc(100% * #{$size});
+    }
+  }
+
   @if ($padding == true) {
     @include media-bp(desktop) {
       padding-left: $grid-gutter-size;
@@ -99,23 +99,11 @@ $viewports: (
     }
   }
 
-  @if ($size != 1) {
-    @include media-bp(desktop) {
-      width: calc(100% * #{$size});
-    }
-  }
-
-  @else {
-    width: 100%;
-  }
-
   @if ($sizeMobile != 1) {
     @include media-bp(mobile) {
       width: calc(100% * #{$sizeMobile});
     }
-  }
-
-  @else {
+  } @else {
     @include media-bp(mobile) {
       width: 100%;
     }
@@ -125,7 +113,7 @@ $viewports: (
 // Armonic animations adding delay
 @mixin animationDelay {
   @for $i from 1 through 20 {
-    &:nth-of-type(n+#{$i}) {
+    &:nth-of-type(n + #{$i}) {
       animation-delay: #{$i/10}s;
     }
   }

@@ -3,7 +3,7 @@
     class="o-header u-sticky"
     :class="{
       'has-menu-open': openMenu,
-      'has-search-open': getSearch.open,
+      'has-search-open': getSearch.open
     }"
   >
     <nav class="o-nav-h">
@@ -169,98 +169,97 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import { mapGetters, mapActions } from 'vuex'
-  import newsOrder from '@/components/order.vue'
-  import search from '@/components/search.vue'
-  import { store } from '@/store'
-  import { LIMITS, LAYOUTS, TIMES } from '@/data/settings'
-  import { Subreddit } from '@/types/state'
-  import draggable from 'vuedraggable'
+import { defineComponent } from 'vue'
+import { mapGetters, mapActions } from 'vuex'
+import newsOrder from '@/components/order.vue'
+import search from '@/components/search.vue'
+import { store } from '@/store'
+import { LIMITS, LAYOUTS, TIMES } from '@/data/settings'
+import draggable from 'vuedraggable'
 
-  export default defineComponent({
-    components: { draggable, newsOrder, search },
-    data() {
-      return {
-        openMenu: false,
-        openSettings: false,
-        limits: LIMITS,
-        layouts: LAYOUTS,
-        times: TIMES,
-        drag: false,
+export default defineComponent({
+  components: { draggable, newsOrder, search },
+  data() {
+    return {
+      openMenu: false,
+      openSettings: false,
+      limits: LIMITS,
+      layouts: LAYOUTS,
+      times: TIMES,
+      drag: false
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'getCurrentSub',
+      'getLayout',
+      'getLimit',
+      'getQuery',
+      'getSearch',
+      'getSubreddits'
+    ]),
+    subreddits: {
+      get() {
+        return store.state.subreddits
+      },
+      set(subreddits: Subreddit[]) {
+        store.dispatch('updateSubs', subreddits)
+      }
+    }
+  },
+  methods: {
+    ...mapActions([
+      'changeLayout',
+      'changeLimit',
+      'changeSearch',
+      'changeSearchOpen',
+      'changeSearchTime',
+      'changeSub',
+      'removeSub'
+    ]),
+    toggleMenu() {
+      this.openMenu = !this.openMenu
+      store.dispatch('changeSearchOpen', true)
+    },
+    toggleSettings() {
+      this.openSettings = !this.openSettings
+      this.openMenu = false
+    },
+    toggleSearch() {
+      this.openMenu = false
+      this.openSettings = false
+      store.dispatch('changeSearchOpen')
+      if (!this.getSearch.open) {
+        store.dispatch('changeSearch', '')
       }
     },
-    computed: {
-      ...mapGetters([
-        'getCurrentSub',
-        'getLayout',
-        'getLimit',
-        'getQuery',
-        'getSearch',
-        'getSubreddits',
-      ]),
-      subreddits: {
-        get() {
-          return store.state.subreddits
-        },
-        set(subreddits: Subreddit[]) {
-          store.dispatch('updateSubs', subreddits)
-        },
-      },
+    resetSettings() {
+      localStorage.clear()
+      location.reload()
+      store.dispatch('resetState')
     },
-    methods: {
-      ...mapActions([
-        'changeLayout',
-        'changeLimit',
-        'changeSearch',
-        'changeSearchOpen',
-        'changeSearchTime',
-        'changeSub',
-        'removeSub',
-      ]),
-      toggleMenu() {
-        this.openMenu = !this.openMenu
-        store.dispatch('changeSearchOpen', true)
-      },
-      toggleSettings() {
-        this.openSettings = !this.openSettings
-        this.openMenu = false
-      },
-      toggleSearch() {
-        this.openMenu = false
-        this.openSettings = false
-        store.dispatch('changeSearchOpen')
-        if (!this.getSearch.open) {
-          store.dispatch('changeSearch', '')
-        }
-      },
-      resetSettings() {
-        localStorage.clear()
-        location.reload()
-        store.dispatch('resetState')
-      },
-      toggleSearchTopic() {
-        this.searchSub()
-      },
-      navigate(menu: string) {
-        this.changeSub(menu)
-        this.openMenu = false
-        if (this.$route.name !== 'home') {
-          this.$router.push({ name: 'home' })
-        }
-      },
-      searchSub() {
-        if (this.$route.name === 'home') {
-          this.$router.push({ name: 'subreddits' })
-          this.toggleSearch()
-        } else {
-          this.$router.push({ name: 'home' })
-          this.toggleSearch()
-        }
-      },
-      isSubreddits() {
-        return this.$route.name === 'subreddits'
-      },
+    toggleSearchTopic() {
+      this.searchSub()
     },
-  })
+    navigate(menu: string) {
+      this.changeSub(menu)
+      this.openMenu = false
+      if (this.$route.name !== 'home') {
+        this.$router.push({ name: 'home' })
+      }
+    },
+    searchSub() {
+      if (this.$route.name === 'home') {
+        this.$router.push({ name: 'subreddits' })
+        this.toggleSearch()
+      } else {
+        this.$router.push({ name: 'home' })
+        this.toggleSearch()
+      }
+    },
+    isSubreddits() {
+      return this.$route.name === 'subreddits'
+    }
+  }
+})
 </script>

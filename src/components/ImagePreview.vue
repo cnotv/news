@@ -36,44 +36,43 @@
   />
 </template>
 <script lang="ts">
-  import { defineComponent, PropType, onMounted, ref } from 'vue'
-  import { RedditPost } from '@/types/reddit-posts'
+import { defineComponent, PropType, onMounted, ref } from 'vue'
 
-  export default defineComponent({
-    name: 'ImagePreview',
-    props: {
-      data: {
-        type: Object as PropType<RedditPost>,
-        default: () => ({}),
-      },
-    },
-    setup() {
-      const videoElement = ref(null as HTMLVideoElement | null)
+export default defineComponent({
+  name: 'ImagePreview',
+  props: {
+    data: {
+      type: Object as PropType<RedditPost>,
+      default: () => ({})
+    }
+  },
+  setup() {
+    const videoElement = ref(null as HTMLVideoElement | null)
 
-      onMounted(() => {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (videoElement.value) {
-                if (entry.isIntersecting) {
-                  videoElement.value.play()
-                } else {
-                  videoElement.value.pause()
-                }
+    onMounted(() => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (videoElement.value) {
+              if (entry.isIntersecting) {
+                videoElement.value.play()
+              } else {
+                videoElement.value.pause()
               }
-            })
-          },
-          {
-            threshold: 0.5, // Adjust this value as needed
-          }
-        )
-
-        if (videoElement.value) {
-          observer.observe(videoElement.value as Element)
+            }
+          })
+        },
+        {
+          threshold: 0.5 // Adjust this value as needed
         }
-      })
+      )
 
-      return { videoElement }
-    },
-  })
+      if (videoElement.value) {
+        observer.observe(videoElement.value as Element)
+      }
+    })
+
+    return { videoElement }
+  }
+})
 </script>
