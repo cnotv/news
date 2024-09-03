@@ -24,6 +24,6 @@ export const state: State = {
       sort: 'hot'
     }
   },
-  strict: process.env.NODE_ENV !== 'production',
+  strict: import.meta.env.NODE_ENV !== 'production',
   subreddits: []
 }
