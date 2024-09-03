@@ -1,20 +1,22 @@
 @media (prefers-color-scheme: light) {
   :root {
-    --brand-primary:                       #333;
-    --brand-secondary:                     #dadada;
-    --body-bg:                             #f1f1f1;
-    --body-color:                          #333;
-    --color-error:                         red;
-    --color-disabled:                      lightgrey;
-    --color-active:                        #fff;
+    --brand-primary: #333;
+    --brand-secondary: #dadada;
+    --body-bg: #f1f1f1;
+    --body-color: #333;
+    --color-hover: #777;
+    --color-focus: #999;
+    --color-error: red;
+    --color-disabled: lightgrey;
+    --color-active: #fff;
 
-    --bg-nav:                              transparent;
-    --bg-header:                           #f1f1f1;
-    --bg-dropdown:                         #fff;
-    --bg-card:                             #fff;
-    --bg-link:                             #fff;
-    --bg-link-hover:                       #dadada;
-    --bg-link-active:                      #333;
-    --modal-shadow-color:                  rgba(0, 0, 0, 0.7);
+    --bg-nav: transparent;
+    --bg-header: #f1f1f1;
+    --bg-dropdown: #fff;
+    --bg-card: #fff;
+    --bg-link: #fff;
+    --bg-link-hover: #dadada;
+    --bg-link-active: #333;
+    --modal-shadow-color: rgba(0, 0, 0, 0.7);
   }
 }
