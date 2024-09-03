@@ -17,7 +17,7 @@
         </header>
 
         <header v-else-if="data.preview" class="o-card__header o-card__header--preview">
-          <ImagePreview :data="data as RedditPost" />
+          <ImagePreview :data="data" />
         </header>
 
         <section>

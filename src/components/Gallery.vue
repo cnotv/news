@@ -6,7 +6,7 @@
 
     <section>
       <a :href="data.url" target="_blank">
-        <ImagePreview v-if="data.preview" :data="data as RedditPost" />
+        <ImagePreview v-if="data.preview" :data="data" />
       </a>
     </section>
 

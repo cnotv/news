@@ -5,22 +5,22 @@
 </template>
 
 <script lang="ts">
-  import { ref, onMounted, onUpdated, nextTick } from 'vue'
+  import { ref, onMounted, onUpdated, nextTick, type DefineComponent, type Ref } from 'vue'
 
   export default {
     setup() {
-      const masonry = ref(null)
+      const masonry = ref(null) as Ref<HTMLDivElement | null>
 
       const layoutMasonry = async () => {
         await nextTick()
         const masonryGrid = masonry.value
         if (masonryGrid) {
           const columnWidth = masonryGrid.offsetWidth / 3
-          let columns = Array.from({ length: 3 }, () => [])
+          let columns: HTMLDivElement[][] = Array.from({ length: 3 }, () => [])
 
           const items = Array.from(masonryGrid.children)
           items.forEach((item, index) => {
-            const column = columns[index % 3]
+            const column: Element[] = columns[index % 3]
             column.push(item)
           })
 
@@ -29,18 +29,18 @@
             columnEl.style.width = `${columnWidth}px`
             columnEl.style.float = 'left'
             column.forEach((item) => columnEl.appendChild(item))
-            return columnEl
+            return columnEl as unknown as HTMLDivElement[]
           })
 
           masonryGrid.innerHTML = ''
-          columns.forEach((column) => masonryGrid.appendChild(column))
+          columns.forEach((column) => masonryGrid.appendChild(column as unknown as Node))
         }
       }
 
       onMounted(layoutMasonry)
       onUpdated(layoutMasonry)
 
-      return { masonry } as DefineComponent
+      return { masonry } as unknown as DefineComponent
     },
   }
 </script>
@@ -49,8 +49,5 @@
   .masonry {
     width: 100%;
     display: flex;
-  }
-  .masonry-item {
-    /* Your item styles here */
   }
 </style>

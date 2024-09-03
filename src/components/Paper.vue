@@ -12,7 +12,7 @@
 
     <section>
       <template v-if="data.preview">
-        <ImagePreview :data="data as RedditPost" />
+        <ImagePreview :data="data" />
       </template>
 
       <div v-if="data.selftext">

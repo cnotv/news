@@ -44,7 +44,7 @@ export default defineComponent({
   props: {
     data: {
       type: Object as PropType<RedditPost>,
-      default: () => ({})
+      default: () => ({} as RedditPost)
     }
   },
   setup() {
