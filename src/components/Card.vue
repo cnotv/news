@@ -10,7 +10,6 @@
             width="100%"
             :src="`${embed(data.url)}`"
             frameborder="0"
-            gesture="media"
             allow="encrypted-media"
             allowfullscreen
           ></iframe>
@@ -39,7 +38,7 @@
           <small>
             {{ date(data.created_utc) }}
           </small>
-          <a href="#" class="c-btn-alt" @click="addSub(data.subreddit)">/r/{{ data.subreddit }} </a>
+          <a :href="'#'" class="c-btn-alt" @click="addSub(data.subreddit)">/r/{{ data.subreddit }} </a>
         </footer>
       </div>
     </a>

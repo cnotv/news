@@ -17,5 +17,8 @@
         "src/*"
       ]
     }
+  },
+  "vueCompilerOptions": {
+    "strictTemplates": true
   }
 }

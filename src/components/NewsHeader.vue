@@ -11,7 +11,6 @@
         v-if="subreddits.length > 0"
         v-model="subreddits"
         class="o-nav-h__left o-nav-h__menu fadeIn"
-        group="subreddits"
         item-key="id"
         @start="drag = true"
         @end="drag = false"

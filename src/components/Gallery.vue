@@ -21,7 +21,6 @@
       <small>{{ date(data.created_utc) }}</small>
       <a
         v-if="search.global && getSearch.open"
-        href="#"
         class="c-btn-alt"
         @click="addSub(data.subreddit)"
         >/r/{{ data.subreddit }}</a

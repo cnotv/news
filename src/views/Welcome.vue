@@ -20,7 +20,6 @@
           v-for="sub in suggestions"
           :key="sub"
           class="c-btn-alt"
-          href="#"
           @click="addSub(sub)"
         >
           + {{ sub }}

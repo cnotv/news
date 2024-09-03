@@ -5,7 +5,6 @@
     :poster="data.preview?.images[0].source.url"
     preload="auto"
     loop="true"
-    webkit-playsinline=""
     controls
   >
     <source :src="data.secure_media.reddit_video.fallback_url" type="video/mp4" />
@@ -17,7 +16,6 @@
     :poster="data.preview?.images[0].source.url"
     preload="auto"
     loop="true"
-    webkit-playsinline=""
     controls
   >
     <source :src="data.preview?.reddit_video_preview?.fallback_url" type="video/mp4" />
@@ -44,7 +42,7 @@ export default defineComponent({
   props: {
     data: {
       type: Object as PropType<RedditPost>,
-      default: () => ({} as RedditPost)
+      default: () => ({})
     }
   },
   setup() {
