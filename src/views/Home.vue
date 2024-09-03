@@ -151,37 +151,38 @@ export default defineComponent({
      * Check if a refresh is required
      */
     _changeSubCheck(x1: number, x2: number, el: HTMLElement): void {
-      const threshold = 300
-      const friction = 3
-      const index = (this.getSubreddits as Subreddits[])
-        .map(({ name }) => name)
-        .indexOf(this.getCurrentSub)
-      const prev = this.getSubreddits[index + 1]
-      const next = this.getSubreddits[index - 1]
+      // TODO: Implement swipe to change subreddit, currently it gets stuck
+      // const threshold = 300
+      // const friction = 3
+      // const index = (this.getSubreddits as Subreddits[])
+      //   .map(({ name }) => name)
+      //   .indexOf(this.getCurrentSub)
+      // const prev = this.getSubreddits[index + 1]
+      // const next = this.getSubreddits[index - 1]
 
-      if (prev) {
-        const left = x1 - x2
-        if (left > threshold / 2 && left < threshold) {
-          el.style.transform = `translateX(${-left / friction}px)`
-        }
+      // if (prev) {
+      //   const left = x1 - x2
+      //   if (left > threshold / 2 && left < threshold) {
+      //     el.style.transform = `translateX(${-left / friction}px)`
+      //   }
 
-        if (left > threshold) {
-          this.changeSub(prev.name)
-          el.style.transform = `translateX(0)`
-        }
-      }
+      //   if (left > threshold) {
+      //     this.changeSub(prev.name)
+      //     el.style.transform = `translateX(0)`
+      //   }
+      // }
 
-      if (next) {
-        const right = x2 - x1
-        if (right > threshold / 2 && right < threshold) {
-          el.style.transform = `translateX(${right / friction}px)`
-        }
+      // if (next) {
+      //   const right = x2 - x1
+      //   if (right > threshold / 2 && right < threshold) {
+      //     el.style.transform = `translateX(${right / friction}px)`
+      //   }
 
-        if (right > threshold) {
-          this.changeSub(next.name)
-          el.style.transform = `translateX(0)`
-        }
-      }
+      //   if (right > threshold) {
+      //     this.changeSub(next.name)
+      //     el.style.transform = `translateX(0)`
+      //   }
+      // }
     },
 
     /**
