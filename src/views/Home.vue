@@ -16,24 +16,43 @@
         <span v-if="!statusOnline">You are offline.</span>
 
         <template v-if="getLayout === 0">
-          <List v-for="post in getPosts" :key="post.data.id" :data="post.data" />
+          <List
+            v-for="post in getPosts"
+            :key="post.data.id"
+            :data="post.data"
+          />
         </template>
+
         <Card
           v-for="post in getPosts"
           v-else-if="getLayout === 1"
           :key="'card' + post.data.id"
           :data="post.data"
         />
+
         <Paper
           v-for="post in getPosts"
           v-else-if="getLayout === 2"
           :key="'paper' + post.data.id"
           :data="post.data"
         />
-        <Masonry v-else-if="getLayout === 3"
-          ><Gallery v-for="post in getPosts" :key="'gallery' + post.data.id" :data="post.data" />
+
+        <Masonry
+          v-else-if="getLayout === 3"
+        >
+          <Gallery
+            v-for="post in getPosts"
+            :key="'gallery' + post.data.id"
+            :data="post.data"
+          />
         </Masonry>
-        <Subreddit v-for="post in getPosts" v-else :key="'sub' + post.data.id" :data="post.data" />
+
+        <Subreddit
+          v-else
+          v-for="post in getPosts"
+          :key="'sub' + post.data.id"
+          :data="post.data"
+        />
       </div>
 
       <div v-else-if="getPosts">Sorry, no post found.</div>
