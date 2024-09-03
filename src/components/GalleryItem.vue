@@ -1,5 +1,5 @@
 <template>
-  <article v-if="data.preview" class="o-gallery__item">
+  <article v-if="isLoaded && data.preview" class="o-gallery__item">
     <header>
       <h6>{{ truncate(data.title, 150) }}</h6>
     </header>
@@ -46,9 +46,17 @@ export default defineComponent({
       default: () => null
     }
   },
+  data() {
+    return {
+      isLoaded: false
+    }
+  },
   computed: {
     ...mapGetters(['getSearch']),
     ...mapState(['search'])
+  },
+  mounted() {
+    this.isLoaded = true
   }
 })
 </script>

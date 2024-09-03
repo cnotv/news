@@ -40,7 +40,7 @@
         <Masonry
           v-else-if="getLayout === 3"
         >
-          <Gallery
+          <GalleryItem
             v-for="post in getPosts"
             :key="'gallery' + post.data.id"
             :data="post.data"
@@ -66,7 +66,7 @@ import { defineComponent } from 'vue'
 import { mapGetters, mapActions, mapState } from 'vuex'
 import Modal from '@/components/Modal.vue'
 import Card from '@/components/Card.vue'
-import Gallery from '@/components/Gallery.vue'
+import GalleryItem from '@/components/GalleryItem.vue'
 import List from '@/components/List.vue'
 import Paper from '@/components/Paper.vue'
 import Subreddit from '@/components/Subreddit.vue'
@@ -77,7 +77,7 @@ import type { Subreddits } from '@/types/reddit-subreddits'
 
 export default defineComponent({
   name: 'Home',
-  components: { Modal, Card, Gallery, List, Subreddit, Paper, Masonry },
+  components: { Modal, Card, GalleryItem, List, Subreddit, Paper, Masonry },
   data() {
     return {
       refresh: false,
