@@ -54,6 +54,7 @@ import Subreddit from '@/components/Subreddit.vue'
 import Masonry from '@/components/Masonry.vue'
 import { getSubreddits } from '@/store/getters'
 import { store } from '@/store'
+import type { Subreddits } from '@/types/reddit-subreddits'
 
 export default defineComponent({
   name: 'Home',
@@ -152,7 +153,7 @@ export default defineComponent({
     _changeSubCheck(x1: number, x2: number, el: HTMLElement): void {
       const threshold = 300
       const friction = 3
-      const index = (this.getSubreddits as ISubreddit[])
+      const index = (this.getSubreddits as Subreddits[])
         .map(({ name }) => name)
         .indexOf(this.getCurrentSub)
       const prev = this.getSubreddits[index + 1]

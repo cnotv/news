@@ -1,9 +1,10 @@
-import axios from 'axios'
+import axios, { type AxiosRequestConfig } from 'axios'
 import axiosRetry from 'axios-retry'
-import { AxiosRequestConfig } from 'axios'
+import type { RedditResponseChild, RedditResponseData } from '@/types/reddit-posts'
+import type { PostSub, Posts } from '@/types/api'
 
 axiosRetry(axios, {
-  retries: 3, // Number of retries (Defaults to 3)
+  retries: 3 // Number of retries (Defaults to 3)
 })
 
 function _subToPost(data: RedditResponseData): PostSub[] {
@@ -13,7 +14,7 @@ function _subToPost(data: RedditResponseData): PostSub[] {
       description: sub.data.public_description,
       name: sub.data.display_name,
       subscribers: sub.data.subscribers,
-      categories: sub.data.advertiser_category,
+      categories: sub.data.advertiser_category
     }
   })
 }
@@ -29,7 +30,7 @@ export default {
       .get(query)
       .then((response) => ({
         posts: response.data.data.children,
-        after: response.data.data.after,
+        after: response.data.data.after
       }))
       .catch((error) => {
         console.log('Error: ', error)
@@ -46,7 +47,7 @@ export default {
       sort: 'relevance',
       type: 'sr',
       q,
-      after,
+      after
     }
     const config: AxiosRequestConfig = { params }
 
@@ -58,5 +59,5 @@ export default {
 
         return []
       })
-  },
+  }
 }

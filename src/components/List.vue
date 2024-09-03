@@ -43,8 +43,9 @@
 
 <script lang="ts">
 import { mapActions, mapGetters, mapState } from 'vuex'
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, type PropType } from 'vue'
 import { mixins } from '@/mixins'
+import type { RedditPost } from '@/types/reddit-posts';
 
 export default defineComponent({
   name: 'List',

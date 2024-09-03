@@ -1,3 +1,5 @@
+import type { State } from '@/types/state'
+
 export const getPosts = (state: State) => state.posts
 export const getSubreddits = (state: State) => state.subreddits
 export const getSearch = (state: State) => state.search

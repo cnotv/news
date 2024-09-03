@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import { ref, onMounted, onUpdated, nextTick } from 'vue'
 
   export default {
@@ -40,7 +40,7 @@
       onMounted(layoutMasonry)
       onUpdated(layoutMasonry)
 
-      return { masonry }
+      return { masonry } as DefineComponent
     },
   }
 </script>

@@ -1,6 +1,3 @@
-import { PostSub } from './api'
-import { RedditPost } from './reddit-posts'
-
 export interface State {
   after?: string
   currentSub: string

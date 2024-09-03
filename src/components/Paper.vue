@@ -12,7 +12,7 @@
 
     <section>
       <template v-if="data.preview">
-        <ImagePreview :data="data" />
+        <ImagePreview :data="data as RedditPost" />
       </template>
 
       <div v-if="data.selftext">
@@ -27,9 +27,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, type PropType } from 'vue'
 import { mixins } from '@/mixins'
 import ImagePreview from '@/components/ImagePreview.vue'
+import type { RedditPost } from '@/types/reddit-posts';
 
 export default defineComponent({
   name: 'Paper',

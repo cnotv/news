@@ -1,3 +1,7 @@
+import type { PostSub } from '@/types/api'
+import type { RedditPost } from '@/types/reddit-posts'
+import type { State, Subreddit, Modal } from '@/types/state'
+
 export default {
   LOAD_POSTS: (state: State, posts: (RedditPost | PostSub)[]) => {
     state.posts = posts
@@ -16,7 +20,7 @@ export default {
     if (isNew) {
       const subreddit: Subreddit = {
         id: `${state.subreddits.length}`,
-        name,
+        name
       }
       state.subreddits = [...state.subreddits, subreddit]
     }
@@ -76,5 +80,5 @@ export default {
   },
   RESET_STATE: () => {
     void 0
-  },
+  }
 }

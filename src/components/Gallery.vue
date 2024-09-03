@@ -6,7 +6,7 @@
 
     <section>
       <a :href="data.url" target="_blank">
-        <ImagePreview v-if="data.preview" :data="data" />
+        <ImagePreview v-if="data.preview" :data="data as RedditPost" />
       </a>
     </section>
 
@@ -31,10 +31,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, type PropType } from 'vue'
 import { mixins } from '@/mixins'
 import ImagePreview from '@/components/ImagePreview.vue'
 import { mapGetters, mapState } from 'vuex'
+import type { RedditPost } from '@/types/reddit-posts';
 
 export default defineComponent({
   name: 'Gallery',

@@ -7,25 +7,25 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home,
+    component: Home
   },
   {
     path: '/welcome',
     name: 'welcome',
-    component: Welcome,
+    component: Welcome
   },
   {
     path: '/subreddits',
     name: 'subreddits',
-    component: Subreddits,
+    component: Subreddits
   },
   {
     path: '/:pathMatch(.*)*',
-    redirect: '/',
-  },
+    redirect: '/'
+  }
 ]
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes,
+  routes
 })

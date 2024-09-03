@@ -1,5 +1,3 @@
-import { RedditPost } from './reddit-posts'
-
 export interface Posts {
   posts: RedditPost[] | PostSub[]
   after: string

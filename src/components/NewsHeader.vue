@@ -176,6 +176,7 @@ import search from '@/components/search.vue'
 import { store } from '@/store'
 import { LIMITS, LAYOUTS, TIMES } from '@/data/settings'
 import draggable from 'vuedraggable'
+import type { Subreddit } from '@/types/state'
 
 export default defineComponent({
   components: { draggable, newsOrder, search },

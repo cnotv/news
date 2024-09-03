@@ -36,7 +36,8 @@
   />
 </template>
 <script lang="ts">
-import { defineComponent, PropType, onMounted, ref } from 'vue'
+import type { RedditPost } from '@/types/reddit-posts';
+import { defineComponent, onMounted, ref, type PropType } from 'vue'
 
 export default defineComponent({
   name: 'ImagePreview',

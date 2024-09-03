@@ -1,5 +1,6 @@
 export interface Subreddits {
   account: null
+  name: string
   authorFlair: AuthorFlair
   comments: AuthorFlair
   executed: AuthorFlair

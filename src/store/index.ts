@@ -5,9 +5,10 @@ import * as getters from './getters'
 import mutations from './mutations'
 import { state } from './state'
 import VuexPersistence from 'vuex-persist'
+import type { State } from '@/types/state'
 
 const vuexLocal = new VuexPersistence({
-  storage: window.localStorage,
+  storage: window.localStorage
 })
 
 export const store = createStore({
@@ -16,5 +17,5 @@ export const store = createStore({
   actions,
   getters,
   modules: {},
-  plugins: [vuexLocal.plugin] as Plugin<State>[],
+  plugins: [vuexLocal.plugin]
 })
